@@ -1,0 +1,1 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c1966ac0-2275-4d4f-8edb-e49901880a0a/deploy-status)](https://app.netlify.com/sites/affectionate-spence-57a700/deploys)
