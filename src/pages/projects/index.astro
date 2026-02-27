@@ -1,55 +1,58 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Masonry from '../../components/Masonry.astro';
-import Pagination from '../../components/Pagination.astro';
-import PostCard from '../../components/PostCard.astro';
-import StreamMarker from '../../components/StreamMarker.astro';
+import StreamLandingIntro from '../../components/StreamLandingIntro.astro';
+import StreamLandingList from '../../components/StreamLandingList.astro';
 import SvgIcon from '../../components/SvgIcon.astro';
 import { getAllProjects } from '../../lib/content.js';
-import { chunkForPagination } from '../../lib/utils.js';
 import { contentStreams, site } from '../../lib/site.js';
+import { buildPaginatedStreamItems, getStreamByKey } from '../../lib/stream-landing.js';
 
-const pageSize = 8;
+const devStream = getStreamByKey(contentStreams, 'dev');
+const pageSize = devStream?.landing?.pageSize || 8;
 const projects = await getAllProjects();
-const pagedProjects = chunkForPagination(projects, pageSize);
-const items = pagedProjects[0] || [];
-const totalPages = pagedProjects.length;
-const devStream = contentStreams.find(stream => stream.key === 'dev');
+const { items, totalPages } = buildPaginatedStreamItems({
+  items: projects,
+  pageSize,
+  stream: devStream,
+  filterByMatches: devStream?.landing?.filterByMatches
+});
+const paginationConfig = site[devStream?.landing?.pagination || 'projects'];
 ---
 
-<BaseLayout title="Projects" description="A showcase of my work." layout="projects">
+<BaseLayout
+  title={devStream?.landing?.title || devStream?.label || 'Projects'}
+  description={devStream?.description || 'A showcase of my work.'}
+  layout={devStream?.landing?.layout || 'projects'}
+>
   <div class="wrapper">
     <header class="full | bg-hero-pattern section" style="--spot-color: color-mix(in oklab, var(--color-bg) 60%, transparent)">
       <div class="section__inner region">
         <div class="wrapper flow prose text-center">
-          <h1 class="gradient-text-linear text-step-4">Projects</h1>
+          <h1 class="gradient-text-linear text-step-4">{devStream?.label || 'Computers'}</h1>
         </div>
       </div>
       <SvgIcon name="divider/edgy" className="divider" />
     </header>
 
-    <div class="region flow prose" style="--region-space-top: var(--space-l); margin-block-end: var(--space-xl-2xl);">
-      {devStream && <StreamMarker stream={devStream} />}
-      <p>Here are some things I've built.</p>
-    </div>
+    <StreamLandingIntro
+      stream={devStream}
+      intro={devStream?.landing?.intro}
+      style="--region-space-top: var(--space-l); margin-block-end: var(--space-xl-2xl);"
+    />
 
-    <Masonry className="grid" layout="50-50" rows="masonry">
-      {items.map(item => <PostCard item={item} />)}
-    </Masonry>
-
-    {
-      totalPages > 1 && (
-        <Pagination
-          currentPage={1}
-          totalPages={totalPages}
-          basePath="/projects/"
-          label={site.projects.paginationLabel}
-          previousText={site.projects.paginationPrevious}
-          nextText={site.projects.paginationNext}
-          pageText={site.projects.paginationPage}
-          showNumbers={site.projects.paginationNumbers}
-        />
-      )
-    }
+    <StreamLandingList
+      items={items}
+      emptyMessage={devStream?.landing?.emptyMessage}
+      pagination={{
+        currentPage: 1,
+        totalPages,
+        basePath: devStream?.href || '/projects/',
+        label: paginationConfig?.paginationLabel,
+        previousText: paginationConfig?.paginationPrevious,
+        nextText: paginationConfig?.paginationNext,
+        pageText: paginationConfig?.paginationPage,
+        showNumbers: paginationConfig?.paginationNumbers
+      }}
+    />
   </div>
 </BaseLayout>

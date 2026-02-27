@@ -1,0 +1,37 @@
+---
+import Masonry from './Masonry.astro';
+import Pagination from './Pagination.astro';
+import PostCard from './PostCard.astro';
+
+const {
+  items = [],
+  emptyMessage,
+  pagination,
+  masonryRows = 'masonry'
+} = Astro.props;
+---
+
+{
+  items.length > 0 ? (
+    <Masonry className="grid" layout="50-50" rows={masonryRows}>
+      {items.map(item => <PostCard item={item} />)}
+    </Masonry>
+  ) : (
+    emptyMessage && <p>{emptyMessage}</p>
+  )
+}
+
+{
+  pagination && pagination.totalPages > 1 && (
+    <Pagination
+      currentPage={pagination.currentPage}
+      totalPages={pagination.totalPages}
+      basePath={pagination.basePath}
+      label={pagination.label}
+      previousText={pagination.previousText}
+      nextText={pagination.nextText}
+      pageText={pagination.pageText}
+      showNumbers={pagination.showNumbers}
+    />
+  )
+}

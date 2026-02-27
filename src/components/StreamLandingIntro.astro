@@ -1,0 +1,16 @@
+---
+import StreamMarker from './StreamMarker.astro';
+
+const {
+  stream,
+  className = 'region flow prose',
+  style,
+  intro
+} = Astro.props;
+---
+
+<div class={className} style={style}>
+  {stream && <StreamMarker stream={stream} />}
+  {intro && <p>{intro}</p>}
+  <slot />
+</div>

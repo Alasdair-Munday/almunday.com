@@ -1,45 +1,57 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Masonry from '../components/Masonry.astro';
-import PostCard from '../components/PostCard.astro';
-import StreamMarker from '../components/StreamMarker.astro';
+import StreamLandingIntro from '../components/StreamLandingIntro.astro';
+import StreamLandingList from '../components/StreamLandingList.astro';
+import SvgIcon from '../components/SvgIcon.astro';
 import { getAllPosts } from '../lib/content.js';
-import { contentStreams } from '../lib/site.js';
+import { contentStreams, site } from '../lib/site.js';
+import { buildPaginatedStreamItems, getStreamByKey } from '../lib/stream-landing.js';
 
-const songwritingStream = contentStreams.find(stream => stream.key === 'songwriting');
+const songwritingStream = getStreamByKey(contentStreams, 'songwriting');
+const pageSize = songwritingStream?.landing?.pageSize || 8;
 const posts = await getAllPosts();
-
-const songwritingPosts = posts.filter(post => {
-  const tags = (post.tags || []).map(tag => String(tag).toLowerCase());
-  return songwritingStream?.matches.some(match => tags.includes(match));
+const { items, totalPages } = buildPaginatedStreamItems({
+  items: posts,
+  pageSize,
+  stream: songwritingStream,
+  filterByMatches: songwritingStream?.landing?.filterByMatches
 });
 ---
 
-<BaseLayout title="Music" description="Songs, writing, and childlike wonder" layout="songwriting">
-  <header class="full | bg-hero-pattern section" style="--spot-color: color-mix(in oklab, var(--color-bg) 60%, transparent)">
-    <div class="section__inner region">
-      <div class="wrapper flow prose text-center">
-        <h1 class="gradient-text-linear">Music</h1>
+<BaseLayout
+  title={songwritingStream?.landing?.title || songwritingStream?.label || 'Music'}
+  description={songwritingStream?.description || 'Songs, writing, and childlike wonder'}
+  layout={songwritingStream?.landing?.layout || 'songwriting'}
+>
+  <div class="wrapper">
+    <header class="full | bg-hero-pattern section" style="--spot-color: color-mix(in oklab, var(--color-bg) 60%, transparent)">
+      <div class="section__inner region">
+        <div class="wrapper flow prose text-center">
+          <h1 class="gradient-text-linear text-step-4">{songwritingStream?.label || 'Music'}</h1>
+        </div>
       </div>
-    </div>
-  </header>
+      <SvgIcon name="divider/edgy" className="divider" />
+    </header>
 
-  <div class="wrapper region flow prose" style="--region-space-top: var(--space-xl-2xl)">
-    {songwritingStream && <StreamMarker stream={songwritingStream} />}
-    <p>
-      A place for songs, half-finished drafts, and reflections that begin in play before they become polished.
-    </p>
+    <StreamLandingIntro
+      stream={songwritingStream}
+      intro={songwritingStream?.landing?.intro}
+      style="--region-space-top: var(--space-l); margin-block-end: var(--space-xl-2xl);"
+    />
 
-    {
-      songwritingPosts.length > 0 ? (
-        <Masonry layout="50-50">
-          {songwritingPosts.map(post => <PostCard item={post} />)}
-        </Masonry>
-      ) : (
-        <p>
-          No music entries are published yet. They are coming.
-        </p>
-      )
-    }
+    <StreamLandingList
+      items={items}
+      emptyMessage={songwritingStream?.landing?.emptyMessage}
+      pagination={{
+        currentPage: 1,
+        totalPages,
+        basePath: '/songwriting/',
+        label: site.blog.paginationLabel,
+        previousText: site.blog.paginationPrevious,
+        nextText: site.blog.paginationNext,
+        pageText: site.blog.paginationPage,
+        showNumbers: site.blog.paginationNumbers
+      }}
+    />
   </div>
 </BaseLayout>

@@ -113,6 +113,15 @@ export const contentStreams = [
     label: 'Computers',
     description: 'I love computers. You can take the nerd out of software development, but you can\'t take the software development out of the nerd. Here I report about projects I\'ve worked on. And some of the technical challenges that I faced along the way.',
     href: '/projects/',
+    landing: {
+      title: 'Projects',
+      layout: 'projects',
+      intro: "Here are some things I've built.",
+      emptyMessage: 'No projects are published yet.',
+      pageSize: 8,
+      pagination: 'projects',
+      filterByMatches: false
+    },
     matches: ['project', 'projects', 'dev', 'development', 'code', 'engineering', 'software', '11ty', 'astro']
   },
   {
@@ -120,6 +129,15 @@ export const contentStreams = [
     label: 'Music',
     description: 'I love music.I write songs to help me process my thoughts. I upload them here in case they help others process theirs.',
     href: '/songwriting/',
+    landing: {
+      title: 'Music',
+      layout: 'songwriting',
+      intro: 'A place for songs, half-finished drafts, and reflections that begin in play before they become polished.',
+      emptyMessage: 'No music entries are published yet. They are coming.',
+      pageSize: 8,
+      pagination: 'blog',
+      filterByMatches: true
+    },
     matches: ['song', 'songs', 'songwriting', 'music', 'worship', 'bass']
   },
   {
@@ -127,6 +145,15 @@ export const contentStreams = [
     label: 'Jesus',
     description: 'I love Jesus. I write here about the Bible and Theology. I genuinely believe that he is the answer, even when we, his followers, regularly miss the point. Blogs are usually ways to externally process without taking some poor listener hostage.',
     href: '/blog/',
+    landing: {
+      title: 'Jesus',
+      layout: 'blog',
+      intro: 'Reflections on following Jesus in the modern world.',
+      emptyMessage: 'No Jesus posts are published yet.',
+      pageSize: 8,
+      pagination: 'blog',
+      filterByMatches: true
+    },
     matches: [
       'faith',
       'theology',
