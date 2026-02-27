@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StreamLandingIntro from '../../components/StreamLandingIntro.astro';
+import StreamLandingList from '../../components/StreamLandingList.astro';
+import SvgIcon from '../../components/SvgIcon.astro';
+import { getAllPosts } from '../../lib/content.js';
+import { contentStreams, site } from '../../lib/site.js';
+import { buildPaginatedStreamItems, getStreamByKey } from '../../lib/stream-landing.js';
+
+const songwritingStream = getStreamByKey(contentStreams, 'songwriting');
+
+export async function getStaticPaths() {
+  const stream = getStreamByKey(contentStreams, 'songwriting');
+  const pageSize = stream?.landing?.pageSize || 8;
+  const posts = await getAllPosts();
+  const { pages } = buildPaginatedStreamItems({
+    items: posts,
+    pageSize,
+    stream,
+    filterByMatches: stream?.landing?.filterByMatches
+  });
+
+  return pages.slice(1).map((items, index) => {
+    const pageNumber = index + 2;
+
+    return {
+      params: {
+        page: String(pageNumber)
+      },
+      props: {
+        items,
+        pageNumber,
+        totalPages: pages.length
+      }
+    };
+  });
+}
+
+const { items, pageNumber, totalPages } = Astro.props;
+const paginationConfig = site[songwritingStream?.landing?.pagination || 'blog'];
+---
+
+<BaseLayout
+  title={`${songwritingStream?.landing?.title || songwritingStream?.label || 'Music'} - Page ${pageNumber}`}
+  description={songwritingStream?.description || 'Songs, writing, and childlike wonder'}
+  layout={songwritingStream?.landing?.layout || 'songwriting'}
+>
+  <div class="wrapper">
+    <header class="full | bg-hero-pattern section" style="--spot-color: color-mix(in oklab, var(--color-bg) 60%, transparent)">
+      <div class="section__inner region">
+        <div class="wrapper flow prose text-center">
+          <h1 class="gradient-text-linear text-step-4">{songwritingStream?.label || 'Music'}</h1>
+        </div>
+      </div>
+      <SvgIcon name="divider/edgy" className="divider" />
+    </header>
+
+    <StreamLandingIntro
+      stream={songwritingStream}
+      intro={songwritingStream?.landing?.intro}
+      style="--region-space-top: var(--space-l); margin-block-end: var(--space-xl-2xl);"
+    />
+
+    <StreamLandingList
+      items={items}
+      emptyMessage={songwritingStream?.landing?.emptyMessage}
+      pagination={{
+        currentPage: pageNumber,
+        totalPages,
+        basePath: songwritingStream?.href || '/songwriting/',
+        label: paginationConfig?.paginationLabel,
+        previousText: paginationConfig?.paginationPrevious,
+        nextText: paginationConfig?.paginationNext,
+        pageText: paginationConfig?.paginationPage,
+        showNumbers: paginationConfig?.paginationNumbers
+      }}
+    />
+  </div>
+</BaseLayout>
