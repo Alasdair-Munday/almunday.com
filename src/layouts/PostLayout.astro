@@ -7,23 +7,27 @@ import '../assets/css/local/table.css';
 import BaseLayout from './BaseLayout.astro';
 import StreamMarker from '../components/StreamMarker.astro';
 
-import { site } from '../lib/site.js';
+import { contentStreams, site, streamLabels } from '../lib/site.js';
 import { estimateReadingTime, formatDate, getContentStream, normalizeAssetPath } from '../lib/utils.js';
 
 const {
   post,
-  backlinks = []
+  backlinks = [],
+  sectionKey
 } = Astro.props;
 
 const absolutePostUrl = new URL(post.url, site.url).toString();
 const normalizedImage = normalizeAssetPath(post.image);
 const readingTime = estimateReadingTime(post.markdown || post.contentHtml);
 const stream = getContentStream(post);
+const canonicalStream = sectionKey ? contentStreams.find((item) => item.key === sectionKey) : null;
+const sectionLabel = canonicalStream?.label || (sectionKey ? streamLabels[sectionKey] : null);
 ---
 
 <BaseLayout
   title={post.title}
   description={post.description}
+  discover={sectionLabel ? { title: `${sectionLabel} | ${post.title}`, description: `${sectionLabel}: ${post.description}` } : undefined}
   layout="post"
   schema="BlogPosting"
   pageDate={post.date}
