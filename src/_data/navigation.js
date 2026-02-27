@@ -1,10 +1,6 @@
 export default {
   top: [
     {
-      text: 'About me',
-      url: '/about/'
-    },
-    {
       text: 'Jesus',
       url: '/blog/'
     },
