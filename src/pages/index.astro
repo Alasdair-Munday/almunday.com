@@ -13,7 +13,10 @@ const featuredPosts = posts.slice(0, 4);
 
 <BaseLayout title="Al Munday - Theology, Tech and Music" description="Homepage" layout="home">
   <div class="wrapper">
-    <header class="full | bg-hero-pattern section" style="--spot-color: var(--color-primary)">
+    <header
+      class="full | bg-hero-pattern section"
+      style="--hero-overlay-opacity: 0.68; --spot-color: color-mix(in oklab, var(--color-primary) 55%, var(--color-bg))"
+    >
       <div class="section__inner flow region">
         <Masonry layout="50-50">
           <div class="prose wrapper">

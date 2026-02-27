@@ -121,7 +121,7 @@
   position: absolute;
   inset: 0;
   background: var(--color-bg);
-  opacity: 0.8;
+  opacity: var(--hero-overlay-opacity, 0.8);
   z-index: -1;
 }
 
