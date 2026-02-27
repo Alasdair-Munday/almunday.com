@@ -11,7 +11,7 @@
 .mainnav ul {
   --gutter: var(--space-xs-s);
   --cluster-vertical-alignment: normal;
-  --nav-list-background: color-mix(in oklab, var(--color-bg-elevated) 92%, transparent);
+  --nav-list-background: url('/assets/images/background/background-tile-colour.png');
   --nav-list-shadow: var(--shadow-soft);
   --nav-list-layout: column;
   --nav-list-height: 100dvh;
@@ -79,7 +79,7 @@
 
 .mainnav svg {
   block-size: 0.9em;
-  color: var(--color-text);
+  color: var(--color-light);
   stroke-width: 3;
 }
 
@@ -89,9 +89,9 @@
 
 .mainnav a {
   --nav-item-background: transparent;
-  --nav-item-text-color: var(--color-text);
+  --nav-item-text-color: var(--color-light);
   --nav-item-padding: var(--space-xs) var(--space-2xs);
-  --nav-item-decoration-color: color-mix(in oklab, var(--color-link) 45%, transparent);
+  --nav-item-decoration-color: color-mix(in oklab, var(--color-light) 45%, transparent);
 
   background: var(--nav-item-background);
   color: var(--nav-item-text-color);
@@ -105,16 +105,16 @@
 }
 
 .mainnav a:where(:hover, :focus-visible) {
-  --nav-item-background: color-mix(in oklab, var(--color-bg-elevated) 92%, transparent);
-  --nav-item-text-color: var(--color-link-hover);
+  --nav-item-background: color-mix(in oklab, var(--color-dark) 30%, transparent);
+  --nav-item-text-color: var(--color-light);
   --nav-item-decoration-color: currentColor;
 }
 
 .mainnav [aria-current='page'],
 .mainnav [data-state='active'] {
   --nav-item-background: color-mix(in oklab, var(--color-secondary) 22%, transparent);
-  --nav-item-text-color: var(--color-text);
-  --nav-item-decoration-color: var(--color-text);
+  --nav-item-text-color: var(--color-light);
+  --nav-item-decoration-color: var(--color-light);
 }
 
 @media screen(navigation) {
@@ -134,13 +134,13 @@
     --nav-list-transform: translateX(0);
     --nav-list-opacity: 1;
     border-inline-start: none;
-    background: transparent;
+    background: var(--nav-list-background);
   }
 
   .mainnav [aria-current='page'],
   .mainnav [data-state='active'] {
     --nav-item-background: color-mix(in oklab, var(--color-secondary) 20%, transparent);
-    --nav-item-text-color: var(--color-text);
+    --nav-item-text-color: var(--color-light);
     --nav-item-decoration-color: currentColor;
   }
 }
@@ -156,13 +156,13 @@
   --nav-list-transform: translateX(0);
   --nav-list-opacity: 1;
   border-inline-start: none;
-  background: transparent;
+  background: var(--nav-list-background);
 }
 
 .mainnav ul:first-child [aria-current='page'],
 .mainnav ul:first-child [data-state='active'] {
   --nav-item-background: color-mix(in oklab, var(--color-secondary) 20%, transparent);
-  --nav-item-text-color: var(--color-text);
+  --nav-item-text-color: var(--color-light);
   --nav-item-decoration-color: currentColor;
 }
 

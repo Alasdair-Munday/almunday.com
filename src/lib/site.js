@@ -83,24 +83,16 @@ export const site = {
 export const navigation = {
   top: [
     {
-      text: 'About',
-      url: '/about/'
+      text: 'Jesus',
+      url: '/blog/'
     },
     {
-      text: 'Recommendations',
-      url: '/recommendations/'
-    },
-    {
-      text: 'Projects',
-      url: '/projects/'
-    },
-    {
-      text: 'Songwriting',
+      text: 'Music',
       url: '/songwriting/'
     },
     {
-      text: 'Blog',
-      url: '/blog/'
+      text: 'Computers',
+      url: '/projects/'
     }
   ],
   bottom: [
