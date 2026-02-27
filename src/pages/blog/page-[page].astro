@@ -7,7 +7,7 @@ import StreamMarker from '../../components/StreamMarker.astro';
 import SvgIcon from '../../components/SvgIcon.astro';
 import { getAllPosts } from '../../lib/content.js';
 import { chunkForPagination } from '../../lib/utils.js';
-import { contentStreams, site } from '../../lib/site.js';
+import { contentStreams, site, streamLabels } from '../../lib/site.js';
 
 export async function getStaticPaths() {
   const pageSize = 8;
@@ -40,10 +40,11 @@ const {
   pageSize
 } = Astro.props;
 const faithStream = contentStreams.find(stream => stream.key === 'faith');
+const blogLabel = streamLabels.faith;
 ---
 
 <BaseLayout
-  title={`Jesus - Page ${pageNumber}`}
+  title={`${blogLabel} - Page ${pageNumber}`}
   description="Reflections on following Jesus in the modern world."
   layout="blog"
 >
@@ -51,7 +52,7 @@ const faithStream = contentStreams.find(stream => stream.key === 'faith');
     <header class="full | bg-hero-pattern section" style="--spot-color: color-mix(in oklab, var(--color-bg) 60%, transparent)">
       <div class="section__inner region">
         <div class="wrapper flow prose text-center">
-          <h1 class="gradient-text-linear text-step-4">Jesus</h1>
+          <h1 class="gradient-text-linear text-step-4">{blogLabel}</h1>
         </div>
       </div>
       <SvgIcon name="divider/edgy" className="divider" />

@@ -42,7 +42,7 @@ export const site = {
     tagSingle: 'Tag',
     tagPlural: 'Tags',
     tagMore: 'More tags:',
-    paginationLabel: 'Blog',
+    paginationLabel: 'Jesus',
     paginationPage: 'Page',
     paginationPrevious: 'Previous',
     paginationNext: 'Next',
@@ -80,18 +80,24 @@ export const site = {
   easteregg: false
 };
 
+export const streamLabels = {
+  faith: 'Jesus',
+  songwriting: 'Music',
+  dev: 'Computers'
+};
+
 export const navigation = {
   top: [
     {
-      text: 'Jesus',
+      text: streamLabels.faith,
       url: '/blog/'
     },
     {
-      text: 'Music',
+      text: streamLabels.songwriting,
       url: '/songwriting/'
     },
     {
-      text: 'Computers',
+      text: streamLabels.dev,
       url: '/projects/'
     }
   ],
@@ -110,21 +116,21 @@ export const personal = {
 export const contentStreams = [
   {
     key: 'dev',
-    label: 'Computers',
+    label: streamLabels.dev,
     description: 'I love computers. You can take the nerd out of software development, but you can\'t take the software development out of the nerd. Here I report about projects I\'ve worked on. And some of the technical challenges that I faced along the way.',
     href: '/projects/',
     matches: ['project', 'projects', 'dev', 'development', 'code', 'engineering', 'software', '11ty', 'astro']
   },
   {
     key: 'songwriting',
-    label: 'Music',
+    label: streamLabels.songwriting,
     description: 'I love music.I write songs to help me process my thoughts. I upload them here in case they help others process theirs.',
     href: '/songwriting/',
     matches: ['song', 'songs', 'songwriting', 'music', 'worship', 'bass']
   },
   {
     key: 'faith',
-    label: 'Jesus',
+    label: streamLabels.faith,
     description: 'I love Jesus. I write here about the Bible and Theology. I genuinely believe that he is the answer, even when we, his followers, regularly miss the point. Blogs are usually ways to externally process without taking some poor listener hostage.',
     href: '/blog/',
     matches: [

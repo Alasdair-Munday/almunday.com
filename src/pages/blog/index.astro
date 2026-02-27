@@ -7,7 +7,7 @@ import StreamMarker from '../../components/StreamMarker.astro';
 import SvgIcon from '../../components/SvgIcon.astro';
 import { getAllPosts } from '../../lib/content.js';
 import { chunkForPagination } from '../../lib/utils.js';
-import { contentStreams, site } from '../../lib/site.js';
+import { contentStreams, site, streamLabels } from '../../lib/site.js';
 
 const pageSize = 8;
 const posts = await getAllPosts();
@@ -15,14 +15,19 @@ const pagedPosts = chunkForPagination(posts, pageSize);
 const items = pagedPosts[0] || [];
 const totalPages = pagedPosts.length;
 const faithStream = contentStreams.find(stream => stream.key === 'faith');
+const blogLabel = streamLabels.faith;
 ---
 
-<BaseLayout title="Blog" description="All blog posts can be found here" layout="blog">
+<BaseLayout
+  title={blogLabel}
+  description="Reflections on following Jesus in the modern world."
+  layout="blog"
+>
   <div class="wrapper">
     <header class="full | bg-hero-pattern section" style="--spot-color: color-mix(in oklab, var(--color-bg) 60%, transparent)">
       <div class="section__inner region">
         <div class="wrapper flow prose text-center">
-          <h1 class="gradient-text-linear text-step-4">Blog</h1>
+          <h1 class="gradient-text-linear text-step-4">{blogLabel}</h1>
         </div>
       </div>
       <SvgIcon name="divider/edgy" className="divider" />
