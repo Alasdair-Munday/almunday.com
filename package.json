@@ -1,12 +1,12 @@
 {
-  "name": "eleventy-excellent",
+  "name": "almunday-com",
   "version": "4.1.8",
-  "description": "Eleventy starter built around the workflow suggested by Andy Bell's buildexcellentwebsit.es.",
+  "description": "Personal site and blog built with Astro.",
   "author": "Lene Saile",
   "license": "ISC",
   "type": "module",
   "engines": {
-    "node": ">=20.x.x"
+    "node": ">=24.0.0"
   },
   "scripts": {
     "clean": "rimraf dist .astro public/assets public/*.png public/*.svg public/*.ico public/*.webmanifest",
@@ -27,16 +27,9 @@
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": "https://github.com/madrilene/eleventy-excellent.git"
+    "url": "https://github.com/Alasdair-Munday/almunday.com.git"
   },
   "dependencies": {
-    "@11ty/eleventy": "^3.0.0",
-    "@11ty/eleventy-fetch": "^5.0.2",
-    "@11ty/eleventy-img": "^6.0.2",
-    "@11ty/eleventy-plugin-rss": "^2.0.3",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
-    "@11ty/eleventy-plugin-webc": "^0.11.2",
-    "@11ty/is-land": "^4.0.1",
     "@astrojs/tailwind": "^6.0.2",
     "debug": "^4.4.0",
     "image-size": "^2.0.2",
@@ -71,7 +64,6 @@
     "postcss-import": "^16.1.0",
     "postcss-import-ext-glob": "^2.1.1",
     "postcss-js": "^4.0.1",
-    "prettier-plugin-jinja-template": "^2.1.0",
     "rimraf": "^6.0.1",
     "sanitize-html": "^2.16.0",
     "sharp": "^0.34.1",

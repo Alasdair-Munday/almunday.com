@@ -2,7 +2,7 @@ class customEasteregg extends HTMLElement {
   constructor() {
     super();
     // Initialize with default keywords
-    this.keywords = ['eleventy', 'excellent'];
+    this.keywords = ['astro', 'almunday'];
     // Add any custom keyword passed as an attribute
     const customKeyword = this.getAttribute('keyword');
     if (customKeyword) {

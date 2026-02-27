@@ -11,7 +11,7 @@ Personal site and blog built with Astro.
 
 ## Requirements
 
-- Node.js 20+
+- Node.js 24+
 - npm
 
 ## Install

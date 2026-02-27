@@ -1,4 +1,3 @@
-import fetch from '@11ty/eleventy-fetch';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
@@ -13,11 +12,12 @@ async function fetchScreenshot(url, filePath) {
   const timeout = 'timeout:5';
   const apiUrl = `https://v1.screenshot.11ty.dev/${encodeURIComponent(url)}/large/_${waitCondition}_${timeout}/`;
 
-  const buffer = await fetch(apiUrl, {
-    duration: '1d',
-    type: 'buffer'
-  });
+  const response = await fetch(apiUrl);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch screenshot (${response.status} ${response.statusText})`);
+  }
 
+  const buffer = Buffer.from(await response.arrayBuffer());
   await fs.writeFile(filePath, buffer);
   console.log(`Screenshot saved to ${filePath}`);
 }
