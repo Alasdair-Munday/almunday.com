@@ -5,6 +5,7 @@ description: "Turning a Hackathon Project into a Usable Christmas Digital Devoti
 date: 2024-12-01
 image: "/assets/images/blog/cbu-calendar.png" 
 tags: ["projects", "11ty"]
+takeALookUrl: "https://faithinkids.org"
 youtube: true
 ---
 # Faith in Kids: Building a Digital Sticker Book

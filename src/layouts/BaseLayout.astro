@@ -3,6 +3,7 @@ import '../styles/global.css';
 
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import SvgIcon from '../components/SvgIcon.astro';
 
 import { site } from '../lib/site.js';
 import { normalizePath, slugifyString } from '../lib/utils.js';
@@ -152,6 +153,15 @@ const blogPostingSchema =
   </head>
 
   <body class={`${layout} bg-tiled-pattern bg-repeat`.trim()}>
+    <div class="site-intro require-js" data-site-intro aria-hidden="true">
+      <div class="site-intro__logo-stage">
+        <span class="site-intro__logo-ring site-intro__logo-ring--inner"></span>
+        <span class="site-intro__logo-ring site-intro__logo-ring--outer"></span>
+        <SvgIcon name="misc/tree-transparent" className="site-intro__logo-icon" />
+      </div>
+      <p class="site-intro__label">{site.siteName}</p>
+    </div>
+
     <div class="reading-progress" aria-hidden="true"></div>
     <Header currentPath={currentPath} />
 
@@ -169,6 +179,60 @@ const blogPostingSchema =
         </>
       )
     }
+
+    <script is:inline>
+      (() => {
+        const intro = document.querySelector('[data-site-intro]');
+        if (!intro) {
+          return;
+        }
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          intro.remove();
+          return;
+        }
+
+        const sessionKey = 'site-intro-seen-v1';
+        if (sessionStorage.getItem(sessionKey) === '1') {
+          intro.remove();
+          return;
+        }
+
+        sessionStorage.setItem(sessionKey, '1');
+        document.body.classList.add('has-intro-lock');
+
+        let hasLeft = false;
+        const leaveIntro = () => {
+          if (hasLeft) {
+            return;
+          }
+
+          hasLeft = true;
+          intro.classList.add('is-leaving');
+
+          window.setTimeout(() => {
+            document.body.classList.remove('has-intro-lock');
+            intro.remove();
+          }, 1250);
+        };
+
+        requestAnimationFrame(() => {
+          intro.classList.add('is-active');
+        });
+
+        const triggerLeave = () => {
+          window.setTimeout(leaveIntro, 380);
+        };
+
+        if (document.readyState === 'complete') {
+          triggerLeave();
+        } else {
+          window.addEventListener('load', triggerLeave, { once: true });
+        }
+
+        window.setTimeout(leaveIntro, 2400);
+      })();
+    </script>
 
     <script is:inline define:vars={{ themeDark: site.themeDark, themeLight: site.themeLight }}>
       const storageKey = 'theme-preference';

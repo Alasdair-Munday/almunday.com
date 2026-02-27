@@ -1,0 +1,227 @@
+.has-intro-lock {
+  overflow: hidden;
+}
+
+.site-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+  pointer-events: none;
+  overflow: hidden;
+  background-color: var(--color-bg);
+  background-image:
+    url('/assets/images/background/background-tile-colour.png'),
+    radial-gradient(circle at 18% 16%, color-mix(in oklab, var(--color-secondary) 26%, transparent) 0, transparent 52%),
+    radial-gradient(circle at 84% 86%, color-mix(in oklab, var(--color-primary) 24%, transparent) 0, transparent 58%);
+  background-size: auto, 100% 100%, 100% 100%;
+  background-repeat: repeat, no-repeat, no-repeat;
+  background-position: top left, center, center;
+  background-blend-mode: soft-light, normal, normal;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 680ms ease 420ms,
+    visibility 0s linear 1100ms;
+}
+
+.site-intro::before,
+.site-intro::after {
+  content: '';
+  position: absolute;
+  inset: -14%;
+  z-index: -2;
+}
+
+.site-intro::before {
+  background:
+    radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--color-bg-elevated) 74%, transparent) 0, transparent 58%),
+    radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--color-tertiary) 18%, transparent) 0, transparent 80%);
+  opacity: 0.9;
+  transform: scale(1);
+  transition:
+    opacity 620ms ease,
+    transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.site-intro::after {
+  background:
+    repeating-linear-gradient(
+      130deg,
+      transparent 0 1rem,
+      color-mix(in oklab, var(--color-tertiary) 14%, transparent) 1rem 1.32rem
+    );
+  opacity: 0.32;
+  animation: intro-drift 9s linear infinite;
+}
+
+.site-intro__logo-stage {
+  position: absolute;
+  inline-size: min(42vmin, 16rem);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--color-bg-elevated) 74%, var(--color-primary));
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--color-border-subtle) 72%, transparent),
+    0 0 0 0.9rem color-mix(in oklab, var(--color-bg) 76%, transparent),
+    0 1.2rem 4rem color-mix(in oklab, black 34%, transparent);
+  transform: scale(0.64);
+  opacity: 0;
+  transition:
+    transform 760ms cubic-bezier(0.22, 1, 0.36, 1) 70ms,
+    opacity 300ms ease 50ms;
+}
+
+.site-intro__logo-ring {
+  position: absolute;
+  border-radius: 999px;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+.site-intro__logo-ring--inner {
+  inset: 12%;
+  border: 1px solid color-mix(in oklab, var(--color-text) 32%, transparent);
+  animation: intro-ring 2s ease-out infinite;
+}
+
+.site-intro__logo-ring--outer {
+  inset: -10%;
+  border: 1px solid color-mix(in oklab, var(--color-primary) 24%, transparent);
+  animation: intro-ring 2s ease-out infinite 300ms;
+}
+
+.site-intro__logo-icon {
+  inline-size: 47%;
+  block-size: auto;
+  color: color-mix(in oklab, var(--color-secondary) 62%, var(--color-primary));
+  filter: drop-shadow(0 0.3rem 0.45rem color-mix(in oklab, black 22%, transparent));
+  transform: translateY(0.45rem) scale(0.82) rotate(-8deg);
+  opacity: 0;
+  transition:
+    transform 860ms cubic-bezier(0.22, 1, 0.36, 1) 130ms,
+    opacity 360ms ease 120ms;
+}
+
+.site-intro__label {
+  margin: 0;
+  margin-top: min(42vmin, 17rem);
+  padding-inline: var(--space-m);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-family: var(--font-display);
+  font-size: clamp(0.92rem, 1.5vw, 1.22rem);
+  color: color-mix(in oklab, var(--color-text) 82%, var(--color-secondary));
+  text-shadow: 0 0.1rem 0.5rem color-mix(in oklab, black 32%, transparent);
+  opacity: 0;
+  transform: translateY(0.8rem);
+  transition:
+    opacity 420ms ease 140ms,
+    transform 620ms cubic-bezier(0.22, 1, 0.36, 1) 140ms;
+}
+
+.site-intro.is-active .site-intro__logo-stage {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.site-intro.is-active .site-intro__logo-icon {
+  transform: translateY(0) scale(1) rotate(0deg);
+  opacity: 1;
+}
+
+.site-intro.is-active .site-intro__label {
+  opacity: 0.9;
+  transform: translateY(0);
+}
+
+.site-intro.is-leaving {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.site-intro.is-leaving::before {
+  opacity: 0;
+  transform: scale(1.22);
+}
+
+.site-intro.is-leaving .site-intro__logo-stage {
+  transform: scale(10.4);
+  transition:
+    transform 980ms cubic-bezier(0.68, -0.08, 0.26, 1),
+    opacity 360ms ease 540ms;
+  opacity: 0;
+}
+
+.site-intro.is-leaving .site-intro__logo-icon {
+  transform: scale(1.24) rotate(4deg);
+  opacity: 0;
+  transition:
+    transform 580ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 280ms ease;
+}
+
+.site-intro.is-leaving .site-intro__logo-ring {
+  transform: scale(1.6);
+  opacity: 0;
+  transition:
+    opacity 380ms ease,
+    transform 760ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.site-intro.is-leaving .site-intro__label {
+  opacity: 0;
+  transform: translateY(-0.65rem);
+  transition:
+    opacity 260ms ease,
+    transform 440ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes intro-ring {
+  0% {
+    transform: scale(0.82);
+    opacity: 0.74;
+  }
+
+  70% {
+    transform: scale(1.15);
+    opacity: 0.32;
+  }
+
+  100% {
+    transform: scale(1.32);
+    opacity: 0;
+  }
+}
+
+@keyframes intro-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-2rem, 1.8rem, 0);
+  }
+}
+
+@media (max-width: 46rem) {
+  .site-intro__logo-stage {
+    inline-size: min(62vmin, 13.8rem);
+  }
+
+  .site-intro__label {
+    margin-top: min(62vmin, 14.8rem);
+    letter-spacing: 0.14em;
+    font-size: clamp(0.92rem, 4vw, 1.1rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-intro {
+    display: none;
+  }
+}

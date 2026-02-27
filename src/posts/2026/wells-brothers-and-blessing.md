@@ -101,6 +101,8 @@ If you put the two Beersheba scenes side by side, a pattern starts to show.
 - At Beersheba, a boy and his mum are sent away from the family of promise. **Brothers become strangers.** God meets them there anyway.
 - At Beersheba, a wandering herdsman and a local king make a covenant over a disputed well. **Strangers become brothers.** Their people share the space.
 
+> In both stories, God brings Eden-shaped restoration. The Question is are the people of God prepared to get with the program?
+
 Same place. Same God. One story full of separation and rejection. Another full of tentative trust and shared blessing.
 
 The ground that holds the pain also holds the possibility of peace.
@@ -109,7 +111,7 @@ The ground that holds the pain also holds the possibility of peace.
 
 ## Wells, fear, and blessing now
 
-None of this is museum‑piece theology. The dynamics are uncomfortably familiar.
+None of this is just abstract or ancient. The dynamics are uncomfortably familiar.
 
 - There is **Sarah‑shaped fear**: when the good thing we’ve been given makes us weirdly anxious about other people who might “take” it – newcomers, younger leaders, people who just do stuff differently and unsettle our sense of status.
 - There is **Ishmael‑shaped hurt**: the experience of being nudged out, not because God has rejected us, but because the institution is protecting itself – and then discovering that God is still paying attention to our tears outside the camp.
@@ -121,6 +123,27 @@ It shows grace at work when insiders and outsiders, locals and foreigners, actua
 
 In a world of tight circles and sharp borders, the chapter quietly throws a few questions back at us:
 
-- Where are the wells – literal or metaphorical – where you live?
-- Who’s being kept away from them out of fear?
-- And what would it take, in that particular spot, for brothers not to become strangers, and for strangers to discover that, at the very least, they can be neighbours who share water and shade?
+- Where are the wells – literal or metaphorical – where you live? or in your parish?
+- Where do you see the children of God refusing to collaborate with others out of fear?
+- And what would it take, in that particular spot, for neighbours to become brothers, collaborating with each other and being the channels of God's promise of restoration?
+
+```markdown
+> Lord, make me channel of your peace:
+> where there is hatred, let me sow love;
+> where there is injury, pardon;
+> where there is doubt, faith;
+> where there is despair, hope;
+> where there is darkness, light;
+> where there is sadness, joy.
+>
+> O divine Master, grant that I may not so much seek
+> to be consoled as to console,
+> to be understood as to understand,
+> to be loved as to love.
+>
+> For it is in giving that we receive,
+> it is in pardoning that we are pardoned,
+> and it is in dying that we are born to eternal life.
+> Amen.
+> - The Prayer of St. Francis
+```

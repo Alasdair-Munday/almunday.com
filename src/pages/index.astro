@@ -3,19 +3,41 @@ import Masonry from '../components/Masonry.astro';
 import PostCard from '../components/PostCard.astro';
 import StreamMarker from '../components/StreamMarker.astro';
 import SvgIcon from '../components/SvgIcon.astro';
+import '../assets/css/local/home.css';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getAllPosts } from '../lib/content.js';
+import { getAllPosts, getAllProjects } from '../lib/content.js';
 import { contentStreams } from '../lib/site.js';
+import { formatDate } from '../lib/utils.js';
 
-const posts = await getAllPosts();
+const [posts, projects] = await Promise.all([getAllPosts(), getAllProjects()]);
 const featuredPosts = posts.slice(0, 4);
+const featuredProjects = projects.slice(0, 4);
+
+function getProjectPreviewUrl(project) {
+  const maybeExternalUrl = project.takeALookUrl ||
+    project.projectUrl ||
+    project.liveUrl ||
+    project.demoUrl ||
+    project.website ||
+    project.repo ||
+    project.github ||
+    project.link;
+
+  return typeof maybeExternalUrl === 'string' && maybeExternalUrl.trim().length > 0
+    ? maybeExternalUrl.trim()
+    : project.url;
+}
+
+function isExternalUrl(href) {
+  return /^https?:\/\//.test(href);
+}
 ---
 
 <BaseLayout title="Al Munday - Theology, Tech and Music" description="Homepage" layout="home">
   <div class="wrapper">
     <header
       class="full | bg-hero-pattern section"
-      style="--hero-overlay-opacity: 0.68; --spot-color: color-mix(in oklab, var(--color-primary) 55%, var(--color-bg))"
+      style="--hero-overlay-opacity: 0.68; --spot-opacity: 86%; --spot-color: color-mix(in oklab, var(--color-primary) 55%, var(--color-bg))"
     >
       <div class="section__inner flow region">
         <Masonry layout="50-50">
@@ -35,7 +57,7 @@ const featuredPosts = posts.slice(0, 4);
             <SvgIcon
               name="misc/me-tree"
               ariaLabel="Al Munday sitting under a tree with a book"
-              styleName="block-size: 500px; fill: var(--color-me-tree);"
+              styleName="block-size: 500px; fill: var(--color-text);"
             />
           </div>
         </Masonry>
@@ -47,12 +69,16 @@ const featuredPosts = posts.slice(0, 4);
       <div class="wrapper flow prose"></div>
     </article>
 
-    <section class="full | region">
-      <div class="wrapper flow prose">
-        <h2>Orient Yourself</h2>
-        <p>
-          This site is mapped around three streams. Pick one and follow where it leads.
-        </p>
+    <section class="full">
+      <div class="home-heading-strip bg-tiled-pattern-theme region">
+        <div class="wrapper flow prose">
+          <h2>Orient Yourself</h2>
+          <p>
+            This site is mapped around three streams. Pick one and follow where it leads.
+          </p>
+        </div>
+      </div>
+      <div class="wrapper flow region">
         <Masonry layout="thirds">
           {
             contentStreams.map(stream => (
@@ -71,14 +97,66 @@ const featuredPosts = posts.slice(0, 4);
       </div>
     </section>
 
-    <section class="full | region">
-      <div
-        class="wrapper flow prose bg-tiled-pattern bg-repeat"
-        style="background-image: url('/assets/images/template/background-tile.png'); background: repeat;"
-      >
-        <h2>Blog</h2>
-        <p>I write about following Jesus in the modern world. All views are my own.</p>
+    <section class="full">
+      <div class="home-heading-strip bg-tiled-pattern-theme region">
+        <div class="wrapper flow prose">
+          <h2>Projects</h2>
+          <p>Things I've built, shipped, and learned from.</p>
+        </div>
+      </div>
+      <div class="wrapper flow prose region">
+        {
+          featuredProjects.length > 0 ? (
+            <Masonry layout="50-50">
+              {
+                featuredProjects.map(project => {
+                  const previewUrl = getProjectPreviewUrl(project);
+                  const externalPreview = isExternalUrl(previewUrl);
 
+                  return (
+                    <custom-card>
+                      <h3 slot="headline" class="text-step-2">
+                        <a href={project.url}>{project.title}</a>
+                      </h3>
+                      <span slot="date">
+                        <time datetime={project.date.toISOString()}>{formatDate(project.date)}</time>
+                      </span>
+                      <p slot="content">{project.description || project.excerpt}</p>
+                      <footer slot="footer" class="project-card-actions cluster">
+                        <a class="button" data-button-variant="primary" data-small-button href={project.url}>
+                          read about it
+                        </a>
+                        <a
+                          class="button"
+                          data-ghost-button
+                          data-small-button
+                          href={previewUrl}
+                          target={externalPreview ? '_blank' : undefined}
+                          rel={externalPreview ? 'noreferrer noopener' : undefined}
+                        >
+                          take a look
+                        </a>
+                      </footer>
+                    </custom-card>
+                  );
+                })
+              }
+            </Masonry>
+          ) : (
+            <p>No projects published yet.</p>
+          )
+        }
+      </div>
+    </section>
+
+    <section class="full">
+      <div class="home-heading-strip bg-tiled-pattern-theme region">
+        <div class="wrapper flow prose">
+          <h2>Blog</h2>
+          <p>I write about following Jesus in the modern world. All views are my own.</p>
+        </div>
+      </div>
+      <div class="wrapper flow prose region">
         <div class="feature | region region-space-l">
           <Masonry layout="50-50">
             {featuredPosts.map(item => <PostCard item={item} headingLevel="h3" />)}

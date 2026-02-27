@@ -2,7 +2,11 @@
   display: block;
   block-size: 3.5em;
   inline-size: 100%;
-  fill: var(--spot-color, var(--color-bg));
+  fill: color-mix(
+    in oklab,
+    var(--spot-color, var(--color-bg)) var(--divider-opacity, var(--spot-opacity, 100%)),
+    transparent
+  );
 }
 
 .divider > .divider {

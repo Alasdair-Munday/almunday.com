@@ -25,6 +25,7 @@
 @import 'blocks/seperator.css' layer(blocks);
 @import 'blocks/site-footer.css' layer(blocks);
 @import 'blocks/site-logo.css' layer(blocks);
+@import 'blocks/site-intro.css' layer(blocks);
 @import 'blocks/skip-link.css' layer(blocks);
 @import 'blocks/textgradient.css' layer(blocks);
 @import 'blocks/theme-switch.css' layer(blocks);

@@ -1,0 +1,16 @@
+body.home {
+  --tile-background-url: url('/assets/images/background/background-tile-colour.png');
+}
+
+.home-heading-strip {
+  --region-space: var(--space-m-l);
+}
+
+.home-heading-strip .prose {
+  --flow-space: var(--space-2xs-xs);
+}
+
+.project-card-actions {
+  --gutter: var(--space-2xs);
+  margin-top: var(--space-s);
+}

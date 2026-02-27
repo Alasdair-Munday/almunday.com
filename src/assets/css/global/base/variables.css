@@ -78,7 +78,8 @@
   --color-bg-accent: color-mix(in oklab, var(--color-cassock-night) 72%, var(--color-cassock-leaf));
   --color-bg-accent-2: color-mix(in oklab, var(--color-cassock-night) 68%, var(--color-cassock-water));
 
-  --tile-background-url: url('/assets/images/background/background-tile.png');
+  --tile-background-url-theme: url('/assets/images/background/background-tile.png');
+  --tile-background-url: var(--tile-background-url-theme);
 }
 
 :root[data-theme='light'] {
@@ -98,21 +99,29 @@
   --color-bg-accent: color-mix(in oklab, var(--color-paper-light) 78%, var(--color-cassock-leaf));
   --color-bg-accent-2: color-mix(in oklab, var(--color-paper-light) 70%, var(--color-cassock-water));
 
-  --tile-background-url: url('/assets/images/background/background-tile-light.png');
+  --tile-background-url-theme: url('/assets/images/background/background-tile-light.png');
+  --tile-background-url: var(--tile-background-url-theme);
 }
 
 .bg-tiled-pattern {
   background-image: var(--tile-background-url);
   background-repeat: repeat;
   background-attachment: scroll;
-  background-position: top;
+  background-position: top left;
+}
+
+.bg-tiled-pattern-theme {
+  background-image: var(--tile-background-url-theme);
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: top left;
 }
 
 .bg-hero-pattern {
   background-image: url('/assets/images/background/background-tile-colour.png');
   background-repeat: repeat;
   background-attachment: scroll;
-  background-position: top;
+  background-position: top left;
   position: relative;
 }
 

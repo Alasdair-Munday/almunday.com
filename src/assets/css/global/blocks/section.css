@@ -3,7 +3,11 @@
 }
 
 .section__inner {
-  background-color: var(--spot-color, color-mix(in oklab, var(--color-bg-soft) 90%, transparent));
+  background-color: color-mix(
+    in oklab,
+    var(--spot-color, color-mix(in oklab, var(--color-bg-soft) 90%, transparent)) var(--spot-opacity, 100%),
+    transparent
+  );
   color: var(--color-text);
 }
 
