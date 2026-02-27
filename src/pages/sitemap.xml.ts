@@ -8,8 +8,6 @@ const xmlDate = value => new Date(value).toISOString();
 
 const basePages = [
   { url: '/', changefreq: 'weekly' },
-  { url: '/about/', changefreq: 'monthly' },
-  { url: '/recommendations/', changefreq: 'monthly' },
   { url: '/blog/', changefreq: 'weekly' },
   { url: '/projects/', changefreq: 'monthly' },
   { url: '/songwriting/', changefreq: 'monthly' },

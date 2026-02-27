@@ -8,15 +8,17 @@ const { currentPath = '/' } = Astro.props;
 const isHome = normalizePath(currentPath) === '/';
 ---
 
-<header class="wrapper">
+<header class="site-header">
   <a href="#main" class="skip-link">{site.skipContent}</a>
 
-  <div class="repel ontop gutter-s">
-    <a href="/" class="logo | cluster" aria-current={isHome ? 'page' : undefined}>
-      <SvgIcon name="misc/tree-transparent" />
-      <span class="font-display">{site.siteName}</span>
-    </a>
+  <div class="wrapper">
+    <div class="repel ontop gutter-s">
+      <a href="/" class="logo | cluster" aria-current={isHome ? 'page' : undefined}>
+        <SvgIcon name="misc/tree-transparent" />
+        <span class="font-display">{site.siteName}</span>
+      </a>
 
-    <MainNav currentPath={currentPath} />
+      <MainNav currentPath={currentPath} />
+    </div>
   </div>
 </header>
