@@ -1,0 +1,15 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { site } from '../lib/site.js';
+---
+
+<PageLayout title="Not Found" description="This page does not exist">
+  <h2>Sorry, that page doesn't exist!</h2>
+
+  <p><a href="/">Please try visiting the home page!</a></p>
+
+  <p>
+    Please let me know if you encounter more errors:
+    <a href={`mailto:${site.creator.email}`}>{site.creator.email}</a>
+  </p>
+</PageLayout>

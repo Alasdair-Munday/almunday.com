@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Masonry from '../../components/Masonry.astro';
+import Pagination from '../../components/Pagination.astro';
+import PostCard from '../../components/PostCard.astro';
+import StreamMarker from '../../components/StreamMarker.astro';
+import SvgIcon from '../../components/SvgIcon.astro';
+import { getAllPosts } from '../../lib/content.js';
+import { chunkForPagination } from '../../lib/utils.js';
+import { contentStreams, site } from '../../lib/site.js';
+
+const pageSize = 8;
+const posts = await getAllPosts();
+const pagedPosts = chunkForPagination(posts, pageSize);
+const items = pagedPosts[0] || [];
+const totalPages = pagedPosts.length;
+const faithStream = contentStreams.find(stream => stream.key === 'faith');
+---
+
+<BaseLayout title="Blog" description="All blog posts can be found here" layout="blog">
+  <div class="wrapper">
+    <header class="full | bg-hero-pattern section" style="--spot-color: color-mix(in oklab, var(--color-bg) 60%, transparent)">
+      <div class="section__inner region">
+        <div class="wrapper flow prose text-center">
+          <h1 class="gradient-text-linear text-step-4">Blog</h1>
+        </div>
+      </div>
+      <SvgIcon name="divider/edgy" className="divider" />
+    </header>
+
+    <div class="region flow prose">
+      {faithStream && <StreamMarker stream={faithStream} />}
+      <p>
+        This blog has a pagination of <strong>{pageSize}</strong> posts per page.<br />
+        The pagination is only shown if there are more posts ({posts.length}) than items per page ({pageSize}).
+      </p>
+    </div>
+
+    <Masonry className="grid" layout="50-50" rows="masonry">
+      {items.map(item => <PostCard item={item} />)}
+    </Masonry>
+
+    {
+      totalPages > 1 && (
+        <Pagination
+          currentPage={1}
+          totalPages={totalPages}
+          basePath="/blog/"
+          label={site.blog.paginationLabel}
+          previousText={site.blog.paginationPrevious}
+          nextText={site.blog.paginationNext}
+          pageText={site.blog.paginationPage}
+          showNumbers={site.blog.paginationNumbers}
+        />
+      )
+    }
+  </div>
+</BaseLayout>

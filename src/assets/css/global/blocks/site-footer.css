@@ -1,19 +1,27 @@
 .site-footer {
   --cluster-horizontal-alignment: center;
+  border-top: 1px solid var(--color-border-subtle);
+  background-image:
+    linear-gradient(
+      color-mix(in oklab, var(--color-bg-elevated) 94%, transparent),
+      color-mix(in oklab, var(--color-bg-elevated) 94%, transparent)
+    ),
+    var(--texture-tile-url);
+  background-color: color-mix(in oklab, var(--color-bg-elevated) 90%, transparent);
+  background-repeat: repeat, repeat;
+  background-size: auto, var(--texture-tile-size);
 }
 
-/* increase tab size */
 .site-footer a:not(.creator a) {
   padding: var(--space-xs);
 }
-.site-footer .creator a:hover {
-  color: transparent;
-  background-image: var(--gradient-rainbow);
-  background-size: 100%;
-  background-repeat: repeat;
-  background-clip: text;
+
+.site-footer .creator {
+  color: var(--color-text-muted);
 }
 
-.site-footer .creator a:hover svg {
-  color: var(--color-primary);
+.site-footer .creator a:hover,
+.site-footer .creator a:focus-visible {
+  color: var(--color-link-hover);
+  text-decoration-color: currentColor;
 }

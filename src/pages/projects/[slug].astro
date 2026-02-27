@@ -1,0 +1,21 @@
+---
+import PostLayout from '../../layouts/PostLayout.astro';
+import { getAllProjects } from '../../lib/content.js';
+
+export async function getStaticPaths() {
+  const projects = await getAllProjects();
+
+  return projects.map(project => ({
+    params: {
+      slug: project.slug
+    },
+    props: {
+      project
+    }
+  }));
+}
+
+const { project } = Astro.props;
+---
+
+<PostLayout post={project} backlinks={[]} />

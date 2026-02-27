@@ -1,11 +1,11 @@
 /* © Ryan Mulligan - https://ryanmulligan.dev/blog/layout-breakouts/ */
 
 .wrapper {
-  --gap: clamp(1rem, 6vw, 3rem);
+  --gap: clamp(1rem, 4vw, 2.5rem);
   --full: minmax(var(--gap), 1fr);
-  --content: min(var(--wrapper-width, 85rem), 100% - var(--gap) * 2);
+  --content: min(var(--wrapper-width, 80rem), 100% - var(--gap) * 2);
   --popout: minmax(0, 2rem);
-  --feature: minmax(0, 5rem);
+  --feature: minmax(0, 4rem);
 
   display: grid;
   grid-template-columns:
@@ -23,6 +23,8 @@
 }
 
 .prose-wrapper {
+  margin: 0 var(--gap);
+  backdrop-filter: blur(4px);
   --wrapper-width: 64rem;
 }
 

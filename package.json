@@ -9,15 +9,20 @@
     "node": ">=20.x.x"
   },
   "scripts": {
-    "clean": "rimraf dist src/_includes/css src/_includes/scripts",
+    "clean": "rimraf dist .astro public/assets public/*.png public/*.svg public/*.ico public/*.webmanifest",
+    "sync:assets": "node ./scripts/sync-public-assets.mjs",
+    "sync:content": "node ./scripts/sync-obsidian-content.mjs --clean",
+    "sync:content:published": "node ./scripts/sync-obsidian-content.mjs --clean --published-only",
+    "predev": "npm run sync:assets",
     "clean:og": "rimraf src/assets/og-images",
     "favicons": "node ./src/_config/setup/generate-favicons.js",
     "colors": "node ./src/_config/setup/create-colors.js",
     "screenshots": "node ./src/_config/setup/generate-screenshots.js",
-    "dev:11ty": "cross-env ELEVENTY_ENV=development eleventy --serve",
-    "build:11ty": "cross-env ELEVENTY_ENV=production eleventy",
-    "start": "npm run dev:11ty",
-    "build": "npm run clean && npm run build:11ty"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "npm run clean && npm run sync:assets && astro build",
+    "preview": "astro preview",
+    "check": "astro check"
   },
   "keywords": [],
   "repository": {
@@ -32,11 +37,16 @@
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
     "@11ty/eleventy-plugin-webc": "^0.11.2",
     "@11ty/is-land": "^4.0.1",
+    "@astrojs/tailwind": "^6.0.2",
+    "debug": "^4.4.0",
+    "image-size": "^2.0.2",
     "lite-youtube-embed": "^0.3.3",
+    "markdown-it-wikilinks": "^1.4.0",
     "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
     "@toycode/markdown-it-class": "^1.2.4",
+    "astro": "^5.2.0",
     "autoprefixer": "^10.4.21",
     "colorjs.io": "^0.5.2",
     "cross-env": "^7.0.3",

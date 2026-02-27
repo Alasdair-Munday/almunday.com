@@ -1,0 +1,17 @@
+---
+import '../assets/css/local/custom-card.css';
+
+import { formatDate } from '../lib/utils.js';
+
+const { item } = Astro.props;
+---
+
+<custom-card clickable>
+  <h2 slot="headline" class="text-step-2">
+    <a href={item.url}>{item.title}</a>
+  </h2>
+  <span slot="date">
+    <time datetime={item.date.toISOString()}>{formatDate(item.date)}</time>
+  </span>
+  <p slot="content">{item.description}</p>
+</custom-card>

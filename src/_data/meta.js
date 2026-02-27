@@ -1,36 +1,35 @@
 export const url = process.env.URL || 'http://localhost:8080';
 // Extract domain from `url`
 export const domain = new URL(url).hostname;
-export const siteName = 'Eleventy Excellent';
-export const siteDescription = 'Eleventy starter for building modern, resilient websites';
-export const siteType = 'Person'; // schema
+export const siteName = 'Rev Al Munday';
+export const siteDescription = 'Rev, dev, musician and overthinker.';
+export const siteType = 'person'; // website, blog, article, book, etc.
 export const locale = 'en_EN';
 export const lang = 'en';
 export const skipContent = 'Skip to content';
 export const author = {
-  name: 'Lene Saile', // i.e. Lene Saile - page / blog author's name. Must be set.
+  name: 'Rev Al Munday', // i.e. Lene Saile - page / blog author's name. Must be set.
   avatar: '/icon-512x512.png', // path to the author's avatar. In this case just using a favicon.
-  email: 'hola@lenesaile.com', // i.e. hola@lenesaile.com - email of the author
-  website: 'https://www.lenesaile.com', // i.e. https.://www.lenesaile.com - the personal site of the author
-  fediverse: '@lene@front-end.social' // used for highlighting journalism on the fediverse. Can be Mastodon, Flipboard, Threads, WordPress (with the ActivityPub plugin installed), PeerTube, Pixelfed, etc. https://blog.joinmastodon.org/2024/07/highlighting-journalism-on-mastodon/
+  email: 'hi@almunday.com', // i.e. hola@lenesaile.com - email of the author
+  website: 'https://almunday.com', // i.e. https.://www.lenesaile.com - the personal site of the author
 };
 export const creator = {
-  name: 'Lene Saile', // i.e. Lene Saile - creator's (developer) name.
-  email: 'hola@lenesaile.com',
-  website: 'https://www.lenesaile.com',
-  social: 'https://front-end.social/@lene'
+  name: 'Rev Al Munday', // i.e. Lene Saile - page / blog author's name. Must be set.
+  avatar: '/icon-512x512.png', // path to the author's avatar. In this case just using a favicon.
+  email: 'hi@almunday.com', // i.e. hola@lenesaile.com - email of the author
+  website: 'https://almunday.com', // i.e. https.://www.lenesaile.com - the personal site of the author
 };
-export const pathToSvgLogo = 'src/assets/svg/misc/logo.svg'; // used for favicon generation
-export const themeColor = '#dd4462'; // used in manifest, for example primary color value
-export const themeLight = '#f8f8f8'; // used for meta tag theme-color, if light colors are prefered. best use value set for light bg
-export const themeDark = '#2e2e2e'; // used for meta tag theme-color, if dark colors are prefered. best use value set for dark bg
-export const opengraph_default = '/assets/images/template/opengraph-default.jpg'; // fallback/default meta image
+export const pathToSvgLogo = 'src/assets/svg/misc/tree-transparent.svg'; // used for favicon generation
+export const themeColor = '#5ca8c1'; // used in manifest, for example primary color value
+export const themeLight = '#cedfda'; // used for meta tag theme-color, if light colors are prefered. best use value set for light bg
+export const themeDark = '#374c56'; // used for meta tag theme-color, if dark colors are prefered. best use value set for dark bg
+export const ph_default = '/assets/images/template/opengraph-default.jpg'; // fallback/default meta image
 export const opengraph_default_alt =
-  "Visible content: An Eleventy starter with CUBE CSS, Cube CSS, Every Layout, Design Tokens and Tailwind for uitility classes. A workflow for building modern and resilient websites, introduced by Andy Bell's project buildexcellentwebsit.es"; // alt text for default meta image"
+  "Visible content: The personal website of Rev Al Munday. A blog about Jesus, Technology and Life."; // alt text for default meta image"
 export const blog = {
   // RSS feed
-  name: 'My Web Development Blog',
-  description: 'Tell the word what you are writing about in your blog. It will show up on feed readers.',
+  name: 'Jesus', // name of the blog,
+  description: 'Reflections on following Jesus in the modern world.', // description of the blog
   // feed links are looped over in the head. You may add more to the array.
   feedLinks: [
     {
@@ -49,7 +48,7 @@ export const blog = {
   tagPlural: 'Tags',
   tagMore: 'More tags:',
   // pagination
-  paginationLabel: 'Blog',
+  paginationLabel: 'Jesus',
   paginationPage: 'Page',
   paginationPrevious: 'Previous',
   paginationNext: 'Next',
@@ -72,8 +71,8 @@ export const navigation = {
 };
 export const themeSwitch = {
   title: 'Theme',
-  light: 'light',
-  dark: 'dark'
+  light: 'Light',
+  dark: 'Dark'
 };
 export const greenweb = {
   // https://carbontxt.org/
@@ -84,11 +83,11 @@ export const greenweb = {
       domain: domain
     }
   ],
-  services: [{domain: 'netlify.com', serviceType: 'cdn'}]
+  services: [{ domain: 'netlify.com', serviceType: 'cdn' }]
 };
 export const viewRepo = {
   // this is for the view/edit on github link. The value in the package.json will be pulled in.
-  allow: true,
+  allow: false,
   infoText: 'View this page on GitHub'
 };
 export const easteregg = true;

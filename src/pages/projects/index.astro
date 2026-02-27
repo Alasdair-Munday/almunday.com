@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Masonry from '../../components/Masonry.astro';
+import Pagination from '../../components/Pagination.astro';
+import PostCard from '../../components/PostCard.astro';
+import StreamMarker from '../../components/StreamMarker.astro';
+import SvgIcon from '../../components/SvgIcon.astro';
+import { getAllProjects } from '../../lib/content.js';
+import { chunkForPagination } from '../../lib/utils.js';
+import { contentStreams, site } from '../../lib/site.js';
+
+const pageSize = 8;
+const projects = await getAllProjects();
+const pagedProjects = chunkForPagination(projects, pageSize);
+const items = pagedProjects[0] || [];
+const totalPages = pagedProjects.length;
+const devStream = contentStreams.find(stream => stream.key === 'dev');
+---
+
+<BaseLayout title="Projects" description="A showcase of my work." layout="projects">
+  <div class="wrapper">
+    <header class="full | bg-hero-pattern section" style="--spot-color: color-mix(in oklab, var(--color-bg) 60%, transparent)">
+      <div class="section__inner region">
+        <div class="wrapper flow prose text-center">
+          <h1 class="gradient-text-linear text-step-4">Projects</h1>
+        </div>
+      </div>
+      <SvgIcon name="divider/edgy" className="divider" />
+    </header>
+
+    <div class="region flow prose" style="--region-space-top: var(--space-l); margin-block-end: var(--space-xl-2xl);">
+      {devStream && <StreamMarker stream={devStream} />}
+      <p>Here are some things I've built.</p>
+    </div>
+
+    <Masonry className="grid" layout="50-50" rows="masonry">
+      {items.map(item => <PostCard item={item} />)}
+    </Masonry>
+
+    {
+      totalPages > 1 && (
+        <Pagination
+          currentPage={1}
+          totalPages={totalPages}
+          basePath="/projects/"
+          label={site.projects.paginationLabel}
+          previousText={site.projects.paginationPrevious}
+          nextText={site.projects.paginationNext}
+          pageText={site.projects.paginationPage}
+          showNumbers={site.projects.paginationNumbers}
+        />
+      )
+    }
+  </div>
+</BaseLayout>

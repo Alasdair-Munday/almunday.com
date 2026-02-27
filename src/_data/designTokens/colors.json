@@ -3,64 +3,116 @@
   "description": "Hex color codes that can be shared, cross-platform. They can be converted at point of usage, such as HSL for web or CMYK for print. neutral and vibrant colors are converted to color palettes, fixed colors are kept as they are",
   "items": [
     {
-      "name": "Gray 100",
-      "value": "#f8f8f8"
+      "name": "Cream 100",
+      "value": "#f8f9f6"
     },
     {
-      "name": "Gray 200",
-      "value": "#e4e4e4"
+      "name": "Cream 200",
+      "value": "#e4e5e2"
     },
     {
-      "name": "Gray 300",
-      "value": "#aeaeae"
+      "name": "Cream 300",
+      "value": "#adaeab"
     },
     {
-      "name": "Gray 400",
-      "value": "#808080"
+      "name": "Cream 400",
+      "value": "#7f817c"
     },
     {
-      "name": "Gray 500",
-      "value": "#636363"
+      "name": "Cream 500",
+      "value": "#62645f"
     },
     {
-      "name": "Gray 600",
-      "value": "#484848"
+      "name": "Cream 600",
+      "value": "#464943"
     },
     {
-      "name": "Gray 700",
-      "value": "#3a3a3a"
+      "name": "Cream 700",
+      "value": "#393b36"
     },
     {
-      "name": "Gray 800",
-      "value": "#2e2e2e"
+      "name": "Cream 800",
+      "value": "#2d2f2a"
     },
     {
-      "name": "Gray 900",
-      "value": "#161616"
+      "name": "Cream 900",
+      "value": "#151713"
     },
     {
-      "name": "Pink",
-      "value": "#dd4462"
+      "name": "Navy 100",
+      "value": "#f7f7ff"
     },
     {
-      "name": "Pink Subdued",
-      "value": "#ce5769"
+      "name": "Navy 200",
+      "value": "#e3e3ee"
     },
     {
-      "name": "Blue",
-      "value": "#4467dd"
+      "name": "Navy 300",
+      "value": "#adadb7"
     },
     {
-      "name": "Blue Subdued",
-      "value": "#4d6cc8"
+      "name": "Navy 400",
+      "value": "#7f7e90"
     },
     {
-      "name": "Gold",
-      "value": "#fbbe25"
+      "name": "Navy 500",
+      "value": "#616175"
     },
     {
-      "name": "Gold Subdued",
-      "value": "#f1c15b"
+      "name": "Navy 600",
+      "value": "#46455b"
+    },
+    {
+      "name": "Navy 700",
+      "value": "#39384b"
+    },
+    {
+      "name": "Navy 800",
+      "value": "#2d2c3c"
+    },
+    {
+      "name": "Navy 900",
+      "value": "#151422"
+    },
+    {
+      "name": "Moonstone",
+      "value": "#5ca8c1"
+    },
+    {
+      "name": "Moonstone Subdued",
+      "value": "#6ca6ba"
+    },
+    {
+      "name": "Rose Pompadour",
+      "value": "#d87a8b"
+    },
+    {
+      "name": "Rose Pompadour Subdued",
+      "value": "#cd828e"
+    },
+    {
+      "name": "Azure",
+      "value": "#cedfda"
+    },
+    {
+      "name": "Azure Subdued",
+      "value": "#d1deda"
+    },
+    {
+      "name": "Hookers green",
+      "value": "#4b6c66"
+    },
+    {
+      "name": "Hookers green Subdued",
+      "value": "#516b66"
+    },
+    {
+      "name": "Charcoal",
+      "value": "#374c56"
+    },
+    {
+      "name": "Charcoal Subdued",
+      "value": "#3b4b53"
     }
   ]
 }

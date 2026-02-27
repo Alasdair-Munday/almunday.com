@@ -1,0 +1,25 @@
+---
+import PostLayout from '../../layouts/PostLayout.astro';
+import { getAllPosts, getBacklinks } from '../../lib/content.js';
+
+export async function getStaticPaths() {
+  const [posts, backlinks] = await Promise.all([getAllPosts(), getBacklinks()]);
+
+  return posts.map(post => ({
+    params: {
+      slug: post.slug
+    },
+    props: {
+      post,
+      backlinks: backlinks[post.url] || []
+    }
+  }));
+}
+
+const {
+  post,
+  backlinks
+} = Astro.props;
+---
+
+<PostLayout post={post} backlinks={backlinks} />

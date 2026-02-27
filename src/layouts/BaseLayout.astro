@@ -1,0 +1,330 @@
+---
+import '../styles/global.css';
+
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+
+import { site } from '../lib/site.js';
+import { normalizePath, slugifyString } from '../lib/utils.js';
+
+const {
+  title,
+  description,
+  layout = '',
+  schema,
+  discover = {},
+  pageDate,
+  ogImage,
+  ogImageAlt,
+  noindex = false
+} = Astro.props;
+
+const currentPath = normalizePath(Astro.url.pathname);
+const resolvedTitle = discover.title || title || site.siteName;
+const metaDescription = discover.description || description || site.siteDescription;
+const canonicalUrl = new URL(currentPath, site.url).toString();
+
+const fallbackOgImage =
+  layout === 'post' && title
+    ? `${site.url}/assets/og-images/${slugifyString(title)}-preview.jpeg`
+    : new URL(site.opengraphDefault, site.url).toString();
+const resolvedOgImage = ogImage ? new URL(ogImage, site.url).toString() : fallbackOgImage;
+const resolvedOgImageAlt = ogImageAlt || (layout === 'post' ? title : site.opengraphDefaultAlt);
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${site.url}#website`,
+      url: site.url,
+      name: site.siteName,
+      description: site.siteDescription,
+      inLanguage: site.locale
+    }
+  ]
+};
+
+const blogPostingSchema =
+  schema === 'BlogPosting'
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        mainEntityOfPage: {
+          '@type': 'WebPage'
+        },
+        isPartOf: {
+          '@id': `${site.url}#website`
+        },
+        '@id': canonicalUrl,
+        headline: resolvedTitle,
+        description: metaDescription,
+        image: resolvedOgImage,
+        inLanguage: site.locale,
+        publisher: {
+          '@type': site.siteType,
+          name: site.author.name,
+          url: site.url
+        },
+        author: {
+          '@type': 'Person',
+          name: site.author.name
+        },
+        datePublished: new Date(pageDate || new Date()).toISOString()
+      }
+    : null;
+---
+
+<!doctype html>
+<html lang={site.lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{resolvedTitle}</title>
+
+    <script is:inline>
+      (() => {
+        const storageKey = 'theme-preference';
+        const storedTheme = localStorage.getItem(storageKey);
+        const fallbackTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const theme = storedTheme || fallbackTheme;
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+
+    <meta name="description" content={metaDescription} />
+    <meta name="theme-color" content={site.themeDark} />
+    <meta name="robots" content={noindex ? 'noindex,nofollow' : 'index,follow'} />
+    <meta name="googlebot" content={noindex ? 'noindex,nofollow' : 'index,follow'} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="view-transition" content="same-origin" />
+
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="author" href="/humans.txt" />
+
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={resolvedTitle} />
+    <meta property="og:image" content={resolvedOgImage} />
+    <meta property="og:image:alt" content={resolvedOgImageAlt} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:site_name" content={site.siteName} />
+    <meta property="og:locale" content={site.locale} />
+    <meta property="article:author" content={site.author.name} />
+
+    {
+      site.blog.feedLinks.map(feedLink => (
+        <link
+          rel="alternate"
+          type={feedLink.type}
+          title={`${feedLink.title}: ${site.siteName}`}
+          href={feedLink.url}
+        />
+      ))
+    }
+
+    <link
+      rel="preload"
+      href="/assets/fonts/redhat/red-hat-display-v7-latin-900.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/atkinson/atkinson-hyperlegible-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    {blogPostingSchema && <script type="application/ld+json" set:html={JSON.stringify(blogPostingSchema)} />}
+  </head>
+
+  <body class={`${layout} bg-tiled-pattern bg-repeat`.trim()}>
+    <div class="reading-progress" aria-hidden="true"></div>
+    <Header currentPath={currentPath} />
+
+    <main id="main" class="flow">
+      <slot />
+    </main>
+
+    <Footer currentPath={currentPath} />
+
+    {
+      site.easteregg && (
+        <>
+          <script type="module" src="/assets/scripts/components/custom-easteregg.js"></script>
+          <custom-easteregg></custom-easteregg>
+        </>
+      )
+    }
+
+    <script is:inline define:vars={{ themeDark: site.themeDark, themeLight: site.themeLight }}>
+      const storageKey = 'theme-preference';
+      const themeColors = {
+        dark: themeLight,
+        light: themeDark
+      };
+
+      const theme = {
+        value: getColorPreference()
+      };
+
+      function getColorPreference() {
+        if (localStorage.getItem(storageKey)) {
+          return localStorage.getItem(storageKey);
+        }
+
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+
+      function reflectPreference() {
+        document.documentElement.setAttribute('data-theme', theme.value);
+      }
+
+      function updateMetaThemeColor() {
+        const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+        if (!metaThemeColor) {
+          return;
+        }
+
+        const newColor = theme.value === 'dark' ? themeColors.dark : themeColors.light;
+        metaThemeColor.setAttribute('content', newColor);
+      }
+
+      function setPreference() {
+        localStorage.setItem(storageKey, theme.value);
+        reflectPreference();
+        updateMetaThemeColor();
+      }
+
+      function onClick(themeValue) {
+        theme.value = themeValue;
+
+        const lightToggle = document.querySelector('#light-theme-toggle');
+        const darkToggle = document.querySelector('#dark-theme-toggle');
+
+        if (lightToggle && darkToggle) {
+          lightToggle.setAttribute('aria-pressed', String(themeValue === 'light'));
+          darkToggle.setAttribute('aria-pressed', String(themeValue === 'dark'));
+        }
+
+        setPreference();
+      }
+
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({ matches: isDark }) => {
+        theme.value = isDark ? 'dark' : 'light';
+        setPreference();
+      });
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const lightThemeToggle = document.querySelector('#light-theme-toggle');
+        const darkThemeToggle = document.querySelector('#dark-theme-toggle');
+        const switcher = document.querySelector('[data-theme-switcher]');
+
+        if (!switcher || !lightThemeToggle || !darkThemeToggle) {
+          return;
+        }
+
+        reflectPreference();
+        updateMetaThemeColor();
+
+        lightThemeToggle.addEventListener('click', () => onClick('light'));
+        darkThemeToggle.addEventListener('click', () => onClick('dark'));
+
+        lightThemeToggle.setAttribute('aria-pressed', String(theme.value === 'light'));
+        darkThemeToggle.setAttribute('aria-pressed', String(theme.value === 'dark'));
+      });
+
+      reflectPreference();
+      updateMetaThemeColor();
+    </script>
+
+    <script is:inline>
+      if (!customElements.get('custom-masonry')) {
+        class CustomMasonry extends HTMLElement {
+          constructor() {
+            super();
+            this.layoutMasonry = this.layoutMasonry.bind(this);
+          }
+
+          connectedCallback() {
+            requestAnimationFrame(() => {
+              this.layoutMasonry();
+              window.addEventListener('resize', this.debounceLayout.bind(this, 100));
+            });
+          }
+
+          disconnectedCallback() {
+            window.removeEventListener('resize', this.debounceLayout);
+          }
+
+          debounceLayout(delay) {
+            clearTimeout(this.timeoutId);
+            this.timeoutId = setTimeout(this.layoutMasonry, delay);
+          }
+
+          layoutMasonry() {
+            const columnCount = getComputedStyle(this).gridTemplateColumns.split(' ').length;
+            const items = Array.from(this.children);
+
+            items.forEach((item, index) => {
+              item.style.marginTop = '0px';
+
+              if (index >= columnCount) {
+                const previousItem = items[index - columnCount];
+                const previousItemBottom =
+                  previousItem.offsetTop +
+                  previousItem.offsetHeight +
+                  parseFloat(getComputedStyle(this).rowGap);
+                const currentItemTop = item.offsetTop;
+                const marginTop = previousItemBottom - currentItemTop;
+                item.style.marginTop = `${marginTop}px`;
+              }
+            });
+          }
+        }
+
+        customElements.define('custom-masonry', CustomMasonry);
+      }
+    </script>
+
+    <script is:inline>
+      const progressBar = document.querySelector('.reading-progress');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (progressBar && document.body.classList.contains('post') && !reduceMotion) {
+        const setProgress = () => {
+          const article = document.querySelector('.post .prose');
+          if (!article) {
+            return;
+          }
+
+          const rect = article.getBoundingClientRect();
+          const start = window.scrollY + rect.top;
+          const distance = Math.max(1, article.offsetHeight - window.innerHeight);
+          const progress = Math.min(1, Math.max(0, (window.scrollY - start) / distance));
+
+          progressBar.style.setProperty('--reading-progress', `${progress * 100}%`);
+        };
+
+        setProgress();
+        document.addEventListener('scroll', setProgress, { passive: true });
+        window.addEventListener('resize', setProgress);
+      } else if (progressBar && !document.body.classList.contains('post')) {
+        progressBar.style.display = 'none';
+      }
+    </script>
+  </body>
+</html>

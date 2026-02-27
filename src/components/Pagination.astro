@@ -1,0 +1,70 @@
+---
+import '../assets/css/local/pagination.css';
+
+const {
+  currentPage,
+  totalPages,
+  basePath,
+  label,
+  showNumbers = true,
+  previousText = 'Previous',
+  nextText = 'Next',
+  pageText = 'Page'
+} = Astro.props;
+
+const hrefFor = page => {
+  if (page <= 1) {
+    return basePath;
+  }
+
+  return `${basePath}page-${page}/`;
+};
+
+const previousHref = currentPage > 1 ? hrefFor(currentPage - 1) : null;
+const nextHref = currentPage < totalPages ? hrefFor(currentPage + 1) : null;
+const pageNumbers = Array.from({ length: totalPages }, (_, idx) => idx + 1);
+---
+
+<section class="region">
+  <nav role="navigation" aria-labelledby="pagination_label">
+    <span id="pagination_label" hidden>{label}</span>
+    <span id="prefix" hidden>{pageText}</span>
+    <ol class="pagination | cluster" role="list">
+      <li>
+        {
+          previousHref ? (
+            <a href={previousHref}>{previousText}</a>
+          ) : (
+            previousText
+          )
+        }
+      </li>
+
+      {
+        showNumbers &&
+          pageNumbers.map(pageNumber => (
+            <li>
+              <a
+                href={hrefFor(pageNumber)}
+                id={`link_${pageNumber}`}
+                aria-labelledby={`prefix link_${pageNumber}`}
+                aria-current={pageNumber === currentPage ? 'page' : undefined}
+              >
+                {pageNumber}
+              </a>
+            </li>
+          ))
+      }
+
+      <li>
+        {
+          nextHref ? (
+            <a href={nextHref}>{nextText}</a>
+          ) : (
+            nextText
+          )
+        }
+      </li>
+    </ol>
+  </nav>
+</section>

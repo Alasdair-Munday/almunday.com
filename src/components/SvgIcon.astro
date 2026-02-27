@@ -1,0 +1,40 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+
+const {
+  name,
+  ariaLabel = '',
+  className = '',
+  styleName = ''
+} = Astro.props;
+
+const iconPath = path.join(process.cwd(), 'src', 'assets', 'svg', `${name}.svg`);
+
+let svgMarkup = '';
+
+try {
+  const rawSvg = fs.readFileSync(iconPath, 'utf8');
+  const attributes = [];
+
+  if (ariaLabel) {
+    attributes.push(`aria-label="${ariaLabel}"`);
+  } else {
+    attributes.push('aria-hidden="true"');
+  }
+
+  if (className) {
+    attributes.push(`class="${className}"`);
+  }
+
+  if (styleName) {
+    attributes.push(`style="${styleName}"`);
+  }
+
+  svgMarkup = rawSvg.replace('<svg', `<svg ${attributes.join(' ')}`);
+} catch {
+  svgMarkup = '';
+}
+---
+
+<Fragment set:html={svgMarkup} />

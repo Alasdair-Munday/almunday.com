@@ -1,0 +1,39 @@
+---
+layout: base
+title: Computers
+description: 'Code, tools, and technical experiments.'
+pagination:
+  data: collections.projects
+  size: 8
+permalink: 'projects/{% if pagination.pageNumber >=1 %}page-{{ pagination.pageNumber + 1 }}/{% endif %}index.html'
+---
+
+<div class="wrapper">
+  <header class="full | section" style="--spot-color: var(--color-primary)">
+    <div class="section__inner flow region" style="--region-space-top: var(--space-xl-2xl)">
+      <h1 class="text-center" style="color: var(--color-text);">{{ title }}</h1>
+    </div>
+
+    {% svg "divider/edgy", null, "divider" %}
+  </header>
+
+  <div class="region flow prose" style="--region-space-top: var(--space-l); margin-block-end: var(--space-xl-2xl);">
+    <p>Here are some things I've built with computers.</p>
+  </div>
+
+  <custom-masonry class="grid" data-layout="50-50" data-rows="masonry">
+		{% asyncEach item in pagination.items %}
+			{% include "partials/card-blog.njk" %}
+		{% endeach %}
+	</custom-masonry>
+
+  <!-- set collection to paginate -->
+  {% set collectionToPaginate = collections.projects %}
+  <!-- set target pagination settings in meta.js -->
+  {% set metaKey = "projects" %}
+  <!-- if the number of items in the collection is greater than the number of items shown on one page -->
+  {% if collectionToPaginate.length > pagination.size %}
+    <!-- include pagination -->
+    {% include 'partials/pagination.njk' %}
+  {% endif %}
+</div>

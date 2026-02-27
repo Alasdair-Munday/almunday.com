@@ -1,0 +1,87 @@
+---
+import Masonry from '../components/Masonry.astro';
+import PostCard from '../components/PostCard.astro';
+import StreamMarker from '../components/StreamMarker.astro';
+import SvgIcon from '../components/SvgIcon.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getAllPosts } from '../lib/content.js';
+import { contentStreams } from '../lib/site.js';
+
+const posts = await getAllPosts();
+const featuredPosts = posts.slice(0, 4);
+---
+
+<BaseLayout title="Al Munday - Theology, Tech and Music" description="Homepage" layout="home">
+  <div class="wrapper">
+    <header class="full | bg-hero-pattern section" style="--spot-color: var(--color-primary)">
+      <div class="section__inner flow region">
+        <Masonry layout="50-50">
+          <div class="prose wrapper">
+            <h1 class="text-center" style="color: var(--color-text);">Hello Friend!</h1>
+            <span class="text-center" style="color: var(--color-text);">
+              <strong></strong>
+              <br />
+              This is a collection of my thoughts, projects, and musings. This site isn't here to be a polished
+              portfolio, but rather a space for me to record my journey, my creative output, and the things i'm
+              reflecting on. Its here for me. But if you find something useful, or interesting, then that would bring
+              me so much joy!
+              <br />
+            </span>
+          </div>
+          <div>
+            <SvgIcon
+              name="misc/me-tree"
+              ariaLabel="Al Munday sitting under a tree with a book"
+              styleName="block-size: 500px; fill: var(--color-me-tree);"
+            />
+          </div>
+        </Masonry>
+      </div>
+      <SvgIcon name="divider/waves" className="divider" />
+    </header>
+
+    <article class="full | region">
+      <div class="wrapper flow prose"></div>
+    </article>
+
+    <section class="full | region">
+      <div class="wrapper flow prose">
+        <h2>Orient Yourself</h2>
+        <p>
+          This site is mapped around three streams. Pick one and follow where it leads.
+        </p>
+        <Masonry layout="thirds">
+          {
+            contentStreams.map(stream => (
+              <custom-card clickable>
+                <h3 slot="headline" class="text-step-2">
+                  <a href={stream.href}>{stream.label}</a>
+                </h3>
+                <span slot="date">
+                  <StreamMarker stream={stream} compact />
+                </span>
+                <p slot="content">{stream.description}</p>
+              </custom-card>
+            ))
+          }
+        </Masonry>
+      </div>
+    </section>
+
+    <section class="full | region">
+      <div
+        class="wrapper flow prose bg-tiled-pattern bg-repeat"
+        style="background-image: url('/assets/images/template/background-tile.png'); background: repeat;"
+      >
+        <h2>Blog</h2>
+        <p>I write about following Jesus in the modern world. All views are my own.</p>
+
+        <div class="feature | region region-space-l">
+          <Masonry layout="50-50">
+            {featuredPosts.map(item => <PostCard item={item} headingLevel="h3" />)}
+          </Masonry>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

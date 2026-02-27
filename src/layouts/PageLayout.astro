@@ -1,0 +1,22 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+const {
+  title,
+  description
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description} layout="page">
+  <header class="full | bg-hero-pattern section" style="--spot-color: color-mix(in oklab, var(--color-bg) 60%, transparent)">
+    <div class="section__inner region">
+      <div class="wrapper flow prose text-center">
+        <h1 class="gradient-text-linear">{title}</h1>
+      </div>
+    </div>
+  </header>
+
+  <div class="region wrapper flow prose paper-reading" style="--region-space-top: var(--space-xl-2xl)">
+    <slot />
+  </div>
+</BaseLayout>

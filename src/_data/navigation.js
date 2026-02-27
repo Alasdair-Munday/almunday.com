@@ -1,20 +1,20 @@
 export default {
   top: [
     {
-      text: 'About',
+      text: 'About me',
       url: '/about/'
     },
     {
-      text: 'Docs',
-      url: '/get-started/'
-    },
-    {
-      text: 'Built with',
-      url: '/built-with/'
-    },
-    {
-      text: 'Blog',
+      text: 'Jesus',
       url: '/blog/'
+    },
+    {
+      text: 'Music',
+      url: '/songwriting/'
+    },
+    {
+      text: 'Computers',
+      url: '/projects/'
     }
   ],
   bottom: [

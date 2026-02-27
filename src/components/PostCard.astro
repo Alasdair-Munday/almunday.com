@@ -1,0 +1,50 @@
+---
+import '../assets/css/local/custom-card.css';
+import '../assets/css/local/stream-marker.css';
+import StreamMarker from './StreamMarker.astro';
+
+import { formatDate, getContentStream, markdownFormat } from '../lib/utils.js';
+
+const {
+  item,
+  headingLevel = 'h2',
+  showTags = true
+} = Astro.props;
+
+const HeadingTag = headingLevel;
+const stream = getContentStream(item);
+---
+
+<custom-card clickable>
+  <HeadingTag slot="headline" class="text-step-2">
+    <a href={item.url}>{item.title}</a>
+  </HeadingTag>
+
+  <span slot="date">
+    {stream && <StreamMarker stream={stream} compact />}
+    {item.draft && (
+      <span class="meta-chip meta-chip--draft">
+        draft
+      </span>
+    )}{' '}
+    <time datetime={item.date.toISOString()}>{formatDate(item.date)}</time>
+  </span>
+
+  {
+    showTags && item.tags.length > 1 && (
+      <div slot="tag">
+        {
+          item.tags
+            .filter(tag => tag !== 'posts')
+            .map(tag => (
+              <span class="meta-chip">
+                {tag}
+              </span>
+            ))
+        }
+      </div>
+    )
+  }
+
+  <div slot="content" set:html={markdownFormat(item.description)} />
+</custom-card>

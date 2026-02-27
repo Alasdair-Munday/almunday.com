@@ -40,7 +40,7 @@
     {% include "head/meta-info.njk" %}
   </head>
 
-  <body class="{{ layout }}">
+  <body class="{{ layout }} bg-tiled-pattern bg-repeat">
     {% set indicateActiveHome %}
       {% if page.url == "/" %}
         aria-current=page
@@ -54,6 +54,11 @@
     {%- if meta.easteregg -%}
       <script type="module" src="/assets/scripts/components/custom-easteregg.js"></script>
       <custom-easteregg></custom-easteregg>
+    {%- endif -%}
+
+    {%- if youtube -%}
+      <link rel="stylesheet" href="/assets/components/lite-yt-embed.css" />
+      <script type="module" src="/assets/components/lite-yt-embed.js"></script>
     {%- endif -%}
   </body>
 </html>

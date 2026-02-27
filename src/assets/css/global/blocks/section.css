@@ -3,17 +3,17 @@
 }
 
 .section__inner {
-  background-color: var(--spot-color, var(--color-bg-accent));
+  background-color: var(--spot-color, color-mix(in oklab, var(--color-bg-soft) 90%, transparent));
   color: var(--color-text);
 }
 
 .section blockquote {
   font-weight: var(--font-bold);
-  line-height: 1;
-  font-size: var(--size-step-4);
+  line-height: 1.2;
+  font-size: var(--size-step-2);
   letter-spacing: var(--tracking-s);
 }
 
 .section :is(h1, h2, h3, blockquote) {
-  opacity: 95%;
+  opacity: 0.98;
 }

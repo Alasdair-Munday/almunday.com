@@ -1,17 +1,12 @@
 .theme-switch h2 {
   font-size: var(--size-step-min-1);
   font-family: var(--font-base);
+  color: var(--color-text-light);
 }
 
 .theme-switch .button[aria-pressed='true'] {
-  --_color-contrast: var(--color-tertiary);
-  --button-bg: var(--_color-contrast);
-  --button-color: var(--color-dark);
-  --button-border-color: var(--_color-contrast);
-  outline-color: var(--_color-contrast);
-}
-
-/* Hide without JS */
-is-land:not(:defined) .theme-switch {
-  display: none;
+  --button-bg: color-mix(in oklab, var(--color-primary) 30%, var(--color-bg-elevated));
+  --button-color: var(--color-text);
+  --button-border-color: var(--color-border-strong);
+  outline-color: var(--color-focus-ring);
 }

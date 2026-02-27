@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Masonry from '../../components/Masonry.astro';
+import TagCard from '../../components/TagCard.astro';
+import { getPostsByTag, getTagList } from '../../lib/content.js';
+import { getLinkActiveState, normalizePath } from '../../lib/utils.js';
+import { site } from '../../lib/site.js';
+
+export async function getStaticPaths() {
+  const tagList = await getTagList();
+
+  const entries = await Promise.all(
+    tagList.map(async tag => ({
+      params: {
+        tag
+      },
+      props: {
+        tag,
+        itemList: await getPostsByTag(tag),
+        tagList
+      }
+    }))
+  );
+
+  return entries;
+}
+
+const {
+  tag,
+  itemList,
+  tagList
+} = Astro.props;
+
+const currentPath = normalizePath(Astro.url.pathname);
+---
+
+<BaseLayout title={`${site.blog.tagSingle}: ${tag}`} layout="tags">
+  <header class="full | bg-hero-pattern section" style="--spot-color: color-mix(in oklab, var(--color-bg) 60%, transparent)">
+    <div class="section__inner region">
+      <div class="wrapper flow prose text-center">
+        <h1 class="gradient-text-linear text-step-4">{site.blog.tagSingle}: {tag}</h1>
+      </div>
+    </div>
+  </header>
+
+  <div class="region">
+    <div class="wrapper flow">
+
+      <Masonry layout="50-50">
+        {itemList.map(item => <TagCard item={item} />)}
+      </Masonry>
+
+      <h2 class="text-step-2">{site.blog.tagMore}</h2>
+
+      <ul class="taglist | my-s-m cluster gutter-s" role="list">
+        {
+          tagList.map(availableTag => {
+            const url = `/tags/${encodeURIComponent(availableTag)}/`;
+            const state = getLinkActiveState(url, currentPath);
+
+            return (
+              <li>
+                <a href={url} class="button" aria-current={state.ariaCurrent as any} data-state={state.dataState}>
+                  {availableTag}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  </div>
+</BaseLayout>

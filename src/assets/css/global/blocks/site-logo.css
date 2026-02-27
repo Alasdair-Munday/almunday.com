@@ -1,6 +1,12 @@
 .logo {
   --gutter: var(--space-xs);
   padding: var(--space-s) 0;
-  font-size: var(--size-step-0);
+  font-size: var(--size-step-3);
   text-decoration: none;
+  letter-spacing: var(--tracking-s);
+}
+
+.logo svg {
+  color: color-mix(in oklab, var(--color-secondary) 62%, var(--color-primary));
+  filter: drop-shadow(0 0.15rem 0.3rem color-mix(in oklab, var(--color-tone-root) 26%, transparent));
 }

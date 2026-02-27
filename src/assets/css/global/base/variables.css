@@ -1,74 +1,131 @@
-/* Global variables.  */
+/* Global design tokens and semantic theme aliases */
 
-/* Basic variable definitions for color schemes */
 :root {
   --gutter: var(--space-m-l);
-  --transition-duration: 250ms;
+  --transition-duration: 180ms;
   --transition-timing: ease;
-  --wrapper-width: 85rem;
-  --tracking: -0.04ch;
-  --tracking-s: -0.075ch;
-  --tracking-wide: 0.04ch;
-  --stroke: 1px solid var(--color-bg-accent);
+  --wrapper-width: 80rem;
+  --measure-reading: 70ch;
+  --measure-wide: 78ch;
+  --tracking: -0.01ch;
+  --tracking-s: -0.03ch;
+  --tracking-wide: 0.03ch;
+  --focus-offset: 0.2rem;
 
-  --gradient-rainbow: linear-gradient(90deg, #cf4662 10%, #fbbe25 30%, #62c95c 50%, #08bccb 75%, #a977d5 90%);
+  --radius-soft: var(--border-radius-medium);
+  --radius-pill: 999px;
+  --shadow-soft: 0 0.35rem 1.6rem color-mix(in oklab, black 20%, transparent);
+
+  /* Cassock palette anchors */
+  --color-cassock-night: #213f51;
+  --color-cassock-leaf: #9ac5bf;
+  --color-cassock-root: #d58a52;
+  --color-cassock-water: #2f6f95;
+  --color-cassock-mist: #dbe9e5;
+
+  --color-paper-light: #f2eee6;
+  --color-paper-muted: #e4ddd0;
+  --color-ink-deep: #1d3240;
+  --color-ink-soft: #305062;
+
+  --color-dark: var(--color-ink-deep);
+  --color-light: var(--color-paper-light);
+
+  --color-primary: var(--color-cassock-water);
+  --color-secondary: var(--color-cassock-leaf);
+  --color-tertiary: var(--color-cassock-root);
+
+  --color-focus-ring: var(--color-cassock-water);
+  --color-border-strong: color-mix(in oklab, var(--color-primary) 48%, var(--color-bg));
+  --color-border-subtle: color-mix(in oklab, var(--color-text) 24%, var(--color-bg));
+
+  --gradient-rainbow: linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--color-primary) 75%, white) 0%,
+    color-mix(in oklab, var(--color-secondary) 85%, white) 50%,
+    color-mix(in oklab, var(--color-tertiary) 85%, white) 100%
+  );
   --gradient-conic: conic-gradient(
-    var(--color-primary) 0 28%,
-    var(--color-secondary) 0 67%,
-    var(--color-tertiary) 0 100%
+    from 90deg,
+    color-mix(in oklab, var(--color-primary) 30%, transparent) 0% 35%,
+    color-mix(in oklab, var(--color-secondary) 45%, transparent) 35% 65%,
+    color-mix(in oklab, var(--color-tertiary) 35%, transparent) 65% 100%
   );
   --gradient-stripes: linear-gradient(
     45deg,
-    var(--color-gray-900) 0 75%,
-    var(--color-primary) 0 85%,
-    var(--color-secondary) 0 92%,
-    var(--color-tertiary) 0 100%
+    color-mix(in oklab, var(--color-primary) 14%, transparent) 0 20%,
+    color-mix(in oklab, var(--color-secondary) 18%, transparent) 20% 50%,
+    color-mix(in oklab, var(--color-tertiary) 18%, transparent) 50% 100%
   );
-
-  --color-light: var(--color-gray-100);
-  --color-dark: var(--color-gray-900);
-  --color-mid: var(--color-gray-400);
 }
 
-/* Light theme */
+/* Default: dark contemplative canvas */
 :root,
-:root[data-theme='light'] {
-  --color-text: var(--color-gray-800);
-  --color-bg: var(--color-gray-100);
-
-  --color-primary: var(--color-pink);
-  --color-secondary: var(--color-blue);
-  --color-tertiary: var(--color-gold);
-
-  --color-text-accent: var(--color-gray-700);
-  --color-bg-accent: var(--color-gray-200);
-  --color-bg-accent-2: var(--color-gray-300);
-}
-
-/* Dark theme */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-text: var(--color-gray-100);
-    --color-bg: var(--color-gray-800);
-
-    --color-primary: var(--color-pink-subdued);
-    --color-secondary: var(--color-blue-subdued);
-    --color-tertiary: var(--color-gold-subdued);
-
-    --color-text-accent: var(--color-gray-300);
-    --color-bg-accent: var(--color-gray-700);
-    --color-bg-accent-2: var(--color-gray-600);
-  }
-}
 :root[data-theme='dark'] {
-  --color-text: var(--color-gray-100);
-  --color-bg: var(--color-gray-800);
+  --color-bg: var(--color-cassock-night);
+  --color-bg-elevated: color-mix(in oklab, var(--color-bg) 86%, white);
+  --color-bg-soft: color-mix(in oklab, var(--color-bg) 78%, var(--color-cassock-mist));
+  --color-me-tree: #ffffff;
 
-  --color-primary: var(--color-pink-subdued);
-  --color-secondary: var(--color-blue-subdued);
-  --color-tertiary: var(--color-gold-subdued);
+  --color-text: #e8f0ed;
+  --color-text-light: #c5d8d3;
+  --color-text-muted: #a9c4be;
+  --color-text-accent: #c7ddd8;
 
-  --color-text-accent: var(--color-gray-300);
-  --color-bg-accent: var(--color-gray-700);
-  --color-bg-accent-2: var(--color-gray-600);
+  --color-link: #b9dad5;
+  --color-link-hover: #f0f7f5;
+
+  --color-bg-accent: color-mix(in oklab, var(--color-cassock-night) 72%, var(--color-cassock-leaf));
+  --color-bg-accent-2: color-mix(in oklab, var(--color-cassock-night) 68%, var(--color-cassock-water));
+
+  --tile-background-url: url('/assets/images/background/background-tile.png');
+}
+
+:root[data-theme='light'] {
+  --color-bg: var(--color-paper-light);
+  --color-bg-elevated: #f8f4ec;
+  --color-bg-soft: var(--color-paper-muted);
+  --color-me-tree: #000000;
+
+  --color-text: var(--color-ink-deep);
+  --color-text-light: color-mix(in oklab, var(--color-text) 66%, white);
+  --color-text-muted: color-mix(in oklab, var(--color-text) 56%, white);
+  --color-text-accent: color-mix(in oklab, var(--color-cassock-water) 55%, var(--color-text));
+
+  --color-link: color-mix(in oklab, var(--color-cassock-water) 78%, var(--color-ink-deep));
+  --color-link-hover: color-mix(in oklab, var(--color-link) 75%, black);
+
+  --color-bg-accent: color-mix(in oklab, var(--color-paper-light) 78%, var(--color-cassock-leaf));
+  --color-bg-accent-2: color-mix(in oklab, var(--color-paper-light) 70%, var(--color-cassock-water));
+
+  --tile-background-url: url('/assets/images/background/background-tile-light.png');
+}
+
+.bg-tiled-pattern {
+  background-image: var(--tile-background-url);
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: top;
+}
+
+.bg-hero-pattern {
+  background-image: url('/assets/images/background/background-tile-colour.png');
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: top;
+  position: relative;
+}
+
+.bg-hero-pattern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-bg);
+  opacity: 0.8;
+  z-index: -1;
+}
+
+.bg-hero-pattern > * {
+  position: relative;
+  z-index: 1;
 }

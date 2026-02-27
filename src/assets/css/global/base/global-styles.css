@@ -1,8 +1,6 @@
 /*
-	Global styles
-
-	Low-specificity, global styles that apply to the whole
-	project: https://cube.fyi/css.html
+  Global styles
+  Low-specificity, global styles that apply to the whole project
 */
 
 html {
@@ -13,14 +11,15 @@ body {
   display: flex;
   flex-direction: column;
   font-family: var(--font-base);
-  font-size: var(--size-step-0);
+  font-size: var(--size-step-min-1);
   font-weight: var(--font-regular);
   font-size-adjust: from-font;
-  line-height: var(--leading-standard);
+  line-height: 1.58;
   color: var(--color-text);
   background-color: var(--color-bg);
   accent-color: var(--color-primary);
   letter-spacing: var(--tracking);
+  text-rendering: optimizeLegibility;
 }
 
 main {
@@ -32,16 +31,17 @@ h2,
 h3 {
   font-family: var(--font-display);
   font-weight: var(--font-extra-bold);
-  line-height: var(--leading-fine);
+  line-height: 1.15;
   letter-spacing: var(--tracking-s);
+  text-wrap: balance;
 }
 
 h1 {
-  font-size: var(--size-step-6);
+  font-size: var(--size-step-5);
 }
 
 h2 {
-  font-size: var(--size-step-4);
+  font-size: var(--size-step-3);
 }
 
 h3 {
@@ -50,18 +50,24 @@ h3 {
 
 blockquote {
   padding: var(--space-m-l);
-  border-inline-start: 0.5rem solid var(--color-primary);
-  font-size: var(--size-step-2);
+  border: 1px solid var(--color-border-subtle);
+  border-inline-start: 0.45rem solid var(--color-primary);
+  border-radius: var(--radius-soft);
+  background: color-mix(in oklab, var(--color-bg-elevated) 82%, transparent);
+  box-shadow: var(--shadow-soft);
+  font-size: var(--size-step-0);
+  line-height: 1.62;
 }
 
 blockquote > * + * {
-  margin-block-start: var(--space-m-l);
+  margin-block-start: var(--space-s-m);
 }
 
 blockquote :last-child {
   font-family: var(--font-base);
   font-style: normal;
-  font-size: var(--size-step-1);
+  font-size: var(--size-step-min-1);
+  color: var(--color-text-light);
 }
 
 input,
@@ -70,7 +76,7 @@ textarea {
 }
 
 svg {
-  block-size: 0.6lh;
+  block-size: 0.8lh;
   inline-size: auto;
   flex: none;
 }
@@ -83,37 +89,45 @@ strong {
 hr {
   border: none;
   height: 1px;
-  width: 10%;
+  width: min(10rem, 30%);
   margin-block: var(--flow-space, var(--space-m-l));
   margin-inline-start: 0;
-  background-color: var(--color-bg-accent-2);
+  background-color: var(--color-border-subtle);
 }
 
 figcaption {
   margin-block-start: var(--space-s);
   font-size: var(--size-step-min-1);
+  color: var(--color-text-light);
   text-align: center;
   padding-block-end: var(--space-xs);
 }
 
 figcaption:after {
-  border-block: var(--stroke);
+  border-block: 1px solid var(--color-border-subtle);
   content: '';
   display: block;
   margin-block: var(--space-xs);
-  /* block-size: 1rem; */
   inline-size: 50%;
   margin-inline: auto;
   opacity: 0.8;
 }
 
 a {
-  text-decoration-thickness: 0.15ex;
-  text-underline-offset: 0.2ch;
+  color: var(--color-link);
+  text-decoration-thickness: 0.1em;
+  text-underline-offset: 0.18em;
+  text-decoration-color: color-mix(in oklab, var(--color-link) 65%, transparent);
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--color-link-hover);
+  text-decoration-color: currentColor;
 }
 
 a:not([class]):hover {
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 :focus {
@@ -121,29 +135,71 @@ a:not([class]):hover {
 }
 
 :focus-visible {
-  outline: 3px solid var(--focus-color, currentColor);
-  outline-offset: var(--focus-offset, 0.3ch);
-}
-
-/* reduce focus offset for Firefox
-*/
-@supports (-moz-appearance: none) {
-  :root {
-    --focus-offset: 0.08em;
-  }
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: var(--focus-offset);
 }
 
 ::selection {
-  background-color: var(--color-text);
-  color: var(--color-bg);
+  background-color: color-mix(in oklab, var(--color-primary) 72%, var(--color-bg));
+  color: var(--color-light);
 }
 
 .preload-transitions * {
   transition: none !important;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 @media (scripting: none) {
   .require-js {
     display: none;
+  }
+}
+
+@media print {
+  :root {
+    --color-bg: #ffffff;
+    --color-text: #0f1720;
+    --color-link: #0f1720;
+    --color-link-hover: #0f1720;
+  }
+
+  body {
+    background: #fff !important;
+    color: #111;
+    font-size: 11pt;
+    line-height: 1.45;
+  }
+
+  .bg-tiled-pattern,
+  header,
+  footer,
+  .theme-switch,
+  custom-easteregg {
+    display: none !important;
+  }
+
+  a,
+  a:visited {
+    color: #111 !important;
+    text-decoration: underline;
+  }
+
+  .prose,
+  .post .prose {
+    max-inline-size: 72ch;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
   }
 }

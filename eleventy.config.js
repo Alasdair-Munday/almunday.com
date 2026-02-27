@@ -15,7 +15,7 @@ dotenv.config();
 import yaml from 'js-yaml';
 
 //  config import
-import {getAllPosts, showInSitemap, tagList} from './src/_config/collections.js';
+import { getAllPosts, getBacklinks, getProjects, showInSitemap, tagList } from './src/_config/collections.js';
 import events from './src/_config/events.js';
 import filters from './src/_config/filters.js';
 import plugins from './src/_config/plugins.js';
@@ -33,6 +33,8 @@ export default async function (eleventyConfig) {
 
   //	---------------------  Collections
   eleventyConfig.addCollection('allPosts', getAllPosts);
+  eleventyConfig.addCollection('backlinks', getBacklinks);
+  eleventyConfig.addCollection('projects', getProjects);
   eleventyConfig.addCollection('showInSitemap', showInSitemap);
   eleventyConfig.addCollection('tagList', tagList);
 
@@ -65,7 +67,7 @@ export default async function (eleventyConfig) {
   });
 
   // ---------------------  bundle
-  eleventyConfig.addBundle('css', {hoist: true});
+  eleventyConfig.addBundle('css', { hoist: true });
 
   // 	--------------------- Library and Data
   eleventyConfig.setLibrary('md', plugins.markdownLib);
@@ -80,10 +82,12 @@ export default async function (eleventyConfig) {
   eleventyConfig.addFilter('shuffle', filters.shuffleArray);
   eleventyConfig.addFilter('alphabetic', filters.sortAlphabetically);
   eleventyConfig.addFilter('slugify', filters.slugifyString);
+  eleventyConfig.addFilter('base64', filters.base64);
 
   // --------------------- Shortcodes
   eleventyConfig.addShortcode('svg', shortcodes.svgShortcode);
   eleventyConfig.addShortcode('image', shortcodes.imageShortcode);
+  eleventyConfig.addShortcode('youtube', shortcodes.youtubeShortcode);
   eleventyConfig.addShortcode('year', () => `${new Date().getFullYear()}`);
 
   // --------------------- Events ---------------------
@@ -97,6 +101,11 @@ export default async function (eleventyConfig) {
   ['src/assets/fonts/', 'src/assets/images/template', 'src/assets/og-images'].forEach(path =>
     eleventyConfig.addPassthroughCopy(path)
   );
+
+  eleventyConfig.addPassthroughCopy({
+    'src/assets/images/background/*': '/assets/images/background/',
+    'src/assets/images/mes/*': '/assets/images/mes',
+  });
 
   eleventyConfig.addPassthroughCopy({
     // -- to root

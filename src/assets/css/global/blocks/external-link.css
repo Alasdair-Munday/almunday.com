@@ -1,13 +1,10 @@
-a[href^='http']:not([href*='localhost:8080']):not([href*='eleventy-excellent.netlify.app']):not(.button):not(
-    .no-indicator
-  ),
+a[href^='http']:not([href*='localhost:8080']):not([href*='almunday.com']):not(.button):not(.no-indicator),
 .indicator {
-  padding-inline-end: 0.8em;
+  padding-inline-end: 0.9em;
+  position: relative;
 }
 
-a[href^='http']:not([href*='localhost:8080']):not([href*='eleventy-excellent.netlify.app']):not(
-    .no-indicator
-  )::after,
+a[href^='http']:not([href*='localhost:8080']):not([href*='almunday.com']):not(.no-indicator)::after,
 .indicator::after {
   position: absolute;
   display: inline-block;
@@ -16,10 +13,10 @@ a[href^='http']:not([href*='localhost:8080']):not([href*='eleventy-excellent.net
   background-image: url('/assets/images/template/external.svg');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 60% auto;
-  /* alternative text rules */
+  background-size: 62% auto;
   content: '(external link)';
   overflow: hidden;
   white-space: nowrap;
-  text-indent: 1em; /* the width of the icon */
+  text-indent: 1em;
+  opacity: 0.85;
 }

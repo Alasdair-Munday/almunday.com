@@ -1,0 +1,24 @@
+---
+import { navigation, site } from '../lib/site.js';
+import { getLinkActiveState } from '../lib/utils.js';
+
+const { currentPath = '/' } = Astro.props;
+---
+
+<nav id="mainnav" class="mainnav" aria-label={site.navigation.ariaTop}>
+  <ul class="cluster" role="list" no-flash>
+    {
+      navigation.top.map(item => {
+        const state = getLinkActiveState(item.url, currentPath);
+
+        return (
+          <li>
+            <a href={item.url} aria-current={state.ariaCurrent} data-state={state.dataState}>
+              {item.text}
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</nav>

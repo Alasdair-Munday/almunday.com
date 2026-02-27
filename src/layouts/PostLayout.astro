@@ -1,0 +1,106 @@
+---
+import '../assets/css/local/footnotes.css';
+import '../assets/css/local/post.css';
+import '../assets/css/local/stream-marker.css';
+import '../assets/css/local/table.css';
+
+import BaseLayout from './BaseLayout.astro';
+import StreamMarker from '../components/StreamMarker.astro';
+
+import { site } from '../lib/site.js';
+import { estimateReadingTime, formatDate, getContentStream, normalizeAssetPath } from '../lib/utils.js';
+
+const {
+  post,
+  backlinks = []
+} = Astro.props;
+
+const absolutePostUrl = new URL(post.url, site.url).toString();
+const normalizedImage = normalizeAssetPath(post.image);
+const readingTime = estimateReadingTime(post.markdown || post.contentHtml);
+const stream = getContentStream(post);
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  layout="post"
+  schema="BlogPosting"
+  pageDate={post.date}
+  ogImage={normalizedImage}
+  ogImageAlt={post.alt || post.title}
+>
+  <header class="full | bg-hero-pattern section" style="--spot-color: color-mix(in oklab, var(--color-bg) 70%, transparent)">
+    <div class="section__inner region text-center">
+      <div class="wrapper flow prose paper-reading">
+        <h1 class="gradient-text-linear">{post.title}</h1>
+
+        <p class="meta | cluster justify-center gutter-xs-s" style="color: var(--color-text-light);">
+          {stream && <StreamMarker stream={stream} compact />}
+
+          {post.draft && (
+            <span class="button" data-small-button data-button-variant="tertiary">
+              draft
+            </span>
+          )}
+
+          <time datetime={post.date.toISOString()}>{formatDate(post.date)}</time>
+          <span>{readingTime} min read</span>
+
+          {
+            post.tags.length > 1 &&
+              post.tags
+                .filter(tag => tag !== 'posts')
+                .map(tag => (
+                  <a class="meta-chip chip" href={`/tags/${encodeURIComponent(tag)}/`}>
+                    {tag}
+                  </a>
+                ))
+          }
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <div class="region" style="--region-space-top: var(--space-xl-2xl)">
+    <div class="wrapper flow prose paper-reading">
+      {
+        normalizedImage && (
+          <figure>
+            <img src={normalizedImage} alt={post.alt || ''} loading="eager" decoding="async" />
+            {post.credit && <figcaption>{post.credit}</figcaption>}
+          </figure>
+        )
+      }
+
+      <div class="flow" set:html={post.contentHtml} />
+
+      {
+        backlinks.length > 0 && (
+          <aside class="backlinks">
+            <h2>Linked from</h2>
+            <ul>
+              {
+                backlinks.map(link => (
+                  <li>
+                    <a href={link.url}>{link.title}</a>
+                  </li>
+                ))
+              }
+            </ul>
+          </aside>
+        )
+      }
+    </div>
+
+    <div hidden class="h-entry">
+      <a class="u-url" href={absolutePostUrl}>
+        {post.title}
+      </a>
+      <a class="p-name u-url" rel="author" href={site.url}>
+        {site.author.name}
+      </a>
+      <img class="u-author h-card" src={site.author.avatar} alt={site.author.name} />
+    </div>
+  </div>
+</BaseLayout>

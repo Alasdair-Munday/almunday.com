@@ -1,0 +1,16 @@
+---
+import '../assets/css/local/stream-marker.css';
+
+const {
+  stream,
+  compact = false
+} = Astro.props;
+
+if (!stream) {
+  throw new Error('StreamMarker requires a stream prop.');
+}
+---
+
+<span class={`stream-marker ${compact ? 'stream-marker--compact' : ''}`.trim()}>
+  <span class="stream-marker__label">{stream.label}</span>
+</span>

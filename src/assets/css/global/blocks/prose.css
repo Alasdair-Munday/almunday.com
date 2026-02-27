@@ -2,10 +2,10 @@
 
 .prose {
   --flow-space: var(--space-m-l);
-  --wrapper-width: 64rem;
+  --wrapper-width: min(72rem, 100%);
 }
 
-.prose :is(pre, pre + *, figure, picture) {
+.prose :is(pre, pre + *, figure, picture, table) {
   --flow-space: var(--space-m-l);
 }
 
@@ -14,16 +14,16 @@
 }
 
 .prose :is(img, video) {
-  border: var(--stroke);
+  border: 1px solid var(--color-border-subtle);
 }
 
 .prose :is(h2, h3, h4) {
-  --flow-space: 1.5em;
+  --flow-space: 1.35em;
   overflow-wrap: anywhere;
   hyphens: auto;
 }
 
-@media screen(md) {
+@screen md {
   .prose :is(h1, h2, h3) {
     overflow-wrap: unset;
     hyphens: unset;
@@ -35,8 +35,12 @@
 }
 
 .prose :is(p, li, dl, blockquote) {
-  max-inline-size: 60ch;
+  max-inline-size: var(--measure-reading);
   text-wrap: pretty;
+}
+
+.prose > :is(h1, h2, h3, h4, p, ul, ol, dl, blockquote, pre, table, .table-wrap, .callout) {
+  margin-inline: auto;
 }
 
 .prose .heading-anchor:where(:hover, :focus) {
@@ -48,19 +52,21 @@
 }
 
 .prose mark {
-  background-color: var(--color-tertiary);
-  color: var(--color-dark);
+  background-color: color-mix(in oklab, var(--color-tertiary) 65%, var(--color-bg));
+  color: var(--color-light);
+  border-radius: 0.15rem;
+  padding-inline: 0.2ch;
 }
 
 /* block space only for "regular lists" and sublists */
 .prose :is(ul, ol):not([class]) li + li,
 .prose :is(ul, ol):not([class]) li > :is(ol, ul) {
-  padding-block-start: var(--space-s);
+  padding-block-start: var(--space-xs);
 }
 
 /* marker only for "regular lists" */
 .prose :is(ul:not([class]):not([role='list'])) li::marker {
-  color: var(--color-primary);
+  color: var(--color-secondary);
   content: '– ';
 }
 
@@ -77,16 +83,44 @@
 }
 
 .prose img {
-  border-radius: var(--border-radius-medium);
+  border-radius: var(--radius-soft);
 }
 
-@media screen(ltsm) {
+/* Callouts/admonitions */
+.prose :is(.callout, .admonition, aside[role='note']) {
+  max-inline-size: var(--measure-reading);
+  border: 1px solid var(--color-border-subtle);
+  border-inline-start: 0.35rem solid var(--color-secondary);
+  border-radius: var(--radius-soft);
+  background: color-mix(in oklab, var(--color-bg-elevated) 84%, transparent);
+  padding: var(--space-s-m) var(--space-m);
+}
+
+.prose :is(.callout, .admonition, aside[role='note']) > :first-child {
+  margin-block-start: 0;
+}
+
+.prose .callout[data-tone='water'],
+.prose .admonition-water {
+  border-inline-start-color: var(--color-primary);
+}
+
+.prose .callout[data-tone='root'],
+.prose .admonition-practice {
+  border-inline-start-color: var(--color-tertiary);
+}
+
+.prose .callout[data-tone='leaf'],
+.prose .admonition-reflection {
+  border-inline-start-color: var(--color-secondary);
+}
+
+@media (max-width: 640px) {
   .prose > *,
   .prose a {
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
-    /* Adds a hyphen where the word breaks, if supported (No Blink) */
     hyphens: auto;
   }
 }

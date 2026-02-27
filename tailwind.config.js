@@ -27,7 +27,7 @@ const lineHeight = tokensToTailwind(textLeadingTokens.items);
 const spacing = tokensToTailwind(clampGenerator(spacingTokens.items));
 
 export default {
-  content: ['./src/**/*.{html,js,md,njk,liquid,webc}'],
+  content: ['./src/**/*.{astro,html,js,jsx,md,mdx,njk,liquid,webc,ts,tsx}'],
   presets: [],
   theme: {
     screens: {
@@ -50,7 +50,7 @@ export default {
       auto: 'auto',
       ...theme('spacing')
     }),
-    padding: ({theme}) => theme('spacing')
+    padding: ({theme}) => theme('spacing'),
   },
   variantOrder: [
     'first',
@@ -143,6 +143,7 @@ export default {
           });
         });
       });
+
     })
   ]
 };

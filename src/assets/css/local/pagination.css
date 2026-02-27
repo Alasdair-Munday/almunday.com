@@ -4,18 +4,14 @@
 
 .pagination li {
   color: var(--pagination-text, var(--color-text));
-  background-color: var(--pagination-bg, var(--color-bg));
-  border: 3px solid var(--pagination-border, var(--color-bg-accent));
-  border-radius: var(--border-radius-medium);
+  background-color: var(--pagination-bg, color-mix(in oklab, var(--color-bg-elevated) 92%, transparent));
+  border: 1px solid var(--pagination-border, var(--color-border-subtle));
+  border-radius: var(--radius-pill);
 }
 
 .pagination li:not(:has(a)) {
   padding: var(--space-xs) var(--space-s-m);
-  opacity: 0.6;
-}
-
-.pagination a {
-  text-decoration: none;
+  opacity: 0.7;
 }
 
 .pagination a {
@@ -24,18 +20,14 @@
   display: block;
 }
 
-.pagination li:not(:has(a)) {
-  padding: var(--space-xs) var(--space-s-m);
-  opacity: 0.6;
-}
-
-.pagination li:has(a:hover) {
-  --pagination-bg: var(--color-bg-accent);
-  --pagination-border: var(--color-bg-accent);
+.pagination li:has(a:hover),
+.pagination li:has(a:focus-visible) {
+  --pagination-bg: color-mix(in oklab, var(--color-bg-elevated) 84%, var(--color-secondary));
+  --pagination-border: var(--color-border-strong);
 }
 
 .pagination li:has(a[aria-current='page']) {
-  --pagination-bg: var(--color-secondary);
-  --pagination-border: var(--color-secondary);
-  --pagination-text: var(--color-light);
+  --pagination-bg: color-mix(in oklab, var(--color-primary) 32%, var(--color-bg-elevated));
+  --pagination-border: color-mix(in oklab, var(--color-primary) 72%, var(--color-bg));
+  --pagination-text: var(--color-text);
 }

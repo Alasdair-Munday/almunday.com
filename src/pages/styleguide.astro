@@ -1,0 +1,224 @@
+---
+import '../assets/css/local/styleguide.css';
+import '../assets/css/local/table.css';
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+import colorTokens from '../_data/designTokens/colors.json';
+import fontTokens from '../_data/designTokens/fonts.json';
+import spacingTokens from '../_data/designTokens/spacing.json';
+import textSizeTokens from '../_data/designTokens/textSizes.json';
+
+import SvgIcon from '../components/SvgIcon.astro';
+
+import { slugifyString } from '../lib/utils.js';
+
+const customColors = [
+  '--color-text',
+  '--color-text-accent',
+  '--color-bg',
+  '--color-bg-accent',
+  '--color-bg-accent-2',
+  '--color-primary',
+  '--color-secondary',
+  '--color-tertiary'
+];
+
+const customGradients = ['--gradient-rainbow', '--gradient-conic', '--gradient-stripes'];
+---
+
+<BaseLayout title="Style Guide" layout="styleguide">
+  <header class="full | bg-hero-pattern section" style="--spot-color: color-mix(in oklab, var(--color-bg) 60%, transparent)">
+    <div class="section__inner region">
+      <div class="wrapper flow prose text-center">
+        <h1 class="gradient-text-linear">Style Guide</h1>
+
+        <p>
+          All design tokens can be found in <code>src/_data/designTokens</code>. <br />
+          This includes all baseline fonts, colors, sizes, and spacing.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <article class="styleguide | wrapper flow">
+
+    <section class="flow region region-space-m">
+      <h2 class="heading-line">Buttons</h2>
+      <ul class="cluster" role="list">
+        <li>
+          <a href="#" class="button">Default button</a>
+        </li>
+        <li>
+          <a href="#" class="button" data-button-variant="primary">primary button</a>
+        </li>
+        <li>
+          <a href="#" class="button" data-button-variant="secondary">secondary button</a>
+        </li>
+        <li>
+          <a href="#" class="button" data-button-variant="tertiary">tertiary button</a>
+        </li>
+
+        <li>
+          <a href="#" class="button" data-ghost-button>Ghost button</a>
+        </li>
+        <li>
+          <a href="#" class="button" data-button-radius="hard">Hard edges</a>
+        </li>
+        <li>
+          <a href="#" class="button"> <SvgIcon name="misc/star" /> Button with icon </a>
+        </li>
+        <li>
+          <a href="#" class="button" data-small-button>small button</a>
+        </li>
+      </ul>
+    </section>
+
+    <div class="full colors | section">
+      <section class="section__inner wrapper flow region">
+        <h2 class="heading-line">Colors</h2>
+
+        <p>{colorTokens.description}</p>
+
+        <ul role="list">
+          {
+            colorTokens.items.map(color => (
+              <li>
+                <div style={`background-color: var(--color-${slugifyString(color.name)})`}></div>
+
+                <p>
+                  <code>
+                    {color.value}
+                    <br />
+                    {`var(--color-${slugifyString(color.name)})`}
+                  </code>
+                </p>
+              </li>
+            ))
+          }
+        </ul>
+
+        <h3 class="heading-line | mt-l-xl">Custom colors</h3>
+        <p>in <code>variables.css</code>. Some only change for dark theme.</p>
+
+        <ul role="list">
+          {
+            customColors.map(color => (
+              <li>
+                <div style={`background-color: var(${color})`}></div>
+                <p>
+                  <code>{color}</code>
+                </p>
+              </li>
+            ))
+          }
+        </ul>
+
+        <h3 class="heading-line | mt-l-xl">Gradients</h3>
+
+        <ul role="list">
+          {
+            customGradients.map(gradient => (
+              <li>
+                <div style={`background-image: var(${gradient})`}></div>
+
+                <p>
+                  <code>{gradient}</code>
+                </p>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </div>
+
+    <section class="fonts | flow region">
+      <h2 class="heading-line">Fonts</h2>
+
+      <ul class="fonts flow">
+        {
+          fontTokens.items.map(font => (
+            <li class="font" style={`font-family: var(--font-${slugifyString(font.name)})`}>
+              <h3 style={`font-family: var(--font-${slugifyString(font.name)})`}>{font.name}</h3>
+              <p>{font.description}</p>
+              <p>
+                <strong>Font Families</strong>: {font.value.join(', ')}
+              </p>
+              <code>{`var(--font-${slugifyString(font.name)})`}</code>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <div class="full sizes | section">
+      <section class="section__inner wrapper flow region">
+        <h2 class="heading-line">Sizes</h2>
+
+        <p>
+          {textSizeTokens.description}. Fluid type and space scales were{' '}
+          <a href={textSizeTokens.meta.scaleGenerator}>generated with Utopia</a>.
+        </p>
+
+        <table class="sizes flow">
+          {
+            textSizeTokens.items.map(size => (
+              <tr>
+                <th scope="row">
+                  <h3>{size.name}</h3>
+                </th>
+                <td>
+                  <span class="flow">
+                    <p>
+                      {size.min}px to {size.max}px
+                    </p>
+                    <code>{`var(--size-${slugifyString(size.name)})`}</code>
+                  </span>
+                </td>
+                <td class="sizes-example">
+                  <p style={`font-size:var(--size-${slugifyString(size.name)})`}>{size.name}</p>
+                </td>
+              </tr>
+            ))
+          }
+        </table>
+      </section>
+    </div>
+
+    <section class="spacing | flow region">
+      <h2 class="heading-line">Spacing</h2>
+
+      <p>
+        {spacingTokens.description}
+        <br />
+        Fluid type and space scales were <a href={spacingTokens.meta.scaleGenerator}>generated with Utopia</a>.
+      </p>
+
+      <table class="spacing flow">
+        {
+          spacingTokens.items.map(space => (
+            <tr>
+              <th scope="row">
+                <h3>{space.name}</h3>
+              </th>
+              <td>
+                <span class="flow">
+                  <p>
+                    {space.min}px to {space.max}px
+                  </p>
+                  <code>{`var(--space-${slugifyString(space.name)})`}</code>
+                </span>
+              </td>
+              <td>
+                <div
+                  class="space"
+                  style={`height:var(--space-${slugifyString(space.name)}); width:var(--space-${slugifyString(space.name)});`}
+                ></div>
+              </td>
+            </tr>
+          ))
+        }
+      </table>
+    </section>
+  </article>
+</BaseLayout>

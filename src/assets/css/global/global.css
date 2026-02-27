@@ -8,11 +8,32 @@
 @import 'base/variables.css' layer(variables);
 @import 'base/global-styles.css' layer(global);
 
-@import-glob 'compositions/*.css' layer(compositions);
-@import-glob 'blocks/*.css' layer(blocks);
-@import-glob 'utilities/*.css' layer(utilities);
+@import 'compositions/cluster.css' layer(compositions);
+@import 'compositions/flow.css' layer(compositions);
+@import 'compositions/grid.css' layer(compositions);
+@import 'compositions/repel.css' layer(compositions);
+@import 'compositions/sidebar.css' layer(compositions);
+@import 'compositions/wrapper.css' layer(compositions);
 
-/* debugging */
-/* @import-glob 'tests/*.css' layer(test); */
+@import 'blocks/button.css' layer(blocks);
+@import 'blocks/code.css' layer(blocks);
+@import 'blocks/external-link.css' layer(blocks);
+@import 'blocks/main-nav.css' layer(blocks);
+@import 'blocks/prose.css' layer(blocks);
+@import 'blocks/reading-progress.css' layer(blocks);
+@import 'blocks/section.css' layer(blocks);
+@import 'blocks/seperator.css' layer(blocks);
+@import 'blocks/site-footer.css' layer(blocks);
+@import 'blocks/site-logo.css' layer(blocks);
+@import 'blocks/skip-link.css' layer(blocks);
+@import 'blocks/textgradient.css' layer(blocks);
+@import 'blocks/theme-switch.css' layer(blocks);
+
+@import 'utilities/grayscale.css' layer(utilities);
+@import 'utilities/heading-line.css' layer(utilities);
+@import 'utilities/ontop.css' layer(utilities);
+@import 'utilities/region.css' layer(utilities);
+@import 'utilities/spin.css' layer(utilities);
+@import 'utilities/visually-hidden.css' layer(utilities);
 
 @import 'tailwindcss/utilities' layer(tailwindUtilities);

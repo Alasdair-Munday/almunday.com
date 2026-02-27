@@ -1,26 +1,41 @@
 .footnotes {
   font-size: var(--size-step-min-1);
+  border-top: 1px solid var(--color-border-subtle);
+  margin-top: var(--space-xl);
+  padding-top: var(--space-s-m);
+}
+
+.footnotes ol {
+  padding-inline-start: var(--space-m);
 }
 
 .footnote-ref {
   font-size: var(--size-step-min-2);
   vertical-align: super;
-  margin-inline-start: 0.1ch;
-  color: var(--color-text-accent);
+  margin-inline-start: 0.14ch;
+  color: var(--color-link);
 }
 
 .footnote-ref a {
   text-decoration: none;
-  padding: 0.3ch;
+  padding: 0.2ch;
+}
+
+.footnote-ref a:hover,
+.footnote-ref a:focus-visible {
+  text-decoration: underline;
 }
 
 .footnote-backref {
   text-decoration: none;
-  background-color: var(--color-bg-accent);
-  border-radius: var(--border-radius-medium);
+  background-color: color-mix(in oklab, var(--color-bg-elevated) 86%, transparent);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border-subtle);
   padding-inline: var(--space-xs);
 }
 
-.footnote-backref:hover {
-  color: var(--color-primary);
+.footnote-backref:hover,
+.footnote-backref:focus-visible {
+  color: var(--color-link-hover);
+  border-color: var(--color-border-strong);
 }

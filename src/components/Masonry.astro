@@ -1,0 +1,11 @@
+---
+const {
+  layout = '50-50',
+  rows = 'masonry',
+  className = ''
+} = Astro.props;
+---
+
+<custom-masonry class={`grid ${className}`.trim()} data-layout={layout} data-rows={rows}>
+  <slot />
+</custom-masonry>

@@ -1,18 +1,18 @@
 /* based on Andy Bell's article: https://piccalil.li/blog/how-i-build-a-button-component/ */
 
 .button {
-  --button-bg: var(--color-text);
-  --button-color: color-mix(in oklab, var(--button-bg) 10%, var(--color-bg));
-  --button-hover-bg: color-mix(in oklab, var(--button-bg) 90%, var(--color-bg));
-  --button-border-width: var(--border-thickness);
+  --button-bg: color-mix(in oklab, var(--color-bg-elevated) 88%, transparent);
+  --button-color: var(--color-text);
+  --button-hover-bg: color-mix(in oklab, var(--button-bg) 84%, var(--color-secondary));
+  --button-border-width: 1px;
   --button-border-style: solid;
-  --button-border-color: color-mix(in oklab, var(--button-bg) 80%, var(--color-text));
-  --button-radius: var(--border-radius-small);
+  --button-border-color: var(--color-border-subtle);
+  --button-radius: var(--radius-soft);
   --button-gap: var(--space-2xs);
   --button-padding: var(--space-xs) var(--space-m);
-  --button-font-family: var(--font-body);
+  --button-font-family: var(--font-base);
   --button-font-weight: var(--font-regular);
-  --button-font-size: var(--size-step-0);
+  --button-font-size: var(--size-step-min-1);
   --button-text-transform: none;
   --button-tracking: normal;
 
@@ -33,9 +33,11 @@
   line-height: var(--leading-flat);
   text-transform: var(--button-text-transform);
   letter-spacing: var(--button-tracking);
-  /* trim the space at the cap height - in  Safari Technology Preview */
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
+  transition: background-color var(--transition-duration) var(--transition-timing),
+    border-color var(--transition-duration) var(--transition-timing),
+    color var(--transition-duration) var(--transition-timing);
 }
 
 .button svg {
@@ -51,8 +53,8 @@
   color: var(--button-color);
 }
 
-.button:focus {
-  outline-color: var(--button-outline-color, var(--button-border-color));
+.button:focus-visible {
+  outline-color: var(--button-outline-color, var(--color-focus-ring));
 }
 
 .button:active {
@@ -61,46 +63,50 @@
 
 /* Variants */
 .button[data-button-variant='primary'] {
-  --button-bg: var(--color-primary);
-  --button-color: var(--color-light);
-  --button-color: color-mix(in oklab, var(--color-primary) 5%, var(--color-light));
+  --button-bg: color-mix(in oklab, var(--color-primary) 35%, var(--color-bg-elevated));
+  --button-color: var(--color-text);
+  --button-border-color: color-mix(in oklab, var(--color-primary) 75%, var(--color-bg));
 }
 
 .button[data-button-variant='secondary'] {
-  --button-bg: var(--color-secondary);
-  --button-color: var(--color-light);
-  --button-color: color-mix(in oklab, var(--color-secondary) 5%, var(--color-light));
+  --button-bg: color-mix(in oklab, var(--color-secondary) 35%, var(--color-bg-elevated));
+  --button-color: var(--color-text);
+  --button-border-color: color-mix(in oklab, var(--color-secondary) 75%, var(--color-bg));
 }
 
 .button[data-button-variant='tertiary'] {
-  --button-bg: var(--color-tertiary);
-  --button-color: var(--color-dark);
-  --button-color: color-mix(in oklab, var(--color-tertiary) 10%, var(--color-dark));
+  --button-bg: color-mix(in oklab, var(--color-tertiary) 30%, var(--color-bg-elevated));
+  --button-color: var(--color-text);
+  --button-border-color: color-mix(in oklab, var(--color-tertiary) 70%, var(--color-bg));
 }
 
 .button[data-ghost-button] {
-  --button-bg: var(--color-bg);
-  --button-border-color: var(--color-text);
-  --button-color: var(--color-text);
-  --button-hover-color: var(--color-bg);
+  --button-bg: transparent;
+  --button-border-color: var(--color-border-subtle);
+  --button-color: var(--color-text-light);
 }
 
 .button[data-ghost-button]:hover {
-  --_ghost-hover-bg: var(--color-bg);
-  --_ghost-hover-bg: color-mix(in oklab, var(--button-bg) 95%, var(--color-dark));
+  --_ghost-hover-bg: color-mix(in oklab, var(--color-bg-elevated) 88%, transparent);
   background: var(--_ghost-hover-bg);
-  color: var(--button-color);
+  color: var(--color-text);
 }
 
 .button[data-small-button] {
-  --button-border-width: 2px;
-  --button-radius: var(--border-radius-small);
+  --button-border-width: 1px;
+  --button-radius: var(--radius-pill);
   --button-font-size: var(--size-step-min-2);
-  --button-padding: var(--space-2xs) var(--space-s) var(--space-3xs) var(--space-s);
-  --button-text-transform: uppercase;
-  --button-tracking: var(--tracking-wide);
+  --button-padding: 0.2rem 0.55rem;
+  --button-tracking: 0;
 }
+
 /* Radius variants */
 .button[data-button-radius='hard'] {
   --button-radius: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
 }

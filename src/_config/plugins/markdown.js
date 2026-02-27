@@ -4,11 +4,12 @@ import markdownItPrism from 'markdown-it-prism';
 import markdownItAnchor from 'markdown-it-anchor';
 import markdownItClass from '@toycode/markdown-it-class';
 import markdownItLinkAttributes from 'markdown-it-link-attributes';
-import {full as markdownItEmoji} from 'markdown-it-emoji';
+import { full as markdownItEmoji } from 'markdown-it-emoji';
 import markdownItFootnote from 'markdown-it-footnote';
 import markdownitMark from 'markdown-it-mark';
 import markdownitAbbr from 'markdown-it-abbr';
-import {slugifyString} from '../filters/slugify.js';
+import markdownItWikilinks from 'markdown-it-wikilinks';
+import { slugifyString } from '../filters/slugify.js';
 
 export const markdownLib = markdownIt({
   html: true,
@@ -62,4 +63,10 @@ export const markdownLib = markdownIt({
       const imgTag = `<img src="${src}" alt="${alt}" ${attributesString}>`;
       return caption ? `<figure>${imgTag}<figcaption>${caption}</figcaption></figure>` : imgTag;
     };
+  })
+  .use(markdownItWikilinks, {
+    baseURL: '/blog/',
+    makeAllLinksAbsolute: true,
+    uriSuffix: '',
+    slugify: slugifyString
   });
