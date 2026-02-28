@@ -1,5 +1,5 @@
 ---
-title: "Who gets to laugh? Who gets to drink?"
+title: "Genesis 21: Strangers or Brothers?"
 date: 2026-02-08
 layout: "post"
 image: "/assets/images/blog/brothers at-the-well.png"
@@ -24,76 +24,48 @@ Then she notices who is making him laugh. It’s Ishmael. The son of that foreig
 
 (Your translation may say mocking but the Hebrew is actually more like "making laughter" clearly a deliberate mirror to Isaac's name. Sometimes our translations try to rescue our heroes rather than letting the awkwardness come through.)
 
+
 What seemed like a good idea once - bringing Hagar into the story — now feels like a problem. Ishmael is older, getting stronger, technically the firstborn. She starts to picture him as a threat to Isaac, to her place, to the promise.
 
+Brene Brown discusses the concept of forboding joy - the sense that comes with joy that its days are numbered and when we feel that insecurity, we can start seeing threats everywhere we look. She writes: "Every time I came too close to softening into sheer joyfulness about my children and how much I love them, I’d picture something terrible happening; I’d picture losing everything in a flash." (Brene Brown, The Gifts of Imperfection)
 
-Brene Brown discusses the concept of forboding joy - the sense that comes with joy that its days are numbered and when we feel that insecurity, we can start seeing threats everywhere we look. Little green Jedi Master Yoda was right - "fear leads to anger anger leads to hate, and hate leads to suffering".
 
 > When Sarah says: "The son of this slave woman will not inherit with my son Isaac"
 
 > The subtext is “I’m the chosen one. This is for *us*. Not for them.”
 
-Sarah sees flourishing as a zero -sum game and so Ishmael and Hagar are sent out of the camp into the desert.
+Sarah sees flourishing as a zero - sum game and so Ishmael and Hagar are sent out of the camp into the desert.
 
 I wonder is there someone you worry might steal your place of authority or blessing? Maybe a gifted young colleague? Or a rival candidate for a promotion? or a nearby church with better music or a charismatic leader?
 
 ---
 ## Ishmael: seen and heard outside the house
 
-Hagar and Ishmael are sent off into the desert with some bread and a skin of water. When the water runs out, Hagar puts Ishmael under a bush and walks away because she can’t bear to watch him die. He cries. She sobs from a distance.
-
-
-Then comes the line that changes everything:
-
+Hagar and Ishmael are sent off into the desert with some bread and a skin of water. When the water runs out, Hagar puts Ishmael under a bush and walks away because she can’t bear to watch him die. He cries. She sobs from a distance. But then... ואתא
 
 > “God heard the boy crying.”
 
+Note God's preferential option for the poor at work: When hagar was alone, God saw _her_. When the boy is the most vulnerable, God heard _his_ cry.
 
-God speaks to Hagar, tells her not to be afraid, and opens her eyes to see a well that was already there in the desert of Beersheba – the “well of promise”. The boy drinks. He lives. He grows up in the wilderness. He becomes an archer. He becomes the start of a whole people.
+God speaks to Hagar, tells her not to be afraid, and opens her eyes to see a well that was already there in the desert of **Beersheba** – the “well of seven / promise / completeness”. And Here God's promise is fulfilled. Because he didnt _need_ Abraham in order to bless the nations. He invited his people to join his mission, but they decided to cast the nations out instead. And just as God Promised, Ishmael is not just saved but becomes the father of a whole nation.
 
-
-
-There’s a detail here that begs to be sat with: Ishmael grows up and becomes “good with the bow”. Elsewhere in the story of Scripture there’s another bow – the one God hangs in the sky after the flood. The warrior’s bow, strung and ready, is turned into a rainbow: laid down, pointed away from us, as a promise of mercy rather than a threat of violence.
-
-
-
-So you end up with this image: a boy pushed out of the house of promise, practising with his bow in the desert; and a God who has hung up his own bow as a sign that he won’t give up on the world. The child who was “too complicated” for the household is seen, heard, and given a future, right under the arc of that promise.
-
-
-
-The promise isn’t just running down the neat family tree in the main camp. There is also promise out on the edges, with the ones who got pushed away “for the good of the house”.
-
-
-The God of Abraham is not stuck inside Abraham’s tent. He hears the cries that come from outside.
+### The Rainbow Connection
+There are two slightly odd references to a Bow in this section. Hagar walks a bow-shot away from Ishmael and Ishmael became "good with the bow". You end up with this image: a boy pushed out of the house of promise, saved from calamity and then handed a bow. The author of Genesis isnt being subtle here. We are supposed to be reminded of the God who has hung up his own bow after Noah's flood as a promise that he won’t give up on the world. (Genesis 6)
 
 ---
 ## Abraham and Abimelech: Strangers become Brothers
+Next we're suddenly in what feels like a completely different story. But watch this. The genius author of Genesis is doing something masterful. 
 
-Later in the chapter we’re back at Beersheba again.
-
-
-
-Abimelech, the local ruler, turns up with his commander – his muscle. Given Abraham’s track record of lying about Sarah to save his own neck, this could easily be the moment everything blows up.
-
-
+Abimelech, the local boss, turns up with his intimidating bodyguard. Given Abraham’s track record of lying to Abimelech about Sarah to save his own neck, this could easily be the moment everything blows up.
 
 But Abimelech opens with: “God is with you in everything you do.” He’s not there to kick Abraham out. He wants a covenant of honesty and kindness.
 
+Abraham, never one to keep things simple, does something stupidly risky. He brings up his own beef: a well he dug has been seized by Abimelech’s servants. This is the kind of thing you usually keep quiet about when a big guy with a sword has just offered you an olive branch.
 
+But Abimelech, miraculously, Is happy to sort it out and they make a covenant. Moving from strangers to brothers.
 
-Abraham, slightly over‑excited, does something bold. He brings up a grievance: a well he dug has been seized by Abimelech’s servants. This is the kind of thing you usually keep quiet about when the king and his army are standing in front of you.
+This is the alternative story to casting out Hagar and Ishmael. Instead of turning brothers into strangers, Abraham forms a covenant. And as a result we see people, a well and a **Tree** (As per usual its all about Trees)
 
-
-
-Abimelech doesn’t explode. He says, “I didn’t know. You didn’t tell me. Let’s sort it.” They make a treaty. Abraham sets aside seven lambs as a witness that he dug the well. The place is called Beersheba again, this time as the “well of the oath”.
-
-
-
-Abraham plants a tamarisk tree there. Now you’ve got water and shade. An actual place to linger. You can almost see the scene: kids from both households playing together by the fountain under the branches. Former strangers enjoying the same space without constantly watching their backs.
-
-
-
-It’s a tiny garden of Eden in Philistine country.
 
 ---
 
@@ -116,19 +88,18 @@ The ground that holds the pain also holds the possibility of peace.
 
 None of this is just abstract or ancient. The dynamics are uncomfortably familiar.
 
-- There is **Sarah‑shaped fear**: when the good thing we’ve been given makes us weirdly anxious about other people who might “take” it – newcomers, younger leaders, people who just do stuff differently and unsettle our sense of status.
-- There is **Ishmael‑shaped hurt**: the experience of being nudged out, not because God has rejected us, but because the institution is protecting itself – and then discovering that God is still paying attention to our tears outside the camp.
-- There is **Abraham‑and‑Abimelech‑shaped opportunity**: the chance to turn contested resources into shared wells, to plant little “tamarisk trees” where different groups can actually be together, rest, and let their kids play in the same space.
+- There is **Sarah's fear**: when the good thing we’ve been given makes us weirdly anxious about other people who might “take” it – newcomers, younger leaders, people who just do stuff differently and unsettle our sense of status.
+
+- There is **Ishmael's hurt**: the experience of being marginalised by the people of God when you become inconvenient or undesirable for what they see mistakenly see as their mission. 
+
+- There is **Abimelech's Collaboration**: the chance to turn contested resources into shared wells, to plant little “tamarisk trees” where different groups can actually be together, rest, and let their kids play in the same space.
 
 Genesis 21 won’t let the promise of God shrink down to one clean bloodline or one tidy community. It shows a God who confronts fear when it pushes others away, and who also walks out into the desert to find the ones who’ve been pushed there.
 
-It shows grace at work when insiders and outsiders, locals and foreigners, actually manage to stand at the same well and say, “Let’s look out for each other.”
+I think God is doing miracles when insiders and outsiders, Christians and not, locals and foreigners, actually manage to stand at the same well and say, “Let’s build something together.”
 
-In a world of tight circles and sharp borders, the chapter quietly throws a few questions back at us:
-
-- Where are the wells – literal or metaphorical – where you live? or in your parish?
 - Where do you see the children of God refusing to collaborate with others out of fear?
-- And what would it take, in that particular spot, for neighbours to become brothers, collaborating with each other and being the channels of God's promise of restoration?
+- What would it take, in that particular spot, for neighbours to become brothers, collaborating with each other and being the channels of God's promise of restoration?
 
 ```markdown
 > Lord, make me channel of your peace:
