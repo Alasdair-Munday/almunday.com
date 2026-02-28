@@ -17,22 +17,25 @@ description: "Genesis 21 is full of tension around a simple, ordinary thing: a w
 Sarah finally has a son.
 
 
-At ninety years old, what she thought was completely impossible is suddenly toddling around by the well. They call him Isaac, “laughter”, because his laugh is like music to her soul.
+At ninety years old, what she thought was completely impossible is suddenly toddling around. They call him Isaac, “he will laugh”, and you can imagine his little laugh is like music to her soul.
 
 
-Then she notices who is making him laugh.
+Then she notices who is making him laugh. It’s Ishmael. The son of that foreign woman Hagar. 
+
+(Your translation may say mocking but the Hebrew is actually more like "making laughter" clearly a deliberate mirror to Isaac's name. Sometimes our translations try to rescue our heroes rather than letting the awkwardness come through.)
+
+What seemed like a good idea once - bringing Hagar into the story — now feels like a problem. Ishmael is older, getting stronger, technically the firstborn. She starts to picture him as a threat to Isaac, to her place, to the promise.
 
 
-It’s Ishmael. The son of “that immigrant woman”. The foreigner. What seemed like a good idea once—bringing Hagar into the story—now feels like a problem. Ishmael is older, getting stronger, technically the firstborn. She starts to picture him as a threat to Isaac, to her place, to the promise.
+Brene Brown discusses the concept of forboding joy - the sense that comes with joy that its days are numbered and when we feel that insecurity, we can start seeing threats everywhere we look. Little green Jedi Master Yoda was right - "fear leads to anger anger leads to hate, and hate leads to suffering".
 
+> When Sarah says: "The son of this slave woman will not inherit with my son Isaac"
 
-Joy turns into anxiety. Gratitude turns into defensiveness. Instead of receiving the promise as a gift that can spill over, she holds onto it like something that has to be defended.
+> The subtext is “I’m the chosen one. This is for *us*. Not for them.”
 
-You can almost hear the shift:
+Sarah sees flourishing as a zero -sum game and so Ishmael and Hagar are sent out of the camp into the desert.
 
-
-> “I’m the chosen one. This is for *us*. Not for them.”
-
+I wonder is there someone you worry might steal your place of authority or blessing? Maybe a gifted young colleague? Or a rival candidate for a promotion? or a nearby church with better music or a charismatic leader?
 
 ---
 ## Ishmael: seen and heard outside the house
