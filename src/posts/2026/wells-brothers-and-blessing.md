@@ -1,8 +1,8 @@
 ---
-title: "Genesis 21: Strangers or Brothers?"
+title: "Genesis 21: Who Gets to Laugh? Who Gets to Drink?"
 date: 2026-02-08
 layout: "post"
-image: "/assets/images/blog/brothers at-the-well.png"
+image: "/assets/images/blog/beersheba.png"
 tags:
   - bible
   - genesis
@@ -12,7 +12,7 @@ tags:
 description: "Genesis 21 is full of tension around a simple, ordinary thing: a well. It’s a story about promised children and unwanted children, about who gets to belong, and about surprising friendship at the places where we share water."
 ---
 
-## Sarah: Brothers Become Strangers
+## Part 1: Brothers Become Strangers
 
 Sarah finally has a son.
 
@@ -30,16 +30,14 @@ What seemed like a good idea once - bringing Hagar into the story — now feels 
 Brene Brown discusses the concept of forboding joy - the sense that comes with joy that its days are numbered and when we feel that insecurity, we can start seeing threats everywhere we look. She writes: "Every time I came too close to softening into sheer joyfulness about my children and how much I love them, I’d picture something terrible happening; I’d picture losing everything in a flash." (Brene Brown, The Gifts of Imperfection)
 
 
-> When Sarah says: "The son of this slave woman will not inherit with my son Isaac"
-
-> The subtext is “I’m the chosen one. This is for *us*. Not for them.”
+> When Sarah says: "The son of this slave woman will not inherit with my son Isaac". The subtext is “I’m the chosen one. This is for *us*. Not for them.”
 
 Sarah sees flourishing as a zero - sum game and so Ishmael and Hagar are sent out of the camp into the desert.
 
 I wonder is there someone you worry might steal your place of authority or blessing? Maybe a gifted young colleague? Or a rival candidate for a promotion? or a nearby church with better music or a charismatic leader?
 
 ---
-## Ishmael: seen and heard outside the house
+## Part 2: God Hears the Cries of the Child. 
 
 Hagar and Ishmael are sent off into the desert with some bread and a skin of water. When the water runs out, Hagar puts Ishmael under a bush and walks away because she can’t bear to watch him die. He cries. She sobs from a distance. But then... ואתא
 
@@ -53,7 +51,7 @@ God speaks to Hagar, tells her not to be afraid, and opens her eyes to see a wel
 There are two slightly odd references to a Bow in this section. Hagar walks a bow-shot away from Ishmael and Ishmael became "good with the bow". You end up with this image: a boy pushed out of the house of promise, saved from calamity and then handed a bow. The author of Genesis isnt being subtle here. We are supposed to be reminded of the God who has hung up his own bow after Noah's flood as a promise that he won’t give up on the world. (Genesis 6)
 
 ---
-## Abraham and Abimelech: Strangers become Brothers
+## Part 3: Abraham and Abimelech: Strangers become Brothers
 Next we're suddenly in what feels like a completely different story. But watch this. The genius author of Genesis is doing something masterful. 
 
 Abimelech, the local boss, turns up with his intimidating bodyguard. Given Abraham’s track record of lying to Abimelech about Sarah to save his own neck, this could easily be the moment everything blows up.
@@ -84,7 +82,7 @@ The ground that holds the pain also holds the possibility of peace.
 
 ---
 
-## Wells, fear, and blessing now
+## Wells, fear, and blessing
 
 None of this is just abstract or ancient. The dynamics are uncomfortably familiar.
 
@@ -92,7 +90,7 @@ None of this is just abstract or ancient. The dynamics are uncomfortably familia
 
 - There is **Ishmael's hurt**: the experience of being marginalised by the people of God when you become inconvenient or undesirable for what they see mistakenly see as their mission. 
 
-- There is **Abimelech's Collaboration**: the chance to turn contested resources into shared wells, to plant little “tamarisk trees” where different groups can actually be together, rest, and let their kids play in the same space.
+- There is **Abimelech's Collaboration**: Where we Choose to partner with those around us, regardless of religion or any other marker of difference. Maybe this leads to the recognition - "God is with you in everything you do".
 
 Genesis 21 won’t let the promise of God shrink down to one clean bloodline or one tidy community. It shows a God who confronts fear when it pushes others away, and who also walks out into the desert to find the ones who’ve been pushed there.
 
@@ -101,7 +99,6 @@ I think God is doing miracles when insiders and outsiders, Christians and not, l
 - Where do you see the children of God refusing to collaborate with others out of fear?
 - What would it take, in that particular spot, for neighbours to become brothers, collaborating with each other and being the channels of God's promise of restoration?
 
-```markdown
 > Lord, make me channel of your peace:
 > where there is hatred, let me sow love;
 > where there is injury, pardon;
@@ -120,4 +117,3 @@ I think God is doing miracles when insiders and outsiders, Christians and not, l
 > and it is in dying that we are born to eternal life.
 > Amen.
 > - The Prayer of St. Francis
-```
