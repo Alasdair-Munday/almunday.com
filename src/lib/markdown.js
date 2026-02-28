@@ -19,6 +19,21 @@ export const markdownRenderer = markdownIt({
   typographer: true
 })
   .disable('code')
+  .use(md => {
+    const defaultFence =
+      md.renderer.rules.fence ||
+      ((tokens, idx, options, _env, self) => self.renderToken(tokens, idx, options));
+
+    md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+      const token = tokens[idx];
+      const info = (token.info || '').trim().toLowerCase();
+      if (info === 'mermaid') {
+        const escaped = md.utils.escapeHtml(token.content);
+        return `<pre class="mermaid">${escaped}</pre>\n`;
+      }
+      return defaultFence(tokens, idx, options, env, self);
+    };
+  })
   .use(markdownItAttrs)
   .use(markdownItPrism, {
     defaultLanguage: 'plaintext'

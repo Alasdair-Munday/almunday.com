@@ -7,34 +7,35 @@ import '../assets/css/local/table.css';
 import BaseLayout from './BaseLayout.astro';
 import StreamMarker from '../components/StreamMarker.astro';
 
-import { contentStreams, site, streamLabels } from '../lib/site.js';
-import { estimateReadingTime, formatDate, getContentStream, normalizeAssetPath } from '../lib/utils.js';
+import {contentStreams, site, streamLabels} from '../lib/site.js';
+import {estimateReadingTime, formatDate, getContentStream, normalizeAssetPath} from '../lib/utils.js';
 
-const {
-  post,
-  backlinks = [],
-  sectionKey
-} = Astro.props;
+const {post, backlinks = [], sectionKey} = Astro.props;
 
 const absolutePostUrl = new URL(post.url, site.url).toString();
 const normalizedImage = normalizeAssetPath(post.image);
 const readingTime = estimateReadingTime(post.markdown || post.contentHtml);
 const stream = getContentStream(post);
-const canonicalStream = sectionKey ? contentStreams.find((item) => item.key === sectionKey) : null;
+const canonicalStream = sectionKey ? contentStreams.find(item => item.key === sectionKey) : null;
 const sectionLabel = canonicalStream?.label || (sectionKey ? streamLabels[sectionKey] : null);
 ---
 
 <BaseLayout
   title={post.title}
   description={post.description}
-  discover={sectionLabel ? { title: `${sectionLabel} | ${post.title}`, description: `${sectionLabel}: ${post.description}` } : undefined}
+  discover={sectionLabel
+    ? {title: `${sectionLabel} | ${post.title}`, description: `${sectionLabel}: ${post.description}`}
+    : undefined}
   layout="post"
   schema="BlogPosting"
   pageDate={post.date}
   ogImage={normalizedImage}
   ogImageAlt={post.alt || post.title}
 >
-  <header class="full | bg-hero-pattern section" style="--spot-color: color-mix(in oklab, var(--color-bg) 70%, transparent)">
+  <header
+    class="full | bg-hero-pattern section"
+    style="--spot-color: color-mix(in oklab, var(--color-bg) 70%, transparent)"
+  >
     <div class="section__inner region text-center">
       <div class="wrapper flow prose paper-reading">
         <h1 class="gradient-text-linear">{post.title}</h1>
@@ -42,11 +43,13 @@ const sectionLabel = canonicalStream?.label || (sectionKey ? streamLabels[sectio
         <p class="meta | cluster justify-center gutter-xs-s" style="color: var(--color-text-light);">
           {stream && <StreamMarker stream={stream} compact />}
 
-          {post.draft && (
-            <span class="button" data-small-button data-button-variant="tertiary">
-              draft
-            </span>
-          )}
+          {
+            post.draft && (
+              <span class="button" data-small-button data-button-variant="tertiary">
+                draft
+              </span>
+            )
+          }
 
           <time datetime={post.date.toISOString()}>{formatDate(post.date)}</time>
           <span>{readingTime} min read</span>
@@ -84,13 +87,11 @@ const sectionLabel = canonicalStream?.label || (sectionKey ? streamLabels[sectio
           <aside class="backlinks">
             <h2>Linked from</h2>
             <ul>
-              {
-                backlinks.map(link => (
-                  <li>
-                    <a href={link.url}>{link.title}</a>
-                  </li>
-                ))
-              }
+              {backlinks.map(link => (
+                <li>
+                  <a href={link.url}>{link.title}</a>
+                </li>
+              ))}
             </ul>
           </aside>
         )
@@ -107,4 +108,21 @@ const sectionLabel = canonicalStream?.label || (sectionKey ? streamLabels[sectio
       <img class="u-author h-card" src={site.author.avatar} alt={site.author.name} />
     </div>
   </div>
+
+  <script is:inline>
+    (() => {
+      if (!document.querySelector('.mermaid')) return;
+      const script = document.createElement('script');
+      script.type = 'module';
+      script.textContent = `
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+        const theme = document.documentElement.getAttribute('data-theme');
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: theme === 'dark' ? 'dark' : 'default'
+        });
+      `;
+      document.head.appendChild(script);
+    })();
+  </script>
 </BaseLayout>

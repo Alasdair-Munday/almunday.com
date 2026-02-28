@@ -2,18 +2,23 @@
 title: "The Hell of Getting Everything You Want"
 date: 2026-02-07
 description: "Why the promise of AI creation mirrors C.S. Lewis's chilling vision of hell in The Great Divorce."
+image: ./src/assets/images/blog/base44.png
 tags: ["AI", "Reflections", "C.S. Lewis", "Culture"]
 ---
+
+## The Brave new world
 We’re getting close to a world where we can summon almost anything we want on a screen—images, stories, even “companions”—on demand. The strange thing is how often that kind of power ends up feeling more like hell than heaven.
 
-
+![](https://www.youtube.com/watch?v=8nOMdtUl8Q4)
 
 That thought came to me while watching an advert for an AI tool called Base 44, promising:
 
 > “What if you could build whatever you want just by thinking about it?”
 
+
 If you’ve read C.S. Lewis’s The Great Divorce, you might recognise how eerily that echoes his vision of hell.
 
+## The Grey Town - Lewis's vision of hell
 In Lewis’s story, the afterlife begins at a bus stop in a place called “Grey Town” on a dull, drizzly British day (trust the Oxford professor to make a very specific kind of rain a key plot point). A bus is waiting that will take anyone who wants to go up to heaven. But when some passengers realise who else has been let in, they decide they’d rather stay where they are.
 
 
@@ -33,6 +38,7 @@ Heaven, by contrast, is surprisingly hard to bear. It requires saying a painful 
 
 That’s where AI comes in.
 
+## AI and hollow power
 Generative AI gives us extraordinary power over the world of images, words, and experiences. With a few prompts we can conjure beautiful pictures, plausible stories, clever summaries, or the illusion of a sympathetic voice that never argues back.
 
 But as Lewis warned in his own way: unending but purposeless power is inherently hollow.
@@ -46,7 +52,7 @@ The power to create anything we can imagine can become the power to isolate ours
 
 
 
-
+## Reality is a Gift 
 We were not made to live inside our heads or our screens. Ultimately, reality exists in the present—in our bodies and in the world that God has created: now fallen, but destined for redemption. AI offers a more powerful way than ever to fool ourselves into thinking the worlds we create are legitimate replacements for the one we can only receive as a gift.
 
 
@@ -61,5 +67,4 @@ Words may create worlds, but the real world was created by, through, and for __*
 
 
 > For by him all things were created, in heaven and on earth, visible and invisible, whether thrones or dominions or rulers or authorities—all things were created through him and for him … For God was pleased to have all his fullness dwell in him, and through him to reconcile to himself all things, whether things on earth or things in heaven, by making peace through his blood, shed on the cross.
-
-(Colossians 1:16, 19–20)
+> - Colossians 1:16, 19–20

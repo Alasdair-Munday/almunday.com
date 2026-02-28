@@ -42,7 +42,7 @@
 }
 
 /* make featured image always 16/9 */
-.post h1 + :is(picture, figure) img {
+.post h1+ :is(picture, figure) img {
   max-inline-size: var(--max-img-width, 100%);
   align-self: center;
   block-size: auto;
@@ -119,4 +119,19 @@
   .post .prose {
     padding: var(--space-s-m);
   }
+}
+
+/* Mermaid diagrams */
+.post .prose pre.mermaid {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  overflow: visible;
+  text-align: center;
+}
+
+.post .prose pre.mermaid svg {
+  max-width: 100%;
+  height: auto;
 }
