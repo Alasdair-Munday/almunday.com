@@ -12,7 +12,7 @@ import {contentStreams, site, streamLabels} from '../../lib/site.js';
 export async function getStaticPaths() {
   const pageSize = 8;
   const allPosts = await getAllPosts();
-  const posts = allPosts.filter(p => p.url.startsWith('/blog/'));
+  const posts = allPosts.filter(p => p.url.startsWith('/songwriting/'));
   const pages = chunkForPagination(posts, pageSize);
 
   return pages.slice(1).map((items, index) => {
@@ -34,14 +34,14 @@ export async function getStaticPaths() {
 }
 
 const {items, pageNumber, totalPages, totalItems, pageSize} = Astro.props;
-const faithStream = contentStreams.find(stream => stream.key === 'faith');
-const blogLabel = streamLabels.faith;
+const songwritingStream = contentStreams.find(stream => stream.key === 'songwriting');
+const musicLabel = streamLabels.songwriting;
 ---
 
 <BaseLayout
-  title={`${blogLabel} - Page ${pageNumber}`}
-  description="Reflections on following Jesus in the modern world."
-  layout="blog"
+  title={`${musicLabel} - Page ${pageNumber}`}
+  description="Songs, writing, and childlike wonder"
+  layout="songwriting"
 >
   <div class="wrapper">
     <header
@@ -50,17 +50,20 @@ const blogLabel = streamLabels.faith;
     >
       <div class="section__inner region">
         <div class="wrapper flow prose text-center">
-          <h1 class="gradient-text-linear text-step-4">{blogLabel}</h1>
+          <h1 class="gradient-text-linear text-step-4">{musicLabel}</h1>
         </div>
       </div>
       <SvgIcon name="divider/edgy" className="divider" />
     </header>
 
-    <div class="region flow prose">
-      {faithStream && <StreamMarker stream={faithStream} />}
+    <div
+      class="region flow prose"
+      style="--region-space-top: var(--space-l); margin-block-end: var(--space-xl-2xl);"
+    >
+      {songwritingStream && <StreamMarker stream={songwritingStream} />}
       <p>
-        This section has a pagination of <strong>{pageSize}</strong> posts per page.<br />
-        The pagination is only shown if there are more posts ({totalItems}) than items per page ({pageSize}).
+        A place for songs, half-finished drafts, and reflections that begin in play before they become
+        polished.
       </p>
     </div>
 
@@ -71,12 +74,12 @@ const blogLabel = streamLabels.faith;
     <Pagination
       currentPage={pageNumber}
       totalPages={totalPages}
-      basePath="/blog/"
-      label={site.blog.paginationLabel}
-      previousText={site.blog.paginationPrevious}
-      nextText={site.blog.paginationNext}
-      pageText={site.blog.paginationPage}
-      showNumbers={site.blog.paginationNumbers}
+      basePath="/songwriting/"
+      label="Music"
+      previousText="Previous"
+      nextText="Next"
+      pageText="Page"
+      showNumbers={true}
     />
   </div>
 </BaseLayout>

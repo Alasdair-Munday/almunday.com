@@ -4,7 +4,7 @@ import {getAllPosts, getBacklinks} from '../../lib/content.js';
 
 export async function getStaticPaths() {
   const [allPosts, backlinks] = await Promise.all([getAllPosts(), getBacklinks()]);
-  const posts = allPosts.filter(p => p.url.startsWith('/blog/'));
+  const posts = allPosts.filter(p => p.url.startsWith('/songwriting/'));
 
   return posts.map(post => ({
     params: {
@@ -20,4 +20,4 @@ export async function getStaticPaths() {
 const {post, backlinks} = Astro.props;
 ---
 
-<PostLayout post={post} backlinks={backlinks} sectionKey="faith" />
+<PostLayout post={post} backlinks={backlinks} sectionKey="songwriting" />

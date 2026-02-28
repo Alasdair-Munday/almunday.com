@@ -5,6 +5,7 @@ import yaml from 'js-yaml';
 
 import { markdownRenderer } from './markdown.js';
 import { normalizeAssetPath, slugifyString, stripHtml } from './utils.js';
+import { contentStreams } from './site.js';
 
 const DEFAULT_POSTS_ROOT = path.join(process.cwd(), 'src', 'posts');
 const DEFAULT_PROJECTS_ROOT = path.join(process.cwd(), 'src', 'projects');
@@ -223,7 +224,15 @@ function normalizePostRecord(record) {
   const { filePath, stats, frontmatter, markdown, contentHtml } = record;
   const title = frontmatter.title || path.basename(filePath, '.md');
   const slug = slugifyString(title);
-  const url = `/blog/${slug}/`;
+
+  const tagsList = normalizeTags(frontmatter.tags).map(t => typeof t === 'string' ? t.toLowerCase() : '');
+  const songwritingStream = contentStreams.find(s => s.key === 'songwriting');
+  let basePath = '/blog';
+  if (songwritingStream && songwritingStream.matches.some(m => tagsList.includes(m.toLowerCase()))) {
+    basePath = '/songwriting';
+  }
+  const url = `${basePath}/${slug}/`;
+
   const date = normalizeDate(frontmatter.date, stats.mtime);
 
   return {
@@ -327,8 +336,10 @@ export async function getBacklinks() {
 
     while ((match = regex.exec(post.markdown)) !== null) {
       const linkText = match[1];
-      const slug = slugifyString(linkText);
-      const targetUrl = `/blog/${slug}/`;
+      const linkSlug = slugifyString(linkText);
+
+      const targetPost = posts.find(p => p.slug === linkSlug);
+      const targetUrl = targetPost ? targetPost.url : `/blog/${linkSlug}/`;
 
       if (!backlinks[targetUrl]) {
         backlinks[targetUrl] = [];

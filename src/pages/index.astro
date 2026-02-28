@@ -1,20 +1,47 @@
 ---
+import Carousel from '../components/Carousel.astro';
 import Masonry from '../components/Masonry.astro';
 import PostCard from '../components/PostCard.astro';
 import StreamMarker from '../components/StreamMarker.astro';
 import SvgIcon from '../components/SvgIcon.astro';
 import '../assets/css/local/home.css';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getAllPosts, getAllProjects } from '../lib/content.js';
-import { contentStreams } from '../lib/site.js';
-import { formatDate } from '../lib/utils.js';
+import {getAllPosts, getAllProjects} from '../lib/content.js';
+import {contentStreams} from '../lib/site.js';
+import {formatDate} from '../lib/utils.js';
 
 const [posts, projects] = await Promise.all([getAllPosts(), getAllProjects()]);
-const featuredPosts = posts.slice(0, 4);
-const featuredProjects = projects.slice(0, 4);
+
+const devStream = contentStreams.find(s => s.key === 'dev');
+const musicStream = contentStreams.find(s => s.key === 'songwriting');
+const faithStream = contentStreams.find(s => s.key === 'faith');
+
+const devItems = projects.slice(0, 6);
+
+const musicItems = posts
+  .filter(post => {
+    const tags = (post.tags || []).map(tag => String(tag).toLowerCase());
+    return musicStream?.matches.some(match => tags.includes(match));
+  })
+  .slice(0, 6);
+
+const musicHasMatches = post => {
+  const tags = (post.tags || []).map(tag => String(tag).toLowerCase());
+  return musicStream?.matches.some(match => tags.includes(match));
+};
+
+const faithItems = posts
+  .filter(post => {
+    const tags = (post.tags || []).map(tag => String(tag).toLowerCase());
+    const explicitlyMatches = faithStream?.matches.some(match => tags.includes(match));
+    const implicitlyMatches = !musicHasMatches(post);
+    return explicitlyMatches || implicitlyMatches;
+  })
+  .slice(0, 6);
 
 function getProjectPreviewUrl(project) {
-  const maybeExternalUrl = project.takeALookUrl ||
+  const maybeExternalUrl =
+    project.takeALookUrl ||
     project.projectUrl ||
     project.liveUrl ||
     project.demoUrl ||
@@ -48,8 +75,8 @@ function isExternalUrl(href) {
               <br />
               This is a collection of my thoughts, projects, and musings. This site isn't here to be a polished
               portfolio, but rather a space for me to record my journey, my creative output, and the things i'm
-              reflecting on. Its here for me. But if you find something useful, or interesting, then that would bring
-              me so much joy!
+              reflecting on. Its here for me. But if you find something useful, or interesting, then that would
+              bring me so much joy!
               <br />
             </span>
           </div>
@@ -73,9 +100,7 @@ function isExternalUrl(href) {
       <div class="home-heading-strip bg-tiled-pattern-theme region">
         <div class="wrapper flow prose">
           <h2>Orient Yourself</h2>
-          <p>
-            This site is mapped around three streams. Pick one and follow where it leads.
-          </p>
+          <p>This site is mapped around three streams. Pick one and follow where it leads.</p>
         </div>
       </div>
       <div class="wrapper flow region">
@@ -100,67 +125,79 @@ function isExternalUrl(href) {
     <section class="full">
       <div class="home-heading-strip bg-tiled-pattern-theme region">
         <div class="wrapper flow prose">
-          <h2>Projects</h2>
-          <p>Things I've built, shipped, and learned from.</p>
+          <h2>{faithStream?.label}</h2>
+          <p>{faithStream?.description}</p>
         </div>
       </div>
       <div class="wrapper flow prose region">
-        {
-          featuredProjects.length > 0 ? (
-            <Masonry layout="50-50">
-              {
-                featuredProjects.map(project => {
-                  const previewUrl = getProjectPreviewUrl(project);
-                  const externalPreview = isExternalUrl(previewUrl);
-
-                  return (
-                    <custom-card>
-                      <h3 slot="headline" class="text-step-2">
-                        <a href={project.url}>{project.title}</a>
-                      </h3>
-                      <span slot="date">
-                        <time datetime={project.date.toISOString()}>{formatDate(project.date)}</time>
-                      </span>
-                      <p slot="content">{project.description || project.excerpt}</p>
-                      <footer slot="footer" class="project-card-actions cluster">
-                        <a class="button" data-button-variant="primary" data-small-button href={project.url}>
-                          read about it
-                        </a>
-                        <a
-                          class="button"
-                          data-ghost-button
-                          data-small-button
-                          href={previewUrl}
-                          target={externalPreview ? '_blank' : undefined}
-                          rel={externalPreview ? 'noreferrer noopener' : undefined}
-                        >
-                          take a look
-                        </a>
-                      </footer>
-                    </custom-card>
-                  );
-                })
-              }
-            </Masonry>
-          ) : (
-            <p>No projects published yet.</p>
-          )
-        }
+        <div class="feature | region region-space-l">
+          <Carousel>
+            {faithItems.map(item => <PostCard item={item} headingLevel="h3" />)}
+          </Carousel>
+        </div>
       </div>
     </section>
 
     <section class="full">
       <div class="home-heading-strip bg-tiled-pattern-theme region">
         <div class="wrapper flow prose">
-          <h2>Blog</h2>
-          <p>I write about following Jesus in the modern world. All views are my own.</p>
+          <h2>{musicStream?.label}</h2>
+          <p>{musicStream?.description}</p>
         </div>
       </div>
       <div class="wrapper flow prose region">
         <div class="feature | region region-space-l">
-          <Masonry layout="50-50">
-            {featuredPosts.map(item => <PostCard item={item} headingLevel="h3" />)}
-          </Masonry>
+          <Carousel>
+            {musicItems.map(item => <PostCard item={item} headingLevel="h3" />)}
+          </Carousel>
+        </div>
+      </div>
+    </section>
+
+    <section class="full">
+      <div class="home-heading-strip bg-tiled-pattern-theme region">
+        <div class="wrapper flow prose">
+          <h2>{devStream?.label}</h2>
+          <p>{devStream?.description}</p>
+        </div>
+      </div>
+      <div class="wrapper flow prose region">
+        <div class="feature | region region-space-l">
+          <Carousel>
+            {
+              devItems.map(project => {
+                const previewUrl = getProjectPreviewUrl(project);
+                const externalPreview = isExternalUrl(previewUrl);
+
+                return (
+                  <custom-card>
+                    <h3 slot="headline" class="text-step-2">
+                      <a href={project.url}>{project.title}</a>
+                    </h3>
+                    <span slot="date">
+                      <time datetime={project.date.toISOString()}>{formatDate(project.date)}</time>
+                    </span>
+                    <p slot="content">{project.description || project.excerpt}</p>
+                    <footer slot="footer" class="project-card-actions cluster">
+                      <a class="button" data-button-variant="primary" data-small-button href={project.url}>
+                        read about it
+                      </a>
+                      <a
+                        class="button"
+                        data-ghost-button
+                        data-small-button
+                        href={previewUrl}
+                        target={externalPreview ? '_blank' : undefined}
+                        rel={externalPreview ? 'noreferrer noopener' : undefined}
+                      >
+                        take a look
+                      </a>
+                    </footer>
+                  </custom-card>
+                );
+              })
+            }
+          </Carousel>
         </div>
       </div>
     </section>

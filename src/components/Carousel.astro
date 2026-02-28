@@ -1,0 +1,9 @@
+---
+import '../assets/css/local/carousel.css';
+
+const {className = '', id} = Astro.props;
+---
+
+<div class={`carousel ${className}`.trim()} id={id}>
+  <slot />
+</div>

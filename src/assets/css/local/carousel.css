@@ -1,0 +1,33 @@
+.carousel {
+    display: flex;
+    gap: var(--space-m);
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+    padding-bottom: var(--space-xs);
+    /* space for focus rings or shadows */
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel>* {
+    scroll-snap-align: start;
+    flex: 0 0 calc(85% - var(--space-m));
+}
+
+@media (min-width: 48em) {
+    .carousel>* {
+        flex: 0 0 calc(45% - var(--space-m));
+    }
+}
+
+@media (min-width: 64em) {
+    .carousel>* {
+        flex: 0 0 calc(33.333% - var(--space-m));
+    }
+}

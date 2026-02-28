@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Masonry from '../../components/Masonry.astro';
+import Pagination from '../../components/Pagination.astro';
+import PostCard from '../../components/PostCard.astro';
+import StreamMarker from '../../components/StreamMarker.astro';
+import SvgIcon from '../../components/SvgIcon.astro';
+import {getAllPosts} from '../../lib/content.js';
+import {chunkForPagination} from '../../lib/utils.js';
+import {contentStreams, site, streamLabels} from '../../lib/site.js';
+
+const pageSize = 8;
+const allPosts = await getAllPosts();
+const posts = allPosts.filter(p => p.url.startsWith('/songwriting/'));
+const pagedPosts = chunkForPagination(posts, pageSize);
+const items = pagedPosts[0] || [];
+const totalPages = pagedPosts.length;
+const songwritingStream = contentStreams.find(stream => stream.key === 'songwriting');
+const musicLabel = streamLabels.songwriting;
+---
+
+<BaseLayout title={musicLabel} description="Songs, writing, and childlike wonder" layout="songwriting">
+  <div class="wrapper">
+    <header
+      class="full | bg-hero-pattern section"
+      style="--spot-color: color-mix(in oklab, var(--color-bg) 60%, transparent)"
+    >
+      <div class="section__inner region">
+        <div class="wrapper flow prose text-center">
+          <h1 class="gradient-text-linear text-step-4">{musicLabel}</h1>
+        </div>
+      </div>
+      <SvgIcon name="divider/edgy" className="divider" />
+    </header>
+
+    <div
+      class="region flow prose"
+      style="--region-space-top: var(--space-l); margin-block-end: var(--space-xl-2xl);"
+    >
+      {songwritingStream && <StreamMarker stream={songwritingStream} />}
+      <p>
+        A place for songs, half-finished drafts, and reflections that begin in play before they become
+        polished.
+      </p>
+    </div>
+
+    {
+      items.length > 0 ? (
+        <>
+          <Masonry className="grid" layout="50-50" rows="masonry">
+            {items.map(item => (
+              <PostCard item={item} />
+            ))}
+          </Masonry>
+
+          {totalPages > 1 && (
+            <Pagination
+              currentPage={1}
+              totalPages={totalPages}
+              basePath="/songwriting/"
+              label="Music"
+              previousText="Previous"
+              nextText="Next"
+              pageText="Page"
+              showNumbers={true}
+            />
+          )}
+        </>
+      ) : (
+        <p>No music entries are published yet. They are coming.</p>
+      )
+    }
+  </div>
+</BaseLayout>
