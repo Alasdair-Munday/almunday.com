@@ -2,7 +2,6 @@
 import pkg from '../../package.json';
 
 import SvgIcon from './SvgIcon.astro';
-import ThemeSwitch from './ThemeSwitch.astro';
 
 import { navigation, personal, site } from '../lib/site.js';
 import { getLinkActiveState } from '../lib/utils.js';
@@ -53,8 +52,6 @@ const { currentPath = '/' } = Astro.props;
         }
       </nav>
     </div>
-
-    <ThemeSwitch />
 
     <aside class="creator | cluster gutter-2xs text-step-min-1 mt-xl">
       Made with <span class="visually-hidden">love</span> <span><SvgIcon name="misc/heart" /></span> and

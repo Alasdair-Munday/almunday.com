@@ -26,7 +26,7 @@ export function GET() {
       }
     ],
     theme_color: site.themeColor,
-    background_color: site.themeLight,
+    background_color: site.themeDark,
     display: 'standalone'
   };
 

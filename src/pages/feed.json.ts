@@ -1,5 +1,6 @@
 import { getAllPosts } from '../lib/content.js';
 import { site } from '../lib/site.js';
+import { normalizeAssetPath, toCanonicalUrl } from '../lib/utils.js';
 
 export const prerender = true;
 
@@ -23,7 +24,12 @@ export async function GET() {
       url: new URL(post.url, site.url).toString(),
       title: post.title,
       content_html: post.contentHtml,
-      date_published: new Date(post.date).toISOString()
+      date_published: new Date(post.date).toISOString(),
+      ...(post.image
+        ? {
+            image: toCanonicalUrl(normalizeAssetPath(post.image), site.url)
+          }
+        : {})
     }))
   };
 

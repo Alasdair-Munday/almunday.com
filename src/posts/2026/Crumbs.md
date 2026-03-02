@@ -1,18 +1,32 @@
 ---
-title: An Avalanche of Crumbs
+title: An Avalanche of Crumbs - When Jesus called a Woman to Preach.
 date: 2026-02-29
-description: Why this deep-cut  from Mark's Gospel is better news than you thought.
+description: The story of the Syrophoenician woman is one of the most ignored Gospel stories in our pulpits. Jesus calls a woman a dog. Not because he hated women but because he was activating her leadership. He was calling her to speak prophetically to the gathered people of God. He was calling her to preach.
+image: /assets/images/blog/crumbs-icon.png
 tags:
   - theology
   - bible
   - gospel-of-mark
 ---
+
+> ### Jesus Honors a Syrophoenician Woman’s Faith
+> Jesus left that place and went to the vicinity of Tyre. He entered a house and did not want anyone to know it; yet he could not keep his presence secret. In fact, as soon as she heard about him, a woman whose little daughter was possessed by an impure spirit came and fell at his feet. The woman was a Greek, born in Syrian Phoenicia. She begged Jesus to drive the demon out of her daughter.
+>
+> “First let the children eat all they want,” he told her, “for it is not right to take the children’s bread and toss it to the dogs.”
+>
+> “Lord,” she replied, “even the dogs under the table eat the children’s crumbs.”
+>
+> Then he told her, “For such a reply, you may go; the demon has left your daughter.”
+>
+> She went home and found her child lying on the bed, and the demon gone.
+>
+> — **Mark 7:24-30 (NIV)**
+
+
 ## Jesus Called a Woman a Dog?!?
 The way that Jesus speaks to this woman has been the source of much
 controversy, especially given the meaning and use of "dog" as a
-chauvinist slur towards women in our culture. When we see Jesus
-seemingly refer to this woman as one of the dogs, it can make us very
-uncomfortable, to say the least. And we shouldn't pretend that it
+chauvinist slur towards women in our culture. The fact it was used to insult gentiles rather than women doesn't really help that much. When we see Jesus seemingly refer to this woman as one of the dogs, it can make us very uncomfortable, to say the least. And we shouldn't pretend that it
 doesn't.
 
 But I've come to realise that this story of the Syro-Phoenician woman is
@@ -30,25 +44,6 @@ But this is the first time in Mark's Gospel that he has stepped outside
 his Israeli context. Tyre and Sidon are part of the region Matthew calls
 Syro-Phoenicia. Wealthy port cities. Supplied with goods from Galilee
 --- the rural region Jesus comes from.
-
-------------------------------------------------------------------------
-
-## The Geography
-
-``` mermaid
-flowchart LR
-    G["Galilee  
-    Jewish region  
-    Rural ministry setting"]
-
-    T["Tyre & Sidon  
-    Phoenician coast  
-    Wealthy Gentile ports"]
-
-    G --- T
-```
-
-------------------------------------------------------------------------
 
 ## The Woman: Privileged and Disadvantaged
 And this is where a woman from Tyre and Sidon --- a woman from the
@@ -78,55 +73,27 @@ This is where we see the genius of Mark's writing.
 ## The Crumb Sandwich
 He has placed this story equidistant between two very similar stories:
 
--   The feeding of the 5,000 in Mark 6:30-44
--   The feeding of the 4,000 in Mark 8:1-10
-
-Twelve baskets are left over in the first.\
-Seven baskets in the second.
-
-That is not random.
-
-------------------------------------------------------------------------
-
-## The Sandwich Shape
-
-``` mermaid
-flowchart TD
-
-    A["Feeding of the 5,000  
-    Mark 6:30-44  
-
-    12 baskets of Crumbs
-    12 Tribes of Israel"]
-
-    B["Syrophoenician Woman  
-    Mark 7:24-30
-    Calls out the Crumbs
-    The hinge moment"]
-
-    C["Feeding of the 4,000  
-    Mark 8:1-10  
-
-    7 baskets of Crumbs 
-    Fullness / The Nations"]
-
-    A --> B
-    B --> C
-```
-
-------------------------------------------------------------------------
+-   The feeding of the 5,000 in Mark 6:30-44 12 baskets of crumbs.
+  - The Syrophoenician woman asks for the crumbs.
+-   The feeding of the 4,000 in Mark 8:1-10 7 baskets of crumbs.
 
 
-In the feeding of the 5,000, bread is multiplied and twelve baskets of
+Before the Syrophoenician woman, in the feeding of the 5,000, bread is multiplied and twelve baskets of
 fragments are gathered up. Twelve --- echoing the twelve
 tribes of Israel.
 
-Then comes this woman.
+From a table with a few loaves and fish come baskets and baskets and
+baskets of overflow. The crumbs from the table are not a consolation prize. They are an avalanche of Grace.
 
+After the Syrophoenician woman, Jesus reveals the truth of what she has seen --- that the blessing never stops with his people. It widens out to bless the nations. The second feeding story - 4,000 people on the gentile shore of the sea of Galilee. The crumbs fill seven baskets. Seven --- the number of fullness, completeness, universality. A widening out. A blessing for the Gentiles. For the whole earth. The "dogs" eat the crumbs. But these crumbs are not a consolation prize. They are an avalanche of Grace.
 
-## Audacious Foreign Women keeping the people of God on track
-Jesus says, "Let the children be fed first." The language is still
-feeding language. Still bread language.
+Mark is showing us the trajectory of God's blessing. It never stops with his people. We are always blessed to be a blessing to the whole world. 
+
+> Right in the middle of the two feeding stories stands a woman who sees it before the disciples do.
+
+## Jesus Challenges the Woman
+Jesus says, "Let the children be fed first. It is not right to take the children's bread and throw it to the dogs." The language is still
+feeding language. Still bread language. In the context, the name "dog" is definitely provocative but it isn't about her gender. He is play-acting the isolationism of his fellow Judeans because he has seen in her eyes that she is ready to blow it wide open. 
 
 And she responds, "Even the dogs under the table eat the crumbs."
 
@@ -134,12 +101,13 @@ She doesn't reject the metaphor. She pushes it further.
 
 She has noticed something. She has understood something about the
 character of God. That Israel was never called to be a holy huddle,
-sectioned off from the rest of the world. Abraham was called to be a
-blessing to the nations.
+sectioned off from the rest of the world. Abraham was called to father a nation that would be a blessing to the whole earth.
 
-And throughout Israel's history there are women from outside the tribe,
+![](/assets/images/blog/ot-gentile-rebel-women-table.png)
+
+Throughout Israel's history there are women from outside the tribe,
 outside the nation, who seem to understand this better than the
-insiders. Rahab. Ruth. Esther. Women who, with a kind of holy
+insiders. Rahab, Ruth, Tamar. Women who, with a kind of holy
 audacity, expose how wide God's grace truly is.
 
 This woman stands in that line.
@@ -147,46 +115,46 @@ This woman stands in that line.
 She sees that even though the people of God are gathered to feast on his
 blessings, the economy of the kingdom is not scarcity. It is abundance.
 
-## The Avalanche of Crumbs is an Avalanche of Grace
-From a table with a few loaves and fish come baskets and baskets and
-baskets of overflow. The crumbs from the table are not a consolation prize. They are an avalanche of Grace.
+Jesus initially turns her down because he knows she has seen
+something. **He gives her the dignity of saying it out loud.** Of being the one to call out the disciples' dismissiveness and the exclusivity of the people of God. 
 
-After this encounter comes the feeding of the 4,000. Seven baskets.
-Seven --- the number of fullness, completeness, universality. A widening
-out.
-
-Mark is showing us two forms of blessing. First Israel. Then the
-nations.
-
-And right in the middle stands a woman who sees it before the disciples
-do.
-
+In Mark's Gospel, the disciples repeatedly fail to grasp what is going on. In fact, the passages between feeding the 5000 and the Syrophoenician woman are a masterclass in missing the point.
 
 ## Jesus calls the woman to preach
-Perhaps Jesus initially turns her down because he knows she has seen
-something. He gives her the dignity of saying it out loud. In Mark's
-Gospel, the disciples repeatedly fail to grasp what is going on. There
-is a hiddenness to Jesus' mission. And here, unexpectedly, a Gentile
-woman articulates the heart of it.
+In 6:52 Mark writes: "for they had not understood about the loaves; their hearts were hardened." 
+And here, unexpectedly, a dispised Gentile woman understands about the loaves more than the disciples do. 
 
-She preaches.
 
-Not because Jesus needs correcting. But because sometimes the Father
-speaks through the margins to signal that the moment has come.
+
+_More than I did **until I stopped to listen to her**_.
+
+
+
+She illuminates the heart of the Gospel to the gathered disciples.
+
+
+
+In other words: 
+
+
+> **She Preaches**. 
+---
 
 ## The Question for us
 So the question for us is this:
 
-When we gather to worship, when we use our resources as a church, do we
-realise that we have nothing to be afraid of when blessing flows
-outward?
+When we gather to worship, when we use our resources as a church, do we prioritize the overflow of blessing to the world?
 
-Do we recognise the economy of crumbs?
+Do we recognise we dont have to defend our church's borders because of the economy of the kingdom where the crumbs vastly outweigh the main course? 
 
-And when someone comes from outside --- from beyond our expected
-boundaries --- are we curious enough to notice the wisdom they might be
-offering?
+And when the voice comes from outside --- or from people we dont expect --- are we curious enough to notice the wisdom they are offering?
 
-The crumbs that the woman talks about are not normal leftovers. They are an avalanche of Grace flowing out from the table to bless the Nations.
+As is often quoted from the pulpit: "The Church is the only organization that exists for the benefit of non-members."
 
+Amen. Lord have mercy.
 
+> We do not presume to come to this thy Table, O merciful Lord, trusting in our own righteousness, but in thy manifold and great mercies. 
+> We are not worthy so much as to gather up the **crumbs under thy Table**. But thou art the same Lord, whose property is always to have mercy: 
+> Grant us therefore, gracious Lord, so to eat the flesh of thy dear Son Jesus Christ, and to drink his blood, that our sinful bodies may be made clean by his body, and our souls washed through his most precious blood, 
+> and that we may evermore dwell in him, and he in us. Amen.
+> — *Thomas Cranmer: The Prayer of Humble Access, Book of Common Prayer, 1549*

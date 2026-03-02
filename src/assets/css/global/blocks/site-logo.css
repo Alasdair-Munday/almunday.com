@@ -1,5 +1,6 @@
 .logo {
   --gutter: var(--space-xs);
+  --logo-cycle: 10s;
   padding: var(--space-s) 0;
   font-size: var(--size-step-3);
   text-decoration: none;
@@ -7,7 +8,153 @@
   color: var(--color-light);
 }
 
-.logo svg {
+.logo__tree {
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: 1em;
+  block-size: 1em;
+  flex: 0 0 auto;
+}
+
+.logo__tree svg {
+  grid-area: 1 / 1;
+  inline-size: 100%;
+  block-size: 100%;
   color: var(--color-light);
-  filter: drop-shadow(0 0.15rem 0.3rem color-mix(in oklab, var(--color-tone-root) 26%, transparent));
+}
+
+.logo__tree-branches {
+  clip-path: inset(0 0 45% 0);
+  transform-box: fill-box;
+  transform-origin: 50% 92%;
+  will-change: transform;
+  animation: logo-branches-sway var(--logo-cycle) ease-in-out infinite;
+}
+
+.logo__tree-base .tree-path,
+.logo__tree-branches .tree-path {
+  fill: currentColor;
+  fill-opacity: 0;
+  stroke: currentColor;
+  stroke-width: 0.02;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  paint-order: stroke fill;
+  stroke-dasharray: 0 1;
+  stroke-dashoffset: 1;
+  transform-box: fill-box;
+  transform-origin: 50% 92%;
+  will-change: stroke-dasharray, stroke-dashoffset, stroke-width, fill-opacity;
+  animation: logo-line-grow var(--logo-cycle) linear infinite;
+}
+
+@keyframes logo-line-grow {
+  0% {
+    stroke-dasharray: 0 1;
+    stroke-dashoffset: 1;
+    stroke-width: 0.02;
+    fill-opacity: 0;
+  }
+
+  8% {
+    stroke-dasharray: 0.08 0.92;
+    stroke-dashoffset: 0.92;
+    stroke-width: 0.035;
+    fill-opacity: 0.03;
+  }
+
+  16% {
+    stroke-dasharray: 0.2 0.8;
+    stroke-dashoffset: 0.8;
+    stroke-width: 0.05;
+    fill-opacity: 0.07;
+  }
+
+  24% {
+    stroke-dasharray: 0.36 0.64;
+    stroke-dashoffset: 0.64;
+    stroke-width: 0.07;
+    fill-opacity: 0.12;
+  }
+
+  32% {
+    stroke-dasharray: 0.54 0.46;
+    stroke-dashoffset: 0.46;
+    stroke-width: 0.09;
+    fill-opacity: 0.2;
+  }
+
+  40% {
+    stroke-dasharray: 0.72 0.28;
+    stroke-dashoffset: 0.28;
+    stroke-width: 0.11;
+    fill-opacity: 0.34;
+  }
+
+  48% {
+    stroke-dasharray: 0.88 0.12;
+    stroke-dashoffset: 0.12;
+    stroke-width: 0.13;
+    fill-opacity: 0.58;
+  }
+
+  56% {
+    stroke-dasharray: 1 0;
+    stroke-dashoffset: 0;
+    stroke-width: 0.145;
+    fill-opacity: 0.8;
+  }
+
+  76% {
+    stroke-dasharray: 1 0;
+    stroke-dashoffset: 0;
+    stroke-width: 0.15;
+    fill-opacity: 1;
+  }
+
+  90% {
+    stroke-dasharray: 0.92 0.08;
+    stroke-dashoffset: 0.08;
+    stroke-width: 0.125;
+    fill-opacity: 0.78;
+  }
+
+  96% {
+    stroke-dasharray: 0.4 0.6;
+    stroke-dashoffset: 0.6;
+    stroke-width: 0.08;
+    fill-opacity: 0.3;
+  }
+
+  100% {
+    stroke-dasharray: 0 1;
+    stroke-dashoffset: 1;
+    stroke-width: 0.02;
+    fill-opacity: 0;
+  }
+}
+
+@keyframes logo-branches-sway {
+  0%,
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+
+  20% {
+    transform: translateX(-0.008em) rotate(-0.35deg);
+  }
+
+  40% {
+    transform: translateX(0.012em) rotate(0.5deg);
+  }
+
+  60% {
+    transform: translateX(-0.009em) rotate(-0.4deg);
+  }
+
+  80% {
+    transform: translateX(0.007em) rotate(0.32deg);
+  }
 }

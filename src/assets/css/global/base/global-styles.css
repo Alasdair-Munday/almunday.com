@@ -4,7 +4,7 @@
 */
 
 html {
-  color-scheme: light dark;
+  color-scheme: dark;
 }
 
 body {
@@ -183,7 +183,6 @@ a:not([class]):hover {
   .bg-tiled-pattern,
   header,
   footer,
-  .theme-switch,
   custom-easteregg {
     display: none !important;
   }

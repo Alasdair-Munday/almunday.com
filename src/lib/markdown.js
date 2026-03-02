@@ -10,7 +10,7 @@ import markdownitMark from 'markdown-it-mark';
 import markdownitAbbr from 'markdown-it-abbr';
 import markdownItWikilinks from 'markdown-it-wikilinks';
 
-import { slugifyString } from './utils.js';
+import { normalizeAssetPath, slugifyString } from './utils.js';
 
 export const markdownRenderer = markdownIt({
   html: true,
@@ -63,7 +63,7 @@ export const markdownRenderer = markdownIt({
   .use(md => {
     md.renderer.rules.image = (tokens, idx) => {
       const token = tokens[idx];
-      const src = token.attrGet('src') || '';
+      const src = normalizeAssetPath(token.attrGet('src') || '');
       const alt = token.content || '';
       const caption = token.attrGet('title');
       const attrs = (token.attrs || []).filter(([key]) => !['src', 'alt', 'title'].includes(key));

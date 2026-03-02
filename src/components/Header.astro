@@ -13,7 +13,10 @@ const isHome = normalizePath(currentPath) === '/';
 
   <div class="repel ontop gutter-s">
     <a href="/" class="logo | cluster" aria-current={isHome ? 'page' : undefined}>
-      <SvgIcon name="misc/tree-transparent" />
+      <span class="logo__tree" aria-hidden="true">
+        <SvgIcon name="misc/tree-transparent" className="logo__tree-base" />
+        <SvgIcon name="misc/tree-transparent" className="logo__tree-branches" />
+      </span>
       <span class="font-display">{site.siteName}</span>
     </a>
 

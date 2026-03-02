@@ -1,6 +1,6 @@
 import { getAllPosts } from '../lib/content.js';
 import { site } from '../lib/site.js';
-import { escapeXml } from '../lib/utils.js';
+import { escapeXml, normalizeAssetPath, toCanonicalUrl } from '../lib/utils.js';
 
 export const prerender = true;
 
@@ -15,11 +15,17 @@ export async function GET() {
   const entries = posts
     .map(post => {
       const absoluteUrl = new URL(post.url, site.url).toString();
+      const imageUrl = post.image ? toCanonicalUrl(normalizeAssetPath(post.image), site.url) : null;
+      const enclosure = imageUrl
+        ? `
+      <link rel="enclosure" href="${escapeXml(imageUrl)}" />`
+        : '';
 
       return `
     <entry>
       <title>${escapeXml(post.title)}</title>
       <link href="${escapeXml(absoluteUrl)}" />
+      ${enclosure}
       <updated>${xmlDate(post.date)}</updated>
       <id>${escapeXml(absoluteUrl)}</id>
       <content type="html">${cdata(post.contentHtml)}</content>

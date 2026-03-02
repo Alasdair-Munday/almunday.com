@@ -51,19 +51,45 @@ export const normalizeAssetPath = value => {
     return value;
   }
 
-  if (value.startsWith('./src/')) {
-    return value.replace('./src', '');
+  const trimmed = value.trim();
+
+  if (trimmed.length === 0) {
+    return trimmed;
   }
 
-  if (value.startsWith('src/')) {
-    return `/${value.replace(/^src\//, '')}`;
+  if (/^[a-zA-Z][a-zA-Z\d+.-]*:/.test(trimmed) || trimmed.startsWith('//')) {
+    return trimmed;
   }
 
-  if (value.startsWith('/')) {
+  let normalized = trimmed;
+
+  if (normalized.startsWith('./src/')) {
+    normalized = normalized.replace('./src', '');
+  } else if (normalized.startsWith('/src/')) {
+    normalized = normalized.replace('/src', '');
+  } else if (normalized.startsWith('src/')) {
+    normalized = `/${normalized.replace(/^src\//, '')}`;
+  } else if (normalized.startsWith('./')) {
+    normalized = normalized.replace(/^\.\//, '/');
+  }
+
+  if (!normalized.startsWith('/')) {
+    normalized = `/${normalized}`;
+  }
+
+  return normalized.replace(/\/{2,}/g, '/');
+};
+
+export const toCanonicalUrl = (value, baseUrl) => {
+  if (!value || typeof value !== 'string') {
     return value;
   }
 
-  return `/${value}`;
+  try {
+    return new URL(value, baseUrl).toString();
+  } catch {
+    return value;
+  }
 };
 
 export const escapeXml = value =>

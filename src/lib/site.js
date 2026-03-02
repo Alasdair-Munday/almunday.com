@@ -108,7 +108,6 @@ export const site = {
   lang: 'en',
   skipContent: 'Skip to content',
   themeColor: '#2f6f95',
-  themeLight: '#f2eee6',
   themeDark: '#213f51',
   opengraphDefault: '/assets/images/template/opengraph-default.jpg',
   opengraphDefaultAlt:
@@ -162,11 +161,6 @@ export const site = {
     ariaBottom: 'Complementary',
     ariaPlatforms: 'Platforms',
     drawerNav: false
-  },
-  themeSwitch: {
-    title: 'Theme',
-    light: 'Light',
-    dark: 'Dark'
   },
   greenweb: {
     disclosures: [
