@@ -1,303 +1,78 @@
 ---
+import { siteConfig } from '../config/site';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SearchModal from '../components/SearchModal.astro';
+import ImageZoom from '../components/ImageZoom.astro';
 import '../styles/global.css';
 
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import SvgIcon from '../components/SvgIcon.astro';
-
-import { site } from '../lib/site.js';
-import { normalizePath, slugifyString } from '../lib/utils.js';
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  wide?: boolean;
+}
 
 const {
-  title,
-  description,
-  layout = '',
-  schema,
-  discover = {},
-  pageDate,
-  ogImage,
-  ogImageAlt,
-  noindex = false
+  title = siteConfig.title,
+  description = siteConfig.description,
+  image = '/og-image.jpg',
+  wide = false,
 } = Astro.props;
 
-const currentPath = normalizePath(Astro.url.pathname);
-const resolvedTitle = discover.title || title || site.siteName;
-const metaDescription = discover.description || description || site.siteDescription;
-const canonicalUrl = new URL(currentPath, site.url).toString();
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || siteConfig.siteUrl);
+const pageTitle = title === siteConfig.title ? `${siteConfig.title} — ${siteConfig.tagline}` : `${title} | ${siteConfig.title}`;
 
-const fallbackOgImage =
-  layout === 'post' && title
-    ? new URL(`/assets/og-images/${slugifyString(title)}-preview.jpeg`, site.url).toString()
-    : new URL(site.opengraphDefault, site.url).toString();
-const resolvedOgImage = ogImage ? new URL(ogImage, site.url).toString() : fallbackOgImage;
-const resolvedOgImageAlt = ogImageAlt || (layout === 'post' ? title : site.opengraphDefaultAlt);
-
-const websiteSchema = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'WebSite',
-      '@id': `${site.url}#website`,
-      url: site.url,
-      name: site.siteName,
-      description: site.siteDescription,
-      inLanguage: site.locale
-    }
-  ]
-};
-
-const blogPostingSchema =
-  schema === 'BlogPosting'
-    ? {
-        '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        mainEntityOfPage: {
-          '@type': 'WebPage'
-        },
-        isPartOf: {
-          '@id': `${site.url}#website`
-        },
-        '@id': canonicalUrl,
-        headline: resolvedTitle,
-        description: metaDescription,
-        image: resolvedOgImage,
-        inLanguage: site.locale,
-        publisher: {
-          '@type': site.siteType,
-          name: site.author.name,
-          url: site.url
-        },
-        author: {
-          '@type': 'Person',
-          name: site.author.name
-        },
-        datePublished: new Date(pageDate || new Date()).toISOString()
-      }
-    : null;
+const features = siteConfig.features ?? {};
+const showSearch = features.search !== false;
+const showImageZoom = features.imageZoom !== false;
 ---
 
-<!doctype html>
-<html lang={site.lang} data-theme="dark">
+<!DOCTYPE html>
+<html lang="en" data-theme="white">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{resolvedTitle}</title>
-
-    <meta name="description" content={metaDescription} />
-    <meta name="theme-color" content={site.themeDark} />
-    <meta name="robots" content={noindex ? 'noindex,nofollow' : 'index,follow'} />
-    <meta name="googlebot" content={noindex ? 'noindex,nofollow' : 'index,follow'} />
-    <meta name="generator" content={Astro.generator} />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="color-scheme" content="dark" />
-    <meta name="view-transition" content="same-origin" />
-
-    <link rel="canonical" href={canonicalUrl} />
-    <link rel="author" href="/humans.txt" />
-
-    <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={resolvedTitle} />
-    <meta property="og:image" content={resolvedOgImage} />
-    <meta property="og:image:alt" content={resolvedOgImageAlt} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:description" content={metaDescription} />
-    <meta property="og:site_name" content={site.siteName} />
-    <meta property="og:locale" content={site.locale} />
-    <meta property="article:author" content={site.author.name} />
-
-    {
-      site.blog.feedLinks.map(feedLink => (
-        <link
-          rel="alternate"
-          type={feedLink.type}
-          title={`${feedLink.title}: ${site.siteName}`}
-          href={feedLink.url}
-        />
-      ))
-    }
-
-    <link
-      rel="preload"
-      href="/assets/fonts/redhat/red-hat-display-v7-latin-900.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/assets/fonts/atkinson/atkinson-hyperlegible-regular.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" type="application/rss+xml" title={siteConfig.title} href={new URL('/rss.xml', Astro.site || siteConfig.siteUrl)} />
 
-    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
-    {blogPostingSchema && <script type="application/ld+json" set:html={JSON.stringify(blogPostingSchema)} />}
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={siteConfig.author} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, canonicalURL)} />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, canonicalURL)} />
+
   </head>
-
-  <body class={`${layout} bg-tiled-pattern bg-repeat`.trim()}>
-    <div class="site-intro require-js" data-site-intro aria-hidden="true">
-      <div class="site-intro__logo-stage">
-        <span class="site-intro__logo-ring site-intro__logo-ring--inner"></span>
-        <span class="site-intro__logo-ring site-intro__logo-ring--outer"></span>
-        <SvgIcon name="misc/tree-transparent" className="site-intro__logo-icon" />
-      </div>
-      <p class="site-intro__label">{site.siteName}</p>
-    </div>
-
-    <div class="reading-progress" aria-hidden="true"></div>
-    <Header currentPath={currentPath} />
-
-    <main id="main" class="flow">
+  <body>
+    <a href="#main-content" class="skip-to-content">Skip to content</a>
+    <Header />
+    <main id="main-content" class:list={['main-content', wide ? 'container-wide' : 'container']}>
       <slot />
     </main>
-
-    <Footer currentPath={currentPath} />
-
-    {
-      site.easteregg && (
-        <>
-          <script type="module" src="/assets/scripts/components/custom-easteregg.js"></script>
-          <custom-easteregg></custom-easteregg>
-        </>
-      )
-    }
-
-    <script is:inline>
-      (() => {
-        const intro = document.querySelector('[data-site-intro]');
-        if (!intro) {
-          return;
-        }
-
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          intro.remove();
-          return;
-        }
-
-        const sessionKey = 'site-intro-seen-v1';
-        if (sessionStorage.getItem(sessionKey) === '1') {
-          intro.remove();
-          return;
-        }
-
-        sessionStorage.setItem(sessionKey, '1');
-        document.body.classList.add('has-intro-lock');
-
-        let hasLeft = false;
-        const leaveIntro = () => {
-          if (hasLeft) {
-            return;
-          }
-
-          hasLeft = true;
-          intro.classList.add('is-leaving');
-
-          window.setTimeout(() => {
-            document.body.classList.remove('has-intro-lock');
-            intro.remove();
-          }, 1250);
-        };
-
-        requestAnimationFrame(() => {
-          intro.classList.add('is-active');
-        });
-
-        const triggerLeave = () => {
-          window.setTimeout(leaveIntro, 380);
-        };
-
-        if (document.readyState === 'complete') {
-          triggerLeave();
-        } else {
-          window.addEventListener('load', triggerLeave, { once: true });
-        }
-
-        window.setTimeout(leaveIntro, 2400);
-      })();
-    </script>
-
-    <script is:inline>
-      if (!customElements.get('custom-masonry')) {
-        class CustomMasonry extends HTMLElement {
-          constructor() {
-            super();
-            this.layoutMasonry = this.layoutMasonry.bind(this);
-          }
-
-          connectedCallback() {
-            requestAnimationFrame(() => {
-              this.layoutMasonry();
-              window.addEventListener('resize', this.debounceLayout.bind(this, 100));
-            });
-          }
-
-          disconnectedCallback() {
-            window.removeEventListener('resize', this.debounceLayout);
-          }
-
-          debounceLayout(delay) {
-            clearTimeout(this.timeoutId);
-            this.timeoutId = setTimeout(this.layoutMasonry, delay);
-          }
-
-          layoutMasonry() {
-            const columnCount = getComputedStyle(this).gridTemplateColumns.split(' ').length;
-            const items = Array.from(this.children);
-
-            items.forEach((item, index) => {
-              item.style.marginTop = '0px';
-
-              if (index >= columnCount) {
-                const previousItem = items[index - columnCount];
-                const previousItemBottom =
-                  previousItem.offsetTop +
-                  previousItem.offsetHeight +
-                  parseFloat(getComputedStyle(this).rowGap);
-                const currentItemTop = item.offsetTop;
-                const marginTop = previousItemBottom - currentItemTop;
-                item.style.marginTop = `${marginTop}px`;
-              }
-            });
-          }
-        }
-
-        customElements.define('custom-masonry', CustomMasonry);
-      }
-    </script>
-
-    <script is:inline>
-      const progressBar = document.querySelector('.reading-progress');
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      if (progressBar && document.body.classList.contains('post') && !reduceMotion) {
-        const setProgress = () => {
-          const article = document.querySelector('.post .prose');
-          if (!article) {
-            return;
-          }
-
-          const rect = article.getBoundingClientRect();
-          const start = window.scrollY + rect.top;
-          const distance = Math.max(1, article.offsetHeight - window.innerHeight);
-          const progress = Math.min(1, Math.max(0, (window.scrollY - start) / distance));
-
-          progressBar.style.setProperty('--reading-progress', `${progress * 100}%`);
-        };
-
-        setProgress();
-        document.addEventListener('scroll', setProgress, { passive: true });
-        window.addEventListener('resize', setProgress);
-      } else if (progressBar && !document.body.classList.contains('post')) {
-        progressBar.style.display = 'none';
-      }
-    </script>
+    <Footer />
+    {showSearch && <SearchModal />}
+    {showImageZoom && <ImageZoom />}
   </body>
 </html>
+
+<style>
+  .main-content {
+    flex: 1;
+    padding-bottom: 3.5rem;
+  }
+</style>

@@ -1,109 +1,56 @@
 # almunday.com
 
-Personal site and blog built with Astro.
+The personal site of Rev Al Munday: writing, songs, reflections, and software projects in one chronological feed.
 
-## Stack
+The site is built with [Astro](https://astro.build) from the open-source [Minrock](https://github.com/rnt-rez/minrock) theme. Content lives in Markdown and can be edited in Obsidian.
 
-- Astro 5 (static output)
-- Tailwind integration (minimal usage)
-- Markdown content with frontmatter
-- Netlify deployment
+## Development
 
-## Requirements
-
-- Node.js 24+
-- npm
-
-## Install
+Requires Node.js 22.12 or newer.
 
 ```bash
-npm install
+npm ci
+npm run dev
 ```
 
-## Local development
+The local site runs at `http://localhost:4321`.
+
+## Validation
 
 ```bash
-npm start
-```
-
-This runs Astro dev server.
-
-## Build
-
-```bash
+npm run check
 npm run build
 ```
 
-Build pipeline:
+## Content
 
-1. Clean build artifacts
-2. Sync static assets into `public/assets`
-3. Build Astro static output into `dist/`
+- Writing: `src/content/blog/<slug>/index.md`
+- Projects: `src/content/projects/<slug>/index.md`
+- Site details and feature flags: `src/config/site.ts`
 
-## Content model
+The homepage combines writing and projects into one date-sorted feed. Existing detail pages remain under `/blog/` and `/projects/`, and the RSS feed includes both collections.
 
-- Blog posts: `src/posts/**/*.md`
-- Projects: `src/projects/**/*.md`
+## Writing in Obsidian
 
-The site reads Markdown recursively and renders routes for blog/project listings and detail pages.
+Open `src/content` as an Obsidian vault. The included vault configuration provides the Minrock writing tools, folder-based article creation, frontmatter editing, image handling, search, tags, and optional Git publishing.
 
-## Obsidian workflow
+New articles live at `src/content/blog/<slug>/index.md`. Images pasted into an article stay beside that article, so they work in Obsidian and on the site. See `src/content/_GUIDE.md` for the vault workflow.
 
-You can author in Obsidian and sync Markdown into the repo before committing.
+## Audio
 
-### Environment
+Article and project pages include Minrock’s browser-based text-to-speech player. It reads the page using the visitor’s installed system voices, with play, pause, paragraph navigation, and speed controls. Add `audio: false` to an article’s frontmatter when a particular piece should not offer narration.
 
-Copy `.env-sample` to `.env` and set:
+## Deployment
 
-- `OBSIDIAN_VAULT_PATH` (required for sync commands)
-- `OBSIDIAN_POSTS_DIR` (optional, default: `Posts`)
-- `OBSIDIAN_PROJECTS_DIR` (optional, default: `Projects`)
+The production URL defaults to `https://almunday.com`. Set `SITE_URL` to override it in another environment.
 
-### Sync commands
+Netlify can build the site with:
 
-Sync all Markdown from vault folders:
-
-```bash
-npm run sync:content
+```text
+Build command: npm run build
+Publish directory: dist
 ```
 
-Sync only notes not marked `draft: true`:
+## Credits
 
-```bash
-npm run sync:content:published
-```
-
-Both commands clean destination Markdown first, then copy into:
-
-- `src/posts`
-- `src/projects`
-
-## Netlify publishing model
-
-Netlify builds from committed files in this repository.
-
-Recommended flow:
-
-1. Write in Obsidian
-2. Run a sync command
-3. Review changes
-4. Commit and push
-5. Netlify builds from committed Markdown
-
-This keeps production builds deterministic and independent of your local vault path.
-
-## Scripts
-
-- `npm start` / `npm run dev`: Astro dev server
-- `npm run build`: production build
-- `npm run preview`: preview built site
-- `npm run check`: Astro type/content checks
-- `npm run sync:assets`: copy `src/assets` to `public/assets`
-- `npm run sync:content`: sync vault content (all Markdown)
-- `npm run sync:content:published`: sync vault content excluding `draft: true`
-
-## Notes
-
-- `URL` in env sets the site URL used in build metadata.
-- If Obsidian folders are missing, sync commands fail with explicit paths.
-- If Obsidian env vars are not set, runtime content loading falls back to in-repo content directories.
+The underlying theme is Minrock by Renato Rezende, used under the MIT License. Site content and branding belong to Rev Al Munday.

@@ -1,205 +1,201 @@
 ---
-import Carousel from '../components/Carousel.astro';
-import Masonry from '../components/Masonry.astro';
-import PostCard from '../components/PostCard.astro';
-import StreamMarker from '../components/StreamMarker.astro';
-import SvgIcon from '../components/SvgIcon.astro';
-import '../assets/css/local/home.css';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import {getAllPosts, getAllProjects} from '../lib/content.js';
-import {contentStreams} from '../lib/site.js';
-import {formatDate} from '../lib/utils.js';
+import { getCollection } from 'astro:content';
+import { siteConfig } from '../config/site';
 
-const [posts, projects] = await Promise.all([getAllPosts(), getAllProjects()]);
+const [posts, projects] = await Promise.all([
+  getCollection('blog', ({data}) => !data.draft),
+  getCollection('projects')
+]);
 
-const devStream = contentStreams.find(s => s.key === 'dev');
-const musicStream = contentStreams.find(s => s.key === 'songwriting');
-const faithStream = contentStreams.find(s => s.key === 'faith');
+const feedItems = [
+  ...posts.map(post => ({
+    kind: 'Writing',
+    title: post.data.title,
+    description: post.data.description,
+    date: post.data.pubDate,
+    href: `/blog/${post.id}`,
+    tags: post.data.tags,
+    image: post.data.image
+  })),
+  ...projects.map(project => ({
+    kind: 'Project',
+    title: project.data.title,
+    description: project.data.description,
+    date: project.data.date,
+    href: `/projects/${project.id}`,
+    tags: project.data.tags,
+    image: undefined
+  }))
+].sort((a, b) => b.date.valueOf() - a.date.valueOf());
 
-const devItems = projects.slice(0, 6);
-
-const musicItems = posts
-  .filter(post => {
-    const tags = (post.tags || []).map(tag => String(tag).toLowerCase());
-    return musicStream?.matches.some(match => tags.includes(match));
-  })
-  .slice(0, 6);
-
-const musicHasMatches = post => {
-  const tags = (post.tags || []).map(tag => String(tag).toLowerCase());
-  return musicStream?.matches.some(match => tags.includes(match));
-};
-
-const faithItems = posts
-  .filter(post => {
-    const tags = (post.tags || []).map(tag => String(tag).toLowerCase());
-    const explicitlyMatches = faithStream?.matches.some(match => tags.includes(match));
-    const implicitlyMatches = !musicHasMatches(post);
-    return explicitlyMatches || implicitlyMatches;
-  })
-  .slice(0, 6);
-
-function getProjectPreviewUrl(project) {
-  const maybeExternalUrl =
-    project.takeALookUrl ||
-    project.projectUrl ||
-    project.liveUrl ||
-    project.demoUrl ||
-    project.website ||
-    project.repo ||
-    project.github ||
-    project.link;
-
-  return typeof maybeExternalUrl === 'string' && maybeExternalUrl.trim().length > 0
-    ? maybeExternalUrl.trim()
-    : project.url;
-}
-
-function isExternalUrl(href) {
-  return /^https?:\/\//.test(href);
-}
+const formatDate = (date: Date) => date.toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric'
+});
 ---
 
-<BaseLayout title="Al Munday - Theology, Tech and Music" description="Homepage" layout="home">
-  <div class="wrapper">
-    <header
-      class="full | bg-hero-pattern section"
-      style="--hero-overlay-opacity: 0.68; --spot-opacity: 86%; --spot-color: color-mix(in oklab, var(--color-primary) 55%, var(--color-bg))"
-    >
-      <div class="section__inner flow region">
-        <Masonry layout="50-50">
-          <div class="prose wrapper">
-            <h1 class="text-center" style="color: var(--color-text);">Hello Friend!</h1>
-            <span class="text-center" style="color: var(--color-text);">
-              <strong></strong>
-              <br />
-              This is a collection of my thoughts, projects, and musings. This site isn't here to be a polished
-              portfolio, but rather a space for me to record my journey, my creative output, and the things i'm
-              reflecting on. Its here for me. But if you find something useful, or interesting, then that would
-              bring me so much joy!
-              <br />
-            </span>
-          </div>
-          <div>
-            <SvgIcon
-              name="misc/me-tree"
-              ariaLabel="Al Munday sitting under a tree with a book"
-              styleName="block-size: 500px; fill: var(--color-text);"
-            />
-          </div>
-        </Masonry>
-      </div>
-      <SvgIcon name="divider/waves" className="divider" />
+<BaseLayout>
+  <section class="hero">
+    <p class="eyebrow">{siteConfig.tagline}</p>
+    <h1>Hello, friend.</h1>
+  </section>
+
+  <section class="feed" aria-labelledby="latest-heading">
+    <header class="feed-header">
+      <h2 id="latest-heading">Latest</h2>
+      <a href="/rss.xml">RSS</a>
     </header>
 
-    <article class="full | region">
-      <div class="wrapper flow prose"></div>
-    </article>
-
-    <section class="full">
-      <div class="home-heading-strip bg-tiled-pattern-theme region">
-        <div class="wrapper flow prose">
-          <h2>Orient Yourself</h2>
-          <p>This site is mapped around three streams. Pick one and follow where it leads.</p>
-        </div>
-      </div>
-      <div class="wrapper flow region">
-        <Masonry layout="thirds">
-          {
-            contentStreams.map(stream => (
-              <custom-card clickable>
-                <h3 slot="headline" class="text-step-2">
-                  <a href={stream.href}>{stream.label}</a>
-                </h3>
-                <span slot="date">
-                  <StreamMarker stream={stream} compact />
-                </span>
-                <p slot="content">{stream.description}</p>
-              </custom-card>
-            ))
-          }
-        </Masonry>
-      </div>
-    </section>
-
-    <section class="full">
-      <div class="home-heading-strip bg-tiled-pattern-theme region">
-        <div class="wrapper flow prose">
-          <h2>{faithStream?.label}</h2>
-          <p>{faithStream?.description}</p>
-        </div>
-      </div>
-      <div class="wrapper flow prose region">
-        <div class="feature | region region-space-l">
-          <Carousel>
-            {faithItems.map(item => <PostCard item={item} headingLevel="h3" />)}
-          </Carousel>
-        </div>
-      </div>
-    </section>
-
-    <section class="full">
-      <div class="home-heading-strip bg-tiled-pattern-theme region">
-        <div class="wrapper flow prose">
-          <h2>{musicStream?.label}</h2>
-          <p>{musicStream?.description}</p>
-        </div>
-      </div>
-      <div class="wrapper flow prose region">
-        <div class="feature | region region-space-l">
-          <Carousel>
-            {musicItems.map(item => <PostCard item={item} headingLevel="h3" />)}
-          </Carousel>
-        </div>
-      </div>
-    </section>
-
-    <section class="full">
-      <div class="home-heading-strip bg-tiled-pattern-theme region">
-        <div class="wrapper flow prose">
-          <h2>{devStream?.label}</h2>
-          <p>{devStream?.description}</p>
-        </div>
-      </div>
-      <div class="wrapper flow prose region">
-        <div class="feature | region region-space-l">
-          <Carousel>
-            {
-              devItems.map(project => {
-                const previewUrl = getProjectPreviewUrl(project);
-                const externalPreview = isExternalUrl(previewUrl);
-
-                return (
-                  <custom-card>
-                    <h3 slot="headline" class="text-step-2">
-                      <a href={project.url}>{project.title}</a>
-                    </h3>
-                    <span slot="date">
-                      <time datetime={project.date.toISOString()}>{formatDate(project.date)}</time>
-                    </span>
-                    <p slot="content">{project.description || project.excerpt}</p>
-                    <footer slot="footer" class="project-card-actions cluster">
-                      <a class="button" data-button-variant="primary" data-small-button href={project.url}>
-                        read about it
-                      </a>
-                      <a
-                        class="button"
-                        data-ghost-button
-                        data-small-button
-                        href={previewUrl}
-                        target={externalPreview ? '_blank' : undefined}
-                        rel={externalPreview ? 'noreferrer noopener' : undefined}
-                      >
-                        take a look
-                      </a>
-                    </footer>
-                  </custom-card>
-                );
-              })
-            }
-          </Carousel>
-        </div>
-      </div>
-    </section>
-  </div>
+    <div class="feed-list">
+      {
+        feedItems.map(item => (
+          <article class="feed-item">
+            {item.image && (
+              <a href={item.href} class="feed-image" aria-label={`Read ${item.title}`}>
+                <img src={item.image} alt="" loading="lazy" decoding="async" />
+              </a>
+            )}
+            <div class="feed-body">
+              <div class="feed-meta">
+                <span>{item.kind}</span>
+                <span aria-hidden="true">·</span>
+                <time datetime={item.date.toISOString()}>{formatDate(item.date)}</time>
+              </div>
+              <h3><a href={item.href}>{item.title}</a></h3>
+              <p>{item.description}</p>
+              {item.tags.length > 0 && (
+                <ul class="tags" aria-label="Tags">
+                  {item.tags.map(tag => <li><a href={`/tags/${tag}`}>#{tag}</a></li>)}
+                </ul>
+              )}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  .hero {
+    padding: 2rem 0 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .eyebrow {
+    margin-bottom: 0.65rem;
+    color: var(--accent);
+    font-size: 0.86rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hero h1 {
+    margin: 0 0 1rem;
+    font-size: clamp(2.4rem, 8vw, 4rem);
+  }
+
+  .hero-copy {
+    max-width: 42rem;
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 1.15rem;
+  }
+
+  .feed {
+    padding-top: 2.5rem;
+  }
+
+  .feed-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .feed-header h2 {
+    margin: 0;
+    border: 0;
+    padding: 0;
+  }
+
+  .feed-header a {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .feed-list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .feed-item {
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg-surface);
+  }
+
+  .feed-image {
+    display: block;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .feed-image img {
+    display: block;
+    width: 100%;
+    max-height: 22rem;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .feed-body {
+    padding: 1.25rem 1.35rem;
+  }
+
+  .feed-meta {
+    display: flex;
+    gap: 0.45rem;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+  }
+
+  .feed-item h3 {
+    margin: 0.45rem 0 0.55rem;
+    font-size: 1.35rem;
+  }
+
+  .feed-item h3 a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  .feed-item p {
+    margin-bottom: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.7rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tags li {
+    margin: 0;
+  }
+
+  .tags a {
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+</style>

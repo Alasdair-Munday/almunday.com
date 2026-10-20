@@ -1,21 +1,36 @@
-# Node modules
-node_modules
+# Build artifacts
+dist/
+.astro/
 
-# generated files
-dist
-src/_includes/css
-src/_includes/scripts
-public/assets
-public/*.png
-public/*.svg
-public/*.ico
-public/*.webmanifest
+# Dependencies
+node_modules/
 
-# cache
-.cache
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
-# secret data
+# Environment
 .env
+.env.*
+!.env.example
 
-# Local Netlify folder
-.netlify
+# OS & Editor files
+.DS_Store
+Thumbs.db
+/.obsidian/
+.vscode/
+.idea/
+.netlify/
+src/content/.obsidian/workspace*.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Internal Fleet Harness & Process Logs (Strictly Local)
+PROGRESS.md
+AGENTS.md
+.agents/

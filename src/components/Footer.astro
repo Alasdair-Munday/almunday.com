@@ -1,65 +1,59 @@
 ---
-import pkg from '../../package.json';
-
-import SvgIcon from './SvgIcon.astro';
-
-import { navigation, personal, site } from '../lib/site.js';
-import { getLinkActiveState } from '../lib/utils.js';
-
-const { currentPath = '/' } = Astro.props;
+import { siteConfig } from '../config/site';
+const currentYear = new Date().getFullYear();
 ---
 
-<footer class="site-footer mt-l-xl p-s-m">
-  <div class="wrapper">
-    <div class="cluster gutter-xs">
-      <nav class="cluster text-step-0" aria-label={site.navigation.ariaBottom}>
-        &copy; {new Date().getFullYear()}
-        <a href="/" aria-current={currentPath === '/' ? 'page' : undefined}>
-          <span class="font-display">{site.siteName}</span> <small>{pkg.version}</small>
-        </a>
-
-        {
-          navigation.bottom.map(item => {
-            const state = getLinkActiveState(item.url, currentPath);
-            return (
-              <a href={item.url} aria-current={state.ariaCurrent} data-state={state.dataState}>
-                {item.text}
-              </a>
-            );
-          })
-        }
-      </nav>
-
-      <nav class="cluster" aria-label={site.navigation.ariaPlatforms}>
-        <a href={site.blog.feedLinks[0].url} rel="alternate" type={site.blog.feedLinks[0].type}>
-          <span class="visually-hidden">{site.blog.feedLinks[0].title}</span>
-          <SvgIcon name="misc/rss" />
-        </a>
-
-        {
-          Object.entries(personal.platforms).map(([key, value]) => {
-            if (!value) {
-              return null;
-            }
-
-            return (
-              <a class="no-indicator" href={value} rel="me">
-                <span class="visually-hidden">{key}</span>
-                <SvgIcon name={`platform/${key}`} />
-              </a>
-            );
-          })
-        }
-      </nav>
-    </div>
-
-    <aside class="creator | cluster gutter-2xs text-step-min-1 mt-xl">
-      Made with <span class="visually-hidden">love</span> <span><SvgIcon name="misc/heart" /></span> and
-      <a class="no-indicator" href="https://astro.build/">
-        Astro
-      </a>
-      by
-      <a href={site.creator.website}>{site.creator.name}</a>
-    </aside>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-links" aria-label="Social and feed links">
+      <a href={siteConfig.socialLinks.github} rel="me">GitHub</a>
+      <a href={siteConfig.socialLinks.bluesky} rel="me">Bluesky</a>
+      <a href={`mailto:${siteConfig.socialLinks.email}`}>Email</a>
+      <a href="/rss.xml">RSS</a>
+    </nav>
+    <p>© {currentYear} Rev Al Munday.</p>
+    <p class="colophon">
+      Built with <a href="https://github.com/rnt-rez/minrock">Minrock</a> and <a href="https://astro.build">Astro</a>.
+    </p>
   </div>
 </footer>
+
+<style>
+  .site-footer {
+    margin-top: auto;
+    padding: 2.5rem 0 3rem;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.88rem;
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.65rem;
+    text-align: center;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.7rem 1.1rem;
+  }
+
+  .footer-links a,
+  .colophon a {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .footer-links a:hover,
+  .colophon a:hover {
+    color: var(--accent);
+  }
+
+  .site-footer p {
+    margin: 0;
+  }
+</style>

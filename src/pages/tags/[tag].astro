@@ -1,73 +1,144 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Masonry from '../../components/Masonry.astro';
-import TagCard from '../../components/TagCard.astro';
-import { getPostsByTag, getTagList } from '../../lib/content.js';
-import { getLinkActiveState, normalizePath } from '../../lib/utils.js';
-import { site } from '../../lib/site.js';
+import ArticleCard from '../../components/ArticleCard.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-  const tagList = await getTagList();
+  const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+  const allProjects = await getCollection('projects');
 
-  const entries = await Promise.all(
-    tagList.map(async tag => ({
-      params: {
-        tag
-      },
-      props: {
-        tag,
-        itemList: await getPostsByTag(tag),
-        tagList
-      }
-    }))
-  );
+  const uniqueTags = [
+    ...new Set([
+      ...allPosts.flatMap((post) => post.data.tags || []),
+      ...allProjects.flatMap((proj) => proj.data.tags || []),
+    ]),
+  ];
 
-  return entries;
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts
+      .filter((post) => post.data.tags?.includes(tag))
+      .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+    const filteredProjects = allProjects
+      .filter((proj) => proj.data.tags?.includes(tag))
+      .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+    return {
+      params: { tag },
+      props: { posts: filteredPosts, projects: filteredProjects, tag },
+    };
+  });
 }
 
-const {
-  tag,
-  itemList,
-  tagList
-} = Astro.props;
-
-const currentPath = normalizePath(Astro.url.pathname);
+const { posts, projects = [], tag } = Astro.props;
+const totalCount = posts.length + projects.length;
 ---
 
-<BaseLayout title={`${site.blog.tagSingle}: ${tag}`} layout="tags">
-  <header class="full | bg-hero-pattern section" style="--spot-color: color-mix(in oklab, var(--color-bg) 60%, transparent)">
-    <div class="section__inner region">
-      <div class="wrapper flow prose text-center">
-        <h1 class="gradient-text-linear text-step-4">{site.blog.tagSingle}: {tag}</h1>
-      </div>
+<BaseLayout
+  title={`#${tag}`}
+  description={`Browse content tagged with #${tag}`}
+>
+  <header class="tag-header">
+    <div class="tag-breadcrumb">
+      <a href="/tags">Tags</a>
+      <span class="sep">/</span>
+      <span class="current">#{tag}</span>
     </div>
+    <h1 class="tag-title">Content tagged with <span class="highlight">#{tag}</span></h1>
+    <p class="tag-count">{totalCount} {totalCount === 1 ? 'item' : 'items'} found ({posts.length} articles, {projects.length} projects)</p>
   </header>
 
-  <div class="region">
-    <div class="wrapper flow">
+  {posts.length > 0 && (
+    <section class="tag-section">
+      <h2 class="section-title">Articles ({posts.length})</h2>
+      <div class="posts-list">
+        {posts.map((post) => (
+          <ArticleCard post={post} />
+        ))}
+      </div>
+    </section>
+  )}
 
-      <Masonry layout="50-50">
-        {itemList.map(item => <TagCard item={item} />)}
-      </Masonry>
-
-      <h2 class="text-step-2">{site.blog.tagMore}</h2>
-
-      <ul class="taglist | my-s-m cluster gutter-s" role="list">
-        {
-          tagList.map(availableTag => {
-            const url = `/tags/${encodeURIComponent(availableTag)}/`;
-            const state = getLinkActiveState(url, currentPath);
-
-            return (
-              <li>
-                <a href={url} class="button" aria-current={state.ariaCurrent as any} data-state={state.dataState}>
-                  {availableTag}
-                </a>
-              </li>
-            );
-          })
-        }
-      </ul>
-    </div>
-  </div>
+  {projects.length > 0 && (
+    <section class="tag-section projects-tag-section">
+      <h2 class="section-title">Projects ({projects.length})</h2>
+      <div class="projects-grid">
+        {projects.map((proj) => (
+          <ProjectCard
+            title={proj.data.title}
+            description={proj.data.description}
+            date={proj.data.date}
+            slug={proj.id}
+            tags={proj.data.tags}
+            stars={proj.data.stars}
+            repoUrl={proj.data.repoUrl}
+            demoUrl={proj.data.demoUrl}
+            category={proj.data.category}
+            emoji={proj.data.emoji}
+          />
+        ))}
+      </div>
+    </section>
+  )}
 </BaseLayout>
+
+<style>
+  .tag-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tag-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .tag-breadcrumb a {
+    color: var(--accent);
+  }
+
+  .tag-title {
+    font-size: 2.25rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.025em;
+  }
+
+  .highlight {
+    color: var(--accent);
+  }
+
+  .tag-count {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 1rem;
+  }
+
+  .posts-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tag-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.4rem;
+  }
+
+  .projects-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+</style>
