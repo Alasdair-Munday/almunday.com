@@ -1,195 +1,229 @@
 ---
-export interface Props {
-  title: string;
-  description: string;
-  date: Date;
-  slug: string;
-  tags?: string[];
-  stars?: number;
-  repoUrl?: string;
-  demoUrl?: string;
-  category?: string;
-  emoji?: string;
+import type { CollectionEntry } from 'astro:content';
+import { formatDate, processMarkdown, isValidDate } from '../utils/markdown';
+import { siteConfig, getPostCardAspectRatio } from '../config';
+import { normalizeStatus, getStatusDisplayText, hasStatusStyling, getStatusClasses } from '../utils/status';
+import { resolveCoverImage } from '../utils/images';
+import ImageWrapper from './ImageWrapper.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  featured?: boolean;
+  eager?: boolean;
+  context?: 'featured' | 'recent' | 'projects' | 'tags' | 'home';
+  showCategories?: boolean;
 }
 
-const { title, description, slug, tags = [], stars = 0, repoUrl, demoUrl, category, emoji = '📦' } = Astro.props;
+const { project, featured = false, eager = false, context = 'projects', showCategories = true } = Astro.props;
+
+// Get excerpt from markdown processing
+const { excerpt } = processMarkdown(project.body || '');
+
+const { title, description: rawDescription, date, image, imageAlt } = project.data;
+
+const cover = resolveCoverImage(image, 'projects', project.id);
+
+const description = rawDescription || excerpt;
+const categories = project.data.categories || [];
+const status = normalizeStatus(project.data.status);
+const repositoryUrl = project.data.repositoryUrl;
+const projectUrl = project.data.projectUrl || project.data.demoUrl || project.data.demoURL;
+
+// Determine content availability for layout
+const hasDescription = description && description.trim().length > 0;
+const hasCategories = showCategories && categories.length > 0;
+const hasHoverContent = hasDescription || hasCategories;
+
+// Determine if we should show the cover image
+// Projects should always show images when available (not controlled by postOptions)
+const shouldShowCoverImage = true;
 ---
 
-<article class="project-card" data-card-link={`/projects/${slug}`}>
-  <div class="project-header">
-    <div class="project-title-wrap">
-      <span class="project-emoji">{emoji}</span>
-      <a href={`/projects/${slug}`} class="project-title">
+<div class="group relative bg-white dark:bg-primary-800 rounded-xl border border-primary-200 dark:border-primary-700 overflow-hidden hover:shadow-xl transition-all duration-300 aspect-[4/3]" data-project-categories={categories.join(',')}>
+  <a href={`/projects/${project.id}`} class="block h-full hover:opacity-100" aria-label={`View project: ${title}`}>
+    <!-- Background Image or Fallback -->
+    {cover && shouldShowCoverImage && (
+      <div class="absolute inset-0">
+        <ImageWrapper
+          src={cover.src}
+          basePath={cover.basePath}
+          alt={imageAlt || `Cover image for project: ${title}`}
+          width={800}
+          height={600}
+          loading={eager ? 'eager' : 'lazy'}
+          fetchpriority={eager ? 'high' : 'auto'}
+          class="w-full h-full object-cover group-hover:brightness-95 transition-[filter] duration-300"
+        />
+        <!-- Dark overlay for better text readability -->
+        <div class="absolute inset-0 bg-black/70 group-hover:bg-black/80 transition-colors duration-300"></div>
+      </div>
+    )}
+
+    <!-- Fallback background when no image -->
+    {!cover && (
+      <div class="absolute inset-0 bg-gradient-to-br from-primary-200 to-primary-300 dark:from-primary-700 dark:to-primary-800"></div>
+    )}
+
+    <!-- Status badge -->
+    {status && (
+      <div class="absolute top-3 right-3 z-10">
+        <span class={`px-2 py-1 rounded-full text-xs font-medium shadow-xs ${getStatusClasses(status)}`}>
+          {getStatusDisplayText(status)}
+        </span>
+      </div>
+    )}
+
+    <!-- Date -->
+    {isValidDate(date) && (
+      <div class="absolute top-3 left-3 z-10">
+        <time datetime={date.toISOString()} class={`text-xs font-mono px-2 py-1 rounded backdrop-blur-sm ${
+          cover && shouldShowCoverImage
+            ? 'text-white/90 bg-black/20'
+            : 'text-primary-700 dark:text-primary-200 bg-white/80 dark:bg-black/20'
+        }`}>
+          {formatDate(date)}
+        </time>
+      </div>
+    )}
+
+    <!-- Content Overlay -->
+    <div class={`absolute inset-0 flex flex-col p-4 md:p-6 z-10 mobile-centered ${
+      // Perfect center title when no description or categories
+      !hasDescription && !hasCategories
+        ? 'justify-center items-center'
+        // Balance layout when only one type of content
+        : (hasDescription && !hasCategories) || (!hasDescription && hasCategories)
+        ? 'justify-center items-center'
+        // Default layout for full content
+        : 'justify-center items-center'
+    }`}>
+      <!-- Title - always centered -->
+      <h3 class={`text-xl font-bold transition-colors line-clamp-2 text-center ${
+        cover && shouldShowCoverImage
+          ? 'text-white group-hover:text-highlight-300 drop-shadow-lg'
+          : 'text-primary-900 dark:text-primary-50 group-hover:text-highlight-600 dark:group-hover:text-highlight-400'
+      } ${
+        // Adjust margin based on content
+        !hasDescription && !hasCategories ? 'mb-0' :
+        (hasDescription && !hasCategories) ? 'mb-4' :
+        (!hasDescription && hasCategories) ? 'mb-4' : 'mb-2'
+      }`}>
         {title}
-      </a>
-      {category && <span class="category-badge">{category}</span>}
-    </div>
-    <div class="project-links">
-      {stars > 0 && (
-        <span class="project-stars" title={`${stars} stars`}>★ {stars}</span>
-      )}
-      {repoUrl && (
-        <a href={repoUrl} target="_blank" rel="noopener noreferrer" class="project-action-link" title="Repository">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/>
-          </svg>
-          Repo
-        </a>
-      )}
-      {demoUrl && (
-        <a href={demoUrl} target="_blank" rel="noopener noreferrer" class="project-action-link" title="Live Demo">
-          Demo ↗
-        </a>
-      )}
-    </div>
-  </div>
+      </h3>
 
-  <p class="project-desc">{description}</p>
+      {hasHoverContent ? (
+        <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          {/* Hover content for full layout */}
+          <!-- Description -->
+          {hasDescription && (
+            <p class={`text-sm mb-3 line-clamp-2 text-left ${
+              cover && shouldShowCoverImage
+                ? 'text-white/90 drop-shadow-lg'
+                : 'text-primary-700 dark:text-primary-300'
+            }`}>
+              {description}
+            </p>
+          )}
 
-  {tags.length > 0 && (
-    <div class="project-tags">
-      {tags.map((tag) => (
-        <a href={`/tags/${tag}`} class="tag-badge">
-          #{tag}
-        </a>
-      ))}
+          <!-- Categories -->
+          {hasCategories && (
+            <div class="flex flex-wrap gap-1 mb-3 justify-center">
+              {categories.slice(0, 3).map(category => (
+                <span class={`inline-flex items-center px-2 py-1 text-xs font-medium rounded backdrop-blur-sm ${
+                  cover && shouldShowCoverImage
+                    ? 'bg-white/20 text-white/90'
+                    : 'bg-primary-100 dark:bg-primary-700 text-primary-700 dark:text-primary-200'
+                }`}>
+                  {category}
+                </span>
+              ))}
+              {categories.length > 3 && (
+                <span class={`inline-flex items-center px-2 py-1 text-xs font-medium rounded backdrop-blur-sm ${
+                  cover && shouldShowCoverImage
+                    ? 'bg-white/20 text-white/90'
+                    : 'bg-primary-100 dark:bg-primary-700 text-primary-700 dark:text-primary-200'
+                }`}>
+                  +{categories.length - 3} more
+                </span>
+              )}
+            </div>
+          )}
+        </div>
+      ) : (
+        <div class="flex flex-col items-center">
+          {/* Always visible content for minimal layouts */}
+          {hasDescription && (
+            <p class={`text-sm line-clamp-2 text-center ${
+              cover && shouldShowCoverImage
+                ? 'text-white/90 drop-shadow-lg'
+                : 'text-primary-700 dark:text-primary-300'
+            }`}>
+              {description}
+            </p>
+          )}
+
+          {hasCategories && (
+            <div class="flex flex-wrap gap-1 mt-3 justify-center">
+              {categories.slice(0, 3).map(category => (
+                <span class={`inline-flex items-center px-2 py-1 text-xs font-medium rounded backdrop-blur-sm ${
+                  cover && shouldShowCoverImage
+                    ? 'bg-white/20 text-white/90'
+                    : 'bg-primary-100 dark:bg-primary-700 text-primary-700 dark:text-primary-200'
+                }`}>
+                  {category}
+                </span>
+              ))}
+              {categories.length > 3 && (
+                <span class={`inline-flex items-center px-2 py-1 text-xs font-medium rounded backdrop-blur-sm ${
+                  cover && shouldShowCoverImage
+                    ? 'bg-white/20 text-white/90'
+                    : 'bg-primary-100 dark:bg-primary-700 text-primary-700 dark:text-primary-200'
+                }`}>
+                  +{categories.length - 3} more
+                </span>
+              )}
+            </div>
+          )}
+        </div>
+      )}
     </div>
-  )}
-</article>
+  </a>
+</div>
 
 <style>
-  .project-card {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    padding: 1.25rem;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background-color: var(--bg-surface);
-    transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
-  }
+  /* Make cards more compact and centered on mobile */
+  @media (max-width: 768px) {
+    /* Reduce card height on mobile and center them */
+    .group[data-project-categories] {
+      aspect-ratio: 2/1 !important;
+      max-height: 200px !important;
+      width: 100%;
+      max-width: 100%;
+    }
 
-  .project-card:hover {
-    border-color: var(--accent);
-    background-color: var(--bg-subtle);
-    transform: translateY(-2px);
-  }
+    /* Center content vertically and horizontally on mobile */
+    .group[data-project-categories] .mobile-centered {
+      justify-content: center !important;
+      align-items: center !important;
+      padding-top: 0 !important;
+      padding: 1rem !important;
+    }
 
-  .project-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
+    /* Smaller title on mobile */
+    .group[data-project-categories] h3 {
+      font-size: 1rem !important;
+      margin-bottom: 0 !important;
+    }
 
-  .project-title-wrap {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
+    /* Hide description and hover content on mobile to save space */
+    .group[data-project-categories] .opacity-0 {
+      display: none !important;
+    }
 
-  .project-emoji {
-    font-size: 1.1rem;
-  }
-
-  .project-title {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--text);
-    text-decoration: none;
-    transition: color 0.15s ease;
-  }
-
-  .project-title:hover {
-    color: var(--accent);
-  }
-
-  .category-badge {
-    font-size: 0.72rem;
-    font-family: var(--font-mono);
-    padding: 0.15rem 0.45rem;
-    border-radius: 4px;
-    background-color: var(--bg);
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    text-transform: uppercase;
-  }
-
-  .project-links {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .project-stars {
-    font-size: 0.8rem;
-    font-family: var(--font-mono);
-    color: #b45309;
-    font-weight: 600;
-  }
-
-  :global([data-theme="slate"]) .project-stars,
-  :global([data-theme="midnight"]) .project-stars {
-    color: #fbbf24;
-  }
-
-  .project-action-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-size: 0.8rem;
-    font-family: var(--font-mono);
-    color: var(--text-muted);
-    text-decoration: none;
-    padding: 0.2rem 0.5rem;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    background-color: var(--bg);
-    transition: color 0.15s ease, border-color 0.15s ease;
-  }
-
-  .project-action-link:hover {
-    color: var(--accent);
-    border-color: var(--accent);
-  }
-
-  .project-desc {
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    margin: 0;
-    line-height: 1.6;
-  }
-
-  .project-tags {
-    display: flex;
-    gap: 0.35rem;
-    flex-wrap: wrap;
-    margin-top: 0.35rem;
-  }
-
-  .tag-badge {
-    display: inline-flex;
-    align-items: center;
-    font-size: 0.78rem;
-    color: var(--accent);
-    text-decoration: none;
-    padding: 0.1rem 0.42rem;
-    border-radius: 4px;
-    background-color: transparent;
-    border: 1px solid transparent;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .tag-badge:hover {
-    color: var(--accent);
-    background-color: var(--bg-subtle);
-    border-color: var(--accent);
-    transform: translateY(-1.5px) scale(1.04);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  }
-
-  .tag-badge:active {
-    transform: translateY(0) scale(0.98);
+    /* Ensure badges stay in corners */
+    .group[data-project-categories] .absolute.top-3 {
+      position: absolute !important;
+    }
   }
 </style>

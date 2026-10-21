@@ -2,7 +2,7 @@
 title: "Faith in Kids: The Christmas Build Up"
 description: "Turning a Hackathon Project into a Usable Christmas Digital Devotional for Kids"
 date: 2024-12-01
-category: "Web project"
+categories: ["Web project"]
 tags: ["projects", "11ty"]
 demoUrl: "https://faithinkids.org"
 emoji: "💻"

@@ -1,0 +1,39 @@
+/* Fixed Al Munday branding, layered over Astro Modular. */
+:root { --al-bg: #e3eeeb; --al-text: #2a4551; --al-border: #b8cbc6; --al-header: #213f51; --al-header-text: #f2eee6; }
+html, body { background: var(--al-bg); color: var(--al-text); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+.al-header { position: sticky; top: 0; z-index: 40; background: var(--al-header) url('/images/navbar-wallpaper.png') repeat; color: var(--al-header-text); border-bottom: 1px solid var(--al-border); }
+.al-header-inner { max-width: 1080px; margin: auto; padding: .7rem 1.5rem; display: flex; gap: 1.25rem; align-items: center; }
+.al-header a, .al-header button { color: var(--al-header-text); }
+.al-brand { display: inline-flex; align-items: center; gap: .65rem; font-size: 1.25rem; font-weight: 700; white-space: nowrap; }
+.al-brand img { width: 2.35rem; height: 2.35rem; filter: brightness(0) invert(1); }
+.al-header nav { display: flex; gap: 1rem; margin-left: auto; font-size: .9rem; }
+.al-header button { background: transparent; border: 1px solid currentColor; border-radius: 5px; padding: .35rem .6rem; font-size: .85rem; cursor: pointer; }
+.al-header kbd { font-size: .7rem; opacity: .8; margin-left: .4rem; }
+.al-garden { padding: 3rem 1.5rem 2rem; }
+.al-eyebrow { font-size: .86rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: .65rem; }
+.al-garden-heading { display: flex; gap: 1rem; justify-content: space-between; align-items: baseline; flex-wrap: wrap; }
+.al-garden h1 { font-size: clamp(2.4rem, 8vw, 4rem); font-weight: 700; letter-spacing: -.025em; margin: 0; line-height: 1.2; }
+.al-garden-intro { margin-top: 1rem; max-width: 42rem; line-height: 1.7; }
+#home-graph-container { width: 100%; height: clamp(480px, 65svh, 760px); margin: 1.5rem 0 .75rem; overflow: hidden; border-block: 1px solid var(--al-border); touch-action: none; }
+#home-graph-container svg { width: 100%; height: 100%; }
+#home-graph-container g[role=link]:focus { outline: none; }
+#home-graph-container g[role=link]:focus circle { stroke: var(--al-text); stroke-width: 4px; }
+.al-graph-help { font-size: .8rem; line-height: 1.6; }
+.al-list { margin-top: 1.5rem; }
+.al-list summary { cursor: pointer; padding: .5rem 0; }
+.al-list ul { list-style: disc; padding: 1rem 1.5rem; line-height: 1.8; }
+.al-loading { padding: 5rem 1rem; text-align: center; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.prose { font-size: 1.05rem; line-height: 1.8; }
+@media(max-width: 600px) { .al-header-inner { padding: .7rem 1rem; gap: .75rem; flex-wrap: wrap; } .al-header nav { order: 3; width: 100%; justify-content: center; } .al-header button { margin-left: auto; } .al-garden { padding: 2rem 1rem; } .al-header kbd { display: none; } }
+@media(prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0s !important; animation-duration: 0s !important; scroll-behavior: auto !important; } }
+
+#swup-container > .py-8 { max-width: 810px; margin: 0 auto; }
+#swup-container article.bg-white { background: var(--al-bg); border: 0; box-shadow: none; }
+#swup-container article > div.p-6 { padding: 1.5rem 0; }
+#swup-container article header h1 { font-size: clamp(1.8rem, 5vw, 2.4rem); line-height: 1.25; letter-spacing: -.025em; }
+#swup-container article header { padding-bottom: 1.5rem; border-bottom: 1px solid var(--al-border); margin-bottom: 2rem; }
+
+footer { background: var(--al-bg) !important; border-top: 1px solid var(--al-border); }
+
+@media(max-width: 600px) { #home-graph-container { height: 700px; } }
