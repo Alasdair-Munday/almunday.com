@@ -1,4 +1,5 @@
 ---
+import LinkedNotes from '../../components/LinkedNotes.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TOC from '../../components/TOC.astro';
 import CopyCode from '../../components/CopyCode.astro';
@@ -61,6 +62,7 @@ const showToc = features.tableOfContents !== false && headings.length > 0;
         <header class="post-header">
           <div class="post-meta">
             <time datetime={post.data.pubDate.toISOString()}>{formattedDate}</time>
+            {post.data.updatedDate && <span> · Updated {post.data.updatedDate.toLocaleDateString('en-GB')}</span>}
             {showReadingTime && (
               <>
                 <span class="meta-dot">·</span>
@@ -123,6 +125,7 @@ const showToc = features.tableOfContents !== false && headings.length > 0;
           )}
         </nav>
 
+      <LinkedNotes href={`/blog/${post.id}`} />
       </article>
     </div>
 
