@@ -1,14 +1,14 @@
 ---
 title: "Genesis 21: Who Gets to Laugh? Who Gets to Drink?"
 date: 2026-02-08
-image: "/assets/images/blog/beersheba.png"
+image: /assets/images/blog/beersheba.png
 tags:
   - bible
   - genesis
   - theology
   - church
   - reconciliation
-description: "Genesis 21 is full of tension around a simple, ordinary thing: a well. It’s a story about promised children and unwanted children, about who gets to belong, and about surprising friendship at the places where we share water."
+description: When confronted with difference, which path will we choose? Welcome or rejection?
 ---
 
 ## Part 1: Brothers Become Strangers
