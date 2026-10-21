@@ -1,39 +1,7 @@
 ---
+import GardenGraph from '../components/GardenGraph.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
 import { siteConfig } from '../config/site';
-
-const [posts, projects] = await Promise.all([
-  getCollection('blog', ({data}) => !data.draft),
-  getCollection('projects')
-]);
-
-const feedItems = [
-  ...posts.map(post => ({
-    kind: 'Writing',
-    title: post.data.title,
-    description: post.data.description,
-    date: post.data.pubDate,
-    href: `/blog/${post.id}`,
-    tags: post.data.tags,
-    image: post.data.image
-  })),
-  ...projects.map(project => ({
-    kind: 'Project',
-    title: project.data.title,
-    description: project.data.description,
-    date: project.data.date,
-    href: `/projects/${project.id}`,
-    tags: project.data.tags,
-    image: undefined
-  }))
-].sort((a, b) => b.date.valueOf() - a.date.valueOf());
-
-const formatDate = (date: Date) => date.toLocaleDateString('en-GB', {
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric'
-});
 ---
 
 <BaseLayout>
@@ -42,40 +10,7 @@ const formatDate = (date: Date) => date.toLocaleDateString('en-GB', {
     <h1>Hello, friend.</h1>
   </section>
 
-  <section class="feed" aria-labelledby="latest-heading">
-    <header class="feed-header">
-      <h2 id="latest-heading">Latest</h2>
-      <a href="/rss.xml">RSS</a>
-    </header>
-
-    <div class="feed-list">
-      {
-        feedItems.map(item => (
-          <article class="feed-item">
-            {item.image && (
-              <a href={item.href} class="feed-image" aria-label={`Read ${item.title}`}>
-                <img src={item.image} alt="" loading="lazy" decoding="async" />
-              </a>
-            )}
-            <div class="feed-body">
-              <div class="feed-meta">
-                <span>{item.kind}</span>
-                <span aria-hidden="true">·</span>
-                <time datetime={item.date.toISOString()}>{formatDate(item.date)}</time>
-              </div>
-              <h3><a href={item.href}>{item.title}</a></h3>
-              <p>{item.description}</p>
-              {item.tags.length > 0 && (
-                <ul class="tags" aria-label="Tags">
-                  {item.tags.map(tag => <li><a href={`/tags/${tag}`}>#{tag}</a></li>)}
-                </ul>
-              )}
-            </div>
-          </article>
-        ))
-      }
-    </div>
-  </section>
+  <GardenGraph />
 </BaseLayout>
 
 <style>
@@ -105,97 +40,4 @@ const formatDate = (date: Date) => date.toLocaleDateString('en-GB', {
     font-size: 1.15rem;
   }
 
-  .feed {
-    padding-top: 2.5rem;
-  }
-
-  .feed-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 1.25rem;
-  }
-
-  .feed-header h2 {
-    margin: 0;
-    border: 0;
-    padding: 0;
-  }
-
-  .feed-header a {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    font-weight: 600;
-  }
-
-  .feed-list {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .feed-item {
-    overflow: hidden;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    background: var(--bg-surface);
-  }
-
-  .feed-image {
-    display: block;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .feed-image img {
-    display: block;
-    width: 100%;
-    max-height: 22rem;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-  }
-
-  .feed-body {
-    padding: 1.25rem 1.35rem;
-  }
-
-  .feed-meta {
-    display: flex;
-    gap: 0.45rem;
-    color: var(--text-muted);
-    font-size: 0.82rem;
-  }
-
-  .feed-item h3 {
-    margin: 0.45rem 0 0.55rem;
-    font-size: 1.35rem;
-  }
-
-  .feed-item h3 a:hover {
-    text-decoration: underline;
-    text-underline-offset: 0.18em;
-  }
-
-  .feed-item p {
-    margin-bottom: 0.85rem;
-    color: var(--text-muted);
-  }
-
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem 0.7rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .tags li {
-    margin: 0;
-  }
-
-  .tags a {
-    color: var(--accent);
-    font-size: 0.8rem;
-    font-weight: 600;
-  }
 </style>

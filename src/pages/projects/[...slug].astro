@@ -1,4 +1,5 @@
 ---
+import LinkedNotes from '../../components/LinkedNotes.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CopyCode from '../../components/CopyCode.astro';
 import AudioPlayer from '../../components/AudioPlayer.astro';
@@ -82,6 +83,7 @@ const currentUrl = new URL(Astro.url.pathname, siteConfig.siteUrl).href;
     <footer class="project-footer">
       <a href="/projects" class="back-link">← Back to all projects</a>
     </footer>
+    <LinkedNotes href={`/projects/${project.id}`} />
   </article>
 
   <CopyCode />
