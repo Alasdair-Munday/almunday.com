@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import { loadEnv } from 'vite';
 import sitemap from '@astrojs/sitemap';
 import { satteri } from '@astrojs/markdown-satteri';
+import { wikiLinks } from './src/utils/garden.mjs';
 import { rehypeCallouts } from './src/plugins/rehype-callouts.mjs';
 
 // Honor SITE_URL from the shell, the host (e.g. Vercel), or a local .env file.
@@ -20,6 +21,7 @@ export default defineConfig({
   },
   markdown: {
     processor: satteri({
+      mdastPlugins: [wikiLinks()],
       hastPlugins: [rehypeCallouts()],
     }),
     shikiConfig: {

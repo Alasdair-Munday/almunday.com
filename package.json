@@ -36,13 +36,15 @@
     "audit:security": "node scripts/audit-security.mjs",
     "audit:google": "node scripts/audit-google-search.mjs",
     "astro": "astro",
-    "postinstall": "node scripts/sign-native-bindings.js"
+    "postinstall": "node scripts/sign-native-bindings.js",
+    "test:garden": "node --test scripts/test-garden.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.3",
     "astro": "^7.2.9",
-    "photoswipe": "^5.4.4"
+    "photoswipe": "^5.4.4",
+    "yaml": "^2.9.1"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",

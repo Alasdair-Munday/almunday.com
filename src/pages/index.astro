@@ -1,4 +1,5 @@
 ---
+import GardenGraph from '../components/GardenGraph.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { siteConfig } from '../config/site';
@@ -13,7 +14,7 @@ const feedItems = [
     kind: 'Writing',
     title: post.data.title,
     description: post.data.description,
-    date: post.data.pubDate,
+    date: post.data.updatedDate ?? post.data.pubDate,
     href: `/blog/${post.id}`,
     tags: post.data.tags,
     image: post.data.image
@@ -42,9 +43,11 @@ const formatDate = (date: Date) => date.toLocaleDateString('en-GB', {
     <h1>Hello, friend.</h1>
   </section>
 
-  <section class="feed" aria-labelledby="latest-heading">
+  <GardenGraph />
+
+  <section id="garden-list" class="feed" aria-labelledby="latest-heading">
     <header class="feed-header">
-      <h2 id="latest-heading">Latest</h2>
+      <h2 id="latest-heading">Recently tended</h2>
       <a href="/rss.xml">RSS</a>
     </header>
 

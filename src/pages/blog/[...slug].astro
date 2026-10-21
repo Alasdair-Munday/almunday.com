@@ -1,4 +1,5 @@
 ---
+import { gardenData } from '../../utils/garden.mjs';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TOC from '../../components/TOC.astro';
 import CopyCode from '../../components/CopyCode.astro';
@@ -16,6 +17,8 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
+const garden = await gardenData();
+const backlinks = garden.notes.filter(note => garden.edges.some(edge => edge.source === note.id && edge.target === post.id));
 const { Content, headings } = await render(post);
 
 const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
@@ -103,6 +106,11 @@ const showToc = features.tableOfContents !== false && headings.length > 0;
           <Content />
         </div>
 
+        {post.data.updatedDate && <p class="updated">Last tended <time datetime={post.data.updatedDate.toISOString()}>{post.data.updatedDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</time></p>}
+        {backlinks.length > 0 && <section class="backlinks" aria-labelledby="backlinks-title">
+          <h2 id="backlinks-title">Linked from</h2>
+          <ul>{backlinks.map(note => <li><a href={note.href}>{note.title}</a></li>)}</ul>
+        </section>}
         <!-- Prev / Next Navigation -->
         <nav class="post-nav" aria-label="Post navigation">
           {prevPost ? (
