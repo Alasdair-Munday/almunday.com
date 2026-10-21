@@ -79,6 +79,47 @@ If you ever run the **Vault CMS Setup Wizard** (`Ctrl / Cmd + P` → `Vault CMS:
 
 ---
 
+## Songs and ChordPro
+
+ChordPro Viewer (ChoPro 0.9.4) is included and enabled in this vault. After
+pulling these changes, restart Obsidian to load it. Use Reading View to preview
+your song; source editing remains ordinary Markdown.
+
+Put a fenced `chopro` block inside any blog post or project page:
+
+````markdown
+```chopro
+{title: My song}
+{key: G}
+
+{start_of_verse: Verse 1}
+[G]Here are the words of a [C]song
+[Em]Chords sit above the [D]words
+{end_of_verse}
+
+{start_of_chorus: Chorus}
+[C]Here is the [G]chorus
+{end_of_chorus}
+```
+````
+
+The same block previews in Obsidian and renders with chords above lyrics on
+almunday.com. Keep website frontmatter (`title`, `pubDate`, etc.) outside the
+block as usual. On the website, `chordpro` is also accepted as a fence alias;
+use `chopro` for compatibility with the Obsidian plugin.
+
+Use inline `[G]` chords and standard ChordPro directives. Website rendering uses
+ChordSheetJS, so advanced directives may differ from ChoPro. Obsidian-specific
+`[!chopro]` transclusions, song flows and setlists are not implemented on the
+website. Transpose your source with Obsidian's **Transpose chords in current
+file** command; the website displays the saved key and has no transpose control.
+Long lines scroll horizontally on narrow screens to preserve chord alignment.
+Browser printing uses a plain, ink-friendly chord sheet style.
+
+ChoPro updates can be checked through Obsidian's community plugin settings.
+The bundled files come from the upstream 0.9.4 release:
+https://github.com/jheddings/obsidian-chopro/releases/tag/0.9.4
+
 ## 🔗 External Resources & Walkthrough
 
 - **Comprehensive Online Guide**: [minrock.vercel.app/blog/obsidian-vault-guide](https://minrock.vercel.app/blog/obsidian-vault-guide)

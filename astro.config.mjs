@@ -3,6 +3,7 @@ import { loadEnv } from 'vite';
 import sitemap from '@astrojs/sitemap';
 import { satteri } from '@astrojs/markdown-satteri';
 import { rehypeCallouts } from './src/plugins/rehype-callouts.mjs';
+import { rehypeChordPro } from './src/plugins/rehype-chordpro.mjs';
 
 // Honor SITE_URL from the shell, the host (e.g. Vercel), or a local .env file.
 // Vite has not loaded .env yet at this point, so read it explicitly.
@@ -20,8 +21,9 @@ export default defineConfig({
   },
   markdown: {
     processor: satteri({
-      hastPlugins: [rehypeCallouts()],
+      hastPlugins: [rehypeCallouts(), rehypeChordPro()],
     }),
+    syntaxHighlight: { type: 'shiki', excludeLangs: ['chopro', 'chordpro'] },
     shikiConfig: {
       theme: 'github-dark-dimmed',
       wrap: true
