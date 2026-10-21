@@ -36,12 +36,16 @@
     "audit:security": "node scripts/audit-security.mjs",
     "audit:google": "node scripts/audit-google-search.mjs",
     "astro": "astro",
-    "postinstall": "node scripts/sign-native-bindings.js"
+    "postinstall": "node scripts/sign-native-bindings.js",
+    "test:chordpro": "node --test scripts/test-chordpro.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.3",
     "astro": "^7.2.9",
+    "chordsheetjs": "18.0.0",
+    "hast-util-from-html": "2.0.3",
+    "hast-util-sanitize": "5.0.2",
     "photoswipe": "^5.4.4"
   },
   "devDependencies": {
