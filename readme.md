@@ -54,3 +54,13 @@ Publish directory: dist
 ## Credits
 
 The underlying theme is Minrock by Renato Rezende, used under the MIT License. Site content and branding belong to Rev Al Munday.
+
+## Digital garden
+
+The homepage keeps the site's theme and displays published writing as a text-led graph, with the complete chronological list below it. Solid lines represent actual links; optional dotted lines represent shared tags. Focus or hover a title to emphasise its connections. The graph is a normal list of links without JavaScript; article navigation and the list remain available.
+
+In the existing VaultCMS/Obsidian blog vault, use `[[Article title]]`, `[[article-folder]]` or `[[Article title|display text]]`. Optional frontmatter `aliases: [Short name]` also resolves. `[[Article title#Heading]]` supports ordinary heading anchors. Markdown links to relative `.md` files and public `/blog/...` routes also count. Code examples, embeds, drafts and unresolved/ambiguous wiki targets do not generate graph edges or public links. Obsidian embeds and block references are not implemented.
+
+A small “Linked from” section appears automatically when another published piece links to an article. Add `updatedDate: YYYY-MM-DD` to show “Last tended” and move it up the homepage list. No writing is rewritten to manufacture connections; the current five pieces initially connect by their existing tags.
+
+Run `npm run test:garden` for resolution/graph regression checks, and `npm run qa` for Astro validation and a complete static build.

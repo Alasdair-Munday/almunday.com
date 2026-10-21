@@ -1,0 +1,98 @@
+---
+import { gardenData } from '../utils/garden.mjs';
+const { notes, edges } = await gardenData();
+const related = [];
+for (let i = 0; i < notes.length; i++) for (let j = i + 1; j < notes.length; j++) {
+  const tags = notes[i].tags.filter((tag: string) => notes[j].tags.includes(tag));
+  if (tags.length && !edges.some(edge => [edge.source, edge.target].includes(notes[i].id) && [edge.source, edge.target].includes(notes[j].id))) related.push({ source: notes[i].id, target: notes[j].id, kind: 'topic' });
+}
+---
+<section class="garden" aria-labelledby="garden-heading">
+  <header><h2 id="garden-heading">Wander through the garden</h2><a href="#garden-list">Browse as a list ↓</a></header>
+  <p class="intro">Reflections, questions and ideas. Follow a title to start reading.</p>
+  <div class="controls" hidden>
+    <label><input type="checkbox" data-topics checked /> Show shared topics</label>
+    <p>Solid lines: links in the writing. Dotted lines: shared topics.</p>
+  </div>
+  <div class="map" data-edges={JSON.stringify([...edges, ...related])}>
+    <svg aria-hidden="true" class="connections"></svg>
+    <ul class="nodes" aria-label="Explore the writing">
+      {notes.map((note, index) => <li class={`position-${index % 6}`}><a href={note.href} data-note={note.id}><span class="dot" aria-hidden="true"></span><span>{note.title}</span></a></li>)}
+    </ul>
+  </div>
+  {edges.length === 0 && <p class="hint">These pieces currently connect through shared topics. Links between pieces will appear here as the garden grows.</p>}
+</section>
+<script>
+  const map = document.querySelector<HTMLElement>('.map');
+  if (map) {
+    const svg = map.querySelector('svg')!;
+    const controls = document.querySelector<HTMLElement>('.controls')!;
+    const checkbox = controls.querySelector<HTMLInputElement>('input')!;
+    const edges: { source: string; target: string; kind: string }[] = JSON.parse(map.dataset.edges || '[]');
+    const nodes = Array.from(map.querySelectorAll<HTMLAnchorElement>('[data-note]'));
+    controls.hidden = false;
+    function draw(active?: string) {
+      if (!map) return;
+      const bounds = map.getBoundingClientRect();
+      svg.setAttribute('viewBox', `0 0 ${bounds.width} ${bounds.height}`);
+      svg.replaceChildren();
+      for (const edge of edges) {
+        if (edge.kind === 'topic' && !checkbox.checked) continue;
+        const source = nodes.find(node => node.dataset.note === edge.source)?.querySelector('.dot')?.getBoundingClientRect();
+        const target = nodes.find(node => node.dataset.note === edge.target)?.querySelector('.dot')?.getBoundingClientRect();
+        if (!source || !target) continue;
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', String(source.x + source.width / 2 - bounds.x));
+        line.setAttribute('y1', String(source.y + source.height / 2 - bounds.y));
+        line.setAttribute('x2', String(target.x + target.width / 2 - bounds.x));
+        line.setAttribute('y2', String(target.y + target.height / 2 - bounds.y));
+        line.setAttribute('stroke', 'var(--accent)');
+        line.setAttribute('stroke-width', '1.5');
+        line.setAttribute('opacity', active ? ([edge.source, edge.target].includes(active) ? '.8' : '.08') : '.28');
+        if (edge.kind === 'topic') line.setAttribute('stroke-dasharray', '2 7');
+        svg.append(line);
+      }
+    }
+    for (const node of nodes) {
+      node.addEventListener('pointerenter', () => draw(node.dataset.note));
+      node.addEventListener('pointerleave', () => draw());
+      node.addEventListener('focus', () => draw(node.dataset.note));
+      node.addEventListener('blur', () => draw());
+    }
+    checkbox.addEventListener('change', () => draw());
+    new ResizeObserver(() => draw()).observe(map);
+    document.fonts.ready.then(() => draw());
+    draw();
+  }
+</script>
+<style>
+  .garden { padding: 2.5rem 0 1rem; }
+  header { display: flex; flex-wrap: wrap; gap: .75rem 2rem; align-items: baseline; justify-content: space-between; }
+  h2 { border: 0; padding: 0; margin: 0; font-size: 1.5rem; }
+  header a, .controls, .hint { font-size: .85rem; color: var(--text-muted); }
+  .intro { color: var(--text-muted); margin: .75rem 0 1.5rem; }
+  .controls { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; justify-content: space-between; }
+  .controls[hidden] { display: none; }
+  .controls p { margin: 0; }
+  label { display: flex; align-items: center; gap: .5rem; }
+  input { accent-color: var(--accent); width: 1rem; height: 1rem; }
+  .map { position: relative; margin-top: 1rem; }
+  .connections { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .nodes { position: relative; list-style: none; margin: 0; padding: 2rem 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4rem 2rem; align-items: center; min-height: 32rem; }
+  li { margin: 0; }
+  .position-1 { transform: translateY(4rem); }
+  .position-3 { transform: translateY(-1rem); }
+  .position-4 { grid-column: 3; }
+  a[data-note] { display: flex; align-items: baseline; gap: .65rem; padding: .85rem; background: var(--bg); line-height: 1.5; font-weight: 600; font-size: .95rem; border-radius: 4px; }
+  a[data-note]:hover { color: var(--accent); }
+  a[data-note]:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .dot { flex-shrink: 0; width: .55rem; height: .55rem; border-radius: 50%; background: var(--accent); }
+  .hint { margin-top: 1.5rem; }
+  @media(max-width: 600px) {
+    .nodes { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem .75rem; min-height: 42rem; padding: 1rem 0 3rem; }
+    .position-4 { grid-column: auto; }
+    .position-1, .position-3 { transform: translateY(3rem); }
+    a[data-note] { padding: .5rem; font-size: .85rem; overflow-wrap: anywhere; gap: .4rem; }
+  }
+  @media print { .garden { display: none; } }
+</style>
