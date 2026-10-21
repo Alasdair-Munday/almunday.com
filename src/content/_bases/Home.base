@@ -3,7 +3,7 @@ filters:
     - file.ext == "md"
 formulas:
   Slug: |-
-    if(file.folder.startsWith("blog"), "/blog/" + file.name.replace(".md", ""),
+    if(file.folder.startsWith("posts"), "/posts/" + file.name.replace(".md", ""),
       if(file.folder.startsWith("projects"), "/projects/" + file.name.replace(".md", ""),
         "/" + file.folder))
   Content Folder: |-
@@ -35,7 +35,7 @@ properties:
     displayName: Draft
   note.image:
     displayName: Image
-  note.pubDate:
+  note.date:
     displayName: PubDate
   note.tags:
     displayName: Tags
@@ -46,13 +46,13 @@ views:
     name: Blog
     filters:
       and:
-        - file.folder.startsWith("blog")
+        - file.folder.startsWith("posts")
     order: []
     sort:
-      - property: pubDate
+      - property: date
         direction: DESC
     fallbackToEmbeds: never
-    propertyDisplay1: note.pubDate
+    propertyDisplay1: note.date
     showTextPreview: true
     imageFormat: cover
     imageProperty: note.image
@@ -66,7 +66,7 @@ views:
     showTags: true
     tagsProperty: note.tags
     customizeNewButton: true
-    newNoteLocation: blog
+    newNoteLocation: posts
     cardSize: 250
     imageAspectRatio: 0.55
     maxTagsToShow: 3

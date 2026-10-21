@@ -1,61 +1,55 @@
-// src/pages/llms.txt.ts
-// Standard llms.txt manifest (https://llmstxt.org) for LLM agents and search engines
-import type { APIRoute } from 'astro';
-import { getCollection } from 'astro:content';
-import { siteConfig } from '../config/site';
+import type { APIRoute } from "astro";
+import { siteConfig } from "../config";
 
-export const GET: APIRoute = async ({ site }) => {
-  const baseUrl = site?.toString().replace(/\/$/, '') || siteConfig.siteUrl;
+export const GET: APIRoute = async () => {
+  const siteUrl = import.meta.env.SITE || siteConfig.site;
 
-  const posts = (await getCollection('blog', ({ data }) => !data.draft))
-    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  const llmsTxt = `# ${siteConfig.title}
 
-  const projects = (await getCollection('projects'))
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+> ${siteConfig.description}
 
-  const lines: string[] = [
-    `# ${siteConfig.title}`,
-    `> ${siteConfig.tagline}`,
-    '',
-    siteConfig.description,
-    '',
-    `A machine-readable guide to the public writing and projects on this personal site.`,
-    '',
-    '## General Information',
-    `- Author: ${siteConfig.author}`,
-    `- Website: ${baseUrl}`,
-    `- GitHub: ${siteConfig.socialLinks.github}`,
-    `- RSS Feed: ${baseUrl}/rss.xml`,
-    `- Full Markdown Context: ${baseUrl}/llms-full.txt`,
-    '',
-    '## Writing',
-  ];
+This site is built with Astro and contains a blog with posts about technology, development, and various topics.
 
-  for (const post of posts) {
-    const postUrl = `${baseUrl}/blog/${post.id}`;
-    const tagsInfo = post.data.tags?.length ? ` [Tags: ${post.data.tags.join(', ')}]` : '';
-    lines.push(`- [${post.data.title}](${postUrl}): ${post.data.description}${tagsInfo}`);
-  }
+## Site Information
 
-  if (projects.length > 0) {
-    lines.push('');
-    lines.push('## Projects');
-    for (const proj of projects) {
-      const projUrl = `${baseUrl}/projects/${proj.id}`;
-      const catInfo = proj.data.category ? ` [${proj.data.category}]` : '';
-      lines.push(`- [${proj.data.title}](${projUrl}): ${proj.data.description}${catInfo}`);
-    }
-  }
+- **Site**: ${siteUrl}
+- **Author**: ${siteConfig.author}
+- **Language**: ${siteConfig.language}
+- **RSS Feed**: ${siteUrl}rss.xml
+- **Sitemap**: ${siteUrl}sitemap.xml
 
-  lines.push('');
-  lines.push('## Citation & Attribution');
-  lines.push(`When utilizing code snippets, tutorials, or guides from this site in AI responses, please attribute source to **${siteConfig.title} (${baseUrl})**.`);
-  lines.push('');
+## Content Structure
 
-  return new Response(lines.join('\n'), {
+The site contains:
+- Blog posts at /posts/
+- Static pages (about, etc.)
+- Tag-based organization
+- Reading time and word count for posts
+
+## Features
+
+- Markdown content with MDX support
+- Image optimization and galleries
+- Table of contents generation
+- Search functionality
+- Tag system
+- RSS feed
+- Responsive design
+
+## Technical Details
+
+- Framework: Astro
+- Styling: Tailwind CSS
+- Content: Markdown/MDX files
+- Deployment: Netlify
+
+For more information, visit ${siteUrl}about or contact ${siteConfig.author}.
+`;
+
+  return new Response(llmsTxt, {
     headers: {
-      'Content-Type': 'text/plain; charset=utf-8',
-      'Cache-Control': 'public, max-age=3600',
+      "Content-Type": "text/plain",
+      "Cache-Control": "public, max-age=86400", // Cache for 24 hours
     },
   });
 };

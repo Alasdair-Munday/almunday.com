@@ -15,10 +15,10 @@ When you open `src/content` as a vault in Obsidian:
 
 ## 📁 The Page Bundle Architecture
 
-Minrock uses the **Folder-Based (Page Bundle)** structure:
+Astro Modular uses the **Folder-Based (Page Bundle)** structure:
 
 ```text
-src/content/blog/
+src/content/posts/
 └── my-awesome-post/
     ├── index.md           # The article content & frontmatter
     ├── architecture.png   # Pasted locally via Ctrl + V
@@ -28,26 +28,26 @@ src/content/blog/
 ### Why this is optimal:
 1. **Self-Contained**: If you delete or move the post folder, all related media files move with it (zero orphaned images).
 2. **Native Preview**: Markdown image links like `![Architecture](architecture.png)` work both inside Obsidian and on your live Astro site.
-3. **Clean URLs**: Minrock generates the route `/blog/my-awesome-post/` automatically.
+3. **Clean URLs**: Astro Modular generates the route `/posts/my-awesome-post/` automatically.
 
 ---
 
 ## 🛠️ Vault CMS Wizard Mapping (If Starting From Scratch)
 
-If you ever run the **Vault CMS Setup Wizard** (`Ctrl / Cmd + P` → `Vault CMS: Open Wizard`), use these exact settings for Minrock:
+If you ever run the **Vault CMS Setup Wizard** (`Ctrl / Cmd + P` → `Vault CMS: Open Wizard`), use these exact settings for Astro Modular:
 
-| Wizard Field | Recommended Value for Minrock | Note |
+| Wizard Field | Recommended Value for Astro Modular | Note |
 | :--- | :--- | :--- |
-| **Welcome / Preset** | `Get started` (Do not apply theme presets) | Preserves Minrock's custom design |
+| **Welcome / Preset** | `Get started` (Do not apply theme presets) | Preserves Astro Modular's custom design |
 | **Project Root** | `../..` | Auto-detected relative to `src/content` |
 | **Config File** | `../../astro.config.mjs` | Astro configuration file |
 | **Content Type Name** | `Blog` | Name of your primary collection |
 | **Folder** | `blog` | Directory inside `src/content/` |
 | **File Organization** | `folder` (*Folder-based*) | Creates `blog/<slug>/index.md` |
 | **Index File Name** | `index` | Entrypoint Markdown filename |
-| **Link Base Path** | `/blog/` | Route prefix on your site |
+| **Link Base Path** | `/posts/` | Route prefix on your site |
 | **Title Property** | `title` | Article headline |
-| **Date Property** | `pubDate` | Format: `YYYY-MM-DD` |
+| **Date Property** | `date` | Format: `YYYY-MM-DD` |
 | **Description Property**| `description` | SEO & social sharing summary |
 | **Tags Property** | `tags` | Array of topic tags (e.g. `['dev', 'tools']`) |
 | **Draft Property** | `draft` | Logic: `true-draft` (`true` hides from production) |
@@ -68,19 +68,19 @@ If you ever run the **Vault CMS Setup Wizard** (`Ctrl / Cmd + P` → `Vault CMS:
    ---
    title: "Your Article Title"
    description: "A concise summary for readers and search engines."
-   pubDate: 2026-09-16
+   date: 2026-09-16
    tags: ["engineering", "design"]
    draft: false
    audio: true
    ---
    ```
 4. **Updating Community Plugins**:
-   - Keep plugins up to date with 1 click: **Settings** (`Ctrl + ,`) → **Community plugins** → **Check for updates** → **Update all**. Your Minrock settings are preserved automatically.
+   - Keep plugins up to date with 1 click: **Settings** (`Ctrl + ,`) → **Community plugins** → **Check for updates** → **Update all**. Your Astro Modular settings are preserved automatically.
 
 ---
 
 ## 🔗 External Resources & Walkthrough
 
-- **Comprehensive Online Guide**: [minrock.vercel.app/blog/obsidian-vault-guide](https://minrock.vercel.app/blog/obsidian-vault-guide)
+- **Comprehensive Online Guide**: [minrock.vercel.app/posts/obsidian-vault-guide](https://minrock.vercel.app/posts/obsidian-vault-guide)
 - **Vault CMS Official Website**: [vaultcms.org](https://vaultcms.org/)
 - **David Kimball's Walkthrough Video**: [YouTube (55s setup demo)](https://www.youtube.com/watch?v=MnXoikTajfI&t=55s)

@@ -1,152 +1,22 @@
 ---
-import { siteConfig } from '../config/site';
-
-interface Props {
-  currentPath?: string;
-}
-
-const { currentPath = Astro.url.pathname } = Astro.props;
-const showSearch = siteConfig.features?.search !== false;
+import { siteConfig } from '../config';
 ---
-
-<header class="site-header">
-  <div class="container-wide header-inner">
-    <a href="/" class="brand" aria-label={`${siteConfig.title} home`}>
-      <img src="/tree-logo.svg" alt="" class="brand-logo" width="40" height="40" />
-      <span>{siteConfig.title}</span>
-    </a>
-
-    <nav class="nav" aria-label="Main navigation">
-      {
-        siteConfig.navLinks.map(link => {
-          const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
-          return (
-            <a href={link.href} class:list={['nav-link', {active: isActive}]} aria-current={isActive ? 'page' : undefined}>
-              {link.title}
-            </a>
-          );
-        })
-      }
-    </nav>
-
-    {
-      showSearch && (
-        <button id="header-search-btn" class="search-trigger" type="button" aria-label="Search" title="Search">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <circle cx="11" cy="11" r="8" />
-            <path d="m21 21-4.3-4.3" />
-          </svg>
-          <span class="search-label">Search</span>
-        </button>
-      )
-    }
+<header id="main-header" class="al-header">
+  <div class="al-header-inner">
+    <a href="/" class="al-brand"><img src="/tree-logo.svg" alt="" width="40" height="40" /><span>{siteConfig.title}</span></a>
+    <nav aria-label="Main navigation"><a href="/">Garden</a><a href="/posts/">Writing</a><a href="/about/">About</a></nav>
+    <button type="button" id="al-search" aria-label="Search the site">Search <kbd aria-hidden="true">⌘K</kbd></button>
   </div>
 </header>
-
-<style>
-  .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    margin-bottom: 2rem;
-    padding: 0.7rem 0;
-    border-bottom: 1px solid color-mix(in srgb, #2a4551 28%, transparent);
-    background-color: #213f51;
-    background-image: url('/images/navbar-wallpaper.png');
-    background-repeat: repeat;
-  }
-
-  .header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.25rem;
-  }
-
-  .brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.65rem;
-    color: #f2eee6;
-    font-size: 1.25rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    text-decoration: none;
-  }
-
-  .brand:hover,
-  .brand:focus-visible {
-    color: #ffffff;
-  }
-
-  .brand-logo {
-    width: 2.35rem;
-    height: 2.35rem;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-  }
-
-  .nav {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-left: auto;
-  }
-
-  .nav-link {
-    padding: 0.3rem;
-    color: #e3eeeb;
-    font-size: 0.95rem;
-    text-decoration: none;
-  }
-
-  .nav-link:hover,
-  .nav-link:focus-visible,
-  .nav-link.active {
-    color: #ffffff;
-    text-decoration: underline;
-    text-underline-offset: 0.25em;
-  }
-
-  .search-trigger {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    border: 1px solid color-mix(in srgb, #ffffff 42%, transparent);
-    border-radius: 6px;
-    background: color-mix(in srgb, #213f51 72%, transparent);
-    color: #f2eee6;
-    padding: 0.45rem 0.65rem;
-    cursor: pointer;
-  }
-
-  .search-trigger:hover,
-  .search-trigger:focus-visible {
-    border-color: #ffffff;
-    color: #ffffff;
-  }
-
-  @media (max-width: 650px) {
-    .header-inner {
-      flex-wrap: wrap;
-    }
-
-    .brand {
-      margin-right: auto;
-    }
-
-    .nav {
-      order: 3;
-      width: 100%;
-      justify-content: center;
-    }
-
-    .search-label {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-      clip-path: inset(50%);
+<script>
+  function initializeAlHeader() {
+    const button = document.getElementById('al-search');
+    if (button && !button.dataset.bound) {
+      button.dataset.bound = 'true';
+      button.addEventListener('click', () => window.dispatchEvent(new CustomEvent('openCommandPalette')));
     }
   }
-</style>
+  initializeAlHeader();
+  document.addEventListener('DOMContentLoaded', initializeAlHeader);
+  (window as any).initializeAlHeader = initializeAlHeader;
+</script>

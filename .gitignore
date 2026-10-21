@@ -34,3 +34,11 @@ src/content/.obsidian/workspace*.json
 PROGRESS.md
 AGENTS.md
 .agents/
+
+# Astro Modular generated assets
+public/graph/
+public/posts/
+public/pages/
+public/projects/
+public/docs/
+public/special/

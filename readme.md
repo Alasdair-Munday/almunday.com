@@ -1,56 +1,24 @@
-# almunday.com
+# Al Munday — Astro Modular digital garden
 
-The personal site of Rev Al Munday: writing, songs, reflections, and software projects in one chronological feed.
+Based on Astro Modular 1.1.8; see ASTRO-MODULAR.md for the upstream revision and ASTRO-MODULAR-LICENSE for attribution.
 
-The site is built with [Astro](https://astro.build) from the open-source [Minrock](https://github.com/rnt-rez/minrock) theme. Content lives in Markdown and can be edited in Obsidian.
+## Writing and publishing
+
+Open `src/content` as your existing Obsidian vault. Articles live in `posts/<slug>/index.md`; projects in `projects/`. Vault CMS and Astro Composer are configured to create articles there with `date: YYYY-MM-DD`. Existing blog posts were moved without changing their bodies, dates or draft states. `draft: true` stays unpublished.
+
+Use normal Markdown links or Obsidian `[[wikilinks]]` between posts. The homepage uses Astro Modular's D3 GraphModal renderer in an inline container, including drag, zoom, clickable titles and keyboard-accessible article nodes. It uses actual article links; unconnected pieces remain visible. “Writing” and “All writing” provide plain-list browsing.
+
+Search opens from the header or Ctrl/Cmd+K. It searches published posts, pages and projects, including body text. Drafts are excluded from published search data and the graph. Existing `/blog/...` and `/tags/...` URLs redirect to Modular's native routes on Netlify.
 
 ## Development
 
-Requires Node.js 22.12 or newer.
+Node 24 and pnpm 10.29.3:
 
-```bash
-npm ci
-npm run dev
+```
+pnpm install --frozen-lockfile
+pnpm run check
+pnpm run build
+pnpm run dev
 ```
 
-The local site runs at `http://localhost:4321`.
-
-## Validation
-
-```bash
-npm run check
-npm run build
-```
-
-## Content
-
-- Writing: `src/content/blog/<slug>/index.md`
-- Projects: `src/content/projects/<slug>/index.md`
-- Site details and feature flags: `src/config/site.ts`
-
-The homepage combines writing and projects into one date-sorted feed. Existing detail pages remain under `/blog/` and `/projects/`, and the RSS feed includes both collections.
-
-## Writing in Obsidian
-
-Open `src/content` as an Obsidian vault. The included vault configuration provides the Minrock writing tools, folder-based article creation, frontmatter editing, image handling, search, tags, and optional Git publishing.
-
-New articles live at `src/content/blog/<slug>/index.md`. Images pasted into an article stay beside that article, so they work in Obsidian and on the site. See `src/content/_GUIDE.md` for the vault workflow.
-
-## Audio
-
-Article and project pages include Minrock’s browser-based text-to-speech player. It reads the page using the visitor’s installed system voices, with play, pause, paragraph navigation, and speed controls. Add `audio: false` to an article’s frontmatter when a particular piece should not offer narration.
-
-## Deployment
-
-The production URL defaults to `https://almunday.com`. Set `SITE_URL` to override it in another environment.
-
-Netlify can build the site with:
-
-```text
-Build command: npm run build
-Publish directory: dist
-```
-
-## Credits
-
-The underlying theme is Minrock by Renato Rezende, used under the MIT License. Site content and branding belong to Rev Al Munday.
+The site uses a single fixed light theme: `src/themes/custom/almunday.ts` and `src/styles/almunday.css`. Theme and mode switching are disabled. Existing tree/logo, wallpaper and public image URLs are retained. The framework is Astro Modular; local adaptations are documented in ASTRO-MODULAR.md. Review upstream upgrades before applying them because the header, homepage and graph embedding are site-specific.

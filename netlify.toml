@@ -1,6 +1,36 @@
 [build]
-  command = "npm run build"
+  command = "pnpm run build"
   publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "24.21.0"
+  NODE_VERSION = "24"
+  PNPM_VERSION = "10.29.3"
+
+[[redirects]]
+  from = "/blog"
+  to = "/posts/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/*"
+  to = "/posts/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tags"
+  to = "/posts/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tags/*"
+  to = "/posts/tag/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/404"
+  status = 404
