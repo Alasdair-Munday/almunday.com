@@ -41,7 +41,7 @@
   "newFileFolderPath": "blog",
   "newLinkFormat": "relative",
   "mobileQuickRibbonItem": "",
-  "vimMode": false,
+  "vimMode": true,
   "readableLineLength": true,
   "defaultViewMode": "source"
 }
