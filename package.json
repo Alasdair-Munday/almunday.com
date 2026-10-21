@@ -17,7 +17,7 @@
     "check-images": "node scripts/check-missing-images.js",
     "update": "node scripts/update.mjs",
     "version": "node scripts/get-version.js",
-    "test": "node --test scripts/test-graph.mjs",
+    "test": "node --test scripts/test-*.mjs",
     "check:files": "node scripts/check-truncated-files.js",
     "check": "astro check",
     "qa": "astro check && pnpm run build"
@@ -71,7 +71,8 @@
     "@types/unist": "^3.0.3",
     "cross-env": "^10.1.0",
     "mdast-util-to-hast": "^13.2.0",
-    "wrangler": "^4.71.0"
+    "wrangler": "^4.71.0",
+    "yaml": "2.9.1"
   },
   "packageManager": "pnpm@10.29.3"
 }

@@ -35,8 +35,6 @@ properties:
     displayName: Draft
   note.image:
     displayName: Image
-  note.date:
-    displayName: PubDate
   note.tags:
     displayName: Tags
   note.title:
