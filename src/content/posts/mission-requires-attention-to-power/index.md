@@ -11,5 +11,5 @@ The notes on empire, poverty, justice hubs, and marginalised communities suggest
 
 ## Related seedlings
 
-- [[God’s Presence Is Found Among the Poor]]
-- [[Mission Begins by Listening to Existing Narratives]]
+- [God’s Presence Is Found Among the Poor](posts/gods-presence-is-found-among-the-poor/index.md)
+- [Mission Begins by Listening to Existing Narratives](posts/mission-begins-by-listening-to-existing-narratives/index.md)
