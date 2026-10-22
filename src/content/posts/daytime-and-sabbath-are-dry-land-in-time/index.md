@@ -2,7 +2,7 @@
 title: "The Daytime and the Sabbath Are Like Dry Land—but in Time"
 description: "Genesis’ separation of darkness and water offers a way to see daylight and Sabbath as forms of created space: one in the world, the other in time."
 date: 2026-10-22
-tags: ["bible","biblical-studies","creation","hermeneutics","worldview"]
+tags: ["bible","biblical-studies","creation","hermeneutics"]
 maturity: seedling
 draft: false
 ---

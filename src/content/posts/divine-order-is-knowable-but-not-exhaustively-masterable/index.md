@@ -2,7 +2,7 @@
 title: "Divine Order Is Knowable but Not Exhaustively Masterable"
 description: "Proverbs presents creation as ordered and intelligible, but that order should not be reduced to a deterministic system humans can fully control."
 date: 2026-10-22
-tags: ["doctrine-of-god","worldview"]
+tags: ["doctrine-of-god"]
 maturity: seed
 draft: false
 ---

@@ -106,4 +106,4 @@ Writing and tag lists show established essays only. Existing blog posts without 
 
 Content tags appear as nodes connected to the notes that use them. Node size follows the number of unique connections in the displayed graph; note opacity still reflects maturity. The maturity slider filters notes and hides tags with no remaining notes. Tags such as `bible`, `culture`, `music` and `tech` work like any other subject tag; there are no special category hubs or mainCategory field.
 
-Use tags for subject matter. Keep maturity in its own property. Housekeeping labels (`digital-garden`, `maturity-*`, standalone maturity stages, draft, blog/post/note, series) are excluded by `src/utils/graph-tags.mjs`. Existing notes have been cleaned accordingly.
+Use tags for subject matter. Keep maturity in its own property. Housekeeping labels (`digital-garden`, `worldview`, `maturity-*`, standalone maturity stages, draft, blog/post/note, series) are excluded by `src/utils/graph-tags.mjs`. Existing notes have been cleaned accordingly.

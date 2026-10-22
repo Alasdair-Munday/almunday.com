@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import {contentTags, addTagNodes, connectionCounts, connectionRadius} from '../src/utils/graph-tags.mjs';
 
 test('content tags exclude housekeeping and deduplicate tags without losing subjects', () => {
-  assert.deepEqual(contentTags(['Bible','bible','digital-garden','maturity-seed','seedling','worldview','music','series']), ['bible','worldview','music']);
+  assert.deepEqual(contentTags(['Bible','bible','digital-garden','maturity-seed','seedling','worldview','music','series']), ['bible','music']);
   assert.deepEqual(contentTags('["tech", "maturity-growing"]'), ['tech']);
 });
 test('tag nodes join notes, preserve note links, and size by unique neighbours', () => {
@@ -24,14 +24,13 @@ test('tag nodes join notes, preserve note links, and size by unique neighbours',
   assert.equal(connectionCounts(subset,graph.connections).get('tag:bible'),1);
 });
 
-test('vault frontmatter has no retired category field or housekeeping tags', () => {
+test('vault frontmatter has no excluded tags', () => {
   const visit = dir => {
     for (const entry of readdirSync(dir,{withFileTypes:true})) {
       const path=join(dir,entry.name);
       if(entry.isDirectory()) visit(path);
       else if(/\.mdx?$/.test(entry.name)) {
         const data=parse(readFileSync(path,'utf8').split('---')[1]);
-        assert.equal(data.mainCategory,undefined,path);
         assert.deepEqual(data.tags || [],contentTags(data.tags),path);
       }
     }

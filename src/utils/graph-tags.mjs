@@ -2,7 +2,7 @@
 export function contentTags(value) {
   const raw = Array.isArray(value) ? value : typeof value === 'string' ? value.replace(/^\[|\]$/g, '').split(',') : [];
   return [...new Set(raw.map(tag => String(tag).trim().replace(/^['"]|['"]$/g, '').replace(/^#/, '').toLowerCase())
-    .filter(tag => tag && !/^(digital[- ]garden|maturity(?:[-/].*)?|seed|seedling|growing|established|draft|blog|posts?|notes?|series)$/.test(tag)))];
+    .filter(tag => tag && !/^(digital[- ]garden|worldview|maturity(?:[-/].*)?|seed|seedling|growing|established|draft|blog|posts?|notes?|series)$/.test(tag)))];
 }
 
 /** Count unique neighbours, treating reciprocal note links as one connection.
