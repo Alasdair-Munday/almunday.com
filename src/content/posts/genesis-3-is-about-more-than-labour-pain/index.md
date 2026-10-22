@@ -11,6 +11,6 @@ Genesis 3:16 may be describing the relational and emotional suffering surroundin
 
 ## Related seedlings
 
-- [[God’s Diversity Is Reflected in Creation]]
-- [[Marriage Is Communal]]
-- [[The Imago Dei Undermines Human Hierarchy]]
+- [God’s Diversity Is Reflected in Creation](posts/gods-diversity-is-reflected-in-creation/index.md)
+- [Marriage Is Communal](posts/marriage-is-communal/index.md)
+- [The Imago Dei Undermines Human Hierarchy](posts/the-imago-dei-undermines-human-hierarchy/index.md)
