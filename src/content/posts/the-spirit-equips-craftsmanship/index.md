@@ -1,5 +1,6 @@
 ---
 title: "The Spirit Equips Craftsmanship"
+type: comment
 description: "The workbook connects artistic skill, imagination and practical craft with the Spirit’s gifts."
 date: 2026-10-22
 tags: ["creativity","culture","holy-spirit"]
