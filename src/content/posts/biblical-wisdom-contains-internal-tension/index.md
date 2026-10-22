@@ -1,5 +1,6 @@
 ---
 title: "Biblical Wisdom Contains Internal Tension"
+type: opinion
 description: "Proverbs should not be treated as a single, mechanically consistent system; its competing voices may deliberately train discernment."
 date: 2026-10-22
 tags: ["bible-and-hermeneutics"]
