@@ -1,5 +1,6 @@
 ---
 title: "The Lamb Redefines What Conquest Means"
+type: opinion
 description: "Revelation destabilises the assumption that victory means becoming a stronger Caesar."
 date: 2026-10-22
 tags: ["bible-and-hermeneutics", "eschatology"]
