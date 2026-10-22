@@ -11,5 +11,5 @@ Some end-times politics treats catastrophe as inevitable and turns the decisive 
 
 ## Related seedlings
 
-- [[The Counterfeit Can Look Like Salvation]]
-- [[Christian Critique Should Begin With Complicity]]
+- [The Counterfeit Can Look Like Salvation](posts/the-counterfeit-can-look-like-salvation/index.md)
+- [Christian Critique Should Begin With Complicity](posts/christian-critique-should-begin-with-complicity/index.md)
