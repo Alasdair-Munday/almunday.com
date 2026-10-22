@@ -1,5 +1,6 @@
 ---
 title: "Why an unbiblical view of perfection makes Christians into bigots"
+type: essay
 date: 2026-02-07
 description: "Diversity in creation is not a flaw. It's a reflection of the good God."
 tags: ["theology","reflections","diversity","creation"]
