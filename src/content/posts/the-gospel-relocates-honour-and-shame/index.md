@@ -11,5 +11,5 @@ Paul’s language of not being ashamed of the gospel suggests a revaluation of s
 
 ## Related seedlings
 
-- [[Salvation Reorders Human Relationships]]
-- [[Difference Is Often Experienced as Threat]]
+- [Salvation Reorders Human Relationships](posts/salvation-reorders-human-relationships/index.md)
+- [Difference Is Often Experienced as Threat](posts/difference-is-often-experienced-as-threat/index.md)
