@@ -1,5 +1,6 @@
 ---
 title: "Eternal Life Is Quality as Well as Quantity"
+type: comment
 description: "Eternal Life Is Quality as Well as Quantity. Extracts from Three Visions of Paradise Workbook."
 date: 2026-10-22
 tags: ["kingdom-of-god","soteriology","spirituality-and-practice"]
