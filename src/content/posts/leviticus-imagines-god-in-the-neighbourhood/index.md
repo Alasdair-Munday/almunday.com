@@ -1,5 +1,6 @@
 ---
 title: "Leviticus Imagines God in the Neighbourhood"
+type: opinion
 description: "Leviticus makes more sense when read as a practical theology of how an imperfect people can live near a holy God."
 date: 2026-10-22
 tags: ["bible","biblical-studies","leviticus","theology"]
