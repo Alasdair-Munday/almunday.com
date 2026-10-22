@@ -1,5 +1,6 @@
 ---
 title: "Caring for Creation Through Delight Rather Than Guilt"
+type: comment
 description: "Caring for Creation Through Delight Rather Than Guilt. Extracts from Three Visions of Paradise Workbook."
 date: 2026-10-22
 tags: ["creation","spirituality-and-practice","kingdom-of-god"]
