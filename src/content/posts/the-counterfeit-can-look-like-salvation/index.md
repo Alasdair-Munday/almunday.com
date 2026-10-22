@@ -11,5 +11,5 @@ Scripture often portrays evil as something that resembles salvation: order, secu
 
 ## Related seedlings
 
-- [[End-Times Politics Can Be an Eschatology of Abandonment]]
-- [[Babylon Accumulates While New Jerusalem Heals]]
+- [End-Times Politics Can Be an Eschatology of Abandonment](posts/end-times-politics-can-be-an-eschatology-of-abandonment/index.md)
+- [Babylon Accumulates While New Jerusalem Heals](posts/babylon-accumulates-while-new-jerusalem-heals/index.md)
