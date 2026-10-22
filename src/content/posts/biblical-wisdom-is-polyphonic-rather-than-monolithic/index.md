@@ -11,5 +11,5 @@ Proverbs should be allowed to speak through multiple voices, poetic ambiguities,
 
 ## Related seedlings
 
-- [[Proverbs Trains Discernment Through Internal Tension]]
-- [[Reparative Interpretation Reads Critically Without Abandoning the Text]]
+- [Proverbs Trains Discernment Through Internal Tension](posts/proverbs-trains-discernment-through-internal-tension/index.md)
+- [Reparative Interpretation Reads Critically Without Abandoning the Text](posts/reparative-interpretation-reads-critically-without-abandoning-the-text/index.md)
