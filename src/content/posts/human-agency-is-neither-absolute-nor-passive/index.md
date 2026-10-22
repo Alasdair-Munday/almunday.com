@@ -11,5 +11,5 @@ The engaged-trust theme offers an anthropology in which humans depend on God’s
 
 ## Related seedlings
 
-- [[Divine Order Is Knowable but Not Exhaustively Masterable]]
-- [[Mission Requires Attention to Power]]
+- [Divine Order Is Knowable but Not Exhaustively Masterable](posts/divine-order-is-knowable-but-not-exhaustively-masterable/index.md)
+- [Mission Requires Attention to Power](posts/mission-requires-attention-to-power/index.md)
