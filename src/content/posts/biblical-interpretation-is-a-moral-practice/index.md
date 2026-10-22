@@ -1,0 +1,23 @@
+---
+title: "Biblical Interpretation Is a Moral Practice"
+description: "How we interpret Scripture affects how we treat vulnerable people, so hermeneutics cannot be separated from questions of power, responsibility, and love."
+date: 2026-10-22
+tags:
+  - bible
+  - biblical-studies
+  - hermeneutics
+  - ethics
+  - worldview
+  - digital-garden
+  - maturity-seed
+maturity: seed
+draft: false
+---
+
+How we interpret Scripture affects how we treat vulnerable people, so hermeneutics cannot be separated from questions of power, responsibility, and love.
+
+## Related seedlings
+
+- [[Reading Difficult Texts Requires More Than Defending Them]]
+- [[Ritual Impurity Is Not the Same as Moral Sin]]
+- [[Biblical Violence Creates Moral Injury]]
