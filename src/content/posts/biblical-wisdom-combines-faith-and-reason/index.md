@@ -11,5 +11,5 @@ The internal world of Proverbs presents faith and reason as complementary practi
 
 ## Related seedlings
 
-- [[Wisdom Is Both Divine Gift and Human Practice]]
-- [[Proverbs Trains Discernment Through Internal Tension]]
+- [Wisdom Is Both Divine Gift and Human Practice](posts/wisdom-is-both-divine-gift-and-human-practice/index.md)
+- [Proverbs Trains Discernment Through Internal Tension](posts/proverbs-trains-discernment-through-internal-tension/index.md)
