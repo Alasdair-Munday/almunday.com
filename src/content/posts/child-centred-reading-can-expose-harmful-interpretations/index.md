@@ -11,5 +11,5 @@ A reparative reading of Proverbs begins by asking how children experience the te
 
 ## Related seedlings
 
-- [[Biblical Interpretation Requires Discernment Rather Than Simple Rule Application]]
-- [[God’s Presence Is Found Among the Poor]]
+- [Biblical Interpretation Requires Discernment Rather Than Simple Rule Application](posts/biblical-interpretation-requires-discernment-rather-than-simple-rule-application/index.md)
+- [God’s Presence Is Found Among the Poor](posts/gods-presence-is-found-among-the-poor/index.md)
