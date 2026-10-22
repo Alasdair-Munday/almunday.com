@@ -1,5 +1,6 @@
 ---
 title: An Avalanche of Crumbs - When Jesus called a Woman to Preach.
+type: essay
 date: 2026-03-01
 description: The story of the Syrophoenician woman is one of the most ignored Gospel stories in our pulpits. Jesus calls a woman a dog. Not because he hated women but because he was activating her leadership. He was calling her to speak prophetically to the gathered people of God. He was calling her to preach.
 tags: ["theology","bible","gospel-of-mark"]
