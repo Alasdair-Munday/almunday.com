@@ -23,8 +23,8 @@ What gifts or “talents” do you have and are you using them? What would it lo
 
 ## Related notes
 
-- [[Worship Is Collective World-Making]]
-- [[Fruitfulness Is Relational Rather Than Merely Productive]]
-- [[Play Is a Sign of Safety]]
+- [Worship Is Collective World-Making](posts/worship-is-collective-world-making/index.md)
+- [Fruitfulness Is Relational Rather Than Merely Productive](posts/fruitfulness-is-relational-rather-than-merely-productive/index.md)
+- [Play Is a Sign of Safety](posts/play-is-a-sign-of-safety/index.md)
 
 *Extracted from Three Visions of Paradise Workbook, Session 3 — Create: Restored Culture. The headings and related-note links were added for this garden.*
