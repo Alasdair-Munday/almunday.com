@@ -11,5 +11,5 @@ The Church should not answer critiques of Christian complicity by declaring Chri
 
 ## Related seedlings
 
-- [[The Counterfeit Can Look Like Salvation]]
-- [[Jesus Is the Criterion for Christian Claims About Victory]]
+- [The Counterfeit Can Look Like Salvation](posts/the-counterfeit-can-look-like-salvation/index.md)
+- [Jesus Is the Criterion for Christian Claims About Victory](posts/jesus-is-the-criterion-for-christian-claims-about-victory/index.md)
