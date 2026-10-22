@@ -11,5 +11,5 @@ Missional action becomes distorted when practical service is detached from its t
 
 ## Related seedlings
 
-- [[The Church Participates in God’s Mission Rather Than Owning It]]
-- [[Mission Requires Attention to Power]]
+- [The Church Participates in God’s Mission Rather Than Owning It](posts/the-church-participates-in-gods-mission-rather-than-owning-it/index.md)
+- [Mission Requires Attention to Power](posts/mission-requires-attention-to-power/index.md)
