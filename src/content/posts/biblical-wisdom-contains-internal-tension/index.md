@@ -11,5 +11,5 @@ Proverbs should not be treated as a single, mechanically consistent system; its 
 
 ## Related seedlings
 
-- [[Wisdom Is Both Divine Gift and Human Practice]]
-- [[Biblical Interpretation Requires Discernment Rather Than Simple Rule Application]]
+- [Wisdom Is Both Divine Gift and Human Practice](posts/wisdom-is-both-divine-gift-and-human-practice/index.md)
+- [Biblical Interpretation Requires Discernment Rather Than Simple Rule Application](posts/biblical-interpretation-requires-discernment-rather-than-simple-rule-application/index.md)
