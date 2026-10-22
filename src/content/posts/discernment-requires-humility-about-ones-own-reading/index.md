@@ -11,5 +11,5 @@ Interpretation should remain open to correction by the wider community, especial
 
 ## Related seedlings
 
-- [[Biblical Interpretation Requires Discernment Rather Than Simple Rule Application]]
-- [[God’s Perfection Includes Relational Openness]]
+- [Biblical Interpretation Requires Discernment Rather Than Simple Rule Application](posts/biblical-interpretation-requires-discernment-rather-than-simple-rule-application/index.md)
+- [God’s Perfection Includes Relational Openness](posts/gods-perfection-includes-relational-openness/index.md)
