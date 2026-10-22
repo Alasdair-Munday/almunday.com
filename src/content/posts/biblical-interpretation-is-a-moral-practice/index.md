@@ -18,6 +18,6 @@ How we interpret Scripture affects how we treat vulnerable people, so hermeneuti
 
 ## Related seedlings
 
-- [[Reading Difficult Texts Requires More Than Defending Them]]
+- [[Reparative Interpretation Reads Critically Without Abandoning the Text]]
 - [[Ritual Impurity Is Not the Same as Moral Sin]]
 - [[Biblical Violence Creates Moral Injury]]
