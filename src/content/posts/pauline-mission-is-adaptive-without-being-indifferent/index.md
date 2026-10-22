@@ -1,4 +1,5 @@
 ---
+mainCategory: bible
 title: "Pauline Mission Is Adaptive Without Being Indifferent"
 description: "Paul’s methods appear context-sensitive, but the underlying theological purpose remains stable; this distinguishes missionary flexibility from theological compromise."
 date: 2026-10-22

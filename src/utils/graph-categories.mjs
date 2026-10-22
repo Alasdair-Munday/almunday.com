@@ -8,8 +8,14 @@ export const GRAPH_CATEGORIES = Object.freeze([
 
 /** Choose one explicit tag-based topic; specific subjects precede broad theology.
  * @param {unknown} value
+ * @param {unknown} mainCategory
  */
-export function getGraphCategory(value) {
+export function getGraphCategory(value, mainCategory = undefined) {
+  if (mainCategory != null && mainCategory !== '') {
+    const explicit = String(mainCategory).trim().toLowerCase();
+    if (!GRAPH_CATEGORIES.some(category => category.id === explicit)) throw new Error(`Unknown mainCategory: ${mainCategory}`);
+    return explicit;
+  }
   const tags = (Array.isArray(value) ? value : typeof value === 'string' ? value.replace(/^\[|\]$/g, '').split(',') : [])
     .map(tag => String(tag).trim().replace(/^['"]|['"]$/g, '').toLowerCase());
   for (const id of ['music', 'tech', 'bible', 'culture', 'theology']) {

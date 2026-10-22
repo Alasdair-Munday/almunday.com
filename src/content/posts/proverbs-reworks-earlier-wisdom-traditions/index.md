@@ -1,4 +1,5 @@
 ---
+mainCategory: bible
 title: "Proverbs Reworks Earlier Wisdom Traditions"
 description: "Proverbs appears to draw on surrounding ancient Near Eastern wisdom traditions and adapt them within its own theological vision rather than presenting itself as culturally isolated."
 date: 2026-10-22

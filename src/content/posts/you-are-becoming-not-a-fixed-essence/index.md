@@ -1,4 +1,5 @@
 ---
+mainCategory: culture
 title: "You Are Becoming, Not a Fixed Essence"
 description: "Human identity is not a static category but an unfolding pattern of commitments, loves, habits and relationships."
 date: 2026-10-22

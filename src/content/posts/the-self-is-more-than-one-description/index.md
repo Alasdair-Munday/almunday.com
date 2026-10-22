@@ -1,4 +1,5 @@
 ---
+mainCategory: culture
 title: "The Self Is More Than One Description"
 description: "Psychological, vocational, existential and theological accounts of a person can all be true without reducing someone to a single definition."
 date: 2026-10-22

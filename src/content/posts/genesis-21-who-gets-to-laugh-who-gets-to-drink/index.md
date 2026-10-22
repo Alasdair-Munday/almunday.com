@@ -1,4 +1,5 @@
 ---
+mainCategory: bible
 title: "Genesis 21: Who Gets to Laugh? Who Gets to Drink?"
 date: 2026-02-08
 image: /assets/images/blog/beersheba.png

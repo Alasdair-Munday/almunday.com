@@ -1,4 +1,5 @@
 ---
+mainCategory: theology
 title: "Caring for Creation Through Delight Rather Than Guilt"
 description: "Caring for Creation Through Delight Rather Than Guilt. Extracts from Three Visions of Paradise Workbook."
 date: 2026-10-22

@@ -1,4 +1,5 @@
 ---
+mainCategory: theology
 title: "The Imago Dei Undermines Human Hierarchy"
 description: "If all people bear God’s image, distinctions of gender, ethnicity, class, and status cannot justify unequal human worth."
 date: 2026-10-22

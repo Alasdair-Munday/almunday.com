@@ -1,4 +1,5 @@
 ---
+mainCategory: bible
 title: "Biblical Interpretation Requires Discernment Rather Than Simple Rule Application"
 description: "The notes on Proverbs, Judges, and the parables repeatedly resist flat readings in favour of contextual and morally attentive interpretation."
 date: 2026-10-22

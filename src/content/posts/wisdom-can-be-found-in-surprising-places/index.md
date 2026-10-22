@@ -1,4 +1,5 @@
 ---
+mainCategory: bible
 title: "Wisdom can be found in surprising places"
 description: ""
 date: 2026-10-21

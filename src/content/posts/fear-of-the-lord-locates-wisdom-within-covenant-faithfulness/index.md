@@ -1,4 +1,5 @@
 ---
+mainCategory: bible
 title: "Fear of the Lord Locates Wisdom Within Covenant Faithfulness"
 description: "In the Genesis 3 and Proverbs material, wisdom is not rejected but subordinated to dependence upon God and expressed through covenant faithfulness."
 date: 2026-10-22

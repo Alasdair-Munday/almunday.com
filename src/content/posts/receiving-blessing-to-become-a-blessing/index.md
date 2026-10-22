@@ -1,4 +1,5 @@
 ---
+mainCategory: theology
 title: "Receiving Blessing to Become a Blessing"
 description: "The workbook connects receiving God’s gifts with offering a foretaste of the kingdom to a community."
 date: 2026-10-22

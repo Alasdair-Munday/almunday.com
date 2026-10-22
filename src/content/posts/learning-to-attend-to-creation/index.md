@@ -1,4 +1,5 @@
 ---
+mainCategory: theology
 title: "Learning to Attend to Creation"
 description: "Questions from the workbook about attention, God’s character, and everyday habits of care."
 date: 2026-10-22

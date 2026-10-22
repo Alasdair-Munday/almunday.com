@@ -1,4 +1,5 @@
 ---
+mainCategory: culture
 title: "The Spirit Equips Craftsmanship"
 description: "The workbook connects artistic skill, imagination and practical craft with the Spirit’s gifts."
 date: 2026-10-22

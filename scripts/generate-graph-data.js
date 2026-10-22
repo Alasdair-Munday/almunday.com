@@ -443,7 +443,7 @@ async function generateGraphData() {
       const postNode = {
         id: post.id,
         type: "post",
-        category: getGraphCategory(post.data.tags),
+        category: getGraphCategory(post.data.tags, post.data.mainCategory),
         maturity: normalizeMaturity(post.data.maturity),
         title: post.data.title,
         slug: post.id,

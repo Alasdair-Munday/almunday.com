@@ -1,4 +1,5 @@
 ---
+mainCategory: theology
 title: "God’s Joyous Being"
 description: "A reading note on Dallas Willard’s account of divine joy and affection."
 date: 2026-10-22

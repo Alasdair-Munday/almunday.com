@@ -1,4 +1,5 @@
 ---
+mainCategory: theology
 title: "Atonement Images Carry Anthropological Assumptions"
 description: "Each atonement model implies a particular account of what is wrong with humanity and what kind of change salvation must bring."
 date: 2026-10-22

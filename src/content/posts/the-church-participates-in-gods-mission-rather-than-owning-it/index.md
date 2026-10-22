@@ -1,4 +1,5 @@
 ---
+mainCategory: theology
 title: "The Church Participates in God’s Mission Rather Than Owning It"
 description: "The idea of missio Dei shifts mission away from institutional expansion and toward participation in what God is already doing."
 date: 2026-10-22

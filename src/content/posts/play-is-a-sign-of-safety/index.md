@@ -1,4 +1,5 @@
 ---
+mainCategory: theology
 title: "Play Is a Sign of Safety"
 description: "Play Is a Sign of Safety. Extracts from Three Visions of Paradise Workbook."
 date: 2026-10-22

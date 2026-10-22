@@ -414,8 +414,9 @@ import Icon from './Icon.astro';
         .attr("class", "graph-edge")
         .attr("fill", "none")
         .attr("stroke", colors.linkStroke)
-        .attr("stroke-width", 1)
-        .attr("stroke-opacity", (d: GraphLink) => d.categoryLink ? 0.08 : 0.14);
+        .attr("data-category-link", d => d.categoryLink ? "true" : null)
+        .attr("stroke-width", d => d.categoryLink ? 1.6 : 1)
+        .attr("stroke-opacity", (d: GraphLink) => d.categoryLink ? 0.4 : 0.14);
 
       // Create node groups
       const nodeGroup = containerGroup
@@ -517,7 +518,7 @@ import Icon from './Icon.astro';
         .on("mouseout", function () {
           link.transition().duration(150)
             .attr("stroke", colors.linkStroke)
-            .attr("stroke-opacity", (d: GraphLink) => d.categoryLink ? 0.08 : 0.14);
+            .attr("stroke-opacity", (d: GraphLink) => d.categoryLink ? 0.4 : 0.14);
 
           nodeGroup.selectAll<SVGCircleElement, GraphNode>("circle")
             .attr("fill", colors.linkStroke)

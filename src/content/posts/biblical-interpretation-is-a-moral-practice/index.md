@@ -1,4 +1,5 @@
 ---
+mainCategory: bible
 title: "Biblical Interpretation Is a Moral Practice"
 description: "How we interpret Scripture affects how we treat vulnerable people, so hermeneutics cannot be separated from questions of power, responsibility, and love."
 date: 2026-10-22

@@ -1,4 +1,5 @@
 ---
+mainCategory: bible
 title: "Story Sandwiches and the Architecture of Creation"
 description: "The separating-and-filling pattern of Genesis 1 may help readers recognise why biblical stories are often arranged as nested or interrupted narratives."
 date: 2026-10-22

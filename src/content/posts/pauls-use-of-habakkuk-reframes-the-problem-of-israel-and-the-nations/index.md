@@ -1,4 +1,5 @@
 ---
+mainCategory: bible
 title: "Paul’s Use of Habakkuk Reframes the Problem of Israel and the Nations"
 description: "Paul’s use of Habakkuk connects the prophet’s concern about law, sin, and the Gentiles with the argument of Romans."
 date: 2026-10-22
