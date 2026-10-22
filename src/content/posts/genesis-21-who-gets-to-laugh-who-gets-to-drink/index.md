@@ -11,11 +11,11 @@ tags:
   - reconciliation
 description: When confronted with difference, which path will we choose? Welcome or rejection?
 ---
-
+> [!NOTE]  This Essay is a distillation of a Sermon on Genesis 21
+> 
 ## Part 1: Brothers Become Strangers
 
 Sarah finally has a son.
-
 
 At ninety years old, what she thought was completely impossible is suddenly toddling around. They call him Isaac, “he will laugh”, and you can imagine his little laugh is like music to her soul.
 
@@ -24,11 +24,9 @@ Then she notices who is making him laugh. It’s Ishmael. The son of that foreig
 
 (Your translation may say mocking but the Hebrew is actually more like "making laughter" clearly a deliberate mirror to Isaac's name. Sometimes our translations try to rescue our heroes rather than letting the awkwardness come through.)
 
-
 What seemed like a good idea once - bringing Hagar into the story — now feels like a problem. Ishmael is older, getting stronger, technically the firstborn. She starts to picture him as a threat to Isaac, to her place, to the promise.
 
 Brene Brown discusses the concept of forboding joy - the sense that comes with joy that its days are numbered and when we feel that insecurity, we can start seeing threats everywhere we look. She writes: "Every time I came too close to softening into sheer joyfulness about my children and how much I love them, I’d picture something terrible happening; I’d picture losing everything in a flash." (Brene Brown, The Gifts of Imperfection)
-
 
 > When Sarah says: "The son of this slave woman will not inherit with my son Isaac". The subtext is “I’m the chosen one. This is for *us*. Not for them.”
 
@@ -63,7 +61,6 @@ Abraham, never one to keep things simple, does something stupidly risky. He brin
 But Abimelech, miraculously, Is happy to sort it out and they make a covenant. Moving from strangers to brothers.
 
 This is the alternative story to casting out Hagar and Ishmael. Instead of turning brothers into strangers, Abraham forms a covenant. And as a result we see people, a well and a **Tree** (As per usual its all about Trees)
-
 
 ---
 
