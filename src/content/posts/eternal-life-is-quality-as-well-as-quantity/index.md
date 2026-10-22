@@ -1,14 +1,8 @@
 ---
-mainCategory: theology
 title: "Eternal Life Is Quality as Well as Quantity"
 description: "Eternal Life Is Quality as Well as Quantity. Extracts from Three Visions of Paradise Workbook."
 date: 2026-10-22
-tags:
-  - kingdom-of-god
-  - soteriology
-  - spirituality-and-practice
-  - digital-garden
-  - maturity-seedling
+tags: ["kingdom-of-god","soteriology","spirituality-and-practice"]
 maturity: seedling
 draft: false
 ---

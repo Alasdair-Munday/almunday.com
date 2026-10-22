@@ -1,14 +1,8 @@
 ---
-mainCategory: theology
 title: "Worship Is Collective World-Making"
 description: "Singing, creativity, and liturgical participation do not merely express belief; they create a shared communal reality and declare what the community considers worthy."
 date: 2026-10-22
-tags:
-  - ecclesiology
-  - worldview
-  - digital-garden
-  - seedling
-  - maturity-seed
+tags: ["ecclesiology","worldview"]
 maturity: seed
 draft: false
 ---

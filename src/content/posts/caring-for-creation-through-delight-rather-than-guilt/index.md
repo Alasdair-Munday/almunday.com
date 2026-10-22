@@ -1,14 +1,8 @@
 ---
-mainCategory: theology
 title: "Caring for Creation Through Delight Rather Than Guilt"
 description: "Caring for Creation Through Delight Rather Than Guilt. Extracts from Three Visions of Paradise Workbook."
 date: 2026-10-22
-tags:
-  - creation
-  - spirituality-and-practice
-  - kingdom-of-god
-  - digital-garden
-  - maturity-seedling
+tags: ["creation","spirituality-and-practice","kingdom-of-god"]
 maturity: seedling
 draft: false
 ---

@@ -1,14 +1,8 @@
 ---
-mainCategory: theology
 title: "Churches Are Communities of Competing Narratives"
 description: "A congregation is not held together only by doctrine or organisation; it is shaped by the stories its buildings, rituals, history, and leaders communicate."
 date: 2026-10-22
-tags:
-  - ecclesiology
-  - worldview
-  - digital-garden
-  - seedling
-  - maturity-seed
+tags: ["ecclesiology","worldview"]
 maturity: seed
 draft: false
 ---

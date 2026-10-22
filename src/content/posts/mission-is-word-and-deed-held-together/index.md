@@ -1,14 +1,8 @@
 ---
-mainCategory: theology
 title: "Mission Is Word and Deed Held Together"
 description: "Missional action becomes distorted when practical service is detached from its theological meaning, or when proclamation is detached from embodied concern."
 date: 2026-10-22
-tags:
-  - missiology
-  - worldview
-  - digital-garden
-  - seedling
-  - maturity-seed
+tags: ["missiology","worldview"]
 maturity: seed
 draft: false
 ---

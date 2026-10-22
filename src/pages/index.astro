@@ -21,7 +21,7 @@ const seo = { title: siteConfig.homepageTitle, description: siteConfig.descripti
       <div class="al-maturity-stages" aria-hidden="true">{MATURITY_STAGES.map(stage => <span>{NOTE_MATURITY[stage].label}</span>)}</div>
     </div>
     <div id="home-graph-container" role="region" aria-label="Interactive graph of published writing"><p class="al-loading">Loading the garden…</p></div>
-    <p class="al-graph-help">Drag to explore · Pinch or scroll to zoom · Choose a title to read. Large nodes mark Bible, Culture, Theology, Music and Tech. Choose a topic to zoom in. Lines connect notes and their main topics. Hover over a note to highlight its connections. <button id="garden-graph-overview" type="button">Show whole garden</button></p>
+    <p class="al-graph-help">Drag to explore · Pinch or scroll to zoom · Choose a title to read. Tags connect related notes. More connections make a node larger. Choose a tag to zoom in. Hover over a note to highlight its connections. <button id="garden-graph-overview" type="button">Show whole garden</button></p>
     <NoteMaturityLegend />
     <details class="al-list"><summary>Essays</summary><ul>{posts.map(post => <li><a href={`/posts/${post.id}/`}>{post.data.title}</a></li>)}</ul></details>
   </section>

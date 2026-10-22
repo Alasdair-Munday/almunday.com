@@ -4,7 +4,7 @@ import { MATURITY_STAGES, NOTE_MATURITY } from '@/utils/note-maturity.mjs';
 ---
 {siteConfig.postOptions.graphView.noteMaturity.enabled && (
   <ul class="maturity-legend" aria-label="Note maturity">
-    {MATURITY_STAGES.map(stage => <li><span class="mark" style={`--mark-size: ${NOTE_MATURITY[stage].radius * 1.3}px; --mark-opacity: ${NOTE_MATURITY[stage].opacity}`} aria-hidden="true"></span>{NOTE_MATURITY[stage].label}</li>)}
+    {MATURITY_STAGES.map(stage => <li><span class="mark" style={`--mark-size: ${8}px; --mark-opacity: ${NOTE_MATURITY[stage].opacity}`} aria-hidden="true"></span>{NOTE_MATURITY[stage].label}</li>)}
   </ul>
 )}
 <style>

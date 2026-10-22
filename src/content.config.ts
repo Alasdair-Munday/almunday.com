@@ -1,5 +1,4 @@
 import { defineCollection, z } from 'astro:content';
-import { GRAPH_CATEGORIES } from './utils/graph-categories.mjs';
 import { MATURITY_STAGES, DEFAULT_MATURITY } from './utils/note-maturity.mjs';
 import { glob } from 'astro/loaders';
 
@@ -8,7 +7,6 @@ const postsCollection = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/posts' }),
   schema: z.object({
     title: z.string().default('Untitled Post'),
-    mainCategory: z.enum(GRAPH_CATEGORIES.map(category => category.id) as [string, ...string[]]).optional(),
     maturity: z.preprocess(
       value => typeof value === 'string' ? value.trim().toLowerCase() || undefined : value ?? undefined,
       z.enum(MATURITY_STAGES).default(DEFAULT_MATURITY)

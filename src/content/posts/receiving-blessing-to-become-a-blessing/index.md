@@ -1,14 +1,8 @@
 ---
-mainCategory: theology
 title: "Receiving Blessing to Become a Blessing"
 description: "The workbook connects receiving God’s gifts with offering a foretaste of the kingdom to a community."
 date: 2026-10-22
-tags:
-  - mission
-  - kingdom-of-god
-  - community
-  - digital-garden
-  - maturity-seedling
+tags: ["mission","kingdom-of-god","community"]
 maturity: seedling
 draft: false
 ---

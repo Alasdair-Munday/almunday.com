@@ -1,14 +1,8 @@
 ---
-mainCategory: theology
 title: "God’s Presence Is Found Among the Poor"
 description: "The vault repeatedly connects Christian perception of God with attention to those who are marginalised, economically poor, or socially excluded."
 date: 2026-10-22
-tags:
-  - doctrine-of-god
-  - worldview
-  - digital-garden
-  - seedling
-  - maturity-seed
+tags: ["doctrine-of-god","worldview"]
 maturity: seed
 draft: false
 ---
