@@ -1,5 +1,6 @@
 ---
 title: "Biblical Violence Creates Moral Injury"
+type: opinion
 description: "Violent biblical stories can expose the psychological and spiritual damage caused by celebrating victory through the death of another person."
 date: 2026-10-22
 tags: ["bible","biblical-studies","hermeneutics","ethics"]
