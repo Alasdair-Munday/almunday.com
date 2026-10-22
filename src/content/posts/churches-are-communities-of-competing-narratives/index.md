@@ -11,5 +11,5 @@ A congregation is not held together only by doctrine or organisation; it is shap
 
 ## Related seedlings
 
-- [[Human Beings Are Formed by Narratives]]
-- [[Worship Is Collective World-Making]]
+- [Human Beings Are Formed by Narratives](posts/human-beings-are-formed-by-narratives/index.md)
+- [Worship Is Collective World-Making](posts/worship-is-collective-world-making/index.md)
