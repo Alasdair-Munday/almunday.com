@@ -1,5 +1,6 @@
 ---
 title: "The Two Mountains Ask Who Is Sacrificed"
+type: opinion
 description: "The two mountains offer a compact biblical diagnostic."
 date: 2026-10-22
 tags: ["bible-and-hermeneutics", "eschatology"]
