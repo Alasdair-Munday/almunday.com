@@ -11,5 +11,5 @@ A church may formally welcome single people, ethnic minorities, immigrants, refu
 
 ## Related seedlings
 
-- [[The Imago Dei Undermines Human Hierarchy]]
-- [[Salvation Reorders Human Relationships]]
+- [The Imago Dei Undermines Human Hierarchy](posts/the-imago-dei-undermines-human-hierarchy/index.md)
+- [Salvation Reorders Human Relationships](posts/salvation-reorders-human-relationships/index.md)
