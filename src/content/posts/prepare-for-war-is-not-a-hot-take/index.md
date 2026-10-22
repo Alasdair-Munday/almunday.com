@@ -11,5 +11,5 @@ draft: false
 
 ## Related seedlings
 
-- [[The Lamb Redefines What Conquest Means]]
-- [[Jesus Is the Criterion for Christian Claims About Victory]]
+- [The Lamb Redefines What Conquest Means](posts/the-lamb-redefines-what-conquest-means/index.md)
+- [Jesus Is the Criterion for Christian Claims About Victory](posts/jesus-is-the-criterion-for-christian-claims-about-victory/index.md)
