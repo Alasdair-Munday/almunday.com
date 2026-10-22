@@ -1,5 +1,6 @@
 ---
 title: Daring greatly with Psalm 1
+type: essay
 description: ""
 date: 2026-10-21
 tags: []
