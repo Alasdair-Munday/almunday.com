@@ -1,5 +1,6 @@
 ---
 title: "Discernment Requires Humility About One’s Own Reading"
+type: opinion
 description: "Interpretation should remain open to correction by the wider community, especially when dealing with symbolic narratives and contested theological claims."
 date: 2026-10-22
 tags: ["spirituality-and-practice"]
