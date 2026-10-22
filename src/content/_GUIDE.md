@@ -101,3 +101,7 @@ The graph uses larger, more solid node marks for more developed notes. Titles st
 The front-page graph starts with a minimum maturity of Growing, showing growing and established notes. Lower the Minimum maturity selector to Seedling or Seed to include earlier ideas. This only filters the graph; published notes remain available through search.
 
 Writing and tag lists show established essays only. Existing blog posts without maturity remain included. Set `maturity: established` when a garden note is ready to appear as an essay.
+
+## Garden topics
+
+The graph has five large topic hubs: Bible, Culture, Theology, Music and Tech. Tag notes with the corresponding lowercase name to associate them; related subject tags are mapped in `src/utils/graph-categories.mjs`. Each note gets one main hub to limit clutter, with Music/Tech first, then Bible, Culture, Theology when tags overlap. Untagged or unmatched notes stay ungrouped. Hubs remain visible at every maturity level, while their note connections follow the filter. These topic nodes are navigation landmarks, not essays or maturity levels.

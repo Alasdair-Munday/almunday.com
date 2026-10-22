@@ -33,6 +33,7 @@ import Icon from './Icon.astro';
 
 <script>
   import * as d3 from "d3";
+  import { GRAPH_CATEGORIES } from '@/utils/graph-categories.mjs';
   import { graphMaturityStyle, meetsMinimumMaturity, MATURITY_STAGES, NOTE_MATURITY } from '@/utils/note-maturity.mjs';
   import { getGraphThemeColors } from '@/utils/graph-theme-colors';
 
@@ -52,6 +53,7 @@ import Icon from './Icon.astro';
     maturity: string;
     label: string;
     group?: string;
+    category?: string | null;
     x?: number;
     y?: number;
     fx?: number | null;
@@ -62,6 +64,7 @@ import Icon from './Icon.astro';
     source: string | GraphNode;
     target: string | GraphNode;
     value: number;
+    categoryLink?: boolean;
   }
 
   interface GraphData {
@@ -239,7 +242,8 @@ import Icon from './Icon.astro';
             name: node.title || node.name,
             slug: node.slug,
             ...graphMaturityStyle(node.maturity, 'global', document.getElementById('graph-modal-overlay')?.dataset.noteMaturityEnabled !== 'false', node.connections || 0),
-            group: node.type
+            group: node.type,
+            category: node.category
           })),
           links: data.connections.map((conn: any) => ({
             source: conn.source,
@@ -262,7 +266,14 @@ import Icon from './Icon.astro';
           const nodes = filter ? graphData.nodes.filter(node => meetsMinimumMaturity(node.maturity, minimum)) : graphData.nodes;
           const ids = new Set(nodes.map(node => node.id));
           const links = graphData.links.filter(link => ids.has(String(link.source)) && ids.has(String(link.target)));
-          renderGraph(container, { nodes, links });
+          const hubs: GraphNode[] = GRAPH_CATEGORIES.map(category => ({
+            id: `category:${category.id}`, name: category.label, group: 'category',
+            category: category.id, radius: 24, opacity: 1, maturity: 'established', label: 'Topic',
+          }));
+          const categoryLinks: GraphLink[] = nodes.filter(node => node.category).map(node => ({
+            source: node.id, target: `category:${node.category}`, value: 1, categoryLink: true,
+          }));
+          renderGraph(container, { nodes: [...hubs, ...nodes], links: [...categoryLinks, ...links] });
         };
         if (filter) filter.oninput = draw;
         draw();
@@ -307,19 +318,25 @@ import Icon from './Icon.astro';
     const links = data.links.map((d) => ({ ...d }));
     const nodes = data.nodes.map((d) => ({ ...d }));
 
-    // Seed a circular cloud, then let linked notes settle together with room for titles.
+    // Topic anchors form a loose circle; notes settle around their tagged subject.
+    const hubRadius = Math.max(330, Math.sqrt(nodes.length) * 65);
+    const anchors = new Map(GRAPH_CATEGORIES.map((category, i) => {
+      const angle = -Math.PI / 2 + i * Math.PI * 2 / GRAPH_CATEGORIES.length;
+      return [category.id, { x: Math.cos(angle) * hubRadius, y: Math.sin(angle) * hubRadius }];
+    }));
     const goldenAngle = Math.PI * (3 - Math.sqrt(5));
     nodes.forEach((node, index) => {
-      const radius = 150 * Math.sqrt(index);
-      node.x = Math.cos(index * goldenAngle) * radius;
-      node.y = Math.sin(index * goldenAngle) * radius;
+      const anchor = anchors.get(node.category || '') || { x: 0, y: 0 };
+      const radius = node.group === 'category' ? 0 : 150 * Math.sqrt(index % 12 + 1);
+      node.x = anchor.x + Math.cos(index * goldenAngle) * radius;
+      node.y = anchor.y + Math.sin(index * goldenAngle) * radius;
     });
     simulation = d3.forceSimulation<GraphNode>(nodes)
-      .force('link', d3.forceLink(links).id((d: any) => d.id).distance(290).strength(0.06))
+      .force('link', d3.forceLink(links).id((d: any) => d.id).distance(290).strength((d: any) => d.categoryLink ? 0.035 : 0.02))
       .force('charge', d3.forceManyBody().strength(-900))
-      .force('x', d3.forceX<GraphNode>(0).strength(0.025))
-      .force('y', d3.forceY<GraphNode>(0).strength(0.025))
-      .force('collision', d3.forceCollide<GraphNode>().radius(135).iterations(3));
+      .force('x', d3.forceX<GraphNode>(d => anchors.get(d.category || '')?.x || 0).strength(d => d.group === 'category' ? 0.8 : 0.08))
+      .force('y', d3.forceY<GraphNode>(d => anchors.get(d.category || '')?.y || 0).strength(d => d.group === 'category' ? 0.8 : 0.08))
+      .force('collision', d3.forceCollide<GraphNode>().radius(d => d.group === 'category' ? 330 : 135).iterations(3));
 
     // Create SVG
     let svg = d3
@@ -367,6 +384,9 @@ import Icon from './Icon.astro';
 
         // Hide/show labels based on zoom level
         const scale = event.transform.k;
+        labels.attr('font-size', d => d.group === 'category' ? `${Math.max(22, 18 / scale)}px` : '16px');
+        labels.filter(d => d.group === 'category').select('tspan').attr('y', Math.max(24, 13 / scale) + 24 / scale);
+        containerGroup.selectAll<SVGCircleElement, GraphNode>('circle').attr('r', d => d.group === 'category' ? Math.max(24, 13 / scale) : d.radius);
         const labelThreshold = container.id === 'home-graph-container' ? 0 : 0.6; // Hide labels when zoomed out beyond this threshold
 
         if (scale < labelThreshold) {
@@ -381,6 +401,10 @@ import Icon from './Icon.astro';
     svg.call(zoom as any);
     if (svg) svg.style('cursor', 'default');
 
+    function focusCategory(node: GraphNode) {
+      svg.call(zoom.transform as any, d3.zoomIdentity.translate(width / 2, height / 2).scale(0.85).translate(-node.x!, -node.y!));
+    }
+
       // Create links
       const link = containerGroup
         .selectAll("path.graph-edge")
@@ -391,7 +415,7 @@ import Icon from './Icon.astro';
         .attr("fill", "none")
         .attr("stroke", colors.linkStroke)
         .attr("stroke-width", 1)
-        .attr("stroke-opacity", 0.14);
+        .attr("stroke-opacity", (d: GraphLink) => d.categoryLink ? 0.08 : 0.14);
 
       // Create node groups
       const nodeGroup = containerGroup
@@ -401,11 +425,13 @@ import Icon from './Icon.astro';
         .append("g")
         .attr("data-id", (d) => d.id)
         .attr("pointer-events", "bounding-box")
-        .attr("tabindex", (d) => d.slug ? 0 : null)
-        .attr("role", (d) => d.slug ? "link" : "img")
-        .attr("aria-label", (d) => `${d.name} — ${d.label}`)
-        .attr("data-maturity", (d) => d.maturity)
+        .attr("tabindex", (d) => d.slug || d.group === 'category' ? 0 : null)
+        .attr("role", (d) => d.group === 'category' ? "button" : d.slug ? "link" : "img")
+        .attr("aria-label", (d) => d.group === 'category' ? `${d.name} topic — zoom to explore` : `${d.name} — ${d.label}`)
+        .attr("data-maturity", (d) => d.group === 'category' ? null : d.maturity)
+        .attr("data-category", d => d.group === 'category' ? d.category || null : null)
         .on("keydown", (_event, d) => {
+          if (d.group === 'category' && (_event.key === 'Enter' || _event.key === ' ')) { _event.preventDefault(); focusCategory(d); }
           if (_event.key === 'Enter' && d.slug) window.location.href = `/posts/${d.slug}`;
         })
         .call(
@@ -438,6 +464,7 @@ import Icon from './Icon.astro';
               const dx = event.x - dragStartX;
               const dy = event.y - dragStartY;
               const dist = Math.sqrt(dx * dx + dy * dy);
+              if (dist < CLICK_DISTANCE && d.group === 'category') focusCategory(d);
               if (dist < CLICK_DISTANCE && d.slug) {
                 closeModal();
 
@@ -490,7 +517,7 @@ import Icon from './Icon.astro';
         .on("mouseout", function () {
           link.transition().duration(150)
             .attr("stroke", colors.linkStroke)
-            .attr("stroke-opacity", 0.14);
+            .attr("stroke-opacity", (d: GraphLink) => d.categoryLink ? 0.08 : 0.14);
 
           nodeGroup.selectAll<SVGCircleElement, GraphNode>("circle")
             .attr("fill", colors.linkStroke)
@@ -527,7 +554,7 @@ import Icon from './Icon.astro';
         })
         .attr("text-anchor", "middle")
         .attr("font-size", "16px")
-        .attr("font-weight", "500")
+        .attr("font-weight", d => d.group === 'category' ? "700" : "500")
         .attr("fill", colors.postText)
         .attr("pointer-events", "all")
         .style("user-select", "none")
@@ -544,8 +571,8 @@ import Icon from './Icon.astro';
       const xs = nodes.map(node => node.x || 0), ys = nodes.map(node => node.y || 0);
       const minX = Math.min(...xs) - 110, maxX = Math.max(...xs) + 110;
       const minY = Math.min(...ys) - 30, maxY = Math.max(...ys) + 130;
-      const fitScale = Math.min(1.2, width / (maxX - minX), height / (maxY - minY));
-      const scale = Math.max(0.9, fitScale);
+      const fitScale = Math.max(0.1, Math.min(1.2, (width - 120) / (maxX - minX), (height - 120) / (maxY - minY)));
+      const scale = fitScale;
       // Keep dense gardens readable; the overview control fits the entire cloud.
       const focusX = (minX + maxX) / 2;
       const focusY = (minY + maxY) / 2;

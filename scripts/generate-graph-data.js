@@ -21,6 +21,7 @@
  * - Nested content: "category/my-post.md" → ID: "category-my-post"
  */
 
+import { getGraphCategory } from '../src/utils/graph-categories.mjs';
 import { normalizeMaturity } from '../src/utils/note-maturity.mjs';
 
 import {
@@ -442,6 +443,7 @@ async function generateGraphData() {
       const postNode = {
         id: post.id,
         type: "post",
+        category: getGraphCategory(post.data.tags),
         maturity: normalizeMaturity(post.data.maturity),
         title: post.data.title,
         slug: post.id,

@@ -10,19 +10,21 @@ test('production graph resolves titles, deduplicates links, excludes drafts and 
     mkdirSync(join(root, 'scripts'));
     mkdirSync(join(root, 'src/content/posts'), { recursive: true });
     mkdirSync(join(root, 'src/utils'), { recursive: true });
+    copyFileSync('src/utils/graph-categories.mjs', join(root, 'src/utils/graph-categories.mjs'));
     copyFileSync('src/utils/note-maturity.mjs', join(root, 'src/utils/note-maturity.mjs'));
     writeFileSync(join(root, 'package.json'), '{"type":"module"}');
     writeFileSync(join(root, 'src/config.ts'), 'maxNodes: 100');
     copyFileSync('scripts/generate-graph-data.js', join(root, 'scripts/generate-graph-data.js'));
-    const note = (slug, title, body, draft = false, maturity = '') => writeFileSync(join(root, `src/content/posts/${slug}.md`), `---\ntitle: ${title}\ndate: 2026-10-21\ndraft: ${draft}\n${maturity ? `maturity: ${maturity}\n` : ''}---\n${body}`);
+    const note = (slug, title, body, draft = false, maturity = '', tags = '') => writeFileSync(join(root, `src/content/posts/${slug}.md`), `---\ntitle: ${title}\ndate: 2026-10-21\ndraft: ${draft}\n${maturity ? `maturity: ${maturity}\n` : ''}${tags ? `tags: ${tags}\n` : ''}---\n${body}`);
     note('first', 'First', '[[Different title]] [[Different title]] `[[Private]]`\n\n```md\n[[Third]]\n```');
-    note('second', 'Different title', '', false, 'growing');
+    note('second', 'Different title', '', false, 'growing', '[bible, theology]');
     note('third', 'Third', '', false, 'seedling');
     note('idea', 'An idea', '', false, 'seed');
     note('private', 'Private', '', true);
     execFileSync(process.execPath, ['scripts/generate-graph-data.js', '--production'], { cwd: root });
     const data = JSON.parse(readFileSync(join(root, 'public/graph/graph-data.json')));
     assert.equal(data.nodes.length, 4);
+    assert.equal(data.nodes.find(node => node.id === 'second').category, 'bible');
     assert.deepEqual(data.nodes.map(node => node.maturity), ['established', 'seed', 'growing', 'seedling']);
     assert.deepEqual(data.connections, [{ source: 'first', target: 'second', type: 'link' }]);
   } finally { rmSync(root, { recursive: true, force: true }); }
