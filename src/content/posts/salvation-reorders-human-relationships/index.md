@@ -11,5 +11,5 @@ Participation in Christ is presented as breaking down hostility and relativising
 
 ## Related seedlings
 
-- [[The Gospel Relocates Honour and Shame]]
-- [[Church Hospitality Requires More Than Inclusion]]
+- [The Gospel Relocates Honour and Shame](posts/the-gospel-relocates-honour-and-shame/index.md)
+- [Church Hospitality Requires More Than Inclusion](posts/church-hospitality-requires-more-than-inclusion/index.md)
