@@ -27,6 +27,6 @@ What is one creative way you can use your skills to bless your local community o
 
 ## Related notes
 
-- [[Creativity Without Building a Monument to Ourselves]]
-- [[Fruitfulness Is Relational Rather Than Merely Productive]]
-- [[Receiving Blessing to Become a Blessing]]
+- [Creativity Without Building a Monument to Ourselves](posts/creativity-without-building-a-monument-to-ourselves/index.md)
+- [Fruitfulness Is Relational Rather Than Merely Productive](posts/fruitfulness-is-relational-rather-than-merely-productive/index.md)
+- [Receiving Blessing to Become a Blessing](posts/receiving-blessing-to-become-a-blessing/index.md)
