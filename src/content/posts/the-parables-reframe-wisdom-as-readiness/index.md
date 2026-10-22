@@ -11,5 +11,5 @@ In the parable of the ten virgins, wisdom is not merely intellectual understandi
 
 ## Related seedlings
 
-- [[Wisdom Is Both Divine Gift and Human Practice]]
-- [[Discernment Requires Humility About One’s Own Reading]]
+- [Wisdom Is Both Divine Gift and Human Practice](posts/wisdom-is-both-divine-gift-and-human-practice/index.md)
+- [Discernment Requires Humility About One’s Own Reading](posts/discernment-requires-humility-about-ones-own-reading/index.md)
