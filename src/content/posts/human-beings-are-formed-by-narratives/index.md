@@ -11,5 +11,5 @@ People and communities receive identity through stories, symbols, histories, and
 
 ## Related seedlings
 
-- [[Churches Are Communities of Competing Narratives]]
-- [[Mission Begins by Listening to Existing Narratives]]
+- [Churches Are Communities of Competing Narratives](posts/churches-are-communities-of-competing-narratives/index.md)
+- [Mission Begins by Listening to Existing Narratives](posts/mission-begins-by-listening-to-existing-narratives/index.md)
