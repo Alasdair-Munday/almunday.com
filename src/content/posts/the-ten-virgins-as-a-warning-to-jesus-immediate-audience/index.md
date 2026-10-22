@@ -1,5 +1,6 @@
 ---
 title: "The Ten Virgins as a Warning to Jesus’ Immediate Audience"
+type: opinion
 description: "The parable of the ten virgins is best read as a warning directed toward Jesus’ contemporary audience, rather than only as a prediction about the church’s future readiness."
 date: 2026-10-22
 tags: ["bible","biblical-studies","hermeneutics"]
