@@ -1,5 +1,6 @@
 ---
 title: "End-Times Politics Can Be an Eschatology of Abandonment"
+type: opinion
 description: "Some end-times politics treats catastrophe as inevitable and turns the decisive question into who can escape, survive, or remain protected."
 date: 2026-10-22
 tags: ["bible-and-hermeneutics", "politics"]
