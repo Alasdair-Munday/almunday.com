@@ -1,5 +1,6 @@
 ---
 title: "Ritual Impurity Is Not the Same as Moral Sin"
+type: opinion
 description: "Leviticus distinguishes ritual states from moral wrongdoing, challenging the assumption that everything described as unclean is automatically sinful."
 date: 2026-10-22
 tags: ["bible","biblical-studies","leviticus","hermeneutics"]
