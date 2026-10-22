@@ -1,5 +1,6 @@
 ---
 title: "Biblical Wisdom Combines Faith and Reason"
+type: opinion
 description: "The internal world of Proverbs presents faith and reason as complementary practices rather than competing sources of knowledge."
 date: 2026-10-22
 tags: ["bible","biblical-studies","hermeneutics"]
