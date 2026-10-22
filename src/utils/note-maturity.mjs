@@ -36,3 +36,8 @@ export function graphMaturityStyle(value, scale = 'global', enabled = true, conn
     : Math.max(5, Math.min(15, connections + 5));
   return { maturity, label: style.label, radius: enabled ? (scale === 'local' ? style.localRadius : style.radius) : legacyRadius, opacity: enabled ? style.opacity : 1 };
 }
+
+/** @param {unknown} value @param {unknown} minimum */
+export function meetsMinimumMaturity(value, minimum = 'growing') {
+  return MATURITY_STAGES.indexOf(normalizeMaturity(value)) >= MATURITY_STAGES.indexOf(normalizeMaturity(minimum));
+}

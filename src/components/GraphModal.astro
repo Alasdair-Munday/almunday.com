@@ -33,7 +33,7 @@ import Icon from './Icon.astro';
 
 <script>
   import * as d3 from "d3";
-  import { graphMaturityStyle } from '@/utils/note-maturity.mjs';
+  import { graphMaturityStyle, meetsMinimumMaturity } from '@/utils/note-maturity.mjs';
   import { getGraphThemeColors } from '@/utils/graph-theme-colors';
 
   // Graph Modal Functionality
@@ -247,7 +247,18 @@ import Icon from './Icon.astro';
             value: 1
           }))
         };
-        renderGraph(container, graphData);
+        const filter = container.id === 'home-graph-container'
+          ? document.getElementById('garden-minimum-maturity') as HTMLSelectElement | null
+          : null;
+        const draw = () => {
+          if (!container.isConnected) return;
+          const nodes = filter ? graphData.nodes.filter(node => meetsMinimumMaturity(node.maturity, filter.value)) : graphData.nodes;
+          const ids = new Set(nodes.map(node => node.id));
+          const links = graphData.links.filter(link => ids.has(String(link.source)) && ids.has(String(link.target)));
+          renderGraph(container, { nodes, links });
+        };
+        if (filter) filter.onchange = draw;
+        draw();
       })
       .catch(error => {
         console.warn('Could not load graph data:', error);
@@ -278,6 +289,13 @@ import Icon from './Icon.astro';
 
     // Clear container
     container.innerHTML = '';
+    if (data.nodes.length === 0) {
+      const message = document.createElement('p');
+      message.textContent = 'No notes at this maturity yet. Choose a lower minimum to explore more.';
+      message.setAttribute('role', 'status');
+      container.append(message);
+      return;
+    }
 
     const links = data.links.map((d) => ({ ...d }));
     const nodes = data.nodes.map((d) => ({ ...d }));

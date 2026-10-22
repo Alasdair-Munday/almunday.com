@@ -97,3 +97,5 @@ maturity: seed
 Use `seed` for a title or a single sentence introducing an idea, `seedling` for a short note that begins exploring it, `growing` for a developing elaboration, and `established` for a developed piece. Maturity is an editorial choice, independent of length, link count or certainty. New post templates start at seed. Existing posts without this property render as established; no existing writing has been reclassified.
 
 The graph uses larger, more solid node marks for more developed notes. Titles stay readable. Each node’s tooltip and accessible label include its maturity. `draft: true` still excludes a note from publication regardless of maturity. Missing or blank maturity means established; an unsupported value produces a build error listing the accepted stages.
+
+The front-page graph starts with a minimum maturity of Growing, showing growing and established notes. Lower the Minimum maturity selector to Seedling or Seed to include earlier ideas. This only filters the graph; published notes remain available through search and All writing.

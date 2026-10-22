@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { graphMaturityStyle, normalizeMaturity, MATURITY_STAGES } from '../src/utils/note-maturity.mjs';
+import { graphMaturityStyle, normalizeMaturity, MATURITY_STAGES, meetsMinimumMaturity } from '../src/utils/note-maturity.mjs';
 
 test('missing and blank maturity preserve established notes; stages accept case/spacing', () => {
   for (const value of [undefined, null, '', '  ']) assert.equal(normalizeMaturity(value), 'established');
@@ -29,4 +29,13 @@ test('disabling maturity styling restores upstream connection-based sizing', () 
   assert.equal(graphMaturityStyle('growing', 'local', false, 0).radius, 3);
   assert.equal(graphMaturityStyle('growing', 'local', false, 100).radius, 8);
   assert.equal(graphMaturityStyle('seedling', 'global', false, 0).opacity, 1);
+});
+
+test('minimum maturity includes the selected stage and all later stages', () => {
+  for (const [index, minimum] of MATURITY_STAGES.entries()) {
+    assert.deepEqual(MATURITY_STAGES.filter(stage => meetsMinimumMaturity(stage, minimum)), MATURITY_STAGES.slice(index));
+  }
+  assert.equal(meetsMinimumMaturity('seedling'), false);
+  assert.equal(meetsMinimumMaturity('growing'), true);
+  assert.equal(meetsMinimumMaturity(undefined), true);
 });
