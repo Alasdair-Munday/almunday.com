@@ -1,5 +1,6 @@
 ---
 title: "Salvation Reorders Human Relationships"
+type: opinion
 description: "Participation in Christ is presented as breaking down hostility and relativising social distinctions, not merely as securing individual forgiveness."
 date: 2026-10-22
 tags: ["soteriology"]
