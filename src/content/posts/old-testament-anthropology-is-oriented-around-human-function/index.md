@@ -1,5 +1,6 @@
 ---
 title: "Old Testament Anthropology Is Oriented Around Human Function"
+type: opinion
 description: "In the Old Testament material, human identity is expressed not only through what humans are but through their vocation to mediate God’s presence and rule under divine authority."
 date: 2026-10-22
 tags: ["bible","biblical-studies","hermeneutics"]
