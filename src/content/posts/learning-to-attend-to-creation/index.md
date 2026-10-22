@@ -27,6 +27,6 @@ How can we practice this in our life?
 
 ## Related notes
 
-- [[Recovering Wonder]]
-- [[God’s Joyous Being]]
-- [[Caring for Creation Through Delight Rather Than Guilt]]
+- [Recovering Wonder](posts/recovering-wonder/index.md)
+- [God’s Joyous Being](posts/gods-joyous-being/index.md)
+- [Caring for Creation Through Delight Rather Than Guilt](posts/caring-for-creation-through-delight-rather-than-guilt/index.md)
