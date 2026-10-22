@@ -11,6 +11,6 @@ The book of Judges presents leadership as increasingly corrupted when gifted peo
 
 ## Related seedlings
 
-- [[The Old Testament Does Not Treat Every Leader as a Hero]]
-- [[The Spirit’s Empowerment Does Not Automatically Legitimate a Judge’s Actions]]
-- [[Jesus Is Lord]]
+- [The Old Testament Does Not Treat Every Leader as a Hero](posts/the-old-testament-does-not-treat-every-leader-as-a-hero/index.md)
+- [The Spirit’s Empowerment Does Not Automatically Legitimate a Judge’s Actions](posts/the-spirits-empowerment-does-not-automatically-legitimate-a-judges-actions/index.md)
+- [Jesus Is Lord](posts/jesus-is-lord/index.md)
