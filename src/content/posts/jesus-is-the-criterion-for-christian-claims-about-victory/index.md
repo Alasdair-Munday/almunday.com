@@ -11,5 +11,5 @@ Christian claims about power, salvation, and the future should be judged by Jesu
 
 ## Related seedlings
 
-- [[Christian Critique Should Begin With Complicity]]
-- [[The Lamb Redefines What Conquest Means]]
+- [Christian Critique Should Begin With Complicity](posts/christian-critique-should-begin-with-complicity/index.md)
+- [The Lamb Redefines What Conquest Means](posts/the-lamb-redefines-what-conquest-means/index.md)
