@@ -33,6 +33,7 @@ import Icon from './Icon.astro';
 
 <script>
   import * as d3 from "d3";
+  import { buildGraphForest } from '@/utils/graph-forest.mjs';
   import { graphMaturityStyle, meetsMinimumMaturity, MATURITY_STAGES, NOTE_MATURITY } from '@/utils/note-maturity.mjs';
   import { getGraphThemeColors } from '@/utils/graph-theme-colors';
 
@@ -62,6 +63,7 @@ import Icon from './Icon.astro';
     source: string | GraphNode;
     target: string | GraphNode;
     value: number;
+    branch?: boolean;
   }
 
   interface GraphData {
@@ -288,7 +290,7 @@ import Icon from './Icon.astro';
     cleanup?.();
     const width = container.offsetWidth;
     const height = container.offsetHeight;
-    const radiusForce = 300;
+
     let dragStartX = 0;
     let dragStartY = 0;
     const CLICK_DISTANCE = 5; // px threshold to distinguish click from drag
@@ -307,17 +309,25 @@ import Icon from './Icon.astro';
     const links = data.links.map((d) => ({ ...d }));
     const nodes = data.nodes.map((d) => ({ ...d }));
 
-    // Create force simulation
-    simulation = d3
-      .forceSimulation<GraphNode>(nodes)
-      .force(
-        "link",
-        d3.forceLink(links).id((d: any) => d.id).distance(200)
-      )
-      .force("charge", d3.forceManyBody().strength(width < 600 ? -20 : -radiusForce))
-      .force("x", d3.forceX<GraphNode>((_d, i) => width < 600 ? width * (i % 2 ? 0.75 : 0.25) : width / 2).strength(width < 600 ? 0.8 : 0.05))
-      .force("y", d3.forceY<GraphNode>((_d, i) => width < 600 ? 55 + Math.floor(i / 2) * ((height - 180) / Math.max(1, Math.ceil(nodes.length / 2) - 1)) : height / 2).strength(width < 600 ? 0.8 : 0.05))
-      .force("collision", d3.forceCollide().radius((d: any) => d.radius + (width < 600 ? 20 : 85)));
+    const forest = buildGraphForest(nodes, links);
+    const hierarchy = d3.hierarchy({ id: '', children: forest.roots });
+    // Reserve space for full wrapped titles, even on a phone. Pan rather than pack.
+    const tree = d3.tree<{ id: string; children: any[] }>()
+      .nodeSize([270, 210])
+      .separation((a, b) => a.parent === b.parent ? 1 : 1.5)(hierarchy);
+    const targets = new Map(tree.descendants().slice(1).map(node => [node.data.id, { x: node.x, y: node.y - 210 }]));
+    for (const node of nodes) Object.assign(node, targets.get(node.id));
+    for (const link of links) {
+      const source = typeof link.source === 'string' ? link.source : link.source.id;
+      const target = typeof link.target === 'string' ? link.target : link.target.id;
+      link.branch = forest.branchEdges.has([source, target].sort().join('\0'));
+    }
+    simulation = d3.forceSimulation<GraphNode>(nodes)
+      .force('link', d3.forceLink(links).id((d: any) => d.id).distance(210).strength(0.015))
+      .force('charge', d3.forceManyBody().strength(-100))
+      .force('x', d3.forceX<GraphNode>(d => targets.get(d.id)!.x).strength(0.7))
+      .force('y', d3.forceY<GraphNode>(d => targets.get(d.id)!.y).strength(0.7))
+      .force('collision', d3.forceCollide<GraphNode>().radius(width < 600 ? 110 : 100));
 
     // Create SVG
     let svg = d3
@@ -381,13 +391,16 @@ import Icon from './Icon.astro';
 
       // Create links
       const link = containerGroup
-        .selectAll("line")
+        .selectAll("path.graph-edge")
         .data(links)
         .enter()
-        .append("line")
+        .append("path")
+        .attr("class", "graph-edge")
+        .attr("fill", "none")
         .attr("stroke", colors.linkStroke)
-        .attr("stroke-width", 2)
-        .attr("stroke-opacity", 0.6);
+        .attr("stroke-width", d => d.branch ? 1.5 : 1)
+        .attr("stroke-dasharray", d => d.branch ? null : "3 5")
+        .attr("stroke-opacity", d => d.branch ? 0.5 : 0.12);
 
       // Create node groups
       const nodeGroup = containerGroup
@@ -486,7 +499,7 @@ import Icon from './Icon.astro';
         .on("mouseout", function () {
           link.transition().duration(150)
             .attr("stroke", colors.linkStroke)
-            .attr("stroke-opacity", 0.6);
+            .attr("stroke-opacity", (d: GraphLink) => d.branch ? 0.5 : 0.12);
 
           nodeGroup.selectAll<SVGCircleElement, GraphNode>("circle")
             .attr("fill", colors.linkStroke)
@@ -508,6 +521,7 @@ import Icon from './Icon.astro';
         .attr("cursor", "pointer");
 
       // Create labels
+      const labelHeights = new Map<string, number>();
       const labels = nodeGroup
         .append("text")
         .each(function(d) {
@@ -522,20 +536,25 @@ import Icon from './Icon.astro';
           lines.forEach((text, i) => d3.select(this).append('tspan').attr('x', 0).attr('y', i === 0 ? d.radius + 20 : null).attr('dy', i ? '1.3em' : 0).text(text));
         })
         .attr("text-anchor", "middle")
-        .attr("font-size", width < 600 ? "16px" : "12px")
+        .attr("font-size", "16px")
         .attr("font-weight", "500")
         .attr("fill", colors.postText)
         .attr("pointer-events", "all")
         .style("user-select", "none")
-        .style("opacity", 1);
+        .style("opacity", 1)
+        .each(function(d) { labelHeights.set(d.id, this.getBBox().height + d.radius + 25); });
 
       // Update positions on simulation tick
       simulation.on("tick", () => {
-        link
-          .attr("x1", (d: any) => d.source.x)
-          .attr("y1", (d: any) => d.source.y)
-          .attr("x2", (d: any) => d.target.x)
-          .attr("y2", (d: any) => d.target.y);
+        link.attr('d', (d: any) => {
+          if (!d.branch) return `M${d.source.x},${d.source.y} L${d.target.x},${d.target.y}`;
+          const [parent, child] = targets.get(d.source.id)!.y < targets.get(d.target.id)!.y
+            ? [d.source, d.target] : [d.target, d.source];
+          const startY = parent.y + labelHeights.get(parent.id)!;
+          const endY = child.y - child.radius - 8;
+          const midY = (startY + endY) / 2;
+          return `M${parent.x},${startY} C${parent.x},${midY} ${child.x},${midY} ${child.x},${endY}`;
+        });
 
         nodeGroup.attr("transform", (d: any) => `translate(${d.x},${d.y})`);
       });
@@ -544,8 +563,16 @@ import Icon from './Icon.astro';
       const xs = nodes.map(node => node.x || 0), ys = nodes.map(node => node.y || 0);
       const minX = Math.min(...xs) - 110, maxX = Math.max(...xs) + 110;
       const minY = Math.min(...ys) - 30, maxY = Math.max(...ys) + 130;
-      const scale = Math.min(1.2, width / (maxX - minX), height / (maxY - minY));
-      svg.call(zoom.transform as any, d3.zoomIdentity.translate(width / 2, height / 2).scale(scale).translate(-(minX + maxX) / 2, -(minY + maxY) / 2));
+      const fitScale = Math.min(1.2, width / (maxX - minX), height / (maxY - minY));
+      const scale = Math.max(0.9, fitScale);
+      // A dense garden opens at a readable scale around its main branch.
+      const focusX = fitScale < scale ? targets.get(forest.roots[0].id)!.x : (minX + maxX) / 2;
+      const focusY = fitScale < scale ? minY + height / (2 * scale) : (minY + maxY) / 2;
+      svg.call(zoom.transform as any, d3.zoomIdentity.translate(width / 2, height / 2).scale(scale).translate(-focusX, -focusY));
+      const overview = container.id === 'home-graph-container' ? document.getElementById('garden-graph-overview') : null;
+      if (overview) overview.onclick = () => {
+        svg.call(zoom.transform as any, d3.zoomIdentity.translate(width / 2, height / 2).scale(fitScale).translate(-(minX + maxX) / 2, -(minY + maxY) / 2));
+      };
       simulation.alpha(0.05).restart();
 
       // Don't auto-fit to graph - let user control the view

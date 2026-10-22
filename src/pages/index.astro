@@ -21,13 +21,14 @@ const seo = { title: siteConfig.homepageTitle, description: siteConfig.descripti
       <div class="al-maturity-stages" aria-hidden="true">{MATURITY_STAGES.map(stage => <span>{NOTE_MATURITY[stage].label}</span>)}</div>
     </div>
     <div id="home-graph-container" role="region" aria-label="Interactive graph of published writing"><p class="al-loading">Loading the garden…</p></div>
-    <p class="al-graph-help">Drag to explore · Pinch or scroll to zoom · Choose a title to read. Lines follow links between pieces.</p>
+    <p class="al-graph-help">Drag to explore · Pinch or scroll to zoom · Choose a title to read. Branches follow links between pieces; faint dotted lines show cross-links. <button id="garden-graph-overview" type="button">Show whole garden</button></p>
     <NoteMaturityLegend />
     <details class="al-list"><summary>Essays</summary><ul>{posts.map(post => <li><a href={`/posts/${post.id}/`}>{post.data.title}</a></li>)}</ul></details>
   </section>
 </BaseLayout>
 
 <style>
+  #garden-graph-overview { font: inherit; color: inherit; text-decoration: underline; cursor: pointer; }
   .al-maturity-filter { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 0 1rem; max-width: 44rem; margin: 1.5rem 0; }
   label { white-space: nowrap; margin: 0; }
   output { font-weight: 600; }
