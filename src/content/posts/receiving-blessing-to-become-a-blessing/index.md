@@ -21,6 +21,6 @@ Genesis 22:18; Matthew 10:7.
 
 ## Related notes
 
-- [[The Church Participates in God’s Mission Rather Than Owning It]]
-- [[Mission Is Word and Deed Held Together]]
-- [[Eternal Life Is Quality as Well as Quantity]]
+- [The Church Participates in God’s Mission Rather Than Owning It](posts/the-church-participates-in-gods-mission-rather-than-owning-it/index.md)
+- [Mission Is Word and Deed Held Together](posts/mission-is-word-and-deed-held-together/index.md)
+- [Eternal Life Is Quality as Well as Quantity](posts/eternal-life-is-quality-as-well-as-quantity/index.md)
