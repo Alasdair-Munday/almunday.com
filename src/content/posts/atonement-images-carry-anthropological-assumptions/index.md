@@ -11,5 +11,5 @@ Each atonement model implies a particular account of what is wrong with humanity
 
 ## Related seedlings
 
-- [[Theories of Atonement Are Historically Situated]]
-- [[Human Beings Are Formed by Narratives]]
+- [Theories of Atonement Are Historically Situated](posts/theories-of-atonement-are-historically-situated/index.md)
+- [Human Beings Are Formed by Narratives](posts/human-beings-are-formed-by-narratives/index.md)
