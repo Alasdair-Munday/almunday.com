@@ -11,5 +11,5 @@ The vault repeatedly connects Christian perception of God with attention to thos
 
 ## Related seedlings
 
-- [[Mission Requires Attention to Power]]
-- [[Child-Centred Reading Can Expose Harmful Interpretations]]
+- [Mission Requires Attention to Power](posts/mission-requires-attention-to-power/index.md)
+- [Child-Centred Reading Can Expose Harmful Interpretations](posts/child-centred-reading-can-expose-harmful-interpretations/index.md)
