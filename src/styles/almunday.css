@@ -37,3 +37,17 @@ html, body { background: var(--al-bg); color: var(--al-text); font-family: syste
 footer { background: var(--al-bg) !important; border-top: 1px solid var(--al-border); }
 
 @media(max-width: 600px) { #home-graph-container { height: 700px; } }
+
+/* Article plus a right-hand exploration sidebar, contained within the page width. */
+#swup-container > .al-post-shell { max-width: none; }
+.al-post-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+.al-post-layout article { min-width: 0; }
+.al-post-sidebar { min-width: 0; padding-top: 1.5rem; }
+.al-post-sidebar-inner { display: grid; gap: 2rem; }
+.al-post-sidebar h2 { font-size: 1rem; font-weight: 700; }
+.al-sidebar-help { font-size: .8rem; line-height: 1.5; margin: .5rem 0 1rem; }
+.al-sidebar-garden-link { display: inline-block; font-size: .85rem; margin-top: .75rem; }
+@media(min-width: 960px) {
+  .al-post-layout { grid-template-columns: minmax(0, 1fr) 300px; }
+  .al-post-sidebar-inner { position: sticky; top: 6rem; }
+}

@@ -1,0 +1,47 @@
+---
+import { isEssay } from '@/utils/note-maturity.mjs';
+import { MATURITY_STAGES, NOTE_MATURITY } from '@/utils/note-maturity.mjs';
+import NoteMaturityLegend from '@/components/NoteMaturityLegend.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { siteConfig } from '@/config';
+import { getCollection } from 'astro:content';
+import { shouldShowPost } from '@/utils/markdown';
+const posts = (await getCollection('posts')).filter(post => shouldShowPost(post, false) && isEssay(post.data.maturity));
+const seo = { title: `Garden | ${siteConfig.title}`, description: siteConfig.description, canonical: siteConfig.site + '/garden/', ogType: 'website' as const };
+---
+<BaseLayout seoData={seo}>
+  <section class="al-garden" aria-labelledby="garden-title">
+    <p class="al-eyebrow">Rev, dev, musician and overthinker.</p>
+    <div class="al-garden-heading"><h1 id="garden-title">The garden.</h1><a href="/posts/">Browse as a list →</a></div>
+    <p class="al-garden-intro">A garden of reflections, questions and things I’m making. Follow a title to explore.</p>
+    <div class="al-maturity-filter">
+      <label for="garden-minimum-maturity">Minimum maturity: <output id="garden-maturity-value" for="garden-minimum-maturity">Growing</output></label>
+      <input id="garden-minimum-maturity" type="range" min="0" max={MATURITY_STAGES.length - 1} step="1" value={MATURITY_STAGES.indexOf('growing')} aria-valuetext="Growing" list="garden-maturity-stages" />
+      <datalist id="garden-maturity-stages">{MATURITY_STAGES.map((stage, index) => <option value={index} label={NOTE_MATURITY[stage].label} />)}</datalist>
+      <div class="al-maturity-stages" aria-hidden="true">{MATURITY_STAGES.map(stage => <span>{NOTE_MATURITY[stage].label}</span>)}</div>
+    </div>
+    <div id="home-graph-container" role="region" aria-label="Interactive graph of published writing"><p class="al-loading">Loading the garden…</p></div>
+    <p class="al-graph-help">Drag to explore · Pinch or scroll to zoom · Choose a title to read. Tags connect related notes. More connections make a node larger. Choose a tag to zoom in. Hover over a note to highlight its connections. <button id="garden-graph-overview" type="button">Show whole garden</button></p>
+    <NoteMaturityLegend />
+    <details class="al-list"><summary>Essays</summary><ul>{posts.map(post => <li><a href={`/posts/${post.id}/`}>{post.data.title}</a></li>)}</ul></details>
+  </section>
+</BaseLayout>
+
+<style>
+  #garden-graph-overview { font: inherit; color: inherit; text-decoration: underline; cursor: pointer; }
+  .al-maturity-filter { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 0 1rem; max-width: 44rem; margin: 1.5rem 0; }
+  label { white-space: nowrap; margin: 0; }
+  output { font-weight: 600; }
+  input[type="range"] { display: block; width: 100%; margin: 0; min-height: 2rem; accent-color: var(--al-text); cursor: pointer; }
+  .al-maturity-stages { grid-column: 2; display: flex; justify-content: space-between; gap: .25rem; font-size: .75rem; }
+  input[type="range"] { appearance: none; background: transparent; }
+  input[type="range"]::-webkit-slider-runnable-track { height: .25rem; border-radius: 1rem; background: var(--al-border); }
+  input[type="range"]::-moz-range-track { height: .25rem; border-radius: 1rem; background: var(--al-border); }
+  input[type="range"]::-webkit-slider-thumb { appearance: none; width: 1rem; height: 1rem; margin-top: -.375rem; border: 0; border-radius: 50%; background: var(--al-text); }
+  input[type="range"]::-moz-range-thumb { width: 1rem; height: 1rem; border: 0; border-radius: 50%; background: var(--al-text); }
+  input[type="range"]:focus-visible { outline: 2px solid var(--al-text); outline-offset: 2px; border-radius: .25rem; }
+  @media (max-width: 600px) {
+    .al-maturity-filter { gap: 0 .75rem; font-size: .85rem; }
+    .al-maturity-stages { display: none; }
+  }
+</style>

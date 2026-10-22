@@ -107,3 +107,7 @@ Writing and tag lists show established essays only. Existing blog posts without 
 Content tags appear as nodes connected to the notes that use them. Node size follows the number of unique connections in the displayed graph; note opacity still reflects maturity. The maturity slider filters notes and hides tags with no remaining notes. Tags such as `bible`, `culture`, `music` and `tech` work like any other subject tag; there are no special category hubs or mainCategory field.
 
 Use tags for subject matter. Keep maturity in its own property. Housekeeping labels (`digital-garden`, `worldview`, `maturity-*`, standalone maturity stages, draft, blog/post/note, series) are excluded by `src/utils/graph-tags.mjs`. Existing notes have been cleaned accordingly.
+
+## Reading and exploring
+
+The front page features evergreen, established writing. The Garden page (`/garden/`) contains the full graph. Each post has a local graph in its right-hand sidebar (below the article on phones), showing notes and tags up to two connections away. Shared tags can therefore introduce another note in two steps. Select a note to read it, expand the local graph for more room, or follow the link to the whole garden.

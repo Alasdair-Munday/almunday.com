@@ -319,8 +319,8 @@ export const siteConfig: SiteConfig = {
     showMobileMenu: true,
     // [CONFIG:NAVIGATION_PAGES]
     pages: [
-      { title: "Garden", url: "/" },
-      { title: "Writing", url: "/posts/" },
+      { title: "Writing", url: "/" },
+      { title: "Garden", url: "/garden/" },
       { title: "About", url: "/about/" }
     ],
     // [CONFIG:NAVIGATION_SOCIAL]
@@ -389,7 +389,7 @@ export const siteConfig: SiteConfig = {
       // [CONFIG:POST_OPTIONS_GRAPH_VIEW_ENABLED]
       enabled: true,
       // [CONFIG:POST_OPTIONS_GRAPH_VIEW_SHOW_IN_SIDEBAR]
-      showInSidebar: false,
+      showInSidebar: true,
       // [CONFIG:POST_OPTIONS_GRAPH_VIEW_MAX_NODES]
       maxNodes: 100,
       // [CONFIG:POST_OPTIONS_GRAPH_VIEW_SHOW_ORPHANED_POSTS]
