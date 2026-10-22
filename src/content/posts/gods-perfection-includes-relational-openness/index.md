@@ -1,5 +1,6 @@
 ---
 title: "God’s Perfection Includes Relational Openness"
+type: opinion
 description: "The notes on divine perfection raise a tension between immutability and genuine relationship, suggesting that perfection may not mean emotional or relational immobility."
 date: 2026-10-22
 tags: ["doctrine-of-god"]
