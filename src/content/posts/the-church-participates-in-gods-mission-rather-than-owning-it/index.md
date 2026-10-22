@@ -11,5 +11,5 @@ The idea of missio Dei shifts mission away from institutional expansion and towa
 
 ## Related seedlings
 
-- [[Mission Is Word and Deed Held Together]]
-- [[Mission Requires Attention to Power]]
+- [Mission Is Word and Deed Held Together](posts/mission-is-word-and-deed-held-together/index.md)
+- [Mission Requires Attention to Power](posts/mission-requires-attention-to-power/index.md)
