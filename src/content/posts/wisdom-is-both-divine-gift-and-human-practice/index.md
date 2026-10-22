@@ -11,5 +11,5 @@ Wisdom appears as rooted in God’s ordering of creation while also requiring hu
 
 ## Related seedlings
 
-- [[Biblical Wisdom Contains Internal Tension]]
-- [[Discernment Requires Humility About One’s Own Reading]]
+- [Biblical Wisdom Contains Internal Tension](posts/biblical-wisdom-contains-internal-tension/index.md)
+- [Discernment Requires Humility About One’s Own Reading](posts/discernment-requires-humility-about-ones-own-reading/index.md)
