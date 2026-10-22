@@ -1,5 +1,6 @@
 ---
 title: "Prepare for War Is Not a Hot Take"
+type: opinion
 description: "“Prepare for war” need not be a novel prophecy or a celebration of violence."
 date: 2026-10-22
 tags: ["bible-and-hermeneutics", "politics"]
