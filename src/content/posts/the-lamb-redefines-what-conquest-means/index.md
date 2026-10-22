@@ -11,5 +11,5 @@ Revelation destabilises the assumption that victory means becoming a stronger Ca
 
 ## Related seedlings
 
-- [[The Two Mountains Ask Who Is Sacrificed]]
-- [[Jesus Is the Criterion for Christian Claims About Victory]]
+- [The Two Mountains Ask Who Is Sacrificed](posts/the-two-mountains-ask-who-is-sacrificed/index.md)
+- [Jesus Is the Criterion for Christian Claims About Victory](posts/jesus-is-the-criterion-for-christian-claims-about-victory/index.md)
