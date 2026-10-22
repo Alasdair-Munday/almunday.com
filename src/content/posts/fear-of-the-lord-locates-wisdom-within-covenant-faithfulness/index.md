@@ -11,5 +11,5 @@ In the Genesis 3 and Proverbs material, wisdom is not rejected but subordinated 
 
 ## Related seedlings
 
-- [[Proverbs Trains Discernment Through Internal Tension]]
-- [[Biblical Wisdom Is Polyphonic Rather Than Monolithic]]
+- [Proverbs Trains Discernment Through Internal Tension](posts/proverbs-trains-discernment-through-internal-tension/index.md)
+- [Biblical Wisdom Is Polyphonic Rather Than Monolithic](posts/biblical-wisdom-is-polyphonic-rather-than-monolithic/index.md)
