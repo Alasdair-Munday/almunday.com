@@ -19,4 +19,4 @@ The violent sayings about the rod should not be lifted out of their ancient educ
 
 - [[Na’ar Does Not Simply Mean Child]]
 - [[Child-Centred Reading Can Expose Harmful Interpretations]]
-- [[Reading Difficult Texts Requires More Than Defending Them]]
+- [[Reparative Interpretation Reads Critically Without Abandoning the Text]]
