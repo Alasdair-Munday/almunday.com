@@ -11,5 +11,5 @@ Fruitfulness includes encouragement, trust, communal formation, and the creation
 
 ## Related seedlings
 
-- [[Abiding Is an Alternative to Religious Toil]]
-- [[Worship Is Collective World-Making]]
+- [Abiding Is an Alternative to Religious Toil](posts/abiding-is-an-alternative-to-religious-toil/index.md)
+- [Worship Is Collective World-Making](posts/worship-is-collective-world-making/index.md)
