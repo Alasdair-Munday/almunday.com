@@ -1,5 +1,5 @@
 {
-  "defaultTemplate": "---\ntitle: \"{{title}}\"\ndescription: \"\"\ndate: {{date}}\ntags: []\nmaturity: seedling\ndraft: false\naudio: true\n---",
+  "defaultTemplate": "---\ntitle: \"{{title}}\"\ndescription: \"\"\ndate: {{date}}\ntags: []\nmaturity: seed\ndraft: false\naudio: true\n---",
   "autoInsertProperties": true,
   "dateFormat": "YYYY-MM-DD",
   "enableCopyHeadingLink": true,
@@ -19,7 +19,7 @@
       "name": "Blog",
       "folder": "posts",
       "linkBasePath": "/posts/",
-      "template": "---\ntitle: \"{{title}}\"\ndescription: \"\"\ndate: {{date}}\ntags: []\nmaturity: seedling\ndraft: false\naudio: true\n---",
+      "template": "---\ntitle: \"{{title}}\"\ndescription: \"\"\ndate: {{date}}\ntags: []\nmaturity: seed\ndraft: false\naudio: true\n---",
       "enabled": true,
       "creationMode": "folder",
       "indexFileName": "index",

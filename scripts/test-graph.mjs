@@ -18,11 +18,12 @@ test('production graph resolves titles, deduplicates links, excludes drafts and 
     note('first', 'First', '[[Different title]] [[Different title]] `[[Private]]`\n\n```md\n[[Third]]\n```');
     note('second', 'Different title', '', false, 'growing');
     note('third', 'Third', '', false, 'seedling');
+    note('idea', 'An idea', '', false, 'seed');
     note('private', 'Private', '', true);
     execFileSync(process.execPath, ['scripts/generate-graph-data.js', '--production'], { cwd: root });
     const data = JSON.parse(readFileSync(join(root, 'public/graph/graph-data.json')));
-    assert.equal(data.nodes.length, 3);
-    assert.deepEqual(data.nodes.map(node => node.maturity), ['established', 'growing', 'seedling']);
+    assert.equal(data.nodes.length, 4);
+    assert.deepEqual(data.nodes.map(node => node.maturity), ['established', 'seed', 'growing', 'seedling']);
     assert.deepEqual(data.connections, [{ source: 'first', target: 'second', type: 'link' }]);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });

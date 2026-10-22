@@ -1,8 +1,9 @@
 /** Shared by the content schema, Node graph generator, and both browser graphs. */
-/** @type {readonly ['seedling', 'growing', 'established']} */
-export const MATURITY_STAGES = ['seedling', 'growing', 'established'];
+/** @type {readonly ['seed', 'seedling', 'growing', 'established']} */
+export const MATURITY_STAGES = ['seed', 'seedling', 'growing', 'established'];
 export const DEFAULT_MATURITY = 'established';
 export const NOTE_MATURITY = Object.freeze({
+  seed: Object.freeze({ label: 'Seed', radius: 2.5, localRadius: 2, opacity: 0.25 }),
   seedling: Object.freeze({ label: 'Seedling', radius: 4, localRadius: 3, opacity: 0.4 }),
   growing: Object.freeze({ label: 'Growing', radius: 7, localRadius: 5, opacity: 0.7 }),
   established: Object.freeze({ label: 'Established', radius: 10, localRadius: 7, opacity: 1 }),
@@ -14,9 +15,9 @@ export function normalizeMaturity(value) {
   const stage = typeof value === 'string' ? value.trim().toLowerCase() : value;
   if (stage === '') return DEFAULT_MATURITY;
   if (!MATURITY_STAGES.includes(stage)) {
-    throw new Error(`Unknown note maturity "${value}". Use seedling, growing, or established.`);
+    throw new Error(`Unknown note maturity "${value}". Use seed, seedling, growing, or established.`);
   }
-  return /** @type {'seedling' | 'growing' | 'established'} */ (stage);
+  return /** @type {'seed' | 'seedling' | 'growing' | 'established'} */ (stage);
 }
 
 /**

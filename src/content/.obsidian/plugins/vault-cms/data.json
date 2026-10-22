@@ -31,7 +31,7 @@
       "draftLogic": "true-draft",
       "hasDraftStatus": true,
       "imageProperty": "image",
-      "template": "---\ntitle: \"{{title}}\"\ndescription: \"\"\ndate: {{date}}\ntags: []\nmaturity: seedling\ndraft: false\naudio: true\n---"
+      "template": "---\ntitle: \"{{title}}\"\ndescription: \"\"\ndate: {{date}}\ntags: []\nmaturity: seed\ndraft: false\naudio: true\n---"
     },
     "content-type-minrock-projects": {
       "titleProperty": "title",
@@ -80,7 +80,7 @@
         "id": "content-type-minrock-blog",
         "name": "Blog",
         "folder": "posts",
-        "template": "---\ntitle: \"{{title}}\"\ndescription: \"\"\ndate: {{date}}\ntags: []\nmaturity: seedling\ndraft: false\naudio: true\n---",
+        "template": "---\ntitle: \"{{title}}\"\ndescription: \"\"\ndate: {{date}}\ntags: []\nmaturity: seed\ndraft: false\naudio: true\n---",
         "enabled": true,
         "linkBasePath": "/posts/",
         "creationMode": "folder",
