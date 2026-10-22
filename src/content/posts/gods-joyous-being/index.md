@@ -23,6 +23,6 @@ The workbook places this passage under “Prophetic Delight as Discipleship.” 
 
 ## Related notes
 
-- [[Recovering Wonder]]
-- [[Play Is a Sign of Safety]]
-- [[Caring for Creation Through Delight Rather Than Guilt]]
+- [Recovering Wonder](posts/recovering-wonder/index.md)
+- [Play Is a Sign of Safety](posts/play-is-a-sign-of-safety/index.md)
+- [Caring for Creation Through Delight Rather Than Guilt](posts/caring-for-creation-through-delight-rather-than-guilt/index.md)
