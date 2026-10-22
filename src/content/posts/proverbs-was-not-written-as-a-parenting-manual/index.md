@@ -11,6 +11,6 @@ The violent sayings about the rod should not be lifted out of their ancient educ
 
 ## Related seedlings
 
-- [[Na’ar Does Not Simply Mean Child]]
-- [[Child-Centred Reading Can Expose Harmful Interpretations]]
-- [[Reparative Interpretation Reads Critically Without Abandoning the Text]]
+- [Na’ar Does Not Simply Mean Child](posts/naar-does-not-simply-mean-child/index.md)
+- [Child-Centred Reading Can Expose Harmful Interpretations](posts/child-centred-reading-can-expose-harmful-interpretations/index.md)
+- [Reparative Interpretation Reads Critically Without Abandoning the Text](posts/reparative-interpretation-reads-critically-without-abandoning-the-text/index.md)
