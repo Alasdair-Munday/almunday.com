@@ -23,8 +23,8 @@ What is the difference between caring for creation out of "guilt" versus caring 
 
 ## Related notes
 
-- [[Salvation Is Not Escape]]
-- [[Recovering Wonder]]
-- [[Creativity Without Building a Monument to Ourselves]]
+- [Salvation Is Not Escape](posts/salvation-is-not-escape/index.md)
+- [Recovering Wonder](posts/recovering-wonder/index.md)
+- [Creativity Without Building a Monument to Ourselves](posts/creativity-without-building-a-monument-to-ourselves/index.md)
 
 *Extracted from Three Visions of Paradise Workbook, Session 2 — Grow: Restored Creation. The headings and related-note links were added for this garden.*
