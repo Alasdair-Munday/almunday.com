@@ -21,6 +21,8 @@
  * - Nested content: "category/my-post.md" → ID: "category-my-post"
  */
 
+import { normalizeMaturity } from '../src/utils/note-maturity.mjs';
+
 import {
   readFileSync,
   writeFileSync,
@@ -440,6 +442,7 @@ async function generateGraphData() {
       const postNode = {
         id: post.id,
         type: "post",
+        maturity: normalizeMaturity(post.data.maturity),
         title: post.data.title,
         slug: post.id,
         date: post.data.date

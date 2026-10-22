@@ -6,6 +6,7 @@ import Icon from './Icon.astro';
 <!-- Graph Modal Overlay -->
 <div
   id="graph-modal-overlay"
+  data-note-maturity-enabled={siteConfig.postOptions.graphView.noteMaturity.enabled}
   class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-sm animate-fade-in"
   role="dialog"
   aria-modal="true"
@@ -32,6 +33,7 @@ import Icon from './Icon.astro';
 
 <script>
   import * as d3 from "d3";
+  import { graphMaturityStyle } from '@/utils/note-maturity.mjs';
   import { getGraphThemeColors } from '@/utils/graph-theme-colors';
 
   // Graph Modal Functionality
@@ -46,6 +48,9 @@ import Icon from './Icon.astro';
     name: string;
     slug?: string;
     radius: number;
+    opacity: number;
+    maturity: string;
+    label: string;
     group?: string;
     x?: number;
     y?: number;
@@ -233,7 +238,7 @@ import Icon from './Icon.astro';
             id: node.id,
             name: node.title || node.name,
             slug: node.slug,
-            radius: Math.max(5, Math.min(15, (node.connections || 0) + 5)),
+            ...graphMaturityStyle(node.maturity, 'global', document.getElementById('graph-modal-overlay')?.dataset.noteMaturityEnabled !== 'false', node.connections || 0),
             group: node.type
           })),
           links: data.connections.map((conn: any) => ({
@@ -369,7 +374,8 @@ import Icon from './Icon.astro';
         .attr("pointer-events", "bounding-box")
         .attr("tabindex", (d) => d.slug ? 0 : null)
         .attr("role", (d) => d.slug ? "link" : "img")
-        .attr("aria-label", (d) => d.name)
+        .attr("aria-label", (d) => `${d.name} — ${d.label}`)
+        .attr("data-maturity", (d) => d.maturity)
         .on("keydown", (_event, d) => {
           if (_event.key === 'Enter' && d.slug) window.location.href = `/posts/${d.slug}`;
         })
@@ -446,11 +452,11 @@ import Icon from './Icon.astro';
               (typeof l.target === 'object' ? l.target.id : l.target) === d.id ? 0.8 : 0.1);
 
           nodeGroup.selectAll<SVGCircleElement, GraphNode>("circle")
-            .attr("fill-opacity", (n) => connected.has(n.id) ? 1 : 0.3)
+            .attr("fill-opacity", (n) => n.opacity * (connected.has(n.id) ? 1 : 0.5))
             .attr("fill", (n) => n.id === d.id ? colors.tagFill : colors.linkStroke);
 
           labels.transition().duration(150)
-            .style("opacity", (n) => connected.has(n.id) ? 1 : 0.1);
+            .style("opacity", 1);
         })
         .on("mouseout", function () {
           link.transition().duration(150)
@@ -459,18 +465,21 @@ import Icon from './Icon.astro';
 
           nodeGroup.selectAll<SVGCircleElement, GraphNode>("circle")
             .attr("fill", colors.linkStroke)
-            .attr("fill-opacity", 1);
+            .attr("fill-opacity", (n) => n.opacity);
 
           const currentTransform = d3.zoomTransform(svg.node() as Element);
           labels.transition().duration(150)
-            .style("opacity", currentTransform.k < 0.6 ? 0 : 0.6);
+            .style("opacity", container.id === 'home-graph-container' || currentTransform.k >= 0.6 ? 1 : 0);
         });
+
+      nodeGroup.append("title").text((d) => `${d.name} — ${d.label}`);
 
       // Create circles
       const node = nodeGroup
         .append("circle")
         .attr("r", (d) => d.radius)
         .attr("fill", colors.linkStroke)
+        .attr("fill-opacity", (d) => d.opacity)
         .attr("cursor", "pointer");
 
       // Create labels
@@ -485,10 +494,9 @@ import Icon from './Icon.astro';
             else line += (line ? ' ' : '') + word;
           }
           if (line) lines.push(line);
-          lines.forEach((text, i) => d3.select(this).append('tspan').attr('x', 0).attr('dy', i ? '1.3em' : '1em').text(text));
+          lines.forEach((text, i) => d3.select(this).append('tspan').attr('x', 0).attr('y', i === 0 ? d.radius + 20 : null).attr('dy', i ? '1.3em' : 0).text(text));
         })
         .attr("text-anchor", "middle")
-        .attr("dy", (d) => d.radius + 8) // Position below the node
         .attr("font-size", width < 600 ? "16px" : "12px")
         .attr("font-weight", "500")
         .attr("fill", colors.postText)

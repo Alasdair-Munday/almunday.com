@@ -1,4 +1,5 @@
 import { defineCollection, z } from 'astro:content';
+import { MATURITY_STAGES, DEFAULT_MATURITY } from './utils/note-maturity.mjs';
 import { glob } from 'astro/loaders';
 
 // Define schema for blog posts
@@ -6,6 +7,10 @@ const postsCollection = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/posts' }),
   schema: z.object({
     title: z.string().default('Untitled Post'),
+    maturity: z.preprocess(
+      value => typeof value === 'string' ? value.trim().toLowerCase() || undefined : value ?? undefined,
+      z.enum(MATURITY_STAGES).default(DEFAULT_MATURITY)
+    ),
     description: z.string().nullable().optional().default('No description provided'),
     date: z.coerce.date().default(() => new Date()),
     tags: z.array(z.string()).nullable().optional(),

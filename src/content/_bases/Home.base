@@ -21,6 +21,8 @@ formulas:
       )
     )
 properties:
+  note.maturity:
+    displayName: Maturity
   file.fullname:
     displayName: Full File Name
   file.name:
@@ -42,6 +44,7 @@ properties:
 views:
   - type: cms
     name: Blog
+    propertyDisplay2: note.maturity
     filters:
       and:
         - file.folder.startsWith("posts")

@@ -140,6 +140,7 @@ export interface SiteConfig {
       showInSidebar: boolean;
       maxNodes: number;
       showOrphanedPosts: boolean;
+      noteMaturity: { enabled: boolean };
     };
     postNavigation: boolean;
     showPostCardCoverImages: "all" | "featured" | "home" | "posts" | "featured-and-posts" | "none";
@@ -393,6 +394,10 @@ export const siteConfig: SiteConfig = {
       maxNodes: 100,
       // [CONFIG:POST_OPTIONS_GRAPH_VIEW_SHOW_ORPHANED_POSTS]
       showOrphanedPosts: true,
+      noteMaturity: {
+        // [CONFIG:POST_OPTIONS_GRAPH_VIEW_NOTE_MATURITY_ENABLED]
+        enabled: true,
+      },
     },
     // [CONFIG:POST_OPTIONS_POST_NAVIGATION]
     postNavigation: true,

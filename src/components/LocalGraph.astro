@@ -27,7 +27,8 @@ const shouldShowGraph = true;
 ---
 
 {shouldShowGraph && (
-  <div id="local-graph-container" class="relative w-full bg-primary-50 dark:bg-primary-800 rounded-xl border border-primary-200 dark:border-primary-700 shadow-lg backdrop-blur-sm bg-opacity-95 dark:bg-opacity-95 overflow-hidden" style="width: 280px; max-width: 280px; height: 280px;">
+  <div id="local-graph-container"
+  data-note-maturity-enabled={siteConfig.postOptions.graphView.noteMaturity.enabled} class="relative w-full bg-primary-50 dark:bg-primary-800 rounded-xl border border-primary-200 dark:border-primary-700 shadow-lg backdrop-blur-sm bg-opacity-95 dark:bg-opacity-95 overflow-hidden" style="width: 280px; max-width: 280px; height: 280px;">
 
     <!-- Icons in top right corner -->
     <div class="absolute top-3 right-3 z-20 flex items-center gap-2">
@@ -58,6 +59,7 @@ const shouldShowGraph = true;
 
 <script>
   import * as d3 from "d3";
+  import { graphMaturityStyle } from '@/utils/note-maturity.mjs';
   import { getGraphThemeColors } from '@/utils/graph-theme-colors';
 
   interface GraphNode {
@@ -65,6 +67,9 @@ const shouldShowGraph = true;
     name: string;
     slug?: string;
     radius: number;
+    opacity: number;
+    maturity: string;
+    label: string;
     group?: string;
     x?: number;
     y?: number;
@@ -118,7 +123,7 @@ const shouldShowGraph = true;
         id: node.id,
         name: node.title || node.name,
         slug: node.slug,
-        radius: Math.max(3, Math.min(8, (node.connections || 0) + 3)),
+        ...graphMaturityStyle(node.maturity, 'local', document.getElementById('local-graph-container')?.dataset.noteMaturityEnabled !== 'false', node.connections || 0),
         group: node.type
       })),
       links: relevantConnections.map((conn: any) => ({
@@ -300,11 +305,11 @@ const shouldShowGraph = true;
             (typeof l.target === 'object' ? l.target.id : l.target) === d.id ? 0.8 : 0.1);
 
         nodeGroup.selectAll<SVGCircleElement, GraphNode>("circle")
-          .attr("fill-opacity", (n) => connected.has(n.id) ? 1 : 0.3)
+          .attr("fill-opacity", (n) => n.opacity * (connected.has(n.id) ? 1 : 0.5))
           .attr("fill", (n) => n.id === d.id ? colors.tagFill : colors.linkStroke);
 
         labels.transition().duration(150)
-          .style("opacity", (n) => connected.has(n.id) ? 1 : 0.1);
+          .style("opacity", 1);
       })
       .on("mouseout", function () {
         link.transition().duration(150)
@@ -313,11 +318,11 @@ const shouldShowGraph = true;
 
         nodeGroup.selectAll<SVGCircleElement, GraphNode>("circle")
           .attr("fill", colors.linkStroke)
-          .attr("fill-opacity", 1);
+          .attr("fill-opacity", (n) => n.opacity);
 
         const currentTransform = svg ? d3.zoomTransform(svg.node() as Element) : d3.zoomIdentity;
         labels.transition().duration(150)
-          .style("opacity", currentTransform.k < 0.8 ? 0 : 0.6);
+          .style("opacity", currentTransform.k < 0.8 ? 0 : 1);
       });
 
     // Create circles
@@ -325,11 +330,11 @@ const shouldShowGraph = true;
       .append("circle")
       .attr("r", (d) => d.radius)
       .attr("cursor", "pointer")
-      .attr("fill-opacity", 1)
+      .attr("fill-opacity", (n) => n.opacity)
       .attr("fill", colors.linkStroke)
       .attr("data-id", (d) => d.id);
 
-    node.append("title").text((d) => d.name ?? d.id);
+    node.append("title").text((d) => `${d.name ?? d.id} — ${d.label}`);
 
     // Create labels
     const labels = nodeGroup
@@ -340,7 +345,7 @@ const shouldShowGraph = true;
       .style("font-size", "8px")
       .style("fill", colors.postText)
       .style("pointer-events", "none")
-      .style("opacity", 0.6); // Start with slightly faded labels
+      .style("opacity", 1);
 
     // Run simulation
     for (let i = 0; i < 200; ++i) simulation.tick();

@@ -84,3 +84,16 @@ If you ever run the **Vault CMS Setup Wizard** (`Ctrl / Cmd + P` → `Vault CMS:
 - **Comprehensive Online Guide**: [minrock.vercel.app/posts/obsidian-vault-guide](https://minrock.vercel.app/posts/obsidian-vault-guide)
 - **Vault CMS Official Website**: [vaultcms.org](https://vaultcms.org/)
 - **David Kimball's Walkthrough Video**: [YouTube (55s setup demo)](https://www.youtube.com/watch?v=MnXoikTajfI&t=55s)
+
+
+## Note maturity
+
+Add `maturity` as a text property in a post's Properties panel or frontmatter:
+
+```yaml
+maturity: seedling
+```
+
+Use `seedling` for a public thought or stub, `growing` for a developing elaboration, and `established` for a developed piece. Maturity is an editorial choice, independent of length, link count or certainty. New post templates start at seedling. Existing posts without this property render as established; no existing writing has been reclassified.
+
+The graph uses larger, more solid node marks for more developed notes. Titles stay readable. Each node’s tooltip and accessible label include its maturity. `draft: true` still excludes a note from publication regardless of maturity. Missing or blank maturity means established; an unsupported value produces a build error listing the accepted stages.
