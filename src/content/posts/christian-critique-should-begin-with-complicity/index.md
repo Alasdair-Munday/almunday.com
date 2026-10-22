@@ -1,5 +1,6 @@
 ---
 title: "Christian Critique Should Begin With Complicity"
+type: opinion
 description: "The Church should not answer critiques of Christian complicity by declaring Christianity innocent."
 date: 2026-10-22
 tags: ["bible-and-hermeneutics", "politics"]
