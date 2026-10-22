@@ -11,6 +11,6 @@ Leviticus makes more sense when read as a practical theology of how an imperfect
 
 ## Related seedlings
 
-- [[Ritual Impurity Is Not the Same as Moral Sin]]
-- [[Theories of Atonement Are Historically Situated]]
-- [[The Church Participates in God’s Mission Rather Than Owning It]]
+- [Ritual Impurity Is Not the Same as Moral Sin](posts/ritual-impurity-is-not-the-same-as-moral-sin/index.md)
+- [Theories of Atonement Are Historically Situated](posts/theories-of-atonement-are-historically-situated/index.md)
+- [The Church Participates in God’s Mission Rather Than Owning It](posts/the-church-participates-in-gods-mission-rather-than-owning-it/index.md)
