@@ -11,5 +11,5 @@ Babylon and New Jerusalem are rival visions of social existence. Babylon accumul
 
 ## Related seedlings
 
-- [[The Counterfeit Can Look Like Salvation]]
-- [[The Lamb Redefines What Conquest Means]]
+- [The Counterfeit Can Look Like Salvation](posts/the-counterfeit-can-look-like-salvation/index.md)
+- [The Lamb Redefines What Conquest Means](posts/the-lamb-redefines-what-conquest-means/index.md)
