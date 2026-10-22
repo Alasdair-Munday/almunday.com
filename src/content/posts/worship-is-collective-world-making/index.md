@@ -11,5 +11,5 @@ Singing, creativity, and liturgical participation do not merely express belief; 
 
 ## Related seedlings
 
-- [[Liturgical Order Communicates Theology]]
-- [[Churches Are Communities of Competing Narratives]]
+- [Liturgical Order Communicates Theology](posts/liturgical-order-communicates-theology/index.md)
+- [Churches Are Communities of Competing Narratives](posts/churches-are-communities-of-competing-narratives/index.md)
