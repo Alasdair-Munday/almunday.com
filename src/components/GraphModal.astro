@@ -33,7 +33,7 @@ import Icon from './Icon.astro';
 
 <script>
   import * as d3 from "d3";
-  import { graphMaturityStyle, meetsMinimumMaturity } from '@/utils/note-maturity.mjs';
+  import { graphMaturityStyle, meetsMinimumMaturity, MATURITY_STAGES, NOTE_MATURITY } from '@/utils/note-maturity.mjs';
   import { getGraphThemeColors } from '@/utils/graph-theme-colors';
 
   // Graph Modal Functionality
@@ -248,16 +248,23 @@ import Icon from './Icon.astro';
           }))
         };
         const filter = container.id === 'home-graph-container'
-          ? document.getElementById('garden-minimum-maturity') as HTMLSelectElement | null
+          ? document.getElementById('garden-minimum-maturity') as HTMLInputElement | null
           : null;
         const draw = () => {
           if (!container.isConnected) return;
-          const nodes = filter ? graphData.nodes.filter(node => meetsMinimumMaturity(node.maturity, filter.value)) : graphData.nodes;
+          const minimum = MATURITY_STAGES[filter ? Number(filter.value) : 0];
+          if (filter) {
+            const label = NOTE_MATURITY[minimum].label;
+            filter.setAttribute('aria-valuetext', label);
+            const output = document.getElementById('garden-maturity-value');
+            if (output) output.textContent = label;
+          }
+          const nodes = filter ? graphData.nodes.filter(node => meetsMinimumMaturity(node.maturity, minimum)) : graphData.nodes;
           const ids = new Set(nodes.map(node => node.id));
           const links = graphData.links.filter(link => ids.has(String(link.source)) && ids.has(String(link.target)));
           renderGraph(container, { nodes, links });
         };
-        if (filter) filter.onchange = draw;
+        if (filter) filter.oninput = draw;
         draw();
       })
       .catch(error => {

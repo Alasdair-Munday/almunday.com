@@ -14,11 +14,12 @@ const seo = { title: siteConfig.homepageTitle, description: siteConfig.descripti
     <p class="al-eyebrow">Rev, dev, musician and overthinker.</p>
     <div class="al-garden-heading"><h1 id="garden-title">Hello, friend.</h1><a href="/posts/">Browse as a list →</a></div>
     <p class="al-garden-intro">A garden of reflections, questions and things I’m making. Follow a title to explore.</p>
-    <label class="al-maturity-filter" for="garden-minimum-maturity">Minimum maturity
-      <select id="garden-minimum-maturity">
-        {MATURITY_STAGES.map(stage => <option value={stage} selected={stage === 'growing'}>{NOTE_MATURITY[stage].label}</option>)}
-      </select>
-    </label>
+    <div class="al-maturity-filter">
+      <label for="garden-minimum-maturity">Minimum maturity: <output id="garden-maturity-value" for="garden-minimum-maturity">Growing</output></label>
+      <input id="garden-minimum-maturity" type="range" min="0" max={MATURITY_STAGES.length - 1} step="1" value={MATURITY_STAGES.indexOf('growing')} aria-valuetext="Growing" list="garden-maturity-stages" />
+      <datalist id="garden-maturity-stages">{MATURITY_STAGES.map((stage, index) => <option value={index} label={NOTE_MATURITY[stage].label} />)}</datalist>
+      <div class="al-maturity-stages" aria-hidden="true">{MATURITY_STAGES.map(stage => <span>{NOTE_MATURITY[stage].label}</span>)}</div>
+    </div>
     <div id="home-graph-container" role="region" aria-label="Interactive graph of published writing"><p class="al-loading">Loading the garden…</p></div>
     <p class="al-graph-help">Drag to explore · Pinch or scroll to zoom · Choose a title to read. Lines follow links between pieces.</p>
     <NoteMaturityLegend />
@@ -27,6 +28,9 @@ const seo = { title: siteConfig.homepageTitle, description: siteConfig.descripti
 </BaseLayout>
 
 <style>
-  .al-maturity-filter { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; margin: 1rem 0; }
-  select { font: inherit; color: inherit; background: transparent; border: 1px solid currentColor; padding: .35rem .6rem; border-radius: .2rem; }
+  .al-maturity-filter { max-width: 28rem; margin: 1.5rem 0; }
+  label { display: block; margin-bottom: .5rem; }
+  output { font-weight: 600; }
+  input[type="range"] { display: block; width: 100%; margin: 0; min-height: 2rem; accent-color: var(--color-primary-600, currentColor); cursor: pointer; }
+  .al-maturity-stages { display: flex; justify-content: space-between; gap: .25rem; font-size: .75rem; }
 </style>
