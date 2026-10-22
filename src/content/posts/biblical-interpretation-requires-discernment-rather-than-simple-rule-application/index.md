@@ -11,5 +11,5 @@ The notes on Proverbs, Judges, and the parables repeatedly resist flat readings 
 
 ## Related seedlings
 
-- [[Biblical Wisdom Contains Internal Tension]]
-- [[Child-Centred Reading Can Expose Harmful Interpretations]]
+- [Biblical Wisdom Contains Internal Tension](posts/biblical-wisdom-contains-internal-tension/index.md)
+- [Child-Centred Reading Can Expose Harmful Interpretations](posts/child-centred-reading-can-expose-harmful-interpretations/index.md)
