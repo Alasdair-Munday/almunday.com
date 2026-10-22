@@ -11,5 +11,5 @@ The notes on divine perfection raise a tension between immutability and genuine 
 
 ## Related seedlings
 
-- [[God’s Diversity Is Reflected in Creation]]
-- [[Discernment Requires Humility About One’s Own Reading]]
+- [God’s Diversity Is Reflected in Creation](posts/gods-diversity-is-reflected-in-creation/index.md)
+- [Discernment Requires Humility About One’s Own Reading](posts/discernment-requires-humility-about-ones-own-reading/index.md)
