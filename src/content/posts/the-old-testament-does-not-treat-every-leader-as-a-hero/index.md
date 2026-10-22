@@ -11,6 +11,6 @@ Biblical narratives often preserve the failures and moral compromises of their l
 
 ## Related seedlings
 
-- [[Judges Is Suspicious of Charismatic Saviours]]
-- [[Biblical Violence Creates Moral Injury]]
-- [[The Spirit’s Empowerment Does Not Automatically Legitimate a Judge’s Actions]]
+- [Judges Is Suspicious of Charismatic Saviours](posts/judges-is-suspicious-of-charismatic-saviours/index.md)
+- [Biblical Violence Creates Moral Injury](posts/biblical-violence-creates-moral-injury/index.md)
+- [The Spirit’s Empowerment Does Not Automatically Legitimate a Judge’s Actions](posts/the-spirits-empowerment-does-not-automatically-legitimate-a-judges-actions/index.md)
