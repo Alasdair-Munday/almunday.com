@@ -11,6 +11,6 @@ How we interpret Scripture affects how we treat vulnerable people, so hermeneuti
 
 ## Related seedlings
 
-- [[Reparative Interpretation Reads Critically Without Abandoning the Text]]
-- [[Ritual Impurity Is Not the Same as Moral Sin]]
-- [[Biblical Violence Creates Moral Injury]]
+- [Reparative Interpretation Reads Critically Without Abandoning the Text](posts/reparative-interpretation-reads-critically-without-abandoning-the-text/index.md)
+- [Ritual Impurity Is Not the Same as Moral Sin](posts/ritual-impurity-is-not-the-same-as-moral-sin/index.md)
+- [Biblical Violence Creates Moral Injury](posts/biblical-violence-creates-moral-injury/index.md)
