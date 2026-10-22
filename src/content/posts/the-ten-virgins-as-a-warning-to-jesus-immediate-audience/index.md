@@ -11,5 +11,5 @@ The parable of the ten virgins is best read as a warning directed toward Jesusâ€
 
 ## Related seedlings
 
-- [[Parables Must Be Read Through Their Narrative Context]]
-- [[Biblical Wisdom Is Polyphonic Rather Than Monolithic]]
+- [Parables Must Be Read Through Their Narrative Context](posts/parables-must-be-read-through-their-narrative-context/index.md)
+- [Biblical Wisdom Is Polyphonic Rather Than Monolithic](posts/biblical-wisdom-is-polyphonic-rather-than-monolithic/index.md)
