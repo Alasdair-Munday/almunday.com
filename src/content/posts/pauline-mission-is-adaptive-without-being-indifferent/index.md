@@ -11,5 +11,5 @@ Paul’s methods appear context-sensitive, but the underlying theological purpos
 
 ## Related seedlings
 
-- [[Mission Is Word and Deed Held Together]]
-- [[Mission Begins by Listening to Existing Narratives]]
+- [Mission Is Word and Deed Held Together](posts/mission-is-word-and-deed-held-together/index.md)
+- [Mission Begins by Listening to Existing Narratives](posts/mission-begins-by-listening-to-existing-narratives/index.md)
