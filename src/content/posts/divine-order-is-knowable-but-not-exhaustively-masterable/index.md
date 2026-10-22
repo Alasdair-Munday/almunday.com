@@ -11,4 +11,4 @@ Proverbs presents creation as ordered and intelligible, but that order should no
 
 ## Related seedlings
 
-- [[Human Agency Is Neither Absolute nor Passive]]
+- [Human Agency Is Neither Absolute nor Passive](posts/human-agency-is-neither-absolute-nor-passive/index.md)
