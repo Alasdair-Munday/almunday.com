@@ -1,5 +1,6 @@
 ---
 title: "Learning to Attend to Creation"
+type: comment
 description: "Questions from the workbook about attention, God’s character, and everyday habits of care."
 date: 2026-10-22
 tags: ["creation","spirituality-and-practice"]
