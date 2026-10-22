@@ -1,5 +1,6 @@
 ---
 title: "The Gospel Relocates Honour and Shame"
+type: opinion
 description: "Paul’s language of not being ashamed of the gospel suggests a revaluation of status, power, and public honour."
 date: 2026-10-22
 tags: ["soteriology"]
