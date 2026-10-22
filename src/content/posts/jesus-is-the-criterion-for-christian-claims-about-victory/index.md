@@ -1,5 +1,6 @@
 ---
 title: "Jesus Is the Criterion for Christian Claims About Victory"
+type: opinion
 description: "Christian claims about power, salvation, and the future should be judged by Jesus."
 date: 2026-10-22
 tags: ["bible-and-hermeneutics", "eschatology"]
