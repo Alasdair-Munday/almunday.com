@@ -11,5 +11,5 @@ In Judges, divine empowerment can enable a deliverer to achieve an intended outc
 
 ## Related seedlings
 
-- [[Parables Must Be Read Through Their Narrative Context]]
-- [[Old Testament Anthropology Is Oriented Around Human Function]]
+- [Parables Must Be Read Through Their Narrative Context](posts/parables-must-be-read-through-their-narrative-context/index.md)
+- [Old Testament Anthropology Is Oriented Around Human Function](posts/old-testament-anthropology-is-oriented-around-human-function/index.md)
