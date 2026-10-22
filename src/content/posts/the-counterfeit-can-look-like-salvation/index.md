@@ -1,5 +1,6 @@
 ---
 title: "The Counterfeit Can Look Like Salvation"
+type: opinion
 description: "Scripture often portrays evil as something that resembles salvation: order, security, abundance, technological achievement, and escape from death."
 date: 2026-10-22
 tags: ["bible-and-hermeneutics", "eschatology"]
