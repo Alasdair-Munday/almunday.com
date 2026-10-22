@@ -11,5 +11,5 @@ Church planting and revitalisation should attend to the history, symbols, memori
 
 ## Related seedlings
 
-- [[Human Beings Are Formed by Narratives]]
-- [[Mission Requires Attention to Power]]
+- [Human Beings Are Formed by Narratives](posts/human-beings-are-formed-by-narratives/index.md)
+- [Mission Requires Attention to Power](posts/mission-requires-attention-to-power/index.md)
