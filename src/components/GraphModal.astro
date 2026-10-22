@@ -33,7 +33,6 @@ import Icon from './Icon.astro';
 
 <script>
   import * as d3 from "d3";
-  import { buildGraphForest } from '@/utils/graph-forest.mjs';
   import { graphMaturityStyle, meetsMinimumMaturity, MATURITY_STAGES, NOTE_MATURITY } from '@/utils/note-maturity.mjs';
   import { getGraphThemeColors } from '@/utils/graph-theme-colors';
 
@@ -63,7 +62,6 @@ import Icon from './Icon.astro';
     source: string | GraphNode;
     target: string | GraphNode;
     value: number;
-    branch?: boolean;
   }
 
   interface GraphData {
@@ -309,25 +307,19 @@ import Icon from './Icon.astro';
     const links = data.links.map((d) => ({ ...d }));
     const nodes = data.nodes.map((d) => ({ ...d }));
 
-    const forest = buildGraphForest(nodes, links);
-    const hierarchy = d3.hierarchy({ id: '', children: forest.roots });
-    // Reserve space for full wrapped titles, even on a phone. Pan rather than pack.
-    const tree = d3.tree<{ id: string; children: any[] }>()
-      .nodeSize([270, 210])
-      .separation((a, b) => a.parent === b.parent ? 1 : 1.5)(hierarchy);
-    const targets = new Map(tree.descendants().slice(1).map(node => [node.data.id, { x: node.x, y: node.y - 210 }]));
-    for (const node of nodes) Object.assign(node, targets.get(node.id));
-    for (const link of links) {
-      const source = typeof link.source === 'string' ? link.source : link.source.id;
-      const target = typeof link.target === 'string' ? link.target : link.target.id;
-      link.branch = forest.branchEdges.has([source, target].sort().join('\0'));
-    }
+    // Seed a circular cloud, then let linked notes settle together with room for titles.
+    const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+    nodes.forEach((node, index) => {
+      const radius = 150 * Math.sqrt(index);
+      node.x = Math.cos(index * goldenAngle) * radius;
+      node.y = Math.sin(index * goldenAngle) * radius;
+    });
     simulation = d3.forceSimulation<GraphNode>(nodes)
-      .force('link', d3.forceLink(links).id((d: any) => d.id).distance(210).strength(0.015))
-      .force('charge', d3.forceManyBody().strength(-100))
-      .force('x', d3.forceX<GraphNode>(d => targets.get(d.id)!.x).strength(0.7))
-      .force('y', d3.forceY<GraphNode>(d => targets.get(d.id)!.y).strength(0.7))
-      .force('collision', d3.forceCollide<GraphNode>().radius(width < 600 ? 110 : 100));
+      .force('link', d3.forceLink(links).id((d: any) => d.id).distance(290).strength(0.06))
+      .force('charge', d3.forceManyBody().strength(-900))
+      .force('x', d3.forceX<GraphNode>(0).strength(0.025))
+      .force('y', d3.forceY<GraphNode>(0).strength(0.025))
+      .force('collision', d3.forceCollide<GraphNode>().radius(135).iterations(3));
 
     // Create SVG
     let svg = d3
@@ -398,9 +390,8 @@ import Icon from './Icon.astro';
         .attr("class", "graph-edge")
         .attr("fill", "none")
         .attr("stroke", colors.linkStroke)
-        .attr("stroke-width", d => d.branch ? 1.5 : 1)
-        .attr("stroke-dasharray", d => d.branch ? null : "3 5")
-        .attr("stroke-opacity", d => d.branch ? 0.5 : 0.12);
+        .attr("stroke-width", 1)
+        .attr("stroke-opacity", 0.14);
 
       // Create node groups
       const nodeGroup = containerGroup
@@ -499,7 +490,7 @@ import Icon from './Icon.astro';
         .on("mouseout", function () {
           link.transition().duration(150)
             .attr("stroke", colors.linkStroke)
-            .attr("stroke-opacity", (d: GraphLink) => d.branch ? 0.5 : 0.12);
+            .attr("stroke-opacity", 0.14);
 
           nodeGroup.selectAll<SVGCircleElement, GraphNode>("circle")
             .attr("fill", colors.linkStroke)
@@ -521,7 +512,6 @@ import Icon from './Icon.astro';
         .attr("cursor", "pointer");
 
       // Create labels
-      const labelHeights = new Map<string, number>();
       const labels = nodeGroup
         .append("text")
         .each(function(d) {
@@ -541,33 +531,24 @@ import Icon from './Icon.astro';
         .attr("fill", colors.postText)
         .attr("pointer-events", "all")
         .style("user-select", "none")
-        .style("opacity", 1)
-        .each(function(d) { labelHeights.set(d.id, this.getBBox().height + d.radius + 25); });
+        .style("opacity", 1);
 
       // Update positions on simulation tick
       simulation.on("tick", () => {
-        link.attr('d', (d: any) => {
-          if (!d.branch) return `M${d.source.x},${d.source.y} L${d.target.x},${d.target.y}`;
-          const [parent, child] = targets.get(d.source.id)!.y < targets.get(d.target.id)!.y
-            ? [d.source, d.target] : [d.target, d.source];
-          const startY = parent.y + labelHeights.get(parent.id)!;
-          const endY = child.y - child.radius - 8;
-          const midY = (startY + endY) / 2;
-          return `M${parent.x},${startY} C${parent.x},${midY} ${child.x},${midY} ${child.x},${endY}`;
-        });
+        link.attr('d', (d: any) => `M${d.source.x},${d.source.y} L${d.target.x},${d.target.y}`);
 
         nodeGroup.attr("transform", (d: any) => `translate(${d.x},${d.y})`);
       });
 
-      simulation.stop().tick(180);
+      simulation.stop().tick(300);
       const xs = nodes.map(node => node.x || 0), ys = nodes.map(node => node.y || 0);
       const minX = Math.min(...xs) - 110, maxX = Math.max(...xs) + 110;
       const minY = Math.min(...ys) - 30, maxY = Math.max(...ys) + 130;
       const fitScale = Math.min(1.2, width / (maxX - minX), height / (maxY - minY));
       const scale = Math.max(0.9, fitScale);
-      // A dense garden opens at a readable scale around its main branch.
-      const focusX = fitScale < scale ? targets.get(forest.roots[0].id)!.x : (minX + maxX) / 2;
-      const focusY = fitScale < scale ? minY + height / (2 * scale) : (minY + maxY) / 2;
+      // Keep dense gardens readable; the overview control fits the entire cloud.
+      const focusX = (minX + maxX) / 2;
+      const focusY = (minY + maxY) / 2;
       svg.call(zoom.transform as any, d3.zoomIdentity.translate(width / 2, height / 2).scale(scale).translate(-focusX, -focusY));
       const overview = container.id === 'home-graph-container' ? document.getElementById('garden-graph-overview') : null;
       if (overview) overview.onclick = () => {
