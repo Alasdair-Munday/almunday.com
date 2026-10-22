@@ -17,8 +17,8 @@ As followers of Jesus, we are called to live in awareness of both of these reali
 
 ## Related notes
 
-- [[Salvation Is Not Escape]]
-- [[Christian Identity Is Already and Not Yet]]
-- [[Caring for Creation Through Delight Rather Than Guilt]]
+- [Salvation Is Not Escape](posts/salvation-is-not-escape/index.md)
+- [Christian Identity Is Already and Not Yet](posts/christian-identity-is-already-and-not-yet/index.md)
+- [Caring for Creation Through Delight Rather Than Guilt](posts/caring-for-creation-through-delight-rather-than-guilt/index.md)
 
 *Extracted from Three Visions of Paradise Workbook, Introduction — Paradise life before and after death. The headings and related-note links were added for this garden.*
