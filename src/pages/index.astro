@@ -1,11 +1,12 @@
 ---
+import { isEssay } from '@/utils/note-maturity.mjs';
 import { MATURITY_STAGES, NOTE_MATURITY } from '@/utils/note-maturity.mjs';
 import NoteMaturityLegend from '@/components/NoteMaturityLegend.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { siteConfig } from '@/config';
 import { getCollection } from 'astro:content';
 import { shouldShowPost } from '@/utils/markdown';
-const posts = (await getCollection('posts')).filter(post => shouldShowPost(post, false));
+const posts = (await getCollection('posts')).filter(post => shouldShowPost(post, false) && isEssay(post.data.maturity));
 const seo = { title: siteConfig.homepageTitle, description: siteConfig.description, canonical: siteConfig.site + '/', ogType: 'website' as const };
 ---
 <BaseLayout seoData={seo}>
@@ -21,7 +22,7 @@ const seo = { title: siteConfig.homepageTitle, description: siteConfig.descripti
     <div id="home-graph-container" role="region" aria-label="Interactive graph of published writing"><p class="al-loading">Loading the garden…</p></div>
     <p class="al-graph-help">Drag to explore · Pinch or scroll to zoom · Choose a title to read. Lines follow links between pieces.</p>
     <NoteMaturityLegend />
-    <details class="al-list"><summary>All writing</summary><ul>{posts.map(post => <li><a href={`/posts/${post.id}/`}>{post.data.title}</a></li>)}</ul></details>
+    <details class="al-list"><summary>Essays</summary><ul>{posts.map(post => <li><a href={`/posts/${post.id}/`}>{post.data.title}</a></li>)}</ul></details>
   </section>
 </BaseLayout>
 

@@ -1,4 +1,5 @@
 ---
+import { isEssay } from '@/utils/note-maturity.mjs';
 import type { GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
 import { siteConfig } from '@/config';
@@ -15,7 +16,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   try {
     // Get all posts
     const allPosts = await getCollection('posts');
-    const visiblePosts = allPosts.filter(post => shouldShowPost(post, isDev));
+    const visiblePosts = allPosts.filter(post => shouldShowPost(post, isDev) && isEssay(post.data.maturity));
     const sortedPosts = sortPostsByDate(visiblePosts);
 
     // Extract all unique tags with error handling

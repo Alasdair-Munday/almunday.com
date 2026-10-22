@@ -98,4 +98,6 @@ Use `seed` for a title or a single sentence introducing an idea, `seedling` for 
 
 The graph uses larger, more solid node marks for more developed notes. Titles stay readable. Each node’s tooltip and accessible label include its maturity. `draft: true` still excludes a note from publication regardless of maturity. Missing or blank maturity means established; an unsupported value produces a build error listing the accepted stages.
 
-The front-page graph starts with a minimum maturity of Growing, showing growing and established notes. Lower the Minimum maturity selector to Seedling or Seed to include earlier ideas. This only filters the graph; published notes remain available through search and All writing.
+The front-page graph starts with a minimum maturity of Growing, showing growing and established notes. Lower the Minimum maturity selector to Seedling or Seed to include earlier ideas. This only filters the graph; published notes remain available through search.
+
+Writing and tag lists show established essays only. Existing blog posts without maturity remain included. Set `maturity: established` when a garden note is ready to appear as an essay.

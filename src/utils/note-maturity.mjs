@@ -41,3 +41,8 @@ export function graphMaturityStyle(value, scale = 'global', enabled = true, conn
 export function meetsMinimumMaturity(value, minimum = 'growing') {
   return MATURITY_STAGES.indexOf(normalizeMaturity(value)) >= MATURITY_STAGES.indexOf(normalizeMaturity(minimum));
 }
+
+/** @param {unknown} maturity */
+export function isEssay(maturity) {
+  return normalizeMaturity(maturity) === 'established';
+}

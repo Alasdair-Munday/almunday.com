@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { graphMaturityStyle, normalizeMaturity, MATURITY_STAGES, meetsMinimumMaturity } from '../src/utils/note-maturity.mjs';
+import { graphMaturityStyle, normalizeMaturity, MATURITY_STAGES, meetsMinimumMaturity, isEssay } from '../src/utils/note-maturity.mjs';
 
 test('missing and blank maturity preserve established notes; stages accept case/spacing', () => {
   for (const value of [undefined, null, '', '  ']) assert.equal(normalizeMaturity(value), 'established');
@@ -38,4 +38,10 @@ test('minimum maturity includes the selected stage and all later stages', () => 
   assert.equal(meetsMinimumMaturity('seedling'), false);
   assert.equal(meetsMinimumMaturity('growing'), true);
   assert.equal(meetsMinimumMaturity(undefined), true);
+});
+
+test('essay lists retain legacy blog posts and exclude developing notes', () => {
+  for (const stage of ['seed', 'seedling', 'growing']) assert.equal(isEssay(stage), false);
+  assert.equal(isEssay('established'), true);
+  assert.equal(isEssay(undefined), true);
 });
