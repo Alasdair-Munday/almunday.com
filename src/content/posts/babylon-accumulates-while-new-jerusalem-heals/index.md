@@ -1,5 +1,6 @@
 ---
 title: "Babylon Accumulates While New Jerusalem Heals"
+type: opinion
 description: "Babylon and New Jerusalem are rival visions of social existence."
 date: 2026-10-22
 tags: ["bible-and-hermeneutics", "eschatology", "politics"]
