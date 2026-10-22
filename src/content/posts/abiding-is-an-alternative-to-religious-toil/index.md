@@ -11,5 +11,5 @@ The recurring contrast between toil and tarry offers a strong account of Christi
 
 ## Related seedlings
 
-- [[Fruitfulness Is Relational Rather Than Merely Productive]]
-- [[The Church Participates in God’s Mission Rather Than Owning It]]
+- [Fruitfulness Is Relational Rather Than Merely Productive](posts/fruitfulness-is-relational-rather-than-merely-productive/index.md)
+- [The Church Participates in God’s Mission Rather Than Owning It](posts/the-church-participates-in-gods-mission-rather-than-owning-it/index.md)
