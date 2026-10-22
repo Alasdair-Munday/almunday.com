@@ -11,5 +11,5 @@ The placement of words, actions, and declarations in a service can subtly determ
 
 ## Related seedlings
 
-- [[Worship Is Collective World-Making]]
-- [[Church Hospitality Requires More Than Inclusion]]
+- [Worship Is Collective World-Making](posts/worship-is-collective-world-making/index.md)
+- [Church Hospitality Requires More Than Inclusion](posts/church-hospitality-requires-more-than-inclusion/index.md)
