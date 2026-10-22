@@ -1,5 +1,6 @@
 ---
 title: "Difference Is Often Experienced as Threat"
+type: opinion
 description: "Several notes suggest that sin is expressed through fear, rejection, or control of difference rather than merely through individual moral failure."
 date: 2026-10-22
 tags: ["anthropology"]
