@@ -1,5 +1,6 @@
 ---
 title: "Reading with Creation Goggles Part 1: Separating and filling - the reading of Genesis 1 that changes everything"
+type: essay
 description: Genesis 1 has a very clear shape, one that is often obscured by our concerns about science, doctrine or culture wars. But what if the essential pattern of  separating and filling was as second nature as "in the beginning" or "Let there be light"? How would that change how ordinary people read the Bible?
 date: 2026-10-20
 tags: ["genesis","creation","biblical-interpretation"]
