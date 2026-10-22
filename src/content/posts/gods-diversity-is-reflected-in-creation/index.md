@@ -11,5 +11,5 @@ Divine unity does not require uniformity. Difference and diversity may be intrin
 
 ## Related seedlings
 
-- [[The Imago Dei Undermines Human Hierarchy]]
-- [[God’s Perfection Includes Relational Openness]]
+- [The Imago Dei Undermines Human Hierarchy](posts/the-imago-dei-undermines-human-hierarchy/index.md)
+- [God’s Perfection Includes Relational Openness](posts/gods-perfection-includes-relational-openness/index.md)
