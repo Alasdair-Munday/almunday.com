@@ -1,5 +1,6 @@
 ---
 title: "Play Is a Sign of Safety"
+type: comment
 description: "Play Is a Sign of Safety. Extracts from Three Visions of Paradise Workbook."
 date: 2026-10-22
 tags: ["community","kingdom-of-god","spirituality-and-practice"]
