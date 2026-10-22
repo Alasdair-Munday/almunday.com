@@ -11,5 +11,5 @@ The two mountains offer a compact biblical diagnostic. On God’s mountain, life
 
 ## Related seedlings
 
-- [[The Counterfeit Can Look Like Salvation]]
-- [[The Lamb Redefines What Conquest Means]]
+- [The Counterfeit Can Look Like Salvation](posts/the-counterfeit-can-look-like-salvation/index.md)
+- [The Lamb Redefines What Conquest Means](posts/the-lamb-redefines-what-conquest-means/index.md)
