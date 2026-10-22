@@ -1,14 +1,8 @@
 ---
-mainCategory: bible
 title: "The Parables Reframe Wisdom as Readiness"
 description: "In the parable of the ten virgins, wisdom is not merely intellectual understanding; it is preparedness to act faithfully before the crisis arrives."
 date: 2026-10-22
-tags:
-  - bible-and-hermeneutics
-  - worldview
-  - digital-garden
-  - seedling
-  - maturity-seed
+tags: ["bible-and-hermeneutics","worldview"]
 maturity: seed
 draft: false
 ---

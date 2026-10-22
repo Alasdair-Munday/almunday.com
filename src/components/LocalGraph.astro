@@ -59,6 +59,7 @@ const shouldShowGraph = true;
 
 <script>
   import * as d3 from "d3";
+  import { connectionCounts } from '@/utils/graph-tags.mjs';
   import { graphMaturityStyle } from '@/utils/note-maturity.mjs';
   import { getGraphThemeColors } from '@/utils/graph-theme-colors';
 
@@ -118,12 +119,14 @@ const shouldShowGraph = true;
       directlyConnectedNodeIds.has(conn.source) && directlyConnectedNodeIds.has(conn.target)
     );
 
+    const counts = connectionCounts(relevantNodes, relevantConnections);
     return {
       nodes: relevantNodes.map((node: any) => ({
         id: node.id,
         name: node.title || node.name,
         slug: node.slug,
-        ...graphMaturityStyle(node.maturity, 'local', document.getElementById('local-graph-container')?.dataset.noteMaturityEnabled !== 'false', node.connections || 0),
+        ...graphMaturityStyle(node.maturity, 'local', document.getElementById('local-graph-container')?.dataset.noteMaturityEnabled !== 'false', counts.get(node.id) || 0),
+        ...(node.type === 'tag' ? {opacity: 1, label: 'Tag'} : {}),
         group: node.type
       })),
       links: relevantConnections.map((conn: any) => ({

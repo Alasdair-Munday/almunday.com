@@ -33,7 +33,7 @@ import Icon from './Icon.astro';
 
 <script>
   import * as d3 from "d3";
-  import { GRAPH_CATEGORIES } from '@/utils/graph-categories.mjs';
+  import { connectionCounts, connectionRadius } from '@/utils/graph-tags.mjs';
   import { graphMaturityStyle, meetsMinimumMaturity, MATURITY_STAGES, NOTE_MATURITY } from '@/utils/note-maturity.mjs';
   import { getGraphThemeColors } from '@/utils/graph-theme-colors';
 
@@ -53,7 +53,7 @@ import Icon from './Icon.astro';
     maturity: string;
     label: string;
     group?: string;
-    category?: string | null;
+    tag?: string;
     x?: number;
     y?: number;
     fx?: number | null;
@@ -64,7 +64,7 @@ import Icon from './Icon.astro';
     source: string | GraphNode;
     target: string | GraphNode;
     value: number;
-    categoryLink?: boolean;
+    tagLink?: boolean;
   }
 
   interface GraphData {
@@ -242,13 +242,15 @@ import Icon from './Icon.astro';
             name: node.title || node.name,
             slug: node.slug,
             ...graphMaturityStyle(node.maturity, 'global', document.getElementById('graph-modal-overlay')?.dataset.noteMaturityEnabled !== 'false', node.connections || 0),
+            ...(node.type === 'tag' ? {opacity: 1, label: 'Tag'} : {}),
             group: node.type,
-            category: node.category
+            tag: node.tag
           })),
           links: data.connections.map((conn: any) => ({
             source: conn.source,
             target: conn.target,
-            value: 1
+            value: 1,
+            tagLink: conn.type === 'tag'
           }))
         };
         const filter = container.id === 'home-graph-container'
@@ -263,17 +265,14 @@ import Icon from './Icon.astro';
             const output = document.getElementById('garden-maturity-value');
             if (output) output.textContent = label;
           }
-          const nodes = filter ? graphData.nodes.filter(node => meetsMinimumMaturity(node.maturity, minimum)) : graphData.nodes;
-          const ids = new Set(nodes.map(node => node.id));
-          const links = graphData.links.filter(link => ids.has(String(link.source)) && ids.has(String(link.target)));
-          const hubs: GraphNode[] = GRAPH_CATEGORIES.map(category => ({
-            id: `category:${category.id}`, name: category.label, group: 'category',
-            category: category.id, radius: 24, opacity: 1, maturity: 'established', label: 'Topic',
-          }));
-          const categoryLinks: GraphLink[] = nodes.filter(node => node.category).map(node => ({
-            source: node.id, target: `category:${node.category}`, value: 1, categoryLink: true,
-          }));
-          renderGraph(container, { nodes: [...hubs, ...nodes], links: [...categoryLinks, ...links] });
+          const posts = graphData.nodes.filter(node => node.group !== 'tag' && (!filter || meetsMinimumMaturity(node.maturity, minimum)));
+          const ids = new Set(posts.map(node => node.id));
+          const tagIds = new Set(graphData.links.filter(link => link.tagLink && ids.has(String(link.source))).map(link => String(link.target)));
+          const nodes = [...posts, ...graphData.nodes.filter(node => node.group === 'tag' && tagIds.has(node.id))];
+          const visibleIds = new Set(nodes.map(node => node.id));
+          const links = graphData.links.filter(link => visibleIds.has(String(link.source)) && visibleIds.has(String(link.target)));
+          const counts = connectionCounts(nodes, links);
+          renderGraph(container, { nodes: nodes.map(node => ({...node, radius: connectionRadius(counts.get(node.id) || 0)})), links });
         };
         if (filter) filter.oninput = draw;
         draw();
@@ -318,25 +317,13 @@ import Icon from './Icon.astro';
     const links = data.links.map((d) => ({ ...d }));
     const nodes = data.nodes.map((d) => ({ ...d }));
 
-    // Topic anchors form a loose circle; notes settle around their tagged subject.
-    const hubRadius = Math.max(260, Math.sqrt(nodes.length) * 45);
-    const anchors = new Map(GRAPH_CATEGORIES.map((category, i) => {
-      const angle = -Math.PI / 2 + i * Math.PI * 2 / GRAPH_CATEGORIES.length;
-      return [category.id, { x: Math.cos(angle) * hubRadius, y: Math.sin(angle) * hubRadius }];
-    }));
-    const goldenAngle = Math.PI * (3 - Math.sqrt(5));
-    nodes.forEach((node, index) => {
-      const anchor = anchors.get(node.category || '') || { x: 0, y: 0 };
-      const radius = node.group === 'category' ? 0 : 110 * Math.sqrt(index % 12 + 1);
-      node.x = anchor.x + Math.cos(index * goldenAngle) * radius;
-      node.y = anchor.y + Math.sin(index * goldenAngle) * radius;
-    });
+    // The existing D3 force graph: no category anchors or imposed hierarchy.
     simulation = d3.forceSimulation<GraphNode>(nodes)
-      .force('link', d3.forceLink(links).id((d: any) => d.id).distance(190).strength((d: any) => d.categoryLink ? 0.08 : 0.05))
+      .force('link', d3.forceLink(links).id((d: any) => d.id).distance(190).strength(0.08))
       .force('charge', d3.forceManyBody().strength(-280))
-      .force('x', d3.forceX<GraphNode>(d => anchors.get(d.category || '')?.x || 0).strength(d => d.group === 'category' ? 0.8 : 0.08))
-      .force('y', d3.forceY<GraphNode>(d => anchors.get(d.category || '')?.y || 0).strength(d => d.group === 'category' ? 0.8 : 0.08))
-      .force('collision', d3.forceCollide<GraphNode>().radius(d => d.group === 'category' ? 230 : 110).iterations(3));
+      .force('x', d3.forceX<GraphNode>(0).strength(0.04))
+      .force('y', d3.forceY<GraphNode>(0).strength(0.04))
+      .force('collision', d3.forceCollide<GraphNode>().radius(110).iterations(3));
 
     // Create SVG
     let svg = d3
@@ -384,9 +371,6 @@ import Icon from './Icon.astro';
 
         // Hide/show labels based on zoom level
         const scale = event.transform.k;
-        labels.attr('font-size', d => d.group === 'category' ? `${Math.max(22, 18 / scale)}px` : '16px');
-        labels.filter(d => d.group === 'category').select('tspan').attr('y', Math.max(24, 13 / scale) + 24 / scale);
-        containerGroup.selectAll<SVGCircleElement, GraphNode>('circle').attr('r', d => d.group === 'category' ? Math.max(24, 13 / scale) : d.radius);
         const labelThreshold = container.id === 'home-graph-container' ? 0 : 0.6; // Hide labels when zoomed out beyond this threshold
 
         if (scale < labelThreshold) {
@@ -401,7 +385,7 @@ import Icon from './Icon.astro';
     svg.call(zoom as any);
     if (svg) svg.style('cursor', 'default');
 
-    function focusCategory(node: GraphNode) {
+    function focusTag(node: GraphNode) {
       svg.call(zoom.transform as any, d3.zoomIdentity.translate(width / 2, height / 2).scale(0.85).translate(-node.x!, -node.y!));
     }
 
@@ -414,9 +398,9 @@ import Icon from './Icon.astro';
         .attr("class", "graph-edge")
         .attr("fill", "none")
         .attr("stroke", colors.linkStroke)
-        .attr("data-category-link", d => d.categoryLink ? "true" : null)
-        .attr("stroke-width", d => d.categoryLink ? 1.6 : 1)
-        .attr("stroke-opacity", (d: GraphLink) => d.categoryLink ? 0.4 : 0.14);
+        .attr("data-tag-link", d => d.tagLink ? "true" : null)
+        .attr("stroke-width", 1)
+        .attr("stroke-opacity", (d: GraphLink) => d.tagLink ? 0.25 : 0.14);
 
       // Create node groups
       const nodeGroup = containerGroup
@@ -426,13 +410,13 @@ import Icon from './Icon.astro';
         .append("g")
         .attr("data-id", (d) => d.id)
         .attr("pointer-events", "bounding-box")
-        .attr("tabindex", (d) => d.slug || d.group === 'category' ? 0 : null)
-        .attr("role", (d) => d.group === 'category' ? "button" : d.slug ? "link" : "img")
-        .attr("aria-label", (d) => d.group === 'category' ? `${d.name} topic — zoom to explore` : `${d.name} — ${d.label}`)
-        .attr("data-maturity", (d) => d.group === 'category' ? null : d.maturity)
-        .attr("data-category", d => d.group === 'category' ? d.category || null : null)
+        .attr("tabindex", (d) => d.slug || d.group === 'tag' ? 0 : null)
+        .attr("role", (d) => d.group === 'tag' ? "button" : d.slug ? "link" : "img")
+        .attr("aria-label", (d) => d.group === 'tag' ? `${d.name} tag — zoom to explore` : `${d.name} — ${d.label}`)
+        .attr("data-maturity", (d) => d.group === 'tag' ? null : d.maturity)
+        .attr("data-tag", d => d.group === 'tag' ? d.tag || null : null)
         .on("keydown", (_event, d) => {
-          if (d.group === 'category' && (_event.key === 'Enter' || _event.key === ' ')) { _event.preventDefault(); focusCategory(d); }
+          if (d.group === 'tag' && (_event.key === 'Enter' || _event.key === ' ')) { _event.preventDefault(); focusTag(d); }
           if (_event.key === 'Enter' && d.slug) window.location.href = `/posts/${d.slug}`;
         })
         .call(
@@ -465,7 +449,7 @@ import Icon from './Icon.astro';
               const dx = event.x - dragStartX;
               const dy = event.y - dragStartY;
               const dist = Math.sqrt(dx * dx + dy * dy);
-              if (dist < CLICK_DISTANCE && d.group === 'category') focusCategory(d);
+              if (dist < CLICK_DISTANCE && d.group === 'tag') focusTag(d);
               if (dist < CLICK_DISTANCE && d.slug) {
                 closeModal();
 
@@ -518,7 +502,7 @@ import Icon from './Icon.astro';
         .on("mouseout", function () {
           link.transition().duration(150)
             .attr("stroke", colors.linkStroke)
-            .attr("stroke-opacity", (d: GraphLink) => d.categoryLink ? 0.4 : 0.14);
+            .attr("stroke-opacity", (d: GraphLink) => d.tagLink ? 0.25 : 0.14);
 
           nodeGroup.selectAll<SVGCircleElement, GraphNode>("circle")
             .attr("fill", colors.linkStroke)
@@ -555,7 +539,7 @@ import Icon from './Icon.astro';
         })
         .attr("text-anchor", "middle")
         .attr("font-size", "16px")
-        .attr("font-weight", d => d.group === 'category' ? "700" : "500")
+        .attr("font-weight", d => d.group === 'tag' ? "700" : "500")
         .attr("fill", colors.postText)
         .attr("pointer-events", "all")
         .style("user-select", "none")

@@ -1,16 +1,8 @@
 ---
-mainCategory: bible
 title: "Judges Is Suspicious of Charismatic Saviours"
 description: "The book of Judges presents leadership as increasingly corrupted when gifted people are treated as if they can become the saviour of the community."
 date: 2026-10-22
-tags:
-  - bible
-  - biblical-studies
-  - judges
-  - leadership
-  - worldview
-  - digital-garden
-  - maturity-seed
+tags: ["bible","biblical-studies","judges","leadership","worldview"]
 maturity: seed
 draft: false
 ---

@@ -1,14 +1,8 @@
 ---
-mainCategory: theology
 title: "Play Is a Sign of Safety"
 description: "Play Is a Sign of Safety. Extracts from Three Visions of Paradise Workbook."
 date: 2026-10-22
-tags:
-  - community
-  - kingdom-of-god
-  - spirituality-and-practice
-  - digital-garden
-  - maturity-seedling
+tags: ["community","kingdom-of-god","spirituality-and-practice"]
 maturity: seedling
 draft: false
 ---

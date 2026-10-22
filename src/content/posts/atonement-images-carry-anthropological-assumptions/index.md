@@ -1,14 +1,8 @@
 ---
-mainCategory: theology
 title: "Atonement Images Carry Anthropological Assumptions"
 description: "Each atonement model implies a particular account of what is wrong with humanity and what kind of change salvation must bring."
 date: 2026-10-22
-tags:
-  - soteriology
-  - worldview
-  - digital-garden
-  - seedling
-  - maturity-seed
+tags: ["soteriology","worldview"]
 maturity: seed
 draft: false
 ---

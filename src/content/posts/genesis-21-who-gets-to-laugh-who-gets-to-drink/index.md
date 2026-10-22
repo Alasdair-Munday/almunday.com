@@ -1,14 +1,8 @@
 ---
-mainCategory: bible
 title: "Genesis 21: Who Gets to Laugh? Who Gets to Drink?"
 date: 2026-02-08
 image: /assets/images/blog/beersheba.png
-tags:
-  - bible
-  - genesis
-  - theology
-  - church
-  - reconciliation
+tags: ["bible","genesis","theology","church","reconciliation"]
 description: When confronted with difference, which path will we choose? Welcome or rejection?
 ---
 

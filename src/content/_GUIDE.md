@@ -96,12 +96,14 @@ maturity: seed
 
 Use `seed` for a title or a single sentence introducing an idea, `seedling` for a short note that begins exploring it, `growing` for a developing elaboration, and `established` for a developed piece. Maturity is an editorial choice, independent of length, link count or certainty. New post templates start at seed. Existing posts without this property render as established; no existing writing has been reclassified.
 
-The graph uses larger, more solid node marks for more developed notes. Titles stay readable. Each node’s tooltip and accessible label include its maturity. `draft: true` still excludes a note from publication regardless of maturity. Missing or blank maturity means established; an unsupported value produces a build error listing the accepted stages.
+The graph uses more solid node marks for more developed notes. Node size reflects connections. Titles stay readable. Each node’s tooltip and accessible label include its maturity. `draft: true` still excludes a note from publication regardless of maturity. Missing or blank maturity means established; an unsupported value produces a build error listing the accepted stages.
 
 The front-page graph starts with a minimum maturity of Growing, showing growing and established notes. Lower the Minimum maturity selector to Seedling or Seed to include earlier ideas. This only filters the graph; published notes remain available through search.
 
 Writing and tag lists show established essays only. Existing blog posts without maturity remain included. Set `maturity: established` when a garden note is ready to appear as an essay.
 
-## Garden topics
+## Graph tags
 
-The graph has five large topic hubs: Bible, Culture, Theology, Music and Tech. Set `mainCategory: bible`, `culture`, `theology`, `music` or `tech` in note Properties to choose its main hub. This overrides tags; related subject tags are mapped in `src/utils/graph-categories.mjs`. Every existing note has an explicit mainCategory. For new notes without that field, tag matching remains a fallback, using Music/Tech first, then Bible, Culture, Theology. Hubs remain visible at every maturity level, while their note connections follow the filter. These topic nodes are navigation landmarks, not essays or maturity levels.
+Content tags appear as nodes connected to the notes that use them. Node size follows the number of unique connections in the displayed graph; note opacity still reflects maturity. The maturity slider filters notes and hides tags with no remaining notes. Tags such as `bible`, `culture`, `music` and `tech` work like any other subject tag; there are no special category hubs or mainCategory field.
+
+Use tags for subject matter. Keep maturity in its own property. Housekeeping labels (`digital-garden`, `maturity-*`, standalone maturity stages, draft, blog/post/note, series) are excluded by `src/utils/graph-tags.mjs`. Existing notes have been cleaned accordingly.

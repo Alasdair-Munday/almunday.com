@@ -10,25 +10,29 @@ test('missing and blank maturity preserve established notes; stages accept case/
   assert.throws(() => normalizeMaturity(1), /Unknown note maturity/);
 });
 
-test('maturity increases mark size/solidity independently of link count in both graphs', () => {
+test('maturity changes opacity while connections determine size in both graphs', () => {
   for (const scale of ['global', 'local']) {
     const styles = MATURITY_STAGES.map(stage => graphMaturityStyle(stage, scale, true, 0));
     for (let i = 1; i < styles.length; i++) {
-      assert.ok(styles[i - 1].radius < styles[i].radius);
+      assert.equal(styles[i - 1].radius, styles[i].radius);
       assert.ok(styles[i - 1].opacity < styles[i].opacity);
     }
     for (const stage of MATURITY_STAGES) {
-      assert.deepEqual(graphMaturityStyle(stage, scale, true, 100), graphMaturityStyle(stage, scale, true, 0));
+      assert.ok(graphMaturityStyle(stage, scale, true, 100).radius > graphMaturityStyle(stage, scale, true, 0).radius);
+      assert.equal(graphMaturityStyle(stage, scale, true, 100).opacity, graphMaturityStyle(stage, scale, true, 0).opacity);
     }
   }
 });
 
-test('disabling maturity styling restores upstream connection-based sizing', () => {
-  assert.equal(graphMaturityStyle('seedling', 'global', false, 0).radius, 5);
-  assert.equal(graphMaturityStyle('seedling', 'global', false, 100).radius, 15);
-  assert.equal(graphMaturityStyle('growing', 'local', false, 0).radius, 3);
-  assert.equal(graphMaturityStyle('growing', 'local', false, 100).radius, 8);
-  assert.equal(graphMaturityStyle('seedling', 'global', false, 0).opacity, 1);
+test('disabling maturity changes opacity without changing connection-based sizes', () => {
+  for (const scale of ['global', 'local']) {
+    for (const stage of MATURITY_STAGES) {
+      const enabled = graphMaturityStyle(stage, scale, true, 5);
+      const disabled = graphMaturityStyle(stage, scale, false, 5);
+      assert.equal(disabled.radius, enabled.radius);
+      assert.equal(disabled.opacity, 1);
+    }
+  }
 });
 
 test('minimum maturity includes the selected stage and all later stages', () => {
