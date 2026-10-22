@@ -11,5 +11,5 @@ In the Old Testament material, human identity is expressed not only through what
 
 ## Related seedlings
 
-- [[The Imago Dei Is a Conspicuous but Limited Old Testament Theme]]
-- [[The Spirit’s Empowerment Does Not Automatically Legitimate a Judge’s Actions]]
+- [The Imago Dei Is a Conspicuous but Limited Old Testament Theme](posts/the-imago-dei-is-a-conspicuous-but-limited-old-testament-theme/index.md)
+- [The Spirit’s Empowerment Does Not Automatically Legitimate a Judge’s Actions](posts/the-spirits-empowerment-does-not-automatically-legitimate-a-judges-actions/index.md)
