@@ -1,5 +1,6 @@
 ---
 title: "The Fool Is More Than Someone Who Lacks Intelligence"
+type: opinion
 description: "In Proverbs, foolishness is fundamentally a moral and relational refusal of wisdom, not merely an intellectual deficiency."
 date: 2026-10-22
 tags: ["bible","biblical-studies","proverbs","wisdom"]
