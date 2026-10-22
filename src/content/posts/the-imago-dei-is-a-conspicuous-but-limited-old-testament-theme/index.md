@@ -11,5 +11,5 @@ The image-of-God language in Genesis 1 is significant but occurs relatively rare
 
 ## Related seedlings
 
-- [[Old Testament Anthropology Is Oriented Around Human Function]]
-- [[Biblical Wisdom Is Polyphonic Rather Than Monolithic]]
+- [Old Testament Anthropology Is Oriented Around Human Function](posts/old-testament-anthropology-is-oriented-around-human-function/index.md)
+- [Biblical Wisdom Is Polyphonic Rather Than Monolithic](posts/biblical-wisdom-is-polyphonic-rather-than-monolithic/index.md)
