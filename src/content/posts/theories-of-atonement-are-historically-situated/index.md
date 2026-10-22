@@ -11,5 +11,5 @@ The development of satisfaction and penal-substitutionary accounts shows how doc
 
 ## Related seedlings
 
-- [[Atonement Images Carry Anthropological Assumptions]]
-- [[Mission Requires Attention to Power]]
+- [Atonement Images Carry Anthropological Assumptions](posts/atonement-images-carry-anthropological-assumptions/index.md)
+- [Mission Requires Attention to Power](posts/mission-requires-attention-to-power/index.md)
