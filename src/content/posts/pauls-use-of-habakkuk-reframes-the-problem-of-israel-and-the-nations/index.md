@@ -11,5 +11,5 @@ Paul’s use of Habakkuk connects the prophet’s concern about law, sin, and th
 
 ## Related seedlings
 
-- [[Biblical Wisdom Combines Faith and Reason]]
-- [[Old Testament Anthropology Is Oriented Around Human Function]]
+- [Biblical Wisdom Combines Faith and Reason](posts/biblical-wisdom-combines-faith-and-reason/index.md)
+- [Old Testament Anthropology Is Oriented Around Human Function](posts/old-testament-anthropology-is-oriented-around-human-function/index.md)
