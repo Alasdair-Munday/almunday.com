@@ -1,5 +1,6 @@
 ---
 title: "Creativity Without Building a Monument to Ourselves"
+type: comment
 description: "Creativity Without Building a Monument to Ourselves. Extracts from Three Visions of Paradise Workbook."
 date: 2026-10-22
 tags: ["culture","creativity","spirituality-and-practice"]
