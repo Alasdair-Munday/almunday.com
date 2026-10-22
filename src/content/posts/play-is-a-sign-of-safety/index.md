@@ -25,8 +25,8 @@ How might receiving the Kingdom of God “like a little child” change our appr
 
 ## Related notes
 
-- [[The Gift of Vulnerability]]
-- [[Identity Is Received Before It Is Performed]]
-- [[Eternal Life Is Quality as Well as Quantity]]
+- [The Gift of Vulnerability](posts/the-gift-of-vulnerability/index.md)
+- [Identity Is Received Before It Is Performed](posts/identity-is-received-before-it-is-performed/index.md)
+- [Eternal Life Is Quality as Well as Quantity](posts/eternal-life-is-quality-as-well-as-quantity/index.md)
 
 *Extracted from Three Visions of Paradise Workbook, Session 1 — Play: Restored Community. The headings and related-note links were added for this garden.*
