@@ -11,5 +11,5 @@ A reparative reading acknowledges harmful or problematic features in a biblical 
 
 ## Related seedlings
 
-- [[Biblical Wisdom Is Polyphonic Rather Than Monolithic]]
-- [[Biblical Wisdom Contains Internal Tension]]
+- [Biblical Wisdom Is Polyphonic Rather Than Monolithic](posts/biblical-wisdom-is-polyphonic-rather-than-monolithic/index.md)
+- [Biblical Wisdom Contains Internal Tension](posts/biblical-wisdom-contains-internal-tension/index.md)
