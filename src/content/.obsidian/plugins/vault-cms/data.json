@@ -4,7 +4,7 @@
   "contentTypes": [
     {
       "id": "content-type-minrock-blog",
-      "name": "Blog",
+      "name": "Posts",
       "folder": "posts",
       "fileOrganization": "folder",
       "enabled": true,
@@ -80,7 +80,7 @@
     "customContentTypes": [
       {
         "id": "content-type-minrock-blog",
-        "name": "Blog",
+        "name": "Posts",
         "folder": "posts",
         "template": "---\ntitle: \"{{title}}\"\ndescription: \"\"\ndate: {{date}}\ntype: opinion\ntags: []\nmaturity: seed\ndraft: false\naudio: true\n---",
         "enabled": true,
