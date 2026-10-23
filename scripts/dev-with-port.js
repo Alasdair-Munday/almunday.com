@@ -30,6 +30,9 @@ function checkPort(port) {
 }
 
 async function getAvailablePort() {
+  const configuredPort = Number(process.env.PORT);
+  if (Number.isInteger(configuredPort) && configuredPort > 0) return configuredPort;
+
   const port5000Available = await checkPort(5000);
 
   if (port5000Available) {
