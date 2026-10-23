@@ -1,0 +1,48 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PostCard from '@/components/PostCard.astro';
+import ContentTypeFilter from '@/components/ContentTypeFilter.astro';
+import Pagination from '@/components/Pagination.astro';
+import { CONTENT_TYPE_LABELS } from '@/utils/content-types.mjs';
+import { shouldShowPost, sortPostsByDate } from '@/utils/markdown';
+import { siteConfig } from '@/config';
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const posts = sortPostsByDate((await getCollection('posts')).filter(post => shouldShowPost(post, false)));
+  return Object.entries(CONTENT_TYPE_LABELS).flatMap(([type, label]) =>
+    paginate(posts.filter(post => post.data.type === type), {
+      params: { type },
+      props: { type, label },
+      pageSize: siteConfig.postOptions.postsPerPage,
+    })
+  );
+};
+interface Props { page: Page<CollectionEntry<'posts'>>; type: string; label: string }
+const { page, type, label } = Astro.props as unknown as Props;
+const baseUrl = `/posts/type/${type}`;
+const pagination = {
+  currentPage: page.currentPage, totalPages: page.lastPage,
+  hasPrev: page.currentPage > 1, hasNext: page.currentPage < page.lastPage,
+};
+const seoData = {
+  title: `${label}${page.currentPage > 1 ? ` - Page ${page.currentPage}` : ''} | ${siteConfig.title}`,
+  description: `Browse ${label.toLowerCase()} by Al Munday.`,
+  canonical: new URL(Astro.url.pathname, siteConfig.site).href,
+  ogType: 'website' as const,
+};
+---
+<BaseLayout seoData={seoData}>
+  <section class="al-garden" aria-labelledby="type-title">
+    <h1 id="type-title">{label}</h1>
+    <ContentTypeFilter currentType={type} />
+    <p>{page.total} {label.toLowerCase()}{page.lastPage > 1 && ` · Page ${page.currentPage} of ${page.lastPage}`}</p>
+    <div class="type-posts">
+      {page.data.map((post, index) => <PostCard post={post} eager={index < 2} context="posts" />)}
+    </div>
+    {page.total === 0 && <p>No {label.toLowerCase()} published yet.</p>}
+    <Pagination pagination={pagination} baseUrl={baseUrl} />
+  </section>
+</BaseLayout>
+<style>.type-posts { display: grid; gap: 1.5rem; margin: 2rem 0; }</style>

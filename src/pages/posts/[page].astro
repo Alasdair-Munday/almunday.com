@@ -1,5 +1,5 @@
 ---
-import { isEssay } from '@/utils/note-maturity.mjs';
+import ContentTypeFilter from "@/components/ContentTypeFilter.astro";
 import type { GetStaticPaths } from 'astro';
 import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
@@ -18,7 +18,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   // Filter posts based on environment
   const isDev = import.meta.env.DEV;
-  const visiblePosts = allPosts.filter(post => shouldShowPost(post, isDev) && isEssay(post.data.maturity));
+  const visiblePosts = allPosts.filter(post => shouldShowPost(post, isDev));
 
   // Sort posts by date
   const sortedPosts = sortPostsByDate(visiblePosts);
@@ -151,6 +151,7 @@ const pagination = {
             Show all posts
           </a>
         </div>
+      <ContentTypeFilter currentType="all" />
       </header>
 
       <div class="relative">

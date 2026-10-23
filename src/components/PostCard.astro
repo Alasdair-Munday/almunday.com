@@ -1,4 +1,5 @@
 ---
+import { CONTENT_TYPE_LABELS } from "@/utils/content-types.mjs";
 import NoteMaturity from './NoteMaturity.astro';
 import { revisionDate } from '@/utils/post-dates.mjs';
 import { contentTags } from '@/utils/graph-tags.mjs';
@@ -77,6 +78,7 @@ const shouldShowCoverImage = (() => {
 
     <div class={`p-4 ${cover && shouldShowCoverImage ? 'rounded-b-lg' : 'rounded-lg'}`}>
       <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-primary-500 dark:text-primary-400 mb-1">
+        <a href={`/posts/type/${post.data.type}/`} class="hover:underline">{CONTENT_TYPE_LABELS[post.data.type as keyof typeof CONTENT_TYPE_LABELS]}</a>
         <time datetime={date.toISOString()}>Published{' '}
           <span class="hidden sm:inline">{formatDate(date)}</span>
           <span class="sm:hidden">{formatDateMobile(date)}</span>
