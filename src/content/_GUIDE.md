@@ -98,9 +98,9 @@ Use `seed` for a title or a single sentence introducing an idea, `seedling` for 
 
 The graph uses more solid node marks for more developed notes. Node size reflects connections. Titles stay readable. Each node’s tooltip and accessible label include its maturity. `draft: true` still excludes a note from publication regardless of maturity. Missing or blank maturity means established; an unsupported value produces a build error listing the accepted stages.
 
-The front-page graph starts with a minimum maturity of Growing, showing growing and established notes. Lower the Minimum maturity selector to Seedling or Seed to include earlier ideas. This only filters the graph; published notes remain available through search.
+The Garden graph starts with a minimum maturity of Evergreen (stored as `established`). Lower the Minimum maturity selector to Seedling or Seed to include earlier ideas. This only filters the graph; published notes remain available through search.
 
-Writing and tag lists show established essays only. Existing blog posts without maturity remain included. Set `maturity: established` when a garden note is ready to appear as an essay.
+Every post list includes a minimum-maturity slider, defaulting to Evergreen (`established`). Lower it to include growing notes, seedlings and seeds. Maturity is independent of content type: Songs, Essays, Opinions, Comments and Software projects can each be browsed at any maturity. Filtering happens before pagination, and changing maturity returns to the first page. Content-type links preserve the selected maturity in the URL.
 
 ## Graph tags
 
@@ -114,7 +114,7 @@ The front page features evergreen, established writing. The Garden page (`/garde
 
 ## Note context and revisions
 
-Every post displays its maturity and a short explanation. Connected reading beside the local graph lists up to five related notes, prioritising direct links, then shared tags. Tag pages include all published maturity levels; the Writing feed remains established essays only. The Garden remembers its minimum-maturity setting in this browser.
+Every post displays its maturity and a short explanation. Connected reading beside the local graph lists up to five related notes, prioritising direct links, then shared tags. Homepage, archive, tag and content-type lists all default to Evergreen; their sliders can reveal earlier published work. The Garden remembers its minimum-maturity setting in this browser.
 
 Keep `date` as the original publication date. When you substantially revise a note, set `lastModified` to the revision date, for example:
 

@@ -2,13 +2,12 @@
 import ContentTypeFilter from "@/components/ContentTypeFilter.astro";
 import treeLogo from '../../public/tree-logo.svg?raw';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import PostCard from '@/components/PostCard.astro';
+import MaturityPostList from '@/components/MaturityPostList.astro';
 import { getCollection } from 'astro:content';
 import { siteConfig } from '@/config';
 import { shouldShowPost, sortPostsByDate } from '@/utils/markdown';
-import { isEssay } from '@/utils/note-maturity.mjs';
-const essays = sortPostsByDate((await getCollection('posts')).filter(post => shouldShowPost(post, false) && (isEssay(post.data.maturity) || post.data.type === 'song')));
-const posts = essays.slice(0, siteConfig.postOptions.postsPerPage);
+const essays = sortPostsByDate((await getCollection('posts')).filter(post => shouldShowPost(post, false)));
+const posts = essays;
 const seo = { title: siteConfig.homepageTitle, description: siteConfig.description, canonical: siteConfig.site + '/', ogType: 'website' as const };
 ---
 <BaseLayout seoData={seo}>
@@ -17,9 +16,7 @@ const seo = { title: siteConfig.homepageTitle, description: siteConfig.descripti
     <div class="al-garden-heading"><div class="al-greeting"><span class="al-greeting-logo" aria-hidden="true" set:html={treeLogo} /><h1 id="writing-title">Hello, friend.</h1></div><a href="/garden/">Explore the garden →</a></div>
     <p class="al-garden-intro">Essays, reflections and songs on faith, culture and the things that shape our lives.</p>
     <ContentTypeFilter />
-    <div class="al-feed-posts">
-      {posts.map((post, index) => <PostCard post={post} featured eager={index < 2} context="recent" />)}
-    </div>
+    <MaturityPostList posts={posts} featured context="recent" />
     <a href="/posts/">All posts →</a>
   </section>
 </BaseLayout>

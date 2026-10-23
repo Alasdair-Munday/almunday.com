@@ -7,9 +7,8 @@ import { siteConfig } from '@/config';
 import { generatePageSEO } from '@/utils/seo';
 import { shouldShowPost, sortPostsByDate, extractTags } from '@/utils/markdown';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import PostCard from '@/components/PostCard.astro';
+import MaturityPostList from '@/components/MaturityPostList.astro';
 import Tags from '@/components/Tags.astro';
-import Pagination from '@/components/Pagination.astro';
 import Icon from '@/components/Icon.astro';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -130,17 +129,7 @@ const pagination = {
             </a>
           </div>
         </div>
-        <p class="text-base text-primary-600 dark:text-primary-300">
-          Page {currentPage} of {totalPages} • <strong>{filteredPosts.length}</strong>
-          {selectedTag ? (
-            <>posts tagged with
-            <span class="inline-flex items-center px-2 py-1 bg-highlight-100 dark:bg-highlight-900/30 text-highlight-800 dark:text-highlight-200 rounded text-sm font-medium ml-1">
-              #{selectedTag}
-            </span></>
-          ) : (
-            <>total posts</>
-          )}
-        </p>
+
 
         <div class="mt-4">
           <a
@@ -160,14 +149,10 @@ const pagination = {
           {paginatedPosts.length > 0 ? (
             <>
               <!-- Posts list -->
-              <div class="space-y-6 mb-12">
-                {paginatedPosts.map((post, index) => (
-                  <PostCard post={post} eager={index < 2} context="posts" />
-                ))}
-              </div>
+              <MaturityPostList posts={filteredPosts} context="posts" />
 
               <!-- Pagination -->
-              <Pagination pagination={pagination} baseUrl="/posts" />
+
             </>
           ) : (
             <div class="text-center py-16">
