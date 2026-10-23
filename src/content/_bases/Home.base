@@ -47,7 +47,7 @@ properties:
     displayName: Title
 views:
   - type: cms
-    name: Blog
+    name: Posts
     propertyDisplay2: note.maturity
     propertyDisplay3: note.lastModified
     propertyDisplay4: note.type
