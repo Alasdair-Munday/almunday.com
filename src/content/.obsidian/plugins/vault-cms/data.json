@@ -4,7 +4,7 @@
   "contentTypes": [
     {
       "id": "content-type-minrock-blog",
-      "name": "Blog",
+      "name": "Posts",
       "folder": "posts",
       "fileOrganization": "folder",
       "enabled": true,
@@ -31,7 +31,8 @@
       "draftLogic": "true-draft",
       "hasDraftStatus": true,
       "imageProperty": "image",
-      "template": "---\ntitle: \"{{title}}\"\ndescription: \"\"\ndate: {{date}}\ntags: []\nmaturity: seed\ndraft: false\naudio: true\n---"
+      "template": "---\ntitle: \"{{title}}\"\ndescription: \"\"\ndate: {{date}}\ntype: opinion\ntags: []\nmaturity: seed\ndraft: false\naudio: true\n---",
+      "typeProperty": "type"
     },
     "content-type-minrock-projects": {
       "titleProperty": "title",
@@ -42,7 +43,8 @@
       "draftLogic": "true-draft",
       "hasDraftStatus": false,
       "imageProperty": "image",
-      "template": "---\ntitle: \"{{title}}\"\ndescription: \"\"\ndate: {{date}}\ncategory: \"Open Source\"\ntags: []\nemoji: \"🚀\"\nrepoUrl: \"\"\ndemoUrl: \"\"\nfeatured: false\n---"
+      "template": "---\ntitle: \"{{title}}\"\ndescription: \"\"\ndate: {{date}}\ncategory: \"Open Source\"\ntype: opinion\ntags: []\nemoji: \"🚀\"\nrepoUrl: \"\"\ndemoUrl: \"\"\nfeatured: false\n---",
+      "typeProperty": "type"
     }
   },
   "attachmentHandlingMode": "same-folder",
@@ -78,9 +80,9 @@
     "customContentTypes": [
       {
         "id": "content-type-minrock-blog",
-        "name": "Blog",
+        "name": "Posts",
         "folder": "posts",
-        "template": "---\ntitle: \"{{title}}\"\ndescription: \"\"\ndate: {{date}}\ntags: []\nmaturity: seed\ndraft: false\naudio: true\n---",
+        "template": "---\ntitle: \"{{title}}\"\ndescription: \"\"\ndate: {{date}}\ntype: opinion\ntags: []\nmaturity: seed\ndraft: false\naudio: true\n---",
         "enabled": true,
         "linkBasePath": "/posts/",
         "creationMode": "folder",
