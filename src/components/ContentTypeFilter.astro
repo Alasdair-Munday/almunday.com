@@ -1,0 +1,17 @@
+---
+import { CONTENT_TYPE_LABELS } from '@/utils/content-types.mjs';
+interface Props { currentType?: string }
+const { currentType } = Astro.props;
+---
+<nav class="content-type-filter" aria-label="Filter by content type">
+  <a href="/posts/" aria-current={currentType === 'all' ? 'page' : undefined}>All posts</a>
+  {Object.entries(CONTENT_TYPE_LABELS).map(([type, label]) => (
+    <a href={`/posts/type/${type}/`} aria-current={currentType === type ? 'page' : undefined}>{label}</a>
+  ))}
+</nav>
+<style>
+  .content-type-filter { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.5rem 0; }
+  a { display: inline-block; padding: .5rem .85rem; border: 1px solid currentColor; border-radius: 2rem; font-size: .9rem; text-decoration: none; }
+  a:hover, a[aria-current="page"] { background: var(--al-text, #263a32); color: var(--al-bg, #fff); }
+  a:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+</style>

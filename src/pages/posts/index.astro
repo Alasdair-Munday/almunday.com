@@ -1,5 +1,5 @@
 ---
-import { isEssay } from '@/utils/note-maturity.mjs';
+import ContentTypeFilter from "@/components/ContentTypeFilter.astro";
 import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
 import { siteConfig } from '@/config';
@@ -32,7 +32,7 @@ const allPosts = await getCollection('posts');
 
 // Filter posts based on environment
 const isDev = import.meta.env.DEV;
-const visiblePosts = allPosts.filter(post => shouldShowPost(post, isDev) && isEssay(post.data.maturity));
+const visiblePosts = allPosts.filter(post => shouldShowPost(post, isDev));
 
 // Sort posts by date (newest first)
 const sortedPosts = sortPostsByDate(visiblePosts);
@@ -155,6 +155,7 @@ const pagination = {
             </a>
           </div>
         )}
+      <ContentTypeFilter currentType="all" />
       </header>
 
       <div class="relative">

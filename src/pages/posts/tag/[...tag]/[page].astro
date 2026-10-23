@@ -1,4 +1,5 @@
 ---
+import ContentTypeFilter from "@/components/ContentTypeFilter.astro";
 import { contentTags } from '@/utils/graph-tags.mjs';
 import type { GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
@@ -174,6 +175,7 @@ const pagination = {
             Show all posts
           </a>
         </div>
+      <ContentTypeFilter />
       </header>
 
       <div class="relative">
