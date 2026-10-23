@@ -1,7 +1,7 @@
 ---
 title: Daring greatly with Psalm 1
 type: essay
-description: ""
+description: Finding parallels between the critic in Roosevelt's famous speech and the wicked one in Psalm 1
 date: 2026-10-21
 tags: []
 draft: false

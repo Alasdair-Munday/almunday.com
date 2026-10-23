@@ -1,10 +1,15 @@
 ---
-title: "Wisdom can be found in surprising places"
-description: ""
+title: Wisdom can be found in surprising places
+description: Wisdom in the Bible is woven throughout creation. We should expect to find wisdom that draws us toward faithfulness in all sorts of places.
 date: 2026-10-21
-tags: []
+tags:
+  - proverbs
+  - wisdom
+  - prophetic-dialogue
+  - biblical-interpretation
 draft: false
 audio: true
+type: comment
 ---
 One of my favourite things is discovering ways in which the wisdom in the Bible intersects with wisdom found within culture.
 # Scripture often borrows and reinterprets from the culture surrounding it
