@@ -123,3 +123,5 @@ views:
     showTags: false
     cardSize: 250
     descriptionProperty: note.description
+  - type: cards
+    name: View

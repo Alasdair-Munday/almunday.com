@@ -3,7 +3,12 @@ title: Daring greatly with Psalm 1
 type: essay
 description: Finding parallels between the critic in Roosevelt's famous speech and the wicked one in Psalm 1
 date: 2026-10-21
-tags: []
+tags:
+  - culture
+  - bible
+  - biblical-interpretation
+  - formation
+  - discipleship
 draft: false
 audio: true
 ---
@@ -42,9 +47,9 @@ While I was at a conference I needed some quiet space so I went to the incredibl
 As I was sipping on my recent investment and finishing off the first sentence, I realised the direction of travel of its cautionary subject:
 
 > Blessed is the one who does not: 
-			walk in the council of the wicked,
-		or stand on the Sinners’ path,
-	or sit in the seat of mockers (*leitzim* לֵצִים )
+			**walk** in the council of the wicked,
+		or **stand** on the Sinners’ path,
+	or **sit** in the seat of mockers (*leitzim* לֵצִים )
 	- Psalm 1:1
 
 In the Psalm we see a descent into a fossilised critical posture. Someone who has sort of dried up, calloused. They deferred their direction to other voices **walking** in the council of the wicked, which caused them to stop and **stand** in the way of sinners and then finally they sit in the seat of לֵצִים 
@@ -58,4 +63,20 @@ Regardless of whether it's held in the word itself, the context paint a picture 
 A picture this paints for me is the armchair critic who has ironically uncritically absorbed the influence of the wicked. They have Learnt by wrote the position of their echo chamber and now hold those who diverge from their position in contempt. They are shouting criticisms at those who continuing to learn and to grow, "to meditate on the law of the Lord day and night".
 
 ## The fate of the scoffer
-Psalm 1 ultimately draws the conclusion that the scoffer does not finally "count" to use Roosevelt's word. Dried up and brittle, they are blown away like "Chaff" - dry disintegrating and useless flakes of plant.
+Psalm 1 ultimately draws the conclusion that "it is not the critic who counts" to use Roosevelt's word. The scoffer's fate is is to end dried up, brittle, blown away in the breeze. 
+
+The final line "the way of the wicked shall perish" doesn't describe some kind of dramatic punishment. It could not be romanticised as some sort of rebellious "highway to hell". It is a futile, fruitless fading away into irrelevance. In roosevelt's words: "those cold and timid souls who know neither victory nor defeat".
+
+# The lonely man in the arena
+One differing point between the two pictures however is that the man in the arena is alone. They fight on through force of will and draw their power from within. Not so the righteous one. 
+
+The righteous person in Psalm 1 draw their power from God's word. Like the arena fighter, they are impervious to the external voices that seek only to criticise, but they still **listen**, they devote themselves to the voice of God. More than that their formation is organic like a tree, drawing sustenance from outside themselves. They don't receive council from others and simply accept it. They participate in the conversation. By meditating on the torah day and night.
+
+Like Jacob, they wrestle with the Lord beside the river all night long and refuse to leave until he blesses them.
+
+> 23 After he had sent them across the stream, he sent over all his possessions. 24 So Jacob was left alone, and a man wrestled with him till daybreak. 25 When the man saw that he could not overpower him, he touched the socket of Jacob’s hip so that his hip was wrenched as he wrestled with the man. 26 Then the man said, “Let me go, for it is daybreak.”
+> But Jacob replied, “I will not let you go unless you bless me.”
+> 27 The man asked him, “What is your name?”
+> “Jacob,” he answered.
+> 28 Then the man said, “Your name will no longer be Jacob, but Israel because you have struggled with God and with humans and have overcome.”
+> - Genesis 32:23-28
