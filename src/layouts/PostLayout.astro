@@ -200,6 +200,15 @@ const showLocalGraph = siteConfig.postOptions.graphView.enabled && siteConfig.po
           )}
         </header>
 
+        {post.data.audio && (
+          <figure class="al-audio-player mb-8 rounded-lg border border-primary-200 dark:border-primary-700 bg-primary-50 dark:bg-primary-800 p-4">
+            <figcaption class="mb-2 font-medium text-primary-900 dark:text-primary-100">Listen</figcaption>
+            <audio controls preload="metadata" class="w-full" src={`/posts/${post.id}/${post.data.audio}`}>
+              Your browser does not support audio playback.
+            </audio>
+          </figure>
+        )}
+
         <!-- Article content -->
         <div class="prose dark:prose-dark max-w-none" id="post-content">
           <Content />

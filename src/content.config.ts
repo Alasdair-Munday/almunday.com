@@ -10,6 +10,11 @@ const postsCollection = defineCollection({
   schema: z.object({
     title: z.string().default('Untitled Post'),
     type: z.enum(CONTENT_TYPES).default('opinion'),
+    // Older Vault CMS templates used a checkbox; only filenames identify playable audio.
+    audio: z.preprocess(
+      value => typeof value === 'boolean' ? undefined : value,
+      z.string().nullable().optional()
+    ),
     maturity: z.preprocess(
       value => typeof value === 'string' ? value.trim().toLowerCase() || undefined : value ?? undefined,
       z.enum(MATURITY_STAGES).default(DEFAULT_MATURITY)

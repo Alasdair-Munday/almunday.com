@@ -71,7 +71,7 @@ If you ever run the **Vault CMS Setup Wizard** (`Ctrl / Cmd + P` → `Vault CMS:
    date: 2026-09-16
    tags: ["engineering", "design"]
    draft: false
-   audio: true
+   audio: null # Or an attached filename, e.g. reflection.mp3
    ---
    ```
 4. **Updating Community Plugins**:
