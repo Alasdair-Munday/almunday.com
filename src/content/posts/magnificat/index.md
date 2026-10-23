@@ -3,6 +3,7 @@ title: "Magnificat"
 description: "A song of Mary’s song: God’s faithful mercy, good news for the poor, and creation welcoming its King."
 date: 2026-10-23
 type: song
+audio: magnificat.mp3
 maturity: seed
 tags: ["music", "worship", "magnificat"]
 draft: false
