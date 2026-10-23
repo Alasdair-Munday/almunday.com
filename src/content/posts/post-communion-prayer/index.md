@@ -3,6 +3,7 @@ title: "Post-Communion Prayer"
 description: "A communion song of thanksgiving, grace, shared life and creation made alive."
 date: 2026-10-23
 type: song
+audio: post-communion-prayer.mp3
 maturity: seed
 tags: ["music", "worship", "communion"]
 draft: false
