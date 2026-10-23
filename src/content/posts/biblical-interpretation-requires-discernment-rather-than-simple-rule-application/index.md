@@ -7,10 +7,7 @@ tags: ["bible-and-hermeneutics"]
 maturity: seed
 draft: false
 ---
-
 The notes on Proverbs, Judges, and the parables repeatedly resist flat readings in favour of contextual and morally attentive interpretation.
-
 ## Related seedlings
-
 - [Biblical Wisdom Contains Internal Tension](posts/biblical-wisdom-contains-internal-tension/index.md)
-- [Child-Centred Reading Can Expose Harmful Interpretations](posts/child-centred-reading-can-expose-harmful-interpretations/index.md)
+- [Child-Centred Reading Can Expose Harmful Interpretations](posts/child-centred-reading-can-expose-harmful-interpretations/index.md)**
