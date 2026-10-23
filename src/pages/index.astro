@@ -1,18 +1,29 @@
 ---
+import treeLogo from '../../public/tree-logo.svg?raw';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { siteConfig } from '@/config';
+import PostCard from '@/components/PostCard.astro';
 import { getCollection } from 'astro:content';
-import { shouldShowPost } from '@/utils/markdown';
-const posts = (await getCollection('posts')).filter(post => shouldShowPost(post, false));
+import { siteConfig } from '@/config';
+import { shouldShowPost, sortPostsByDate } from '@/utils/markdown';
+import { isEssay } from '@/utils/note-maturity.mjs';
+const essays = sortPostsByDate((await getCollection('posts')).filter(post => shouldShowPost(post, false) && isEssay(post.data.maturity)));
+const posts = essays.slice(0, siteConfig.postOptions.postsPerPage);
 const seo = { title: siteConfig.homepageTitle, description: siteConfig.description, canonical: siteConfig.site + '/', ogType: 'website' as const };
 ---
 <BaseLayout seoData={seo}>
-  <section class="al-garden" aria-labelledby="garden-title">
+  <section class="al-garden al-writing-feed" aria-labelledby="writing-title">
     <p class="al-eyebrow">Rev, dev, musician and overthinker.</p>
-    <div class="al-garden-heading"><h1 id="garden-title">Hello, friend.</h1><a href="/posts/">Browse as a list →</a></div>
-    <p class="al-garden-intro">A garden of reflections, questions and things I’m making. Follow a title to explore.</p>
-    <div id="home-graph-container" role="region" aria-label="Interactive graph of published writing"><p class="al-loading">Loading the garden…</p></div>
-    <p class="al-graph-help">Drag to explore · Pinch or scroll to zoom · Choose a title to read. Lines follow links between pieces.</p>
-    <details class="al-list"><summary>All writing</summary><ul>{posts.map(post => <li><a href={`/posts/${post.id}/`}>{post.data.title}</a></li>)}</ul></details>
+    <div class="al-garden-heading"><div class="al-greeting"><span class="al-greeting-logo" aria-hidden="true" set:html={treeLogo} /><h1 id="writing-title">Hello, friend.</h1></div><a href="/garden/">Explore the garden →</a></div>
+    <p class="al-garden-intro">Essays and reflections on faith, culture and the things that shape our lives.</p>
+    <div class="al-feed-posts">
+      {posts.map((post, index) => <PostCard post={post} featured eager={index < 2} context="recent" />)}
+    </div>
+    <a href="/posts/">All writing →</a>
   </section>
 </BaseLayout>
+<style>
+  .al-greeting { display: flex; align-items: center; gap: .8rem; }
+  .al-greeting-logo { display: inline-flex; flex: 0 0 auto; }
+  .al-greeting-logo :global(svg) { width: clamp(3rem, 6vw, 5rem); height: clamp(3rem, 6vw, 5rem); fill: currentColor; }
+  .al-feed-posts { display: grid; gap: 2rem; margin: 2rem 0; }
+</style>

@@ -21,6 +21,9 @@
  * - Nested content: "category/my-post.md" → ID: "category-my-post"
  */
 
+import { contentTags, addTagNodes } from '../src/utils/graph-tags.mjs';
+import { normalizeMaturity } from '../src/utils/note-maturity.mjs';
+
 import {
   readFileSync,
   writeFileSync,
@@ -440,6 +443,8 @@ async function generateGraphData() {
       const postNode = {
         id: post.id,
         type: "post",
+        tags: contentTags(post.data.tags),
+        maturity: normalizeMaturity(post.data.maturity),
         title: post.data.title,
         slug: post.id,
         date: post.data.date
@@ -502,13 +507,14 @@ async function generateGraphData() {
     // Remove date field from nodes before exporting (only needed for sorting)
     const nodesForExport = filteredNodes.map(({ date, ...node }) => node);
 
+    const tagged = addTagNodes(nodesForExport, filteredConnections);
     // Generate graph data
     const graphData = {
-      nodes: nodesForExport,
-      connections: filteredConnections,
+      nodes: tagged.nodes,
+      connections: tagged.connections,
       metadata: {
         totalPosts: filteredNodes.length,
-        totalConnections: filteredConnections.length,
+        totalConnections: tagged.connections.length,
         maxNodesApplied: maxNodes && nodes.length > maxNodes,
         originalNodeCount: nodes.length,
       },

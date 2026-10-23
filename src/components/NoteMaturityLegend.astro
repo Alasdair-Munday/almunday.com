@@ -1,0 +1,14 @@
+---
+import { siteConfig } from '@/config';
+import { MATURITY_STAGES, NOTE_MATURITY } from '@/utils/note-maturity.mjs';
+---
+{siteConfig.postOptions.graphView.noteMaturity.enabled && (
+  <ul class="maturity-legend" aria-label="Note maturity">
+    {MATURITY_STAGES.map(stage => <li><span class="mark" style={`--mark-size: ${8}px; --mark-opacity: ${NOTE_MATURITY[stage].opacity}`} aria-hidden="true"></span>{NOTE_MATURITY[stage].label}</li>)}
+  </ul>
+)}
+<style>
+  .maturity-legend { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; align-items: center; list-style: none; padding: 0; margin: 1rem 0; font-size: .85rem; }
+  li { display: flex; gap: .5rem; align-items: center; }
+  .mark { width: var(--mark-size); height: var(--mark-size); border-radius: 50%; background: currentColor; opacity: var(--mark-opacity); display: inline-block; }
+</style>

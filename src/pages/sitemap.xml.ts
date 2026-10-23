@@ -1,3 +1,4 @@
+import { revisionDate } from '@/utils/post-dates.mjs';
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 import { siteConfig } from "../config";
@@ -106,7 +107,7 @@ export const GET: APIRoute = async () => {
     urls.push(`
       <url>
         <loc>${siteUrl}posts/${(post as any).id}/</loc>
-        <lastmod>${post.data.date.toISOString()}</lastmod>
+        <lastmod>${(revisionDate(post.data.date, post.data.lastModified) || post.data.date).toISOString()}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
       </url>

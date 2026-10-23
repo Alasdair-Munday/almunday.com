@@ -6,6 +6,7 @@ import Icon from './Icon.astro';
 <!-- Graph Modal Overlay -->
 <div
   id="graph-modal-overlay"
+  data-note-maturity-enabled={siteConfig.postOptions.graphView.noteMaturity.enabled}
   class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-sm animate-fade-in"
   role="dialog"
   aria-modal="true"
@@ -32,6 +33,8 @@ import Icon from './Icon.astro';
 
 <script>
   import * as d3 from "d3";
+  import { connectionCounts, connectionRadius } from '@/utils/graph-tags.mjs';
+  import { graphMaturityStyle, meetsMinimumMaturity, MATURITY_STAGES, NOTE_MATURITY } from '@/utils/note-maturity.mjs';
   import { getGraphThemeColors } from '@/utils/graph-theme-colors';
 
   // Graph Modal Functionality
@@ -46,7 +49,11 @@ import Icon from './Icon.astro';
     name: string;
     slug?: string;
     radius: number;
+    opacity: number;
+    maturity: string;
+    label: string;
     group?: string;
+    tag?: string;
     x?: number;
     y?: number;
     fx?: number | null;
@@ -57,6 +64,7 @@ import Icon from './Icon.astro';
     source: string | GraphNode;
     target: string | GraphNode;
     value: number;
+    tagLink?: boolean;
   }
 
   interface GraphData {
@@ -233,16 +241,51 @@ import Icon from './Icon.astro';
             id: node.id,
             name: node.title || node.name,
             slug: node.slug,
-            radius: Math.max(5, Math.min(15, (node.connections || 0) + 5)),
-            group: node.type
+            ...graphMaturityStyle(node.maturity, 'global', document.getElementById('graph-modal-overlay')?.dataset.noteMaturityEnabled !== 'false', node.connections || 0),
+            ...(node.type === 'tag' ? {opacity: 1, label: 'Tag'} : {}),
+            group: node.type,
+            tag: node.tag
           })),
           links: data.connections.map((conn: any) => ({
             source: conn.source,
             target: conn.target,
-            value: 1
+            value: 1,
+            tagLink: conn.type === 'tag'
           }))
         };
-        renderGraph(container, graphData);
+        const filter = container.id === 'home-graph-container'
+          ? document.getElementById('garden-minimum-maturity') as HTMLInputElement | null
+          : null;
+        if (filter) {
+          try {
+            const saved = localStorage.getItem('almunday:garden:minimum-maturity');
+            const index = MATURITY_STAGES.findIndex(stage => stage === saved);
+            if (index >= 0) filter.value = String(index);
+          } catch { /* Storage may be disabled; the default remains usable. */ }
+        }
+        const draw = () => {
+          if (!container.isConnected) return;
+          const minimum = MATURITY_STAGES[filter ? Number(filter.value) : 0];
+          if (filter) {
+            const label = NOTE_MATURITY[minimum].label;
+            filter.setAttribute('aria-valuetext', label);
+            const output = document.getElementById('garden-maturity-value');
+            if (output) output.textContent = label;
+          }
+          const posts = graphData.nodes.filter(node => node.group !== 'tag' && (!filter || meetsMinimumMaturity(node.maturity, minimum)));
+          const ids = new Set(posts.map(node => node.id));
+          const tagIds = new Set(graphData.links.filter(link => link.tagLink && ids.has(String(link.source))).map(link => String(link.target)));
+          const nodes = [...posts, ...graphData.nodes.filter(node => node.group === 'tag' && tagIds.has(node.id))];
+          const visibleIds = new Set(nodes.map(node => node.id));
+          const links = graphData.links.filter(link => visibleIds.has(String(link.source)) && visibleIds.has(String(link.target)));
+          const counts = connectionCounts(nodes, links);
+          renderGraph(container, { nodes: nodes.map(node => ({...node, radius: connectionRadius(counts.get(node.id) || 0)})), links });
+        };
+        if (filter) filter.oninput = () => {
+          try { localStorage.setItem('almunday:garden:minimum-maturity', MATURITY_STAGES[Number(filter.value)]); } catch { /* Keep filtering usable without storage. */ }
+          draw();
+        };
+        draw();
       })
       .catch(error => {
         console.warn('Could not load graph data:', error);
@@ -265,7 +308,7 @@ import Icon from './Icon.astro';
     cleanup?.();
     const width = container.offsetWidth;
     const height = container.offsetHeight;
-    const radiusForce = 300;
+
     let dragStartX = 0;
     let dragStartY = 0;
     const CLICK_DISTANCE = 5; // px threshold to distinguish click from drag
@@ -273,21 +316,24 @@ import Icon from './Icon.astro';
 
     // Clear container
     container.innerHTML = '';
+    if (data.nodes.length === 0) {
+      const message = document.createElement('p');
+      message.textContent = 'No notes at this maturity yet. Choose a lower minimum to explore more.';
+      message.setAttribute('role', 'status');
+      container.append(message);
+      return;
+    }
 
     const links = data.links.map((d) => ({ ...d }));
     const nodes = data.nodes.map((d) => ({ ...d }));
 
-    // Create force simulation
-    simulation = d3
-      .forceSimulation<GraphNode>(nodes)
-      .force(
-        "link",
-        d3.forceLink(links).id((d: any) => d.id).distance(200)
-      )
-      .force("charge", d3.forceManyBody().strength(width < 600 ? -20 : -radiusForce))
-      .force("x", d3.forceX<GraphNode>((_d, i) => width < 600 ? width * (i % 2 ? 0.75 : 0.25) : width / 2).strength(width < 600 ? 0.8 : 0.05))
-      .force("y", d3.forceY<GraphNode>((_d, i) => width < 600 ? 55 + Math.floor(i / 2) * ((height - 180) / Math.max(1, Math.ceil(nodes.length / 2) - 1)) : height / 2).strength(width < 600 ? 0.8 : 0.05))
-      .force("collision", d3.forceCollide().radius((d: any) => d.radius + (width < 600 ? 20 : 85)));
+    // The existing D3 force graph: no category anchors or imposed hierarchy.
+    simulation = d3.forceSimulation<GraphNode>(nodes)
+      .force('link', d3.forceLink(links).id((d: any) => d.id).distance(190).strength(0.08))
+      .force('charge', d3.forceManyBody().strength(-280))
+      .force('x', d3.forceX<GraphNode>(0).strength(0.04))
+      .force('y', d3.forceY<GraphNode>(0).strength(0.04))
+      .force('collision', d3.forceCollide<GraphNode>().radius(110).iterations(3));
 
     // Create SVG
     let svg = d3
@@ -349,15 +395,26 @@ import Icon from './Icon.astro';
     svg.call(zoom as any);
     if (svg) svg.style('cursor', 'default');
 
+    function openTag(node: GraphNode) {
+      if (!node.tag) return;
+      closeModal();
+      const href = `/posts/tag/${encodeURIComponent(node.tag)}/`;
+      if ((window as any).swup) (window as any).swup.navigate(href);
+      else window.location.href = href;
+    }
+
       // Create links
       const link = containerGroup
-        .selectAll("line")
+        .selectAll("path.graph-edge")
         .data(links)
         .enter()
-        .append("line")
+        .append("path")
+        .attr("class", "graph-edge")
+        .attr("fill", "none")
         .attr("stroke", colors.linkStroke)
-        .attr("stroke-width", 2)
-        .attr("stroke-opacity", 0.6);
+        .attr("data-tag-link", d => d.tagLink ? "true" : null)
+        .attr("stroke-width", 1)
+        .attr("stroke-opacity", (d: GraphLink) => d.tagLink ? 0.25 : 0.14);
 
       // Create node groups
       const nodeGroup = containerGroup
@@ -367,10 +424,13 @@ import Icon from './Icon.astro';
         .append("g")
         .attr("data-id", (d) => d.id)
         .attr("pointer-events", "bounding-box")
-        .attr("tabindex", (d) => d.slug ? 0 : null)
-        .attr("role", (d) => d.slug ? "link" : "img")
-        .attr("aria-label", (d) => d.name)
+        .attr("tabindex", (d) => d.slug || d.group === 'tag' ? 0 : null)
+        .attr("role", (d) => d.group === 'tag' || d.slug ? "link" : "img")
+        .attr("aria-label", (d) => d.group === 'tag' ? `${d.name} — browse matching notes` : `${d.name} — ${d.label}`)
+        .attr("data-maturity", (d) => d.group === 'tag' ? null : d.maturity)
+        .attr("data-tag", d => d.group === 'tag' ? d.tag || null : null)
         .on("keydown", (_event, d) => {
+          if (d.group === 'tag' && (_event.key === 'Enter' || _event.key === ' ')) { _event.preventDefault(); openTag(d); }
           if (_event.key === 'Enter' && d.slug) window.location.href = `/posts/${d.slug}`;
         })
         .call(
@@ -403,6 +463,7 @@ import Icon from './Icon.astro';
               const dx = event.x - dragStartX;
               const dy = event.y - dragStartY;
               const dist = Math.sqrt(dx * dx + dy * dy);
+              if (dist < CLICK_DISTANCE && d.group === 'tag') openTag(d);
               if (dist < CLICK_DISTANCE && d.slug) {
                 closeModal();
 
@@ -446,31 +507,34 @@ import Icon from './Icon.astro';
               (typeof l.target === 'object' ? l.target.id : l.target) === d.id ? 0.8 : 0.1);
 
           nodeGroup.selectAll<SVGCircleElement, GraphNode>("circle")
-            .attr("fill-opacity", (n) => connected.has(n.id) ? 1 : 0.3)
+            .attr("fill-opacity", (n) => n.opacity * (connected.has(n.id) ? 1 : 0.5))
             .attr("fill", (n) => n.id === d.id ? colors.tagFill : colors.linkStroke);
 
           labels.transition().duration(150)
-            .style("opacity", (n) => connected.has(n.id) ? 1 : 0.1);
+            .style("opacity", 1);
         })
         .on("mouseout", function () {
           link.transition().duration(150)
             .attr("stroke", colors.linkStroke)
-            .attr("stroke-opacity", 0.6);
+            .attr("stroke-opacity", (d: GraphLink) => d.tagLink ? 0.25 : 0.14);
 
           nodeGroup.selectAll<SVGCircleElement, GraphNode>("circle")
             .attr("fill", colors.linkStroke)
-            .attr("fill-opacity", 1);
+            .attr("fill-opacity", (n) => n.opacity);
 
           const currentTransform = d3.zoomTransform(svg.node() as Element);
           labels.transition().duration(150)
-            .style("opacity", currentTransform.k < 0.6 ? 0 : 0.6);
+            .style("opacity", container.id === 'home-graph-container' || currentTransform.k >= 0.6 ? 1 : 0);
         });
+
+      nodeGroup.append("title").text((d) => `${d.name} — ${d.label}`);
 
       // Create circles
       const node = nodeGroup
         .append("circle")
         .attr("r", (d) => d.radius)
         .attr("fill", colors.linkStroke)
+        .attr("fill-opacity", (d) => d.opacity)
         .attr("cursor", "pointer");
 
       // Create labels
@@ -485,12 +549,11 @@ import Icon from './Icon.astro';
             else line += (line ? ' ' : '') + word;
           }
           if (line) lines.push(line);
-          lines.forEach((text, i) => d3.select(this).append('tspan').attr('x', 0).attr('dy', i ? '1.3em' : '1em').text(text));
+          lines.forEach((text, i) => d3.select(this).append('tspan').attr('x', 0).attr('y', i === 0 ? d.radius + 20 : null).attr('dy', i ? '1.3em' : 0).text(text));
         })
         .attr("text-anchor", "middle")
-        .attr("dy", (d) => d.radius + 8) // Position below the node
-        .attr("font-size", width < 600 ? "16px" : "12px")
-        .attr("font-weight", "500")
+        .attr("font-size", "16px")
+        .attr("font-weight", d => d.group === 'tag' ? "700" : "500")
         .attr("fill", colors.postText)
         .attr("pointer-events", "all")
         .style("user-select", "none")
@@ -498,21 +561,25 @@ import Icon from './Icon.astro';
 
       // Update positions on simulation tick
       simulation.on("tick", () => {
-        link
-          .attr("x1", (d: any) => d.source.x)
-          .attr("y1", (d: any) => d.source.y)
-          .attr("x2", (d: any) => d.target.x)
-          .attr("y2", (d: any) => d.target.y);
+        link.attr('d', (d: any) => `M${d.source.x},${d.source.y} L${d.target.x},${d.target.y}`);
 
         nodeGroup.attr("transform", (d: any) => `translate(${d.x},${d.y})`);
       });
 
-      simulation.stop().tick(180);
+      simulation.stop().tick(300);
       const xs = nodes.map(node => node.x || 0), ys = nodes.map(node => node.y || 0);
       const minX = Math.min(...xs) - 110, maxX = Math.max(...xs) + 110;
       const minY = Math.min(...ys) - 30, maxY = Math.max(...ys) + 130;
-      const scale = Math.min(1.2, width / (maxX - minX), height / (maxY - minY));
-      svg.call(zoom.transform as any, d3.zoomIdentity.translate(width / 2, height / 2).scale(scale).translate(-(minX + maxX) / 2, -(minY + maxY) / 2));
+      const fitScale = Math.max(0.1, Math.min(1.2, (width - 120) / (maxX - minX), (height - 120) / (maxY - minY)));
+      const scale = fitScale;
+      // Keep dense gardens readable; the overview control fits the entire cloud.
+      const focusX = (minX + maxX) / 2;
+      const focusY = (minY + maxY) / 2;
+      svg.call(zoom.transform as any, d3.zoomIdentity.translate(width / 2, height / 2).scale(scale).translate(-focusX, -focusY));
+      const overview = container.id === 'home-graph-container' ? document.getElementById('garden-graph-overview') : null;
+      if (overview) overview.onclick = () => {
+        svg.call(zoom.transform as any, d3.zoomIdentity.translate(width / 2, height / 2).scale(fitScale).translate(-(minX + maxX) / 2, -(minY + maxY) / 2));
+      };
       simulation.alpha(0.05).restart();
 
       // Don't auto-fit to graph - let user control the view

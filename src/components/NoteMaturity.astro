@@ -1,0 +1,15 @@
+---
+import { normalizeMaturity, NOTE_MATURITY } from '@/utils/note-maturity.mjs';
+interface Props { maturity?: string; compact?: boolean; }
+const { maturity, compact = false } = Astro.props;
+const stage = normalizeMaturity(maturity);
+const note = NOTE_MATURITY[stage];
+---
+<p class:list={['al-note-maturity', { compact }]} data-maturity-label={stage}>
+  <strong>{note.label}</strong><span> — {note.description}</span>
+</p>
+<style>
+  .al-note-maturity { font-size: .85rem; line-height: 1.5; margin: .75rem 0 1rem; }
+  strong { font-weight: 600; }
+  .compact { font-size: .75rem; margin: .5rem 0; }
+</style>

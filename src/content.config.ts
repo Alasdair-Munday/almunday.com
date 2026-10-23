@@ -1,13 +1,22 @@
 import { defineCollection, z } from 'astro:content';
+import { MATURITY_STAGES, DEFAULT_MATURITY } from './utils/note-maturity.mjs';
 import { glob } from 'astro/loaders';
+
+const CONTENT_TYPES = ['opinion', 'comment', 'essay', 'software-project', 'song'];
 
 // Define schema for blog posts
 const postsCollection = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/posts' }),
   schema: z.object({
     title: z.string().default('Untitled Post'),
+    type: z.enum(CONTENT_TYPES).default('opinion'),
+    maturity: z.preprocess(
+      value => typeof value === 'string' ? value.trim().toLowerCase() || undefined : value ?? undefined,
+      z.enum(MATURITY_STAGES).default(DEFAULT_MATURITY)
+    ),
     description: z.string().nullable().optional().default('No description provided'),
     date: z.coerce.date().default(() => new Date()),
+    lastModified: z.coerce.date().optional(),
     tags: z.array(z.string()).nullable().optional(),
     draft: z.boolean().optional(),
     image: z.any().nullable().optional().transform((val) => {
@@ -66,6 +75,7 @@ const projectsCollection = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/projects' }),
   schema: z.object({
     title: z.string().default('Untitled Project'),
+    type: z.enum(CONTENT_TYPES).optional(),
     description: z.string().nullable().optional().default('No description provided'),
     date: z.coerce.date().default(() => new Date()),
     categories: z.array(z.string()).nullable().optional().default([]),

@@ -74,5 +74,8 @@
     "wrangler": "^4.71.0",
     "yaml": "2.9.1"
   },
-  "packageManager": "pnpm@10.29.3"
+  "packageManager": "pnpm@10.29.3",
+  "volta": {
+    "node": "24.21.0"
+  }
 }

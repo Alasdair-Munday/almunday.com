@@ -1,3 +1,4 @@
+import { revisionDate } from '@/utils/post-dates.mjs';
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 import { siteConfig } from "../config";
@@ -39,7 +40,7 @@ export const GET: APIRoute = async () => {
     <link href="${siteUrl}posts/${(post as any).id}/"/>
     <id>${siteUrl}posts/${(post as any).id}/</id>
     <published>${new Date(post.data.date).toISOString()}</published>
-    <updated>${new Date(post.data.date).toISOString()}</updated>
+    <updated>${(revisionDate(post.data.date, post.data.lastModified) || post.data.date).toISOString()}</updated>
     <summary>${post.data.description || ""}</summary>
     ${
       post.data.tags

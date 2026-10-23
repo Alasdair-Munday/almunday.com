@@ -1,4 +1,9 @@
 ---
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import NoteMaturity from '@/components/NoteMaturity.astro';
+import { connectedReading } from '@/utils/connected-reading.mjs';
+import { revisionDate } from '@/utils/post-dates.mjs';
 import type { Post, Heading } from '@/types';
 import { siteConfig, getCoverAspectClasses } from '@/config';
 import { generatePostSEO } from '@/utils/seo';
@@ -15,14 +20,18 @@ import Lightbox from '@/components/Lightbox.astro';
 import Icon from '@/components/Icon.astro';
 import ImageWrapper from '@/components/ImageWrapper.astro';
 import { devConfig } from '@/config/dev';
-import { readFileSync } from 'fs';
-import { join } from 'path';
 
 export interface Props {
   post: Post;
 }
 
 const { post } = Astro.props;
+const updated = revisionDate(post.data.date, post.data.lastModified);
+let reading: ReturnType<typeof connectedReading> = [];
+try {
+  const graph = JSON.parse(readFileSync(join(process.cwd(), 'public/graph/graph-data.json'), 'utf8'));
+  reading = connectedReading(graph, post.id);
+} catch { /* A development session can start before graph data has been generated. */ }
 
 // Check if we're in development mode
 const isDev = import.meta.env.DEV;
@@ -52,7 +61,7 @@ const structuredData = {
     }
   },
   "datePublished": post.data.date.toISOString(),
-  "dateModified": post.data.date.toISOString(),
+  "dateModified": (updated || post.data.date).toISOString(),
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": Astro.url.href
@@ -75,26 +84,9 @@ const toc = shouldShowTOC ? await generateTOC(headings) : [];
 // Get adjacent posts for navigation
 const { prev: prevPost, next: nextPost } = getAdjacentPosts(visiblePosts, post.id);
 
-// Check if current post has connections for LocalGraph
-let hasLocalGraphConnections = false;
-if (siteConfig.postOptions.graphView.enabled && siteConfig.postOptions.graphView.showInSidebar) {
-  try {
-    // Read the graph data file directly from the file system (works at build time)
-    const graphDataPath = join(process.cwd(), 'public', 'graph', 'graph-data.json');
-    const graphDataContent = readFileSync(graphDataPath, 'utf-8');
-    const graphData = JSON.parse(graphDataContent);
+// Show the neighbourhood even for an isolated note, without hiding the sidebar.
+const showLocalGraph = siteConfig.postOptions.graphView.enabled && siteConfig.postOptions.graphView.showInSidebar;
 
-    // Check if current post has any connections (both incoming and outgoing)
-    const matchingConnections = graphData.connections.filter((conn: any) =>
-      conn.source === post.id || conn.target === post.id
-    );
-
-    hasLocalGraphConnections = matchingConnections.length > 0;
-  } catch (error) {
-    // If we can't read the graph data at build time, don't show the graph
-    hasLocalGraphConnections = false;
-  }
-}
 ---
 
 <BaseLayout seoData={seoData}>
@@ -128,8 +120,8 @@ if (siteConfig.postOptions.graphView.enabled && siteConfig.postOptions.graphView
     )}
   </Fragment>
 
-  <div class="py-8 relative">
-    <div class="mx-auto px-4 sm:px-6 lg:px-8 relative" style={`max-width: ${siteConfig.layout.contentWidth}`}>
+  <div class="py-8 relative al-post-shell">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8 relative al-post-layout" style={`max-width: ${siteConfig.layout.contentWidth}`}>
       <!-- Main content -->
       <article class={`bg-white dark:bg-primary-900 rounded-lg border border-primary-200 dark:border-primary-700 shadow-xs ${siteConfig.postOptions.showPostCardCoverImages !== 'none' && cover && post.data.hideCoverImage !== true ? 'overflow-hidden' : ''}`}>
         {/* Cover image - shown if global config allows and not hidden by frontmatter */}
@@ -157,9 +149,10 @@ if (siteConfig.postOptions.graphView.enabled && siteConfig.postOptions.graphView
           <h1 class="text-xl font-bold text-primary-900 dark:text-primary-50 mb-6 leading-tight">
             {post.data.title}
           </h1>
+          <NoteMaturity maturity={post.data.maturity} />
 
           <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-primary-600 dark:text-primary-300 mb-6">
-            <time datetime={post.data.date.toISOString()} class="font-medium">
+            <time datetime={post.data.date.toISOString()} class="font-medium">Published{' '}
               <span class="hidden sm:inline">
                 {formatDate(post.data.date)}
               </span>
@@ -167,6 +160,8 @@ if (siteConfig.postOptions.graphView.enabled && siteConfig.postOptions.graphView
                 {formatDateMobile(post.data.date)}
               </span>
             </time>
+
+            {updated && <time class="al-updated" datetime={updated.toISOString()}>Updated {formatDate(updated)}</time>}
 
             {siteConfig.postOptions.readingTime && readingTime && (
               <>
@@ -266,22 +261,26 @@ if (siteConfig.postOptions.graphView.enabled && siteConfig.postOptions.graphView
         </div>
       </article>
 
-      <!-- Desktop Left Sidebar - Graph (top left) -->
-      {hasLocalGraphConnections && (
-        <div class="hidden xl:block absolute top-0 right-full mr-1 w-[280px] h-full">
-          <div class="sticky top-24 pb-6" id="graph-sidebar">
-            <LocalGraph currentSlug={post.id} />
+      {(showLocalGraph || shouldShowTOC || reading.length > 0) && (
+        <aside class="al-post-sidebar" aria-label="Explore this post">
+          <div class="al-post-sidebar-inner">
+            {showLocalGraph && (
+              <section aria-labelledby="connections-title">
+                <h2 id="connections-title">Explore connections</h2>
+                <p class="al-sidebar-help">Notes and tags up to two steps away. Zoom or expand to read titles.</p>
+                <LocalGraph currentSlug={post.id} />
+                <a class="al-sidebar-garden-link" href="/garden/">Explore the whole garden →</a>
+              </section>
+            )}
+            {reading.length > 0 && (
+              <section class="al-connected-reading" aria-labelledby="connected-reading-title">
+                <h2 id="connected-reading-title">Connected reading</h2>
+                <ul>{reading.map(note => <li><a href={`/posts/${note.slug}/`}>{note.title}</a><span>{note.reason}</span></li>)}</ul>
+              </section>
+            )}
+            {shouldShowTOC && <TableOfContents headings={toc} />}
           </div>
-        </div>
-      )}
-
-      <!-- Desktop Right Sidebar - TOC -->
-      {shouldShowTOC && (
-        <div class="hidden xl:block absolute top-0 left-full ml-1 w-[280px] h-full">
-          <div class="sticky top-24 pb-6" id="toc-sidebar">
-            <TableOfContents headings={toc} />
-          </div>
-        </div>
+        </aside>
       )}
     </div>
   </div>

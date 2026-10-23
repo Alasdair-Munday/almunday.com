@@ -27,18 +27,20 @@ const shouldShowGraph = true;
 ---
 
 {shouldShowGraph && (
-  <div id="local-graph-container" class="relative w-full bg-primary-50 dark:bg-primary-800 rounded-xl border border-primary-200 dark:border-primary-700 shadow-lg backdrop-blur-sm bg-opacity-95 dark:bg-opacity-95 overflow-hidden" style="width: 280px; max-width: 280px; height: 280px;">
+  <div id="local-graph-container"
+  data-current-note={currentSlug}
+  data-note-maturity-enabled={siteConfig.postOptions.graphView.noteMaturity.enabled} class="relative w-full bg-primary-50 dark:bg-primary-800 rounded-xl border border-primary-200 dark:border-primary-700 shadow-lg backdrop-blur-sm bg-opacity-95 dark:bg-opacity-95 overflow-hidden" style="width: 100%; height: 340px;">
 
     <!-- Icons in top right corner -->
     <div class="absolute top-3 right-3 z-20 flex items-center gap-2">
       <!-- Global graph modal button -->
-      <button
-        id="local-graph-modal-btn"
+      <a
+        href="/garden/"
         class="p-1 text-primary-500 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-200 transition-colors pointer-events-auto"
-        title="Global Graph"
+        title="Explore the whole garden"
       >
         <Icon name="git-fork" class="w-4 h-4" />
-      </button>
+      </a>
       <!-- Fullscreen button -->
       <button
         id="local-graph-fullscreen-btn"
@@ -58,6 +60,9 @@ const shouldShowGraph = true;
 
 <script>
   import * as d3 from "d3";
+  import { graphNeighborhood } from '@/utils/graph-neighborhood.mjs';
+  import { connectionCounts } from '@/utils/graph-tags.mjs';
+  import { graphMaturityStyle } from '@/utils/note-maturity.mjs';
   import { getGraphThemeColors } from '@/utils/graph-theme-colors';
 
   interface GraphNode {
@@ -65,7 +70,12 @@ const shouldShowGraph = true;
     name: string;
     slug?: string;
     radius: number;
+    opacity: number;
+    maturity: string;
+    label: string;
     group?: string;
+    current?: boolean;
+    tag?: string;
     x?: number;
     y?: number;
     fx?: number | null;
@@ -97,29 +107,18 @@ const shouldShowGraph = true;
   function filterLocalGraphData(data: any, currentSlug: string): GraphData {
     if (!currentSlug) return { nodes: [], links: [] };
 
-    const currentNode = data.nodes.find((node: any) => node.id === currentSlug);
-    if (!currentNode) return { nodes: [], links: [] };
-
-    const directlyConnectedNodeIds = new Set([currentSlug]);
-    data.connections.forEach((conn: any) => {
-      if (conn.source === currentSlug || conn.target === currentSlug) {
-        directlyConnectedNodeIds.add(conn.source);
-        directlyConnectedNodeIds.add(conn.target);
-      }
-    });
-
-    const relevantNodes = data.nodes.filter((node: any) => directlyConnectedNodeIds.has(node.id));
-    const relevantConnections = data.connections.filter((conn: any) =>
-      directlyConnectedNodeIds.has(conn.source) && directlyConnectedNodeIds.has(conn.target)
-    );
-
+    const {nodes: relevantNodes, connections: relevantConnections} = graphNeighborhood(data, currentSlug, 2);
+    const counts = connectionCounts(relevantNodes, relevantConnections);
     return {
       nodes: relevantNodes.map((node: any) => ({
         id: node.id,
         name: node.title || node.name,
         slug: node.slug,
-        radius: Math.max(3, Math.min(8, (node.connections || 0) + 3)),
-        group: node.type
+        ...graphMaturityStyle(node.maturity, 'local', document.getElementById('local-graph-container')?.dataset.noteMaturityEnabled !== 'false', counts.get(node.id) || 0),
+        ...(node.type === 'tag' ? {opacity: 1, label: 'Tag'} : {}),
+        group: node.type,
+        tag: node.tag,
+        current: node.id === currentSlug
       })),
       links: relevantConnections.map((conn: any) => ({
         source: conn.source,
@@ -142,7 +141,7 @@ const shouldShowGraph = true;
     const radiusForce = 100; // Smaller radius for local graph
 
     const links = data.links.map((d) => ({ ...d }));
-    const nodes = data.nodes.map((d) => ({ ...d }));
+    const nodes = data.nodes.map((d) => ({ ...d, ...(d.current ? {fx: 0, fy: 0} : {}) }));
 
     // Create force simulation
     simulation = d3
@@ -152,13 +151,13 @@ const shouldShowGraph = true;
         d3
           .forceLink(links)
           .id((d) => (d as GraphNode).id)
-          .distance(30)
+          .distance(90)
           .strength(0.2),
       )
       .force("charge", d3.forceManyBody().strength(-100))
       .force(
         "collide",
-        d3.forceCollide((d) => d.radius + 8),
+        d3.forceCollide((d) => d.radius + 45),
       )
       .force("radial", d3.forceRadial(radiusForce))
       .force("x", d3.forceX(0).strength(0.05))
@@ -194,11 +193,12 @@ const shouldShowGraph = true;
 
         // Hide/show labels based on zoom level
         const scale = event.transform.k;
+        labels.filter(d => !!d.current).style('font-size', `${10 / scale}px`).select('tspan').attr('y', d => d.radius + 10 / scale);
         const labelThreshold = 0.8; // Higher threshold for local graph due to smaller size
 
         if (scale < labelThreshold) {
           // Hide all labels when zoomed out
-          labels.style("opacity", 0);
+          labels.style("opacity", d => d.current ? 1 : 0);
         } else {
           // Show all labels when zoomed in
           labels.style("opacity", 1);
@@ -227,6 +227,12 @@ const shouldShowGraph = true;
       .selectAll("g")
       .data(nodes)
       .join("g")
+      .attr('data-node-id', d => d.id)
+      .attr('data-current', d => d.current ? 'true' : null)
+      .attr('tabindex', d => d.slug || d.tag ? 0 : null)
+      .attr('role', d => d.slug || d.tag ? 'link' : 'img')
+      .attr('aria-label', d => `${d.name}${d.current ? ' — current note' : ''}`)
+      .on('keydown', (event, d) => { if(event.key === 'Enter') { if(d.tag) window.location.href = `/posts/tag/${encodeURIComponent(d.tag)}/`; else if(d.slug) window.location.href = `/posts/${d.slug}/`; } })
       .call(
         d3
           .drag<SVGGElement, GraphNode>()
@@ -251,7 +257,7 @@ const shouldShowGraph = true;
             const dx = event.x - dragStartX;
             const dy = event.y - dragStartY;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < CLICK_DISTANCE && d.slug) {
+            if (dist < CLICK_DISTANCE && (d.slug || d.tag)) {
               const modals = document.querySelectorAll('.fixed.inset-0.z-50');
               modals.forEach(modal => {
                 if (modal.id !== 'command-palette-overlay') {
@@ -261,7 +267,7 @@ const shouldShowGraph = true;
               document.body.style.overflow = '';
               resetLocalGraph();
 
-              const url = `/posts/${d.slug}`;
+              const url = d.tag ? `/posts/tag/${encodeURIComponent(d.tag)}/` : `/posts/${d.slug}`;
               if ((window as any).swup) {
                 (window as any).swup.navigate(url);
               } else {
@@ -300,11 +306,11 @@ const shouldShowGraph = true;
             (typeof l.target === 'object' ? l.target.id : l.target) === d.id ? 0.8 : 0.1);
 
         nodeGroup.selectAll<SVGCircleElement, GraphNode>("circle")
-          .attr("fill-opacity", (n) => connected.has(n.id) ? 1 : 0.3)
+          .attr("fill-opacity", (n) => n.opacity * (connected.has(n.id) ? 1 : 0.5))
           .attr("fill", (n) => n.id === d.id ? colors.tagFill : colors.linkStroke);
 
         labels.transition().duration(150)
-          .style("opacity", (n) => connected.has(n.id) ? 1 : 0.1);
+          .style("opacity", n => n.current || n.id === d.id ? 1 : 0);
       })
       .on("mouseout", function () {
         link.transition().duration(150)
@@ -313,11 +319,11 @@ const shouldShowGraph = true;
 
         nodeGroup.selectAll<SVGCircleElement, GraphNode>("circle")
           .attr("fill", colors.linkStroke)
-          .attr("fill-opacity", 1);
+          .attr("fill-opacity", (n) => n.opacity);
 
         const currentTransform = svg ? d3.zoomTransform(svg.node() as Element) : d3.zoomIdentity;
         labels.transition().duration(150)
-          .style("opacity", currentTransform.k < 0.8 ? 0 : 0.6);
+          .style("opacity", (n: GraphNode) => n.current || currentTransform.k >= 0.8 ? 1 : 0);
       });
 
     // Create circles
@@ -325,22 +331,32 @@ const shouldShowGraph = true;
       .append("circle")
       .attr("r", (d) => d.radius)
       .attr("cursor", "pointer")
-      .attr("fill-opacity", 1)
+      .attr("fill-opacity", (n) => n.current ? 1 : n.opacity)
+      .attr("stroke", d => d.current ? colors.postText : "none")
+      .attr("stroke-width", d => d.current ? 2 : 0)
       .attr("fill", colors.linkStroke)
       .attr("data-id", (d) => d.id);
 
-    node.append("title").text((d) => d.name ?? d.id);
+    node.append("title").text((d) => `${d.name ?? d.id} — ${d.label}`);
 
     // Create labels
     const labels = nodeGroup
       .append("text")
-      .text((d) => d.name ?? d.id)
+      .each(function(d) {
+        const words = (d.current ? 'You are here' : d.name ?? d.id).split(/\s+/);
+        const lines: string[] = []; let line = '';
+        for (const word of words) {
+          if ((line + ' ' + word).length > 22 && line) { lines.push(line); line = word; }
+          else line += (line ? ' ' : '') + word;
+        }
+        if (line) lines.push(line);
+        lines.forEach((text, i) => d3.select(this).append('tspan').attr('x', 0).attr('y', i === 0 ? d.radius + 10 : null).attr('dy', i ? '1.2em' : 0).text(text));
+      })
       .attr("text-anchor", "middle")
-      .attr("dy", (d) => d.radius + 8)
-      .style("font-size", "8px")
+      .style("font-size", "9px")
       .style("fill", colors.postText)
       .style("pointer-events", "none")
-      .style("opacity", 0.6); // Start with slightly faded labels
+      .style("opacity", 1);
 
     // Run simulation
     for (let i = 0; i < 200; ++i) simulation.tick();
@@ -355,7 +371,13 @@ const shouldShowGraph = true;
       nodeGroup.attr("transform", (d: any) => `translate(${d.x},${d.y})`);
     });
 
-    simulation.alpha(1).restart();
+    const minX = Math.min(...nodes.map(n => n.x || 0)) - 25;
+    const maxX = Math.max(...nodes.map(n => n.x || 0)) + 25;
+    const minY = Math.min(...nodes.map(n => n.y || 0)) - 25;
+    const maxY = Math.max(...nodes.map(n => n.y || 0)) + 25;
+    const scale = Math.min(1, (width - 30) / (maxX - minX), (height - 30) / (maxY - minY));
+    svg.call(zoom.transform as any, d3.zoomIdentity.scale(scale).translate(-(minX + maxX) / 2, -(minY + maxY) / 2));
+    simulation.alpha(0.05).restart();
 
     // Append SVG to container
     container.appendChild(svg.node()!);

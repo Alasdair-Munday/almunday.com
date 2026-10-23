@@ -1,9 +1,10 @@
 ---
 title: "The Hell of Getting Everything You Want"
+type: essay
 date: 2026-02-07
 description: "Why the promise of AI creation mirrors C.S. Lewis's chilling vision of hell in The Great Divorce."
 image: /assets/images/blog/base44.png
-tags: ["ai", "reflections", "c-s-lewis", "culture"]
+tags: ["ai","reflections","c-s-lewis","culture"]
 ---
 
 ## The Brave new world

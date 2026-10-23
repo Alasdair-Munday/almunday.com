@@ -1,9 +1,10 @@
 ---
 title: Daring greatly with Psalm 1
-description: ""
+type: essay
+description: Finding parallels between the critic in Roosevelt's famous speech and the wicked one in Psalm 1
 date: 2026-10-21
 tags: []
-draft: true
+draft: false
 audio: true
 ---
 # The Man in the arena
@@ -57,4 +58,4 @@ Regardless of whether it's held in the word itself, the context paint a picture 
 A picture this paints for me is the armchair critic who has ironically uncritically absorbed the influence of the wicked. They have Learnt by wrote the position of their echo chamber and now hold those who diverge from their position in contempt. They are shouting criticisms at those who continuing to learn and to grow, "to meditate on the law of the Lord day and night".
 
 ## The fate of the scoffer
-Psalm 1 ultimately draws the conclusion that the scoffer does not finally "count" to use Roosevelt's word. Dried up and brittle, they are blown away like "Chaff" - dry disintegrating and useless flakes of plant. 
+Psalm 1 ultimately draws the conclusion that the scoffer does not finally "count" to use Roosevelt's word. Dried up and brittle, they are blown away like "Chaff" - dry disintegrating and useless flakes of plant.
