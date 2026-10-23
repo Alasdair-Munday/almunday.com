@@ -25,6 +25,8 @@ properties:
     displayName: Updated
   note.maturity:
     displayName: Maturity
+  note.type:
+    displayName: Type
   file.fullname:
     displayName: Full File Name
   file.name:
@@ -48,6 +50,7 @@ views:
     name: Blog
     propertyDisplay2: note.maturity
     propertyDisplay3: note.lastModified
+    propertyDisplay4: note.type
     filters:
       and:
         - file.folder.startsWith("posts")
