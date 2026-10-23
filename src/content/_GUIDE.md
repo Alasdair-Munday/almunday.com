@@ -111,3 +111,16 @@ Use tags for subject matter. Keep maturity in its own property. Housekeeping lab
 ## Reading and exploring
 
 The front page features evergreen, established writing. The Garden page (`/garden/`) contains the full graph. Each post has a local graph in its right-hand sidebar (below the article on phones), showing notes and tags up to two connections away. Shared tags can therefore introduce another note in two steps. Select a note to read it, expand the local graph for more room, or follow the link to the whole garden.
+
+## Note context and revisions
+
+Every post displays its maturity and a short explanation. Connected reading beside the local graph lists up to five related notes, prioritising direct links, then shared tags. Tag pages include all published maturity levels; the Writing feed remains established essays only. The Garden remembers its minimum-maturity setting in this browser.
+
+Keep `date` as the original publication date. When you substantially revise a note, set `lastModified` to the revision date, for example:
+
+```yaml
+date: 2026-10-01
+lastModified: 2026-10-23
+```
+
+A later revision displays as Updated and is used in search-engine metadata, Atom and sitemap dates. Existing dates are not inferred from rebuilds. The vault Blog cards expose Updated as an optional property.

@@ -21,6 +21,8 @@ formulas:
       )
     )
 properties:
+  note.lastModified:
+    displayName: Updated
   note.maturity:
     displayName: Maturity
   file.fullname:
@@ -45,6 +47,7 @@ views:
   - type: cms
     name: Blog
     propertyDisplay2: note.maturity
+    propertyDisplay3: note.lastModified
     filters:
       and:
         - file.folder.startsWith("posts")

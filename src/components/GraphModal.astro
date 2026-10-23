@@ -256,6 +256,13 @@ import Icon from './Icon.astro';
         const filter = container.id === 'home-graph-container'
           ? document.getElementById('garden-minimum-maturity') as HTMLInputElement | null
           : null;
+        if (filter) {
+          try {
+            const saved = localStorage.getItem('almunday:garden:minimum-maturity');
+            const index = MATURITY_STAGES.findIndex(stage => stage === saved);
+            if (index >= 0) filter.value = String(index);
+          } catch { /* Storage may be disabled; the default remains usable. */ }
+        }
         const draw = () => {
           if (!container.isConnected) return;
           const minimum = MATURITY_STAGES[filter ? Number(filter.value) : 0];
@@ -274,7 +281,10 @@ import Icon from './Icon.astro';
           const counts = connectionCounts(nodes, links);
           renderGraph(container, { nodes: nodes.map(node => ({...node, radius: connectionRadius(counts.get(node.id) || 0)})), links });
         };
-        if (filter) filter.oninput = draw;
+        if (filter) filter.oninput = () => {
+          try { localStorage.setItem('almunday:garden:minimum-maturity', MATURITY_STAGES[Number(filter.value)]); } catch { /* Keep filtering usable without storage. */ }
+          draw();
+        };
         draw();
       })
       .catch(error => {
@@ -385,8 +395,12 @@ import Icon from './Icon.astro';
     svg.call(zoom as any);
     if (svg) svg.style('cursor', 'default');
 
-    function focusTag(node: GraphNode) {
-      svg.call(zoom.transform as any, d3.zoomIdentity.translate(width / 2, height / 2).scale(0.85).translate(-node.x!, -node.y!));
+    function openTag(node: GraphNode) {
+      if (!node.tag) return;
+      closeModal();
+      const href = `/posts/tag/${encodeURIComponent(node.tag)}/`;
+      if ((window as any).swup) (window as any).swup.navigate(href);
+      else window.location.href = href;
     }
 
       // Create links
@@ -411,12 +425,12 @@ import Icon from './Icon.astro';
         .attr("data-id", (d) => d.id)
         .attr("pointer-events", "bounding-box")
         .attr("tabindex", (d) => d.slug || d.group === 'tag' ? 0 : null)
-        .attr("role", (d) => d.group === 'tag' ? "button" : d.slug ? "link" : "img")
-        .attr("aria-label", (d) => d.group === 'tag' ? `${d.name} tag — zoom to explore` : `${d.name} — ${d.label}`)
+        .attr("role", (d) => d.group === 'tag' || d.slug ? "link" : "img")
+        .attr("aria-label", (d) => d.group === 'tag' ? `${d.name} — browse matching notes` : `${d.name} — ${d.label}`)
         .attr("data-maturity", (d) => d.group === 'tag' ? null : d.maturity)
         .attr("data-tag", d => d.group === 'tag' ? d.tag || null : null)
         .on("keydown", (_event, d) => {
-          if (d.group === 'tag' && (_event.key === 'Enter' || _event.key === ' ')) { _event.preventDefault(); focusTag(d); }
+          if (d.group === 'tag' && (_event.key === 'Enter' || _event.key === ' ')) { _event.preventDefault(); openTag(d); }
           if (_event.key === 'Enter' && d.slug) window.location.href = `/posts/${d.slug}`;
         })
         .call(
@@ -449,7 +463,7 @@ import Icon from './Icon.astro';
               const dx = event.x - dragStartX;
               const dy = event.y - dragStartY;
               const dist = Math.sqrt(dx * dx + dy * dy);
-              if (dist < CLICK_DISTANCE && d.group === 'tag') focusTag(d);
+              if (dist < CLICK_DISTANCE && d.group === 'tag') openTag(d);
               if (dist < CLICK_DISTANCE && d.slug) {
                 closeModal();
 

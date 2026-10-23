@@ -1,4 +1,7 @@
 ---
+import NoteMaturity from './NoteMaturity.astro';
+import { revisionDate } from '@/utils/post-dates.mjs';
+import { contentTags } from '@/utils/graph-tags.mjs';
 import type { CollectionEntry } from 'astro:content';
 import { formatDate, formatDateMobile, processMarkdown, calculateReadingTime, getReadingTimeMobile, DATE_LOCALE } from '../utils/markdown';
 import { siteConfig, getPostCardAspectRatio } from '../config';
@@ -18,7 +21,9 @@ const { post, featured = false, eager = false, context = 'posts' } = Astro.props
 const { excerpt, wordCount } = processMarkdown(post.body || '');
 const readingTime = calculateReadingTime(post.body || '');
 
-const { title, description, date, tags, image, imageAlt } = post.data;
+const { title, description, date, image, imageAlt } = post.data;
+const tags = contentTags(post.data.tags);
+const updated = revisionDate(date, post.data.lastModified);
 
 const cover = resolveCoverImage(image, 'posts', post.id);
 
@@ -72,10 +77,12 @@ const shouldShowCoverImage = (() => {
 
     <div class={`p-4 ${cover && shouldShowCoverImage ? 'rounded-b-lg' : 'rounded-lg'}`}>
       <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-primary-500 dark:text-primary-400 mb-1">
-        <time datetime={date.toISOString()}>
+        <time datetime={date.toISOString()}>Published{' '}
           <span class="hidden sm:inline">{formatDate(date)}</span>
           <span class="sm:hidden">{formatDateMobile(date)}</span>
         </time>
+
+        {updated && <time class="al-updated" datetime={updated.toISOString()}>Updated {formatDate(updated)}</time>}
 
         {siteConfig.postOptions.readingTime && readingTime && (
           <>
@@ -105,6 +112,8 @@ const shouldShowCoverImage = (() => {
       }`}>
         <a href={`/posts/${post.id}`} aria-label={`View post: ${title}`}>{title}</a>
       </h3>
+
+      {context === 'tags' && <NoteMaturity maturity={post.data.maturity} compact />}
 
       {featured && description && (
         <p class="text-primary-600 dark:text-primary-300 line-clamp-3 text-sm leading-relaxed mt-1">

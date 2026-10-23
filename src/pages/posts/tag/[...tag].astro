@@ -1,9 +1,9 @@
 ---
-import { isEssay } from '@/utils/note-maturity.mjs';
+import { contentTags } from '@/utils/graph-tags.mjs';
 import type { GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
 import { siteConfig } from '@/config';
-import { shouldShowPost, sortPostsByDate, extractTags } from '@/utils/markdown';
+import { shouldShowPost, sortPostsByDate } from '@/utils/markdown';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PostCard from '@/components/PostCard.astro';
 import Tags from '@/components/Tags.astro';
@@ -16,11 +16,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
   try {
     // Get all posts
     const allPosts = await getCollection('posts');
-    const visiblePosts = allPosts.filter(post => shouldShowPost(post, isDev) && isEssay(post.data.maturity));
+    const visiblePosts = allPosts.filter(post => shouldShowPost(post, isDev));
     const sortedPosts = sortPostsByDate(visiblePosts);
 
     // Extract all unique tags with error handling
-    const allTags = extractTags(sortedPosts);
+    const allTags = [...new Set(sortedPosts.flatMap(post => contentTags(post.data.tags)))].sort();
 
     if (isDev && allTags.length === 0) {
     }
@@ -61,7 +61,7 @@ try {
     if (!post.data.tags) return false;
 
     // Handle both string and array tags
-    const postTags = Array.isArray(post.data.tags) ? post.data.tags : [post.data.tags];
+    const postTags = contentTags(post.data.tags);
     return postTags.some((postTag: any) =>
       postTag && typeof postTag === 'string' && postTag.trim() === tag.trim()
     );
@@ -82,8 +82,8 @@ const endIndex = Math.min(postsPerPage, totalPosts);
 const paginatedPosts = filteredPosts.slice(startIndex, endIndex);
 
 // Generate SEO data
-const pageTitle = `Posts tagged "${tag}"`;
-const pageDescription = `All posts tagged with "${tag}"`;
+const pageTitle = `Notes tagged "${tag}"`;
+const pageDescription = `Notes at every maturity level tagged with "${tag}"`;
 
 const seoData = {
   title: `${pageTitle} | ${siteConfig.title}`,

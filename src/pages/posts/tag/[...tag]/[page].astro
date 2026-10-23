@@ -1,9 +1,9 @@
 ---
-import { isEssay } from '@/utils/note-maturity.mjs';
+import { contentTags } from '@/utils/graph-tags.mjs';
 import type { GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
 import { siteConfig } from '@/config';
-import { shouldShowPost, sortPostsByDate, extractTags } from '@/utils/markdown';
+import { shouldShowPost, sortPostsByDate } from '@/utils/markdown';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PostCard from '@/components/PostCard.astro';
 import Tags from '@/components/Tags.astro';
@@ -16,11 +16,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
   try {
     // Get all posts
     const allPosts = await getCollection('posts');
-    const visiblePosts = allPosts.filter(post => shouldShowPost(post, isDev) && isEssay(post.data.maturity));
+    const visiblePosts = allPosts.filter(post => shouldShowPost(post, isDev));
     const sortedPosts = sortPostsByDate(visiblePosts);
 
     // Extract all unique tags with error handling
-    const allTags = extractTags(sortedPosts);
+    const allTags = [...new Set(sortedPosts.flatMap(post => contentTags(post.data.tags)))].sort();
 
     if (isDev && allTags.length === 0) {
     }
@@ -33,7 +33,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       try {
         const tagPosts = sortedPosts.filter(post => {
           if (!post.data.tags) return false;
-          const postTags = Array.isArray(post.data.tags) ? post.data.tags : [post.data.tags];
+          const postTags = contentTags(post.data.tags);
           return postTags.some((postTag: any) =>
             postTag && typeof postTag === 'string' && postTag.trim() === tag.trim()
           );
@@ -86,7 +86,7 @@ try {
     if (!post.data.tags) return false;
 
     // Handle both string and array tags
-    const postTags = Array.isArray(post.data.tags) ? post.data.tags : [post.data.tags];
+    const postTags = contentTags(post.data.tags);
     return postTags.some((postTag: any) =>
       postTag && typeof postTag === 'string' && postTag.trim() === tag.trim()
     );
@@ -106,7 +106,7 @@ const endIndex = Math.min(startIndex + postsPerPage, totalPosts);
 const paginatedPosts = filteredPosts.slice(startIndex, endIndex);
 
 // Generate SEO data
-const pageTitle = `Posts tagged "${tag}" - Page ${currentPage}`;
+const pageTitle = `Notes tagged "${tag}" - Page ${currentPage}`;
 const pageDescription = `Page ${currentPage} of posts tagged with "${tag}"`;
 
 const seoData = {
@@ -135,7 +135,7 @@ const pagination = {
       <header class="mb-8">
         <div class="flex items-start justify-between mb-3">
           <h1 class="font-bold text-primary-900 dark:text-primary-50">
-            Posts tagged "{tag}"
+            Notes tagged "{tag}"
           </h1>
           <div class="flex items-center space-x-2">
             <a

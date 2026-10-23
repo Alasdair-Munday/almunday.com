@@ -1,3 +1,4 @@
+import { revisionDate } from './post-dates.mjs';
 import type {
   Post,
   Page,
@@ -88,7 +89,7 @@ export function generatePostSEO(post: Post, url: string): SEOData {
     ogImage,
     ogType: "article",
     publishedTime: date.toISOString(),
-    modifiedTime: date.toISOString(),
+    modifiedTime: (revisionDate(date, post.data.lastModified) || date).toISOString(),
     tags: tags?.filter((tag) => tag !== null) || undefined,
     noIndex: post.data.noIndex || false, // Add this line
   };

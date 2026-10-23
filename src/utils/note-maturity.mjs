@@ -4,10 +4,10 @@ import { connectionRadius } from './graph-tags.mjs';
 export const MATURITY_STAGES = ['seed', 'seedling', 'growing', 'established'];
 export const DEFAULT_MATURITY = 'established';
 export const NOTE_MATURITY = Object.freeze({
-  seed: Object.freeze({ label: 'Seed', opacity: 0.25 }),
-  seedling: Object.freeze({ label: 'Seedling', opacity: 0.4 }),
-  growing: Object.freeze({ label: 'Growing', opacity: 0.7 }),
-  established: Object.freeze({ label: 'Established', opacity: 1 }),
+  seed: Object.freeze({ label: 'Seed', description: 'an idea to develop', opacity: 0.25 }),
+  seedling: Object.freeze({ label: 'Seedling', description: 'an early exploration', opacity: 0.4 }),
+  growing: Object.freeze({ label: 'Growing', description: 'a developing reflection', opacity: 0.7 }),
+  established: Object.freeze({ label: 'Established', description: 'a developed piece', opacity: 1 }),
 });
 
 /** @param {unknown} value */

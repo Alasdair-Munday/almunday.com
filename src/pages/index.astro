@@ -1,4 +1,5 @@
 ---
+import treeLogo from '../../public/tree-logo.svg?raw';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PostCard from '@/components/PostCard.astro';
 import { getCollection } from 'astro:content';
@@ -12,7 +13,7 @@ const seo = { title: siteConfig.homepageTitle, description: siteConfig.descripti
 <BaseLayout seoData={seo}>
   <section class="al-garden al-writing-feed" aria-labelledby="writing-title">
     <p class="al-eyebrow">Rev, dev, musician and overthinker.</p>
-    <div class="al-garden-heading"><h1 id="writing-title">Hello, friend.</h1><a href="/garden/">Explore the garden →</a></div>
+    <div class="al-garden-heading"><div class="al-greeting"><span class="al-greeting-logo" aria-hidden="true" set:html={treeLogo} /><h1 id="writing-title">Hello, friend.</h1></div><a href="/garden/">Explore the garden →</a></div>
     <p class="al-garden-intro">Essays and reflections on faith, culture and the things that shape our lives.</p>
     <div class="al-feed-posts">
       {posts.map((post, index) => <PostCard post={post} featured eager={index < 2} context="recent" />)}
@@ -21,5 +22,8 @@ const seo = { title: siteConfig.homepageTitle, description: siteConfig.descripti
   </section>
 </BaseLayout>
 <style>
+  .al-greeting { display: flex; align-items: center; gap: .8rem; }
+  .al-greeting-logo { display: inline-flex; flex: 0 0 auto; }
+  .al-greeting-logo :global(svg) { width: clamp(3rem, 6vw, 5rem); height: clamp(3rem, 6vw, 5rem); fill: currentColor; }
   .al-feed-posts { display: grid; gap: 2rem; margin: 2rem 0; }
 </style>

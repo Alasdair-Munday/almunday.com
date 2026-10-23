@@ -1,4 +1,9 @@
 ---
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import NoteMaturity from '@/components/NoteMaturity.astro';
+import { connectedReading } from '@/utils/connected-reading.mjs';
+import { revisionDate } from '@/utils/post-dates.mjs';
 import type { Post, Heading } from '@/types';
 import { siteConfig, getCoverAspectClasses } from '@/config';
 import { generatePostSEO } from '@/utils/seo';
@@ -21,6 +26,12 @@ export interface Props {
 }
 
 const { post } = Astro.props;
+const updated = revisionDate(post.data.date, post.data.lastModified);
+let reading: ReturnType<typeof connectedReading> = [];
+try {
+  const graph = JSON.parse(readFileSync(join(process.cwd(), 'public/graph/graph-data.json'), 'utf8'));
+  reading = connectedReading(graph, post.id);
+} catch { /* A development session can start before graph data has been generated. */ }
 
 // Check if we're in development mode
 const isDev = import.meta.env.DEV;
@@ -50,7 +61,7 @@ const structuredData = {
     }
   },
   "datePublished": post.data.date.toISOString(),
-  "dateModified": post.data.date.toISOString(),
+  "dateModified": (updated || post.data.date).toISOString(),
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": Astro.url.href
@@ -138,9 +149,10 @@ const showLocalGraph = siteConfig.postOptions.graphView.enabled && siteConfig.po
           <h1 class="text-xl font-bold text-primary-900 dark:text-primary-50 mb-6 leading-tight">
             {post.data.title}
           </h1>
+          <NoteMaturity maturity={post.data.maturity} />
 
           <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-primary-600 dark:text-primary-300 mb-6">
-            <time datetime={post.data.date.toISOString()} class="font-medium">
+            <time datetime={post.data.date.toISOString()} class="font-medium">Published{' '}
               <span class="hidden sm:inline">
                 {formatDate(post.data.date)}
               </span>
@@ -148,6 +160,8 @@ const showLocalGraph = siteConfig.postOptions.graphView.enabled && siteConfig.po
                 {formatDateMobile(post.data.date)}
               </span>
             </time>
+
+            {updated && <time class="al-updated" datetime={updated.toISOString()}>Updated {formatDate(updated)}</time>}
 
             {siteConfig.postOptions.readingTime && readingTime && (
               <>
@@ -247,7 +261,7 @@ const showLocalGraph = siteConfig.postOptions.graphView.enabled && siteConfig.po
         </div>
       </article>
 
-      {(showLocalGraph || shouldShowTOC) && (
+      {(showLocalGraph || shouldShowTOC || reading.length > 0) && (
         <aside class="al-post-sidebar" aria-label="Explore this post">
           <div class="al-post-sidebar-inner">
             {showLocalGraph && (
@@ -256,6 +270,12 @@ const showLocalGraph = siteConfig.postOptions.graphView.enabled && siteConfig.po
                 <p class="al-sidebar-help">Notes and tags up to two steps away. Zoom or expand to read titles.</p>
                 <LocalGraph currentSlug={post.id} />
                 <a class="al-sidebar-garden-link" href="/garden/">Explore the whole garden →</a>
+              </section>
+            )}
+            {reading.length > 0 && (
+              <section class="al-connected-reading" aria-labelledby="connected-reading-title">
+                <h2 id="connected-reading-title">Connected reading</h2>
+                <ul>{reading.map(note => <li><a href={`/posts/${note.slug}/`}>{note.title}</a><span>{note.reason}</span></li>)}</ul>
               </section>
             )}
             {shouldShowTOC && <TableOfContents headings={toc} />}
