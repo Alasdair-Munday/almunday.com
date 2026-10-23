@@ -88,9 +88,10 @@ If you ever run the **Vault CMS Setup Wizard** (`Ctrl / Cmd + P` → `Vault CMS:
 
 ## Note maturity
 
-Add `maturity` as a text property in a post's Properties panel or frontmatter:
+Add `type` and `maturity` as text properties in a post's Properties panel or frontmatter:
 
 ```yaml
+type: opinion
 maturity: seed
 ```
 
@@ -124,3 +125,8 @@ lastModified: 2026-10-23
 ```
 
 A later revision displays as Updated and is used in search-engine metadata, Atom and sitemap dates. Existing dates are not inferred from rebuilds. The vault Blog cards expose Updated as an optional property.
+
+
+## Content types
+
+Use `type` to describe the shape of a note: `opinion` for a concise idea, `comment` for a more expanded reflection that is not a full essay, `essay` for a developed piece, `software-project` for a software project, and `song` for songs. The Blog view in Home now displays Type alongside Date, Maturity and Updated.
