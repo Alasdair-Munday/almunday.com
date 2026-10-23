@@ -1,15 +1,9 @@
 ---
-<<<<<<< Updated upstream
-title: "Abiding Is an Alternative to Religious Toil"
 type: opinion
 description: "The recurring contrast between toil and tarry offers a strong account of Christian vocation as participation in Christ rather than anxious productivity."
-=======
 title: The Task is not to Toil but to Tarry
-description: The recurring contrast between toil and tarry offers a strong account of Christian vocation as participation in Christ rather than anxious productivity.
->>>>>>> Stashed changes
 date: 2026-10-22
-tags:
-  - spirituality-and-practice
+tags: [spirituality-and-practice]
 maturity: seed
 draft: false
 ---

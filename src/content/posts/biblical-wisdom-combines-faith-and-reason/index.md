@@ -1,12 +1,7 @@
 ---
-<<<<<<< Updated upstream
-title: "Biblical Wisdom Combines Faith and Reason"
 type: opinion
-description: "The internal world of Proverbs presents faith and reason as complementary practices rather than competing sources of knowledge."
-=======
-title: Biblical Wisdom Combines Faith and Reason - Innocent as doves and shrewd as vipers
-description: The internal world of Proverbs presents faith and reason as complementary practices rather than competing sources of knowledge.
->>>>>>> Stashed changes
+title: Biblical Wisdom is Innocent as doves and shrewd as vipers
+description: The internal world of Proverbs presents righteousness and pragmatism as complementary practices rather than competing sources of knowledge.
 date: 2026-10-22
 tags:
   - bible
