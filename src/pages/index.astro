@@ -12,9 +12,10 @@ const seo = { title: siteConfig.homepageTitle, description: siteConfig.descripti
 ---
 <BaseLayout seoData={seo}>
   <section class="al-garden al-writing-feed" aria-labelledby="writing-title">
-    <p class="al-eyebrow">Rev, dev, musician and overthinker.</p>
-    <div class="al-garden-heading"><div class="al-greeting"><span class="al-greeting-logo" aria-hidden="true" set:html={treeLogo} /><h1 id="writing-title">Hello, friend.</h1></div><a href="/garden/">Explore the garden →</a></div>
-    <p class="al-garden-intro">Essays, reflections and songs on faith, culture and the things that shape our lives.</p>
+    <p class="al-eyebrow">Hi i'm Al. I'm a priest in the Church of England, a software developer and a musician.</p>
+    <div class="al-garden-heading"><div class="al-greeting"><span class="al-greeting-logo" aria-hidden="true" set:html={treeLogo} /><h1 id="writing-title">Welcome, friend.</h1></div><a href="/garden/">Explore the garden →</a></div>
+    <p class="al-garden-intro">This is my digital garden. A digital garden is like a portfolio but where output is published from the beginning. This means that the collection includes unfinished and bareley started work as well as work that feels complete. The various thoughts and pieces are interconnected allowing you and me to see connecting ideas that, every now and then, result in discovering something new. So there are bits of writing, song ideas and software projects that are potentially embarrasing but I realised that if I wait for content to be ready, I never create anything</p>
+
     <ContentTypeFilter />
     <MaturityPostList posts={posts} featured context="recent" />
     <a href="/posts/">All posts →</a>
