@@ -7,7 +7,7 @@ export const NOTE_MATURITY = Object.freeze({
   seed: Object.freeze({ label: 'Seed', description: 'an idea to develop', opacity: 0.25 }),
   seedling: Object.freeze({ label: 'Seedling', description: 'an early exploration', opacity: 0.4 }),
   growing: Object.freeze({ label: 'Growing', description: 'a developing reflection', opacity: 0.7 }),
-  established: Object.freeze({ label: 'Established', description: 'a developed piece', opacity: 1 }),
+  established: Object.freeze({ label: 'Evergreen', description: 'a developed piece', opacity: 1 }),
 });
 
 /** @param {unknown} value */

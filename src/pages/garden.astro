@@ -1,12 +1,12 @@
 ---
-import { isEssay } from '@/utils/note-maturity.mjs';
+import MaturityPostList from '@/components/MaturityPostList.astro';
 import { MATURITY_STAGES, NOTE_MATURITY } from '@/utils/note-maturity.mjs';
 import NoteMaturityLegend from '@/components/NoteMaturityLegend.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { siteConfig } from '@/config';
 import { getCollection } from 'astro:content';
 import { shouldShowPost } from '@/utils/markdown';
-const posts = (await getCollection('posts')).filter(post => shouldShowPost(post, false) && isEssay(post.data.maturity));
+const posts = (await getCollection('posts')).filter(post => shouldShowPost(post, false));
 const seo = { title: `Garden | ${siteConfig.title}`, description: siteConfig.description, canonical: siteConfig.site + '/garden/', ogType: 'website' as const };
 ---
 <BaseLayout seoData={seo}>
@@ -15,15 +15,15 @@ const seo = { title: `Garden | ${siteConfig.title}`, description: siteConfig.des
     <div class="al-garden-heading"><h1 id="garden-title">The garden.</h1><a href="/posts/">Browse as a list →</a></div>
     <p class="al-garden-intro">A garden of reflections, questions and things I’m making. Follow a title to explore.</p>
     <div class="al-maturity-filter">
-      <label for="garden-minimum-maturity">Minimum maturity: <output id="garden-maturity-value" for="garden-minimum-maturity">Growing</output></label>
-      <input id="garden-minimum-maturity" type="range" min="0" max={MATURITY_STAGES.length - 1} step="1" value={MATURITY_STAGES.indexOf('growing')} aria-valuetext="Growing" list="garden-maturity-stages" />
+      <label for="garden-minimum-maturity">Minimum maturity: <output id="garden-maturity-value" for="garden-minimum-maturity">Evergreen</output></label>
+      <input id="garden-minimum-maturity" type="range" min="0" max={MATURITY_STAGES.length - 1} step="1" value={MATURITY_STAGES.indexOf('established')} aria-valuetext="Evergreen" list="garden-maturity-stages" />
       <datalist id="garden-maturity-stages">{MATURITY_STAGES.map((stage, index) => <option value={index} label={NOTE_MATURITY[stage].label} />)}</datalist>
       <div class="al-maturity-stages" aria-hidden="true">{MATURITY_STAGES.map(stage => <span>{NOTE_MATURITY[stage].label}</span>)}</div>
     </div>
     <div id="home-graph-container" role="region" aria-label="Interactive graph of published writing"><p class="al-loading">Loading the garden…</p></div>
     <p class="al-graph-help">Drag to explore · Pinch or scroll to zoom · Choose a title to read. Tags connect related notes. More connections make a node larger. Choose a tag to browse matching notes. Hover over a note to highlight its connections. <button id="garden-graph-overview" type="button">Show whole garden</button></p>
     <NoteMaturityLegend />
-    <details class="al-list"><summary>Essays</summary><ul>{posts.map(post => <li><a href={`/posts/${post.id}/`}>{post.data.title}</a></li>)}</ul></details>
+    <details class="al-list"><summary>Browse as a list</summary><MaturityPostList posts={posts} /></details>
   </section>
 </BaseLayout>
 

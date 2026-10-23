@@ -1,0 +1,104 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import PostCard from './PostCard.astro';
+import { MATURITY_STAGES, NOTE_MATURITY, normalizeMaturity } from '@/utils/note-maturity.mjs';
+import { siteConfig } from '@/config';
+interface Props {
+  posts: CollectionEntry<'posts'>[];
+  featured?: boolean;
+  context?: 'recent' | 'posts' | 'tags';
+}
+const { posts, featured = false, context = 'posts' } = Astro.props;
+const pageSize = siteConfig.postOptions.postsPerPage;
+const id = `maturity-${context}`;
+let visible = 0;
+const total = posts.filter(post => normalizeMaturity(post.data.maturity) === 'established').length;
+---
+<maturity-post-list data-page-size={pageSize}>
+  <div class="maturity-control">
+    <label for={id}>Minimum maturity: <output for={id}>Evergreen</output></label>
+    <input id={id} type="range" min="0" max="3" step="1" value="3" aria-valuetext="Evergreen" />
+    <div class="stages" aria-hidden="true">{MATURITY_STAGES.map(stage => <span>{NOTE_MATURITY[stage].label}</span>)}</div>
+  </div>
+  <p data-list-status aria-live="polite">{total} matching {total === 1 ? 'post' : 'posts'}</p>
+  <div class="maturity-posts">
+    {posts.map(post => {
+      const maturity = normalizeMaturity(post.data.maturity);
+      const shown = maturity === 'established' && visible++ < pageSize;
+      return <div data-post-maturity={maturity} hidden={!shown}><PostCard post={post} featured={featured} eager={shown} context={context} /></div>;
+    })}
+  </div>
+  <p data-list-empty hidden={total > 0}>No posts at this maturity. Lower the slider to include earlier work.</p>
+  <nav aria-label="Post list pages" hidden={total <= pageSize}>
+    <button type="button" data-previous disabled>Previous</button>
+    <span data-page-status>Page 1 of {Math.max(1, Math.ceil(total / pageSize))}</span>
+    <button type="button" data-next>Next</button>
+  </nav>
+</maturity-post-list>
+<style>
+  maturity-post-list { display: block; }
+  [hidden] { display: none !important; }
+  .maturity-control { max-width: 44rem; margin: 1.5rem 0; }
+  label { display: block; margin-bottom: .5rem; }
+  output { font-weight: 600; }
+  input { width: 100%; min-height: 2rem; accent-color: var(--al-text); }
+  .stages { display: flex; justify-content: space-between; font-size: .8rem; }
+  .maturity-posts { display: grid; gap: 1.5rem; margin: 2rem 0; }
+  nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: 2rem 0; }
+  button { padding: .5rem .85rem; border: 1px solid currentColor; border-radius: .25rem; }
+  button:disabled { opacity: .4; }
+  :is(button,input):focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+</style>
+<script>
+  import { MATURITY_STAGES, NOTE_MATURITY } from '@/utils/note-maturity.mjs';
+  class MaturityPostList extends HTMLElement {
+    connectedCallback() {
+      const slider = this.querySelector('input')!;
+      const output = this.querySelector('output')!;
+      const items = [...this.querySelectorAll<HTMLElement>('[data-post-maturity]')];
+      const size = Number(this.dataset.pageSize);
+      const previous = this.querySelector<HTMLButtonElement>('[data-previous]')!;
+      const next = this.querySelector<HTMLButtonElement>('[data-next]')!;
+      let page = 1;
+      const url = new URL(location.href);
+      const index = MATURITY_STAGES.indexOf(url.searchParams.get('maturity') as typeof MATURITY_STAGES[number]);
+      slider.value = String(index < 0 ? 3 : index);
+      const update = () => {
+        const minimum = Number(slider.value);
+        const label = NOTE_MATURITY[MATURITY_STAGES[minimum]].label;
+        output.textContent = label;
+        slider.setAttribute('aria-valuetext', label);
+        const matches = items.filter(item => MATURITY_STAGES.indexOf(item.dataset.postMaturity as typeof MATURITY_STAGES[number]) >= minimum);
+        const pages = Math.max(1, Math.ceil(matches.length / size));
+        page = Math.min(page, pages);
+        const shown = new Set(matches.slice((page - 1) * size, page * size));
+        for (const item of items) item.hidden = !shown.has(item);
+        this.querySelector('[data-list-status]')!.textContent = `${matches.length} matching ${matches.length === 1 ? 'post' : 'posts'}`;
+        this.querySelector<HTMLElement>('[data-list-empty]')!.hidden = matches.length > 0;
+        this.querySelector('nav')!.hidden = pages <= 1;
+        this.querySelector('[data-page-status]')!.textContent = `Page ${page} of ${pages}`;
+        previous.disabled = page === 1;
+        next.disabled = page === pages;
+        // Preserve the chosen maturity when switching content type.
+        for (const link of document.querySelectorAll<HTMLAnchorElement>('.content-type-filter a')) {
+          const target = new URL(link.href);
+          if (minimum === 3) target.searchParams.delete('maturity');
+          else target.searchParams.set('maturity', MATURITY_STAGES[minimum]);
+          link.href = target.pathname + target.search;
+        }
+      };
+      slider.oninput = () => {
+        page = 1;
+        const current = new URL(location.href);
+        if (Number(slider.value) === 3) current.searchParams.delete('maturity');
+        else current.searchParams.set('maturity', MATURITY_STAGES[Number(slider.value)]);
+        history.replaceState(null, '', current);
+        update();
+      };
+      previous.onclick = () => { page--; update(); };
+      next.onclick = () => { page++; update(); };
+      update();
+    }
+  }
+  if (!customElements.get('maturity-post-list')) customElements.define('maturity-post-list', MaturityPostList);
+</script>
