@@ -1,0 +1,38 @@
+/* ChordSheetJS div layout, scoped to avoid changing article typography. */
+.chordpro {
+  max-width: 100%;
+  min-width: 0;
+  margin: 1.75rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--al-border);
+  border-radius: 8px;
+  background: var(--al-bg);
+  color: var(--al-text);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  line-height: 1.5;
+  text-align: left;
+}
+.chordpro .title { font-family: var(--font-prose, sans-serif); font-size: 1.3rem; font-weight: 700; margin: 0 0 .5rem; }
+.chordpro .subtitle { font-family: var(--font-prose, sans-serif); color: var(--al-text); margin: 0 0 1rem; }
+.chordpro .paragraph { margin: 0 0 1.25rem; }
+.chordpro .paragraph:last-child { margin-bottom: 0; }
+.chordpro .row { display: flex; flex-wrap: nowrap; width: max-content; min-width: 100%; }
+.chordpro .column { flex: 0 0 auto; }
+.chordpro .chord, .chordpro .lyrics { white-space: pre; min-height: 1.5em; }
+.chordpro .chord { color: var(--al-text); font-weight: 700; padding-right: .6em; }
+.chordpro .chord:empty { padding-right: 0; }
+.chordpro .chord::after, .chordpro .lyrics::after { content: '\200b'; }
+.chordpro .comment, .chordpro .label { font-family: var(--font-prose, sans-serif); font-weight: 600; margin: .5rem 0; }
+.chordpro .comment { font-style: italic; }
+.chordpro .chorus { border-left: 3px solid var(--al-border); padding-left: 1rem; }
+
+@media (max-width: 480px) {
+  .chordpro { padding: .85rem; font-size: .875rem; }
+}
+@media print {
+  .chordpro { overflow: visible; border: 0; padding: 0; background: white; color: black; font-size: 10pt; }
+  .chordpro .chord, .chordpro .subtitle { color: black; }
+  .chordpro .paragraph { break-inside: avoid; }
+  .chordpro .chorus { border-color: #aaa; }
+}

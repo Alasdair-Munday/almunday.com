@@ -9,6 +9,36 @@ tags: ["music", "worship", "magnificat"]
 draft: false
 ---
 
+## Chord chart
+
+```chopro
+{title: Magnificat}
+{key: E}
+
+{start_of_verse: Verse}
+[E] [A/E]
+[E] [A/E]
+[E] [A]
+[E] [A]
+{end_of_verse}
+
+{start_of_verse: Prechorus}
+[B] [E] [A]
+[B] [E] [F#m]
+{end_of_verse}
+
+{start_of_chorus: Chorus}
+[A]
+[E] [B]
+[A]
+[E] [B]
+[A] [B] [E] [A]
+[A] [B] [E]
+{end_of_chorus}
+```
+
+## Lyrics
+
 God is good all the time  
 His faithfulness never fails  
 His mighty hand gives hope to all  

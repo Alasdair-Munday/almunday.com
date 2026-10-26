@@ -1,0 +1,188 @@
+/* ChordPro Plugin Styles for Obsidian */
+
+/* ===== Container Styles ===== */
+.chopro-container {
+    line-height: 1.8;
+    white-space: pre;
+    tab-size: 4;
+    padding: 0.25rem 0rem;
+    background: var(--background-primary);
+    border-radius: 6px;
+    overflow-x: auto;
+}
+
+.callout[data-callout="chopro"] {
+    background: var(--background-primary);
+    padding: 0;
+    overflow-x: auto;
+}
+
+/* ===== Line and Pair Layout ===== */
+.chopro-line {
+    margin-bottom: 0.5rem;
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.chopro-line:has(.chopro-pair) {
+    padding-top: calc(var(--chopro-chord-size, 1) * 1.5em);
+    min-height: calc(1.5em + var(--chopro-chord-size, 1) * 1em);
+    align-items: baseline;
+}
+
+.chopro-pair {
+    position: relative;
+    display: inline-block;
+    vertical-align: baseline;
+    flex-shrink: 0;
+    min-width: var(--chord-min-width, 1ch);
+    margin-right: 0.1em;
+}
+
+/* ===== Chord and Annotation Styles ===== */
+.chopro-chord,
+.chopro-annotation {
+    color: var(--chopro-chord-color, #2563eb);
+    font-size: calc(var(--chopro-chord-size, 1) * 1em);
+    font-weight: bold;
+    white-space: nowrap;
+    font-family: var(--font-monospace);
+    display: inline;
+    margin-right: 0.5em;
+    text-overflow: ellipsis;
+}
+
+.chopro-pair .chopro-chord,
+.chopro-pair .chopro-annotation {
+    position: absolute;
+    top: -1.5em;
+    left: 0;
+    z-index: 1;
+}
+
+.chopro-chord-modifier {
+    padding-left: 0.1em;
+}
+
+.chopro-italic-annotations .chopro-annotation {
+    font-style: italic;
+}
+
+.chopro-superscript-mods .chopro-chord-modifier {
+    vertical-align: top;
+    font-size: 0.75em;
+}
+
+/* ===== Lyrics Styles ===== */
+.chopro-lyrics {
+    white-space: pre;
+    display: inline;
+}
+
+.chopro-pair .chopro-lyrics {
+    display: inline-block;
+}
+
+.chopro-pair .chopro-lyrics:empty::after {
+    content: "\00A0";
+    min-width: 1ch;
+}
+
+.chopro-pair .chopro-lyrics-empty {
+    min-width: 1ch;
+}
+
+/* ===== Modal Styles ===== */
+.chopro-modal-button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.chopro-modal-button-container button {
+    padding: 8px 16px;
+}
+
+/* ===== Settings Styles ===== */
+.obskit-settings-tab-container {
+    display: flex;
+    border-bottom: 1px solid var(--background-modifier-border);
+    margin-bottom: 20px;
+}
+
+.obskit-settings-tab-button {
+    padding: 10px 20px;
+    border: none;
+    background: transparent;
+    color: var(--text-normal);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.obskit-settings-tab-button:hover {
+    background: var(--background-modifier-hover);
+}
+
+.obskit-settings-tab-button-active {
+    color: var(--text-accent);
+    border-bottom-color: var(--interactive-accent);
+    background: var(--background-modifier-active-hover);
+}
+
+/* ===== Metadata Header Styles ===== */
+
+/* Main header container */
+.chopro-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1rem var(--file-margins);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--background-modifier-border);
+}
+
+/* Left column */
+.chopro-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.chopro-header-title {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--text-normal);
+    line-height: 1.2;
+}
+
+.chopro-header-artist {
+    font-size: 1em;
+    color: var(--text-muted);
+    line-height: 1.3;
+}
+
+/* Right column */
+.chopro-header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.125rem;
+    text-align: right;
+}
+
+.chopro-header-info {
+    font-size: 0.95em;
+    color: var(--text-normal);
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+/* Remove file-margins padding when header is inside a callout */
+.callout[data-callout="chopro"] .chopro-header {
+    padding: 1rem 0;
+}
