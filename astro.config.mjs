@@ -6,6 +6,7 @@ import mdx from '@astrojs/mdx';
 import { remarkInternalLinks, remarkFolderImages, remarkImageCaptions } from './src/utils/internallinks.ts';
 import remarkCallouts from './src/utils/remark-callouts.ts';
 import remarkImageGrids from './src/utils/remark-image-grids.ts';
+import remarkChordPro from './src/utils/remark-chordpro.mjs';
 import remarkMermaid from './src/utils/remark-mermaid.ts';
 import { remarkObsidianEmbeds } from './src/utils/remark-obsidian-embeds.ts';
 import remarkBases from './src/utils/remark-bases.ts';
@@ -137,6 +138,7 @@ image: {
       remarkBreaks,
       remarkImageGrids,
       remarkMermaid,
+      remarkChordPro,
       [remarkReadingTime, {}],
       [remarkToc, {
         tight: true,
