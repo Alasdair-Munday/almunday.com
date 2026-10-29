@@ -1,6 +1,6 @@
 ---
 type: opinion
-description: The recurring contrast between toil and tarry offers a strong account of Christian vocation as participation in Christ rather than anxious productivity.
+description: A seed for a future post, drawn from my sermon on Jesus as the true vine in John 15.
 title: The Task is not to Toil but to Tarry
 date: 2026-10-22
 tags:
@@ -10,7 +10,7 @@ tags:
 maturity: seed
 draft: false
 ---
-The recurring contrast between toil and tarry offers a strong account of Christian vocation as participation in Christ rather than anxious productivity.
+“The task is not to toil but to tarry” was the title of my sermon on Jesus as the true vine in John 15. I may expand this into a full post in the future.
 
 ## Related seedlings
 
