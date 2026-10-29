@@ -1,26 +1,31 @@
 ---
-title: "Post-Communion Prayer"
-description: "A communion song of thanksgiving, grace, shared life and creation made alive."
+title: Post-Communion Prayer
+description: A pop-punkish version of a post communion prayer from common worship
 date: 2026-10-23
 type: song
 audio: post-communion-prayer.mp3
 maturity: seed
-tags: ["music", "worship", "communion"]
+tags:
+  - music
+  - worship
+  - communion
 draft: false
 ---
 This Song is a setting of my favourite post-communion prayer from common worship.
 
 # Lyrics and Chords
 ```chopro
+Verse 1:
 [E]Father of all, we [A]give you thanks and [E]praise  
 When [A]we were lost you [E]met us in your [B]Son and brought us home  
 [E]Dying and living [A]he declared your [E]love  
 [A]Gave us grace and [E]opened up the [B]gate for us to come  
 
+pre-chorus:
 [C#m]Thank you [B]for your [A]love  
 Your [F#m]body [E/G#]and your [A]blood  
 
-Chorus
+Chorus:
 [A]Keep us in the [E]hope that you have [B]set before our eyes  
 So [A]we and all your [E]children shall be [B]free  
 Let [A]all creation [B]praise you, let the [G#m]whole earth come a[C#m]live  
@@ -28,19 +33,14 @@ Let [A]all creation [B]praise you, let the [G#m]whole earth come a[C#m]live
 Be your hands and feet
 (or maybe: May we be a channel of your peace, Be your hands and feet)
 
-Sharing his body, we live his risen life  
-Filled with his blood we share the cup that won’t run dry  
-And filled with his Spirit we’ll light up all the world  
-We’ll share the life and love you graciously provide
-
-Chorus
-Keep us in the hope that you have set before our eyes  
-So we and all your children shall be free  
-Let all creation praise you, let the whole earth come alive  
-Jesus, could we be your hands and feet  
+Verse 2:
+[E]Sharing his body, we [A]live his risen life[E]  
+Filled [A]with his blood we [E]share the cup that [B]won’t run dry  
+[E]And filled with his Spirit [A]we’ll light up all the [E]world  
+We’ll [A]share the life and [E]love you gracious[B]ly provide
 ```
 
-# Original Text
+# Original Text from common worship
 >	Father of all,
 	we give you thanks and praise,
 	that when we were still far off
