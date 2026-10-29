@@ -48,9 +48,6 @@ properties:
 views:
   - type: cms
     name: Posts
-    propertyDisplay2: note.maturity
-    propertyDisplay3: note.lastModified
-    propertyDisplay4: note.type
     filters:
       and:
         - file.folder.startsWith("posts")
@@ -58,6 +55,9 @@ views:
     sort:
       - property: date
         direction: DESC
+    propertyDisplay2: note.maturity
+    propertyDisplay3: note.lastModified
+    propertyDisplay4: note.type
     fallbackToEmbeds: never
     propertyDisplay1: note.date
     showTextPreview: true

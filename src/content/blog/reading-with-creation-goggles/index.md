@@ -12,9 +12,7 @@ audio: false
 aliases:
   - reading-with-creation-goggles-part-1-separating-and-filling-the-reading-of-genesis-1-that-changes-everything
 ---
-
 # The Artistry of Genesis 1.
-
 Genesis 1 is, in my opinion, the most beautiful and profound text ever written.
 
 It is not just memorable, but catchy. Its like a song that you cant get out of your head

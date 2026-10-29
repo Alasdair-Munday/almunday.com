@@ -1,13 +1,15 @@
 ---
 type: opinion
-description: "The recurring contrast between toil and tarry offers a strong account of Christian vocation as participation in Christ rather than anxious productivity."
+description: The recurring contrast between toil and tarry offers a strong account of Christian vocation as participation in Christ rather than anxious productivity.
 title: The Task is not to Toil but to Tarry
 date: 2026-10-22
-tags: [spirituality-and-practice]
+tags:
+  - spirituality-and-practice
+  - formation
+  - contemplation
 maturity: seed
 draft: false
 ---
-
 The recurring contrast between toil and tarry offers a strong account of Christian vocation as participation in Christ rather than anxious productivity.
 
 ## Related seedlings

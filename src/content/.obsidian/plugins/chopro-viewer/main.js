@@ -9738,3 +9738,5 @@ var ChoproPlugin = class extends import_obsidian5.Plugin {
     }
   }
 };
+
+/* nosourcemap */

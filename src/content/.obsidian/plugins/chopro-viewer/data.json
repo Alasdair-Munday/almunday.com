@@ -1,0 +1,17 @@
+{
+  "rendering": {
+    "chordColor": "#2563eb",
+    "chordSize": 1,
+    "superscriptChordMods": false,
+    "chordDecorations": "none",
+    "normalizedChordDisplay": false,
+    "italicAnnotations": true,
+    "showMetadataHeader": false
+  },
+  "flow": {
+    "filesFolder": "",
+    "extraLine": true
+  },
+  "logLevel": 0,
+  "__obskit_config_version__": 0
+}
