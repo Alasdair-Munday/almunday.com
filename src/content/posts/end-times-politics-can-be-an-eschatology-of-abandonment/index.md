@@ -8,7 +8,7 @@ maturity: seed
 draft: false
 ---
 
-Some end-times politics treats catastrophe as inevitable and turns the decisive question into who can escape, survive, or remain protected. This pattern can connect rapture imagery, Christian nationalism, ethnonationalism, and the wealth rapture imagined by technological elites—different movements sharing a protected-insider future while the world outside collapses.
+Some end-times politics treats catastrophe as inevitable and turns the decisive question into who can escape, survive, or remain protected. This pattern can connect rapture imagery, Christian nationalism, ethnonationalism, and the wealth rapture imagined by technological elites—different movements sharing a protected-insider future while the world outside collapses. This is the opposite of the way of Jesus, whose life, death and resurrection disclose salvation as solidarity with the vulnerable, faithful presence in the midst of suffering and the healing of the world.
 
 ## Related seedlings
 
