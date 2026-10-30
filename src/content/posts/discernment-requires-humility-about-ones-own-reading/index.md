@@ -12,6 +12,8 @@ Wisdom can be found in surprising places. Interpretation should remain open to c
 
 It is wrong to dismiss interpretations from other sources before allowing them to challenge our own. Discernment is not the defence of a private reading, but the humble testing of what we think we know.
 
+This includes the wisdom carried by people whose belonging is re-situated by divine love. To be named and loved by God can mean being misunderstood by the world, because divine love gives people a different social location. Those whom dominant communities overlook may see truths that insiders have learned not to notice.
+
 ## Related seedlings
 - [Biblical Law Is Wisdom Before It Is Rule Application](posts/biblical-interpretation-requires-discernment-rather-than-simple-rule-application/index.md)
 - [God’s Perfection Includes Relational Openness](posts/gods-perfection-includes-relational-openness/index.md)
