@@ -1,14 +1,14 @@
 ---
-title: "Mission Is Word and Deed Held Together"
+title: "The Kingdom Is Found Where Practical and Spiritual Liberation Meet"
 type: opinion
-description: "Missional action becomes distorted when practical service is detached from its theological meaning, or when proclamation is detached from embodied concern."
+description: "A reflection from a presentation on missional leadership: the kingdom of God is located at the intersection of practical and spiritual liberation."
 date: 2026-10-22
 tags: ["missiology"]
 maturity: seed
 draft: false
 ---
 
-Missional action becomes distorted when practical service is detached from its theological meaning, or when proclamation is detached from embodied concern.
+This reflection comes from a presentation on missional leadership. The kingdom of God is located at the intersection of practical and spiritual liberation. Practical service becomes distorted when detached from its theological meaning, while proclamation becomes distorted when detached from embodied concern for people’s material lives.
 
 ## Related seedlings
 
