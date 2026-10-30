@@ -1,14 +1,14 @@
 ---
 title: "Divine Order Is Knowable but Not Exhaustively Masterable"
 type: opinion
-description: "Proverbs presents creation as ordered and intelligible, but that order should not be reduced to a deterministic system humans can fully control."
+description: "The Bible presents creation and history as ordered and intelligible, but that order should not be reduced to a deterministic system humans can fully control."
 date: 2026-10-22
 tags: ["doctrine-of-god"]
 maturity: seed
 draft: false
 ---
 
-Proverbs presents creation as ordered and intelligible, but that order should not be reduced to a deterministic system humans can fully control.
+The whole Bible presents creation and history as ordered and intelligible, but that order should not be reduced to a deterministic system humans can fully control. Scripture gives us patterns to recognise and wisdom to practise, while preserving mystery, contingency and the freedom of God and human beings.
 
 ## Related seedlings
 
