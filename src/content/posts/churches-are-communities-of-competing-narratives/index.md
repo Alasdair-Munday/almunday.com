@@ -1,14 +1,14 @@
 ---
 title: "Churches Are Communities of Competing Narratives"
 type: opinion
-description: "A congregation is not held together only by doctrine or organisation; it is shaped by the stories its buildings, rituals, history, and leaders communicate."
+description: "A church communicates its theology through space, shared stories and community practices before we consider its worship, churchmanship or preaching."
 date: 2026-10-22
 tags: ["ecclesiology"]
 maturity: seed
 draft: false
 ---
 
-A congregation is not held together only by doctrine or organisation; it is shaped by the stories its buildings, rituals, history, and leaders communicate.
+A church communicates its theology through its use of space, its shared stories and its community practices before we even consider its worship, churchmanship or the content of its preaching. The building’s arrangement, the people remembered, the welcome offered and the habits of belonging all tell the congregation what kind of community it is and what kind of God it believes in.
 
 ## Related seedlings
 
