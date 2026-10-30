@@ -1,14 +1,14 @@
 ---
 title: "Difference Is Often Experienced as Threat"
 type: opinion
-description: "Several notes suggest that sin is expressed through fear, rejection, or control of difference rather than merely through individual moral failure."
+description: "A feminist reading of Genesis 1 shows how difference can be experienced as threat and turned into fear, rejection or control."
 date: 2026-10-22
 tags: ["anthropology"]
 maturity: seed
 draft: false
 ---
 
-Several notes suggest that sin is expressed through fear, rejection, or control of difference rather than merely through individual moral failure.
+A feminist reading of Genesis 1 offers an important insight: difference is often experienced as threat, and can then be managed through fear, rejection or control. Sin is therefore expressed not only in individual moral failure, but in the creation of hierarchies and systems that make difference unsafe or subordinate.
 
 ## Related seedlings
 
