@@ -1,17 +1,17 @@
 ---
-title: "Discernment Requires Humility About One’s Own Reading"
+title: "Wisdom Can Be Found in Surprising Places"
 type: opinion
-description: "Interpretation should remain open to correction by the wider community, especially when dealing with symbolic narratives and contested theological claims."
+description: "Wisdom may come through unexpected readers and interpretations, so discernment requires humility about our own reading."
 date: 2026-10-22
 tags: ["spirituality-and-practice"]
 maturity: seed
 draft: false
 ---
 
-Interpretation should remain open to correction by the wider community, especially when dealing with symbolic narratives and contested theological claims.
+Wisdom can be found in surprising places. Interpretation should remain open to correction by the wider community, especially when dealing with symbolic narratives and contested theological claims. Other readers may have seen something we have missed, particularly when they stand outside our usual interpretive community.
 
-It is also wrong to reject the interpretation from other sources without letting them clash against your position. You may discover that they have seen something that you haven't because [Wisdom can be found in surprising places](posts/wisdom-can-be-found-in-surprising-places/index.md)
+It is wrong to dismiss interpretations from other sources before allowing them to challenge our own. Discernment is not the defence of a private reading, but the humble testing of what we think we know.
 
 ## Related seedlings
-- [Biblical Interpretation Requires Discernment Rather Than Simple Rule Application](posts/biblical-interpretation-requires-discernment-rather-than-simple-rule-application/index.md)
+- [Biblical Law Is Wisdom Before It Is Rule Application](posts/biblical-interpretation-requires-discernment-rather-than-simple-rule-application/index.md)
 - [God’s Perfection Includes Relational Openness](posts/gods-perfection-includes-relational-openness/index.md)
