@@ -10,6 +10,8 @@ draft: false
 
 A feminist reading of Genesis 1 offers an important insight: difference is often experienced as threat, and can then be managed through fear, rejection or control. Sin is therefore expressed not only in individual moral failure, but in the creation of hierarchies and systems that make difference unsafe or subordinate.
 
+This connects with Brian Brock’s account of woman as an icon of alterity: a figure through whom the Church can learn whether it receives the other as a gift and neighbour, or tries to absorb, control and silence difference.
+
 ## Related seedlings
 
 - [The Gospel Relocates Honour and Shame](posts/the-gospel-relocates-honour-and-shame/index.md)
