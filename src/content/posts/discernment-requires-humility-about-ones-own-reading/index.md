@@ -1,10 +1,10 @@
 ---
 title: "Wisdom Can Be Found in Surprising Places"
-type: opinion
+type: comment
 description: "Wisdom may come through unexpected readers and interpretations, so discernment requires humility about our own reading."
 date: 2026-10-22
 tags: ["spirituality-and-practice"]
-maturity: seed
+maturity: established
 draft: false
 ---
 
