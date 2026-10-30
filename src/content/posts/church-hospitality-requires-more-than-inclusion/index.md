@@ -10,6 +10,8 @@ draft: false
 
 Tolerance and formal inclusion are not enough. To be fully the Church of Christ, the Church must foster genuine belonging: people must not merely be admitted into the community, but recognised as necessary members of Christ’s body, able to shape its life and receive its care.
 
+Belonging therefore requires attention to power. A church must ask who benefits from its activity, whose voice remains unheard, who is expected to adapt and who is permitted to shape the community. Without that examination, inclusion can leave the existing centre of power untouched.
+
 ## Related seedlings
 
 - [The Imago Dei Undermines Human Hierarchy](posts/the-imago-dei-undermines-human-hierarchy/index.md)
