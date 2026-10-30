@@ -1,14 +1,14 @@
 ---
-title: "Judges Is Suspicious of Charismatic Saviours"
+title: "Judges Critiques Human Kingship"
 type: opinion
-description: "The book of Judges presents leadership as increasingly corrupted when gifted people are treated as if they can become the saviour of the community."
+description: "The refrain “there was no king in Israel” is not a call for a human ruler, but a critique of kingship: a king who is not YHWH is ultimately no king at all."
 date: 2026-10-22
 tags: ["bible","biblical-studies","judges","leadership"]
 maturity: seed
 draft: false
 ---
 
-The book of Judges presents leadership as increasingly corrupted when gifted people are treated as if they can become the saviour of the community.
+The refrain “there was no king in Israel” and the repeated statement that the people did what was right in their own eyes are not simply a call for a human ruler. They are a theological comment on Saul and kingship: a king who is not YHWH is ultimately no king at all. Judges exposes the failure of charismatic saviours and human rulers when they take the place that belongs to God.
 
 ## Related seedlings
 
