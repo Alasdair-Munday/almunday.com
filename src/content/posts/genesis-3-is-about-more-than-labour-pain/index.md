@@ -8,7 +8,7 @@ maturity: seed
 draft: false
 ---
 
-Genesis 3:16 should not be reduced to a prediction of physical labour pain. The pain of childbirth is itself relational: the suffering of bringing life into the world is bound up with dependence, desire, vulnerability and family relationships. The verse may therefore describe how the rupture of Genesis 3 reaches into the whole experience of conception, birth and family life.
+Genesis 3:16 should not be reduced to a prediction of physical labour pain. The pain of childbirth is itself relational: the suffering of bringing life into the world is bound up with dependence, desire, vulnerability and family relationships. The verse may therefore describe how the rupture of Genesis 3 reaches into the whole experience of conception, birth and family life. It also foreshadows the complexity of bearing children as a key mechanism in the biblical narrative: births become sites of promise, danger, rivalry, grief and unexpected fulfilment.
 
 ## Related seedlings
 
