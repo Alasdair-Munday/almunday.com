@@ -1,16 +1,16 @@
 ---
-title: "Fear of the Lord Locates Wisdom Within Covenant Faithfulness"
+title: "Wisdom Must Remain Connected to Its Source"
 type: opinion
-description: "In the Genesis 3 and Proverbs material, wisdom is not rejected but subordinated to dependence upon God and expressed through covenant faithfulness."
+description: "Genesis 3 suggests that the human pursuit of wisdom is real and valid, but dangerous when it is detached from YHWH, its source."
 date: 2026-10-22
 tags: ["bible","biblical-studies","hermeneutics"]
 maturity: seed
 draft: false
 ---
 
-In the Genesis 3 and Proverbs material, wisdom is not rejected but subordinated to dependence upon God and expressed through covenant faithfulness.
+Genesis 3 can be read as a reflection on wisdom as an effect of the forbidden tree. The Bible does not reject the human pursuit of wisdom; it validates our desire to understand and discern. But wisdom becomes dangerous when it is detached from its source. The pursuit of knowledge must remain connected to YHWH, because the fear of the Lord is the beginning of wisdom.
 
 ## Related seedlings
 
 - [Proverbs Trains Discernment Through Internal Tension](posts/proverbs-trains-discernment-through-internal-tension/index.md)
-- [Biblical Wisdom Is Polyphonic Rather Than Monolithic](posts/biblical-wisdom-is-polyphonic-rather-than-monolithic/index.md)
+- [Wisdom Can Be Found in Surprising Places](posts/discernment-requires-humility-about-ones-own-reading/index.md)
