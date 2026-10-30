@@ -1,14 +1,14 @@
 ---
 title: "Fruitfulness Is Relational Rather Than Merely Productive"
 type: opinion
-description: "Fruitfulness includes encouragement, trust, communal formation, and the creation of conditions in which others can flourish."
+description: "“Be fruitful and multiply” makes multiplication subordinate to fruitfulness: growth is not faithful if it does not create conditions for life and flourishing."
 date: 2026-10-22
 tags: ["spirituality-and-practice"]
 maturity: seed
 draft: false
 ---
 
-Fruitfulness includes encouragement, trust, communal formation, and the creation of conditions in which others can flourish.
+“Be fruitful and multiply” rejects multiplication without fruitfulness. Genesis 1 does not present growth, reproduction or expansion as ends in themselves; multiplication is ordered towards life, flourishing and the blessing of creation. Fruitfulness includes encouragement, trust, communal formation and the creation of conditions in which others can flourish.
 
 ## Related seedlings
 
