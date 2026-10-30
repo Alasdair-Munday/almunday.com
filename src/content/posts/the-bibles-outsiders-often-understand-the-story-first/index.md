@@ -14,4 +14,3 @@ Biblical narratives repeatedly use outsiders, women, foreigners, and socially ma
 
 - [Salvation Reorders Human Relationships](posts/salvation-reorders-human-relationships/index.md)
 - [The Imago Dei Undermines Human Hierarchy](posts/the-imago-dei-undermines-human-hierarchy/index.md)
-- [Biblical Interpretation Is a Moral Practice](posts/biblical-interpretation-is-a-moral-practice/index.md)
