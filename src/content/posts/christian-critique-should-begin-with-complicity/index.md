@@ -1,14 +1,20 @@
 ---
 title: "Christian Critique Should Begin With Complicity"
 type: opinion
-description: "The Church should not answer critiques of Christian complicity by declaring Christianity innocent."
+description: "A defence of Christianity must directly engage the Church’s complicity in evil and what that means for ecclesiology and soteriology."
 date: 2026-10-22
 tags: ["bible-and-hermeneutics", "politics"]
 maturity: seed
 draft: false
 ---
 
-The Church should not answer critiques of Christian complicity by declaring Christianity innocent. Christian traditions have sometimes sustained escapism, domination, ecological indifference, nationalism, and exclusion. The question is not only whether a distortion misreads Christianity, but why Christian communities are so susceptible to it.
+A defence of Christianity must directly engage the question of why the Church has been complicit in so much evil, rather than simply declaring Christianity innocent. This raises theological questions about what the Church is and what salvation means: our ecclesiology and soteriology must account for the Church’s historical failures and distortions.
+
+Jacques Ellul’s *The Subversion of Christianity* is a key conversation partner, especially in its examination of the contradictions between the biblical revelation and the Church’s actual practice.
+
+## Related books
+
+- [Jacques Ellul, *The Subversion of Christianity*](https://wipfandstock.com/9781606089743/the-subversion-of-christianity/)
 
 ## Related seedlings
 
