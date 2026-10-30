@@ -9,7 +9,7 @@ draft: false
 ---
 The Bible is a unified story that leads to Jesus, but it contains multiple perspectives on that story. These voices are not a flaw to be explained away; they dialogue with and critique one another by design.
 
-Biblical polyphony is a feature, not a bug. Proverbs especially should be allowed to speak through multiple voices, poetic ambiguities and tensions rather than being forced into one completely uniform theological system. The resulting tensions invite discernment while allowing the canon to preserve the particular testimony of each voice within the larger story.
+Biblical polyphony is a feature, not a bug. Proverbs especially should be allowed to speak through multiple voices, poetic ambiguities and tensions rather than being forced into one completely uniform theological system. The contradictory and competing voices may be intentionally arranged to prevent mechanical rule application and require wisdom from the reader. These tensions train discernment while allowing the canon to preserve the particular testimony of each voice within the larger story.
 [Contradiction in proverbs - Peter Hatton](https://www.amazon.co.uk/Contradiction-Book-Proverbs-Counsel-Testament/dp/0754663043)
 ## Related seedlings
 - [Wisdom Is Both Divine Gift and Human Practice](posts/wisdom-is-both-divine-gift-and-human-practice/index.md)
