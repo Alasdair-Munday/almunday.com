@@ -10,6 +10,10 @@ draft: false
 
 Participation in Christ is presented as breaking down hostility and relativising social distinctions, not merely as securing individual forgiveness.
 
+## Source
+
+- [Scot McKnight, *A Community Called Atonement*](https://www.abingdonpress.com/product/9780687645541/)
+
 ## Related seedlings
 
 - [The Gospel Relocates Honour and Shame](posts/the-gospel-relocates-honour-and-shame/index.md)
