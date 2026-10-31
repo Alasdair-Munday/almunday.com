@@ -12,6 +12,10 @@ Purity is not morality. Leviticus distinguishes ritual states from moral wrongdo
 
 This clarifies Jesus’ encounters with impurity. When he touches the sick, the bleeding and the dead, impurity does not overcome him. Life moves in the other direction: Jesus confronts the forces of death and restores people to life, community and worship.
 
+## Source
+
+- [Matthew Thiessen, *Jesus and the Forces of Death: The Gospels’ Portrayal of Ritual Impurity within First-Century Judaism*](https://bakeracademic.com/products/9781540964878_jesus-and-the-forces-of-death)
+
 ## Related seedlings
 
-- [Reparative Interpretation Reads Critically Without Abandoning the Text](posts/reparative-interpretation-reads-critically-without-abandoning-the-text/index.md)
+- [Reparative Reading Is Curious, Not Judgemental](posts/reparative-interpretation-reads-critically-without-abandoning-the-text/index.md)
