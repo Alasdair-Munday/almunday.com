@@ -1,16 +1,21 @@
 ---
-title: "The Spirit’s Empowerment Does Not Automatically Legitimate a Judge’s Actions"
+title: "Spirit Empowerment in Judges Is Dispensed Power, Not Dispensed Wisdom"
 type: opinion
-description: "In Judges, divine empowerment can enable a deliverer to achieve an intended outcome without implying that every choice made by that deliverer is morally approved."
+description: "The Spirit gives the judges power to secure deliverance without supplying wisdom, replacing their character or coercively determining their choices."
 date: 2026-10-22
-tags: ["bible","biblical-studies","hermeneutics"]
+tags: ["bible","biblical-studies","judges","holy-spirit","hermeneutics"]
 maturity: seed
 draft: false
 ---
 
-In Judges, divine empowerment can enable a deliverer to achieve an intended outcome without implying that every choice made by that deliverer is morally approved.
+Spirit empowerment in Judges is dispensed power, not dispensed wisdom. The recipient continues to act as they otherwise would, with the same character, desires and moral limitations, but divine empowerment ensures their victory.
+
+It is as though God puts a finger on the scales of history to move events towards the intended end without coercing the person through whom that movement occurs. God enables an outcome without turning the judge into a puppet or making every choice involved in achieving it morally legitimate.
+
+The presence of divine power therefore does not prove the presence of divine wisdom. A judge can be genuinely empowered by God while remaining foolish, violent or morally compromised in the exercise of that power.
 
 ## Related seedlings
 
-- [Parables Must Be Read Through Their Narrative Context](posts/parables-must-be-read-through-their-narrative-context/index.md)
-- [Old Testament Anthropology Is Oriented Around Human Function](posts/old-testament-anthropology-is-oriented-around-human-function/index.md)
+- [Most Old Testament Heroes Would Be Villains in Another Story](posts/the-old-testament-does-not-treat-every-leader-as-a-hero/index.md)
+- [Judges Critiques Human Kingship](posts/judges-is-suspicious-of-charismatic-saviours/index.md)
+- [Biblical Violence Creates Moral Injury](posts/biblical-violence-creates-moral-injury/index.md)
