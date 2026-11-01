@@ -12,7 +12,5 @@ The Hebrew term *na’ar* is often translated “child,” but carries much more
 
 In Proverbs, I think the *na’ar* belongs within an adolescent phase. This person has begun to move beyond the *peti*—the simple or inexperienced person—but has not yet decisively chosen the way of either wisdom or folly. Reading *na’ar* merely as “child” obscures this moment of formation and decision.
 
-## Related seedlings
 
-- [Proverbs Was Not Written as a Parenting Manual](posts/proverbs-was-not-written-as-a-parenting-manual/index.md)
-- [Old Testament Anthropology Is Oriented Around Human Function](posts/old-testament-anthropology-is-oriented-around-human-function/index.md)
+- [The Throat Is a Connecting Point That Breaks Down Mind–Body Dualism](posts/the-throat-breaks-down-mind-body-dualism/index.md)
