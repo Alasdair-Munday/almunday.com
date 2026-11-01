@@ -12,7 +12,6 @@ A feminist reading of Genesis 1 offers an important insight: difference is often
 
 This connects with Brian Brock’s account of woman as an icon of alterity: a figure through whom the Church can learn whether it receives the other as a gift and neighbour, or tries to absorb, control and silence difference.
 
-## Related seedlings
 
-- [The Gospel Relocates Honour and Shame](posts/the-gospel-relocates-honour-and-shame/index.md)
+- [Salvation Reorders Human Relationships](posts/salvation-reorders-human-relationships/index.md)
 - [Church Hospitality Requires More Than Inclusion](posts/church-hospitality-requires-more-than-inclusion/index.md)
