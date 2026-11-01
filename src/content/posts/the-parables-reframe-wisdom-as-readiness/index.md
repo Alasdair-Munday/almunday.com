@@ -14,7 +14,6 @@ The wise are ready to fulfil that destiny both at the moment of fulfilment and t
 
 Eschatological wisdom therefore joins present faithfulness to future hope: becoming light to the world as we wait, so that we are ready to welcome Christ when he comes.
 
-## Related writing
 
-- [Wisdom Is Both Divine Gift and Human Practice](posts/wisdom-is-both-divine-gift-and-human-practice/index.md)
+- [Biblical Wisdom Is Polyphonic by Design](posts/biblical-wisdom-contains-internal-tension/index.md)
 - [Wisdom Can Be Found in Surprising Places](posts/discernment-requires-humility-about-ones-own-reading/index.md)
