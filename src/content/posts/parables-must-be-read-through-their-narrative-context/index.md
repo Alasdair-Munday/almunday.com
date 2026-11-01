@@ -12,6 +12,5 @@ Jesus’ teaching and action are inextricably linked. His actions are often prop
 
 For instance, many of the parables told as Jesus approaches Jerusalem are critiques of the Judean leadership and pictures of what it means to steward the calling to be the people of God in the world. Their meaning emerges from Jesus’ journey, audience and surrounding conflicts, as well as from the actions he performs in Jerusalem.
 
-## Related seedlings
 
-- [The Ten Virgins as a Warning to Jesus’ Immediate Audience](posts/the-ten-virgins-as-a-warning-to-jesus-immediate-audience/index.md)
+- [Wisdom Is Readiness to Be Light to the World](posts/the-parables-reframe-wisdom-as-readiness/index.md)
