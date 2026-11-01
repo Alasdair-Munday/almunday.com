@@ -10,7 +10,6 @@ draft: false
 
 The Trinitarian God is imaged in humanity through our multiplicity. Gender functions as one icon of this divine diversity, but it does not exhaust the claim: the image is expressed in every human difference. Divine unity does not require uniformity, because the life of God shows how relational plurality can belong to unity rather than threaten it.
 
-## Related seedlings
 
 - [The Imago Dei Undermines Human Hierarchy](posts/the-imago-dei-undermines-human-hierarchy/index.md)
-- [God’s Perfection Includes Relational Openness](posts/gods-perfection-includes-relational-openness/index.md)
+- [The Imago Dei Is Borne Together](posts/the-imago-dei-undermines-human-hierarchy/index.md)
