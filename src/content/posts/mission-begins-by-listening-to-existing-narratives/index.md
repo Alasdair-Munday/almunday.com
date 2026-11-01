@@ -10,6 +10,5 @@ draft: false
 
 This reflection arose from an assignment on the intentional reordering of the building at St Andrew’s, Avonmouth. Church planting and revitalisation should attend to the history, symbols, memories and local stories already present in a place. Reordering a building is never merely practical: it reshapes the community’s inherited story and communicates a renewed account of its identity and mission.
 
-## Related seedlings
 
-- [Mission Requires Attention to Power](posts/mission-requires-attention-to-power/index.md)
+- [The Kingdom Is Found Where Practical and Spiritual Liberation Meet](posts/mission-is-word-and-deed-held-together/index.md)
