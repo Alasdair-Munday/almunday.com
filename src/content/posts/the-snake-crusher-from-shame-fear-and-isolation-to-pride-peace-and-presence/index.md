@@ -24,6 +24,20 @@ In the second account, God reaches into the dirt and forms the human from the ea
 
 Together, these accounts say something extraordinary about the dignity of being human. We are made in the image of God. We are placed within creation like angled mirrors: reflecting the praise of creation towards God and reflecting the glory and love of God towards creation.
 
+```mermaid
+flowchart TB
+    God["God"]
+    Humanity["Humanity<br/>image-bearers"]
+    Creation["Creation"]
+
+    God -->|"glory and love"| Humanity
+    Humanity -->|"praise and worship"| God
+    Humanity -->|"loving service"| Creation
+    Creation -->|"praise carried"| Humanity
+```
+
+*Humanity receives God’s glory and love, reflects them into creation, and carries creation’s praise back to God.*
+
 That privilege gives us a purpose. We are here to show creation, and one another, who God is. We worship on behalf of creation and serve creation on behalf of God.
 
 This is a communal calling. Sometimes collectively praising God means carrying people who cannot presently sing. Sometimes collectively serving creation means carrying people who do not have the capacity to contribute in the same way as others. We need one another precisely because we are not all able to do the same things.
@@ -36,6 +50,20 @@ The human beings in Genesis 2 are placed in a garden and given three beautiful c
 
 Connection to God, connection to creation and connection to one another: this is the picture of humanity before the fall. This is who we are.
 
+```mermaid
+flowchart TB
+    Humanity["Human beings<br/>in the garden"]
+    God["Connection to God<br/>walking together"]
+    Creation["Connection to creation<br/>serving and tending"]
+    Others["Connection to one another<br/>bone of my bones"]
+
+    Humanity --- God
+    Humanity --- Creation
+    Humanity --- Others
+```
+
+*Genesis 2 presents human life as three inseparable relationships rather than an isolated individual existence.*
+
 ## The fall is not our deepest identity
 
 The lies of evil are not who we are.
@@ -45,6 +73,29 @@ Our deepest identity is the dignity God has given us: to bear God’s image, ref
 The fall does not change God’s declaration about humanity. Even when we fail to live as God’s image-bearers, we remain people God has created and called.
 
 Genesis 3 shows the man and woman becoming ashamed, afraid and alone. The gospel meets these distortions with pride, peace and presence.
+
+```mermaid
+flowchart LR
+    subgraph Distortion["Genesis 3 distortion"]
+        direction TB
+        Ashamed["Ashamed"]
+        Afraid["Afraid"]
+        Alone["Alone"]
+    end
+
+    subgraph Restoration["Gospel restoration"]
+        direction TB
+        Pride["Pride<br/>received dignity"]
+        Peace["Peace<br/>resting in God’s goodness"]
+        Presence["Presence<br/>reconnection"]
+    end
+
+    Ashamed --> Pride
+    Afraid --> Peace
+    Alone --> Presence
+```
+
+*The gospel does not erase our humanity; it restores the dignity, trust and connection for which we were made.*
 
 “Pride” may sound provocative. There is a pride that grasps at superiority, puts us above other people or tries to take God’s place. That is not what I mean. I mean the opposite of shame: knowing the dignity God has given us. God wants us to know that we are God’s beloved creation, fearfully and wonderfully made.
 
