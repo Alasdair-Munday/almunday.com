@@ -1,5 +1,5 @@
 {
-  "defaultTemplate": "---\ntitle: \"{{title}}\"\ndescription: \"\"\ndate: {{date}}\ntags: []\nmaturity: seed\ndraft: false\naudio: true\n---",
+  "defaultTemplate": "---\ntitle: \"{{title}}\"\ndescription: \"\"\ndate: {{date}}\ntype: opinion\ntags: []\nmaturity: seed\ndraft: false\n---",
   "autoInsertProperties": true,
   "dateFormat": "YYYY-MM-DD",
   "enableCopyHeadingLink": true,
@@ -16,10 +16,10 @@
   "contentTypes": [
     {
       "id": "content-type-1788644678353-8dfokbrrb",
-      "name": "Blog",
+      "name": "Posts",
       "folder": "posts",
       "linkBasePath": "/posts/",
-      "template": "---\ntitle: \"{{title}}\"\ndescription: \"\"\ndate: {{date}}\ntags: []\nmaturity: seed\ndraft: false\naudio: true\n---",
+      "template": "---\ntitle: \"{{title}}\"\ndescription: \"\"\ndate: {{date}}\ntype: opinion\ntags: []\nmaturity: seed\ndraft: false\n---",
       "enabled": true,
       "creationMode": "folder",
       "indexFileName": "index",
