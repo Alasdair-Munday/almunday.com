@@ -7,7 +7,7 @@ This folder is the Obsidian vault that directly powers almunday.com.
 ## ⚡ Instant Writing Workflow
 
 When you open `src/content` as a vault in Obsidian:
-- **New Article**: Press `Ctrl / Cmd + N` (or click **+ New** in the Blog view).
+- **New Post**: Press `Ctrl / Cmd + N` (or click **+ New** in the Posts view). New posts are created under `posts/<slug>/index.md` with the site's standard properties.
 - **Pasting Images**: Press `Ctrl + V` inside any note. Screenshots and diagrams are automatically saved directly beside your post in the same folder.
 - **Publishing**: Use the Git status bar icon (or `Ctrl / Cmd + P` → `Git: Push`) to send your changes to the site repository. Netlify then builds the update.
 
@@ -69,11 +69,14 @@ If you ever run the **Vault CMS Setup Wizard** (`Ctrl / Cmd + P` → `Vault CMS:
    title: "Your Article Title"
    description: "A concise summary for readers and search engines."
    date: 2026-09-16
+   type: opinion
    tags: ["engineering", "design"]
+   maturity: seed
    draft: false
-   audio: null # Or an attached filename, e.g. reflection.mp3
    ---
    ```
+
+   The Astro Composer **Posts** content type inserts these properties automatically when creating posts. `type` defaults to `opinion`; change it to `comment`, `essay`, `software-project`, or `song` when appropriate. Add an `audio` filename only for a playable recording.
 4. **Updating Community Plugins**:
    - Keep plugins up to date with 1 click: **Settings** (`Ctrl + ,`) → **Community plugins** → **Check for updates** → **Update all**. Your Astro Modular settings are preserved automatically.
 
